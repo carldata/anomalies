@@ -1,0 +1,25 @@
+{
+  "name": "anomalies",
+  "version": "1.0.0",
+  "description": "Detecting anomalies frontend",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carldata/anomalies.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/carldata/anomalies/issues"
+  },
+  "homepage": "https://github.com/carldata/anomalies#readme",
+  "devDependencies": {
+    "ts-loader": "^4.0.1",
+    "typescript": "^2.7.2",
+    "webpack": "^4.1.1",
+    "webpack-dev-server": "^3.1.1"
+  }
+}
