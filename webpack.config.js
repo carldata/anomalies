@@ -11,7 +11,7 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
   },
-  modules: {
+  module: {
     rules: [
       {
         test: /\.(ts|tsx)(\?.*)?$/,
@@ -25,7 +25,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
-    contentBase: path.join(__dirname,'dist'),
+    contentBase: path.join(__dirname, 'dist'),
     hot: true,
     port: 9000
   }
