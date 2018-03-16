@@ -1,0 +1,17 @@
+.vscode/
+build/
+dist/
+node_modules/
+typings/
+tmp/
+npm-debug.log
+.sw[a-z]
+bundle.js
+bundle.js.map
+docker_build.sh
+anomalies-frontend.yaml
+*.woff2
+*.ttf
+*.eot
+*.svg
+*.woff
