@@ -1,0 +1,2 @@
+# anomalies
+Detecting anomalies frontend
