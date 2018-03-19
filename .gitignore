@@ -9,3 +9,8 @@ bundle.js
 bundle.js.map
 docker_build.sh
 anomalies-frontend.yaml
+dist/*.woff2
+dist/*.woff
+dist/*.svg
+dist/*.ttf
+dist/*.eot
