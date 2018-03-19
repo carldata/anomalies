@@ -3,6 +3,7 @@ import '../styles/bootstrap.min.css';
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { createHashHistory } from 'history'
+import { Projects } from './projects-screen'
 
 class HelloReactComponent extends React.Component {
   render() {
@@ -10,4 +11,4 @@ class HelloReactComponent extends React.Component {
   }
 }
 
-ReactDOM.render(<HelloReactComponent />, document.getElementById('app'))
+ReactDOM.render(<Projects />, document.getElementById('app'))
