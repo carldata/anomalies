@@ -2,13 +2,25 @@ import '../styles/bootstrap.min.css';
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { applyMiddleware, combineReducers, createStore } from 'redux'
+import thunk from 'redux-thunk'
 import { createHashHistory } from 'history'
+
+import { IState } from './state'
+import projectsScreenReducer from './projects-screen/store-creator'
+
 import { Projects } from './projects-screen'
 
-class HelloReactComponent extends React.Component {
-  render() {
-    return <div className='container'> <div className='btn btn-success' > Hello and Welcome to React! Let's start a new journey ! </div> </div>
-  }
-}
+let reducers = combineReducers<IState>({
+  projectsScreen: projectsScreenReducer
+})
 
-ReactDOM.render(<Projects />, document.getElementById('app'))
+const store = createStore(reducers, applyMiddleware(thunk))
+
+ReactDOM.render(
+  <Provider store={store}>
+    <div className='container'>
+      <Projects />
+    </div>
+  </Provider>, document.getElementById('app'))

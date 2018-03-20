@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/carldata/anomalies#readme",
   "devDependencies": {
+    "@types/lodash": "^4.14.105",
     "@types/react": "^16.0.40",
     "@types/react-bootstrap": "^0.32.6",
     "@types/react-dom": "^16.0.4",
@@ -38,6 +39,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "lodash": "^4.17.5",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
