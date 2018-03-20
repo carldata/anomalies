@@ -18,8 +18,8 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
   render() {
     return <div>
       <div> {this.props.anotherDummyText} </div>
-      <Button bsStyle="success" onClick={()=>this.props.test()} >Click to change text</Button>
-      <Button bsStyle="primary" onClick={()=>this.props.goBackToProjectsScreen()}>Click to go to projects screen</Button>
+      <Button bsStyle="primary" onClick={()=>this.props.test()} >Click to change text</Button>
+      <Button bsStyle="success" onClick={()=>this.props.goBackToProjectsScreen()}>Click to go to projects screen</Button>
     </div>
   }
 }
@@ -37,4 +37,4 @@ function matchDispatchToProps(dispatch: Dispatch<{}>){
   },dispatch)
 }
 
-export const Anomalies = connect(mapStateToProps,matchDispatchToProps)(AnomaliesComponent)
+export default connect(mapStateToProps,matchDispatchToProps)(AnomaliesComponent)

@@ -11,7 +11,8 @@ interface IProjectComponentProps {
 }
 
 interface IProjectComponentActionCreators {
-  test: () => (dispatch: Dispatch<{}>) => {}
+  test: () => (dispatch: Dispatch<{}>) => {},
+  goToAnomaliesScreen: () => (dispatch: Dispatch<{}>) => {}
 }
 
 class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators> {
@@ -19,6 +20,7 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
     return <div>
       <div>{this.props.dummyText}</div>
       <Button bsStyle="primary" onClick={() => this.props.test()} >Click me to see magic</Button>
+      <Button bsStyle="success" onClick={() => this.props.goToAnomaliesScreen()} >Go to anomalies screen</Button>
     </div>
   }
 }
@@ -31,8 +33,9 @@ function mapStateToProps(state: IState) {
 
 function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
-    test: projectScreenActionCreators.test
+    test: projectScreenActionCreators.test,
+    goToAnomaliesScreen : projectScreenActionCreators.goToAnomaliesScreen
   }, dispatch)
 }
 
-export const Projects = connect(mapStateToProps, matchDispatchToProps)(ProjectsComponent)
+export default connect(mapStateToProps, matchDispatchToProps)(ProjectsComponent)

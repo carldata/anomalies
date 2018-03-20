@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux'
+import { push } from 'react-router-redux'
 
 export const anomaliesScreenActionTypes = {
   ANOMALY_TEST_ACTION: "ANOMALY_TEST_ACTION"
@@ -6,9 +7,9 @@ export const anomaliesScreenActionTypes = {
 
 export const anomaliesScreenActionCreators = {
   test: () => (dispatch: Dispatch<{}>) => {
-    dispatch({ type: anomaliesScreenActionTypes.ANOMALY_TEST_ACTION, payload: "whatever man" })
+    dispatch({ type: anomaliesScreenActionTypes.ANOMALY_TEST_ACTION, payload: "Text changed" })
   },
   goBackToProjectsScreen: () => (dispatch: Dispatch<{}>) => {
-    console.log("Hello my dear friend")
+    dispatch(push("/projects"))
   }
 }
