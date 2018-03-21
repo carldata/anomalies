@@ -4,9 +4,9 @@ import { watchGoToProjects } from './anomalies-screen/sagas'
 
 
 export function* rootSaga() {
-  return yield all([
+  return yield [
     fork(watchTestAsyncCall),
     fork(watchGoToAnomalies),
     fork(watchGoToProjects)
-  ])
+  ]
 } 
