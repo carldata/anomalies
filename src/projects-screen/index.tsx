@@ -11,16 +11,18 @@ interface IProjectComponentProps {
 }
 
 interface IProjectComponentActionCreators {
-  test: () => (dispatch: Dispatch<{}>) => {},
-  goToAnomaliesScreen: () => (dispatch: Dispatch<{}>) => {}
+  test: () => any,
+  goToAnomaliesScreen: () => any,
+  startTestAsyncCall: () => any
 }
 
 class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators> {
   render() {
     return <div>
       <div>{this.props.dummyText}</div>
-      <Button bsStyle="primary" onClick={() => this.props.test()} >Click me to see magic</Button>
-      <Button bsStyle="success" onClick={() => this.props.goToAnomaliesScreen()} >Go to anomalies screen</Button>
+      <Button onClick={() => this.props.test() } > Test changing initial text </Button>
+      <Button bsStyle='primary' onClick={() => this.props.startTestAsyncCall()} > Test Async Call </Button>
+      <Button bsStyle='success' onClick={() => this.props.goToAnomaliesScreen() } >Go to Anomalies screen</Button>
     </div>
   }
 }
@@ -34,7 +36,8 @@ function mapStateToProps(state: IState) {
 function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     test: projectScreenActionCreators.test,
-    goToAnomaliesScreen : projectScreenActionCreators.goToAnomaliesScreen
+    goToAnomaliesScreen: projectScreenActionCreators.goToAnomaliesScreen,
+    startTestAsyncCall: projectScreenActionCreators.startTestAsyncCall
   }, dispatch)
 }
 

@@ -10,31 +10,28 @@ interface IAnomaliesComponentProps {
 }
 
 interface IAnomaliesComponentActionCreators {
-  test: () => (dispatch: Dispatch<{}>) => {},
-  goBackToProjectsScreen: () => (dispatch: Dispatch<{}>) => {}
+  goToProjectsScreen: () => any
 }
 
 class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators>{
   render() {
     return <div>
       <div> {this.props.anotherDummyText} </div>
-      <Button bsStyle="primary" onClick={()=>this.props.test()} >Click to change text</Button>
-      <Button bsStyle="success" onClick={()=>this.props.goBackToProjectsScreen()}>Click to go to projects screen</Button>
+      <Button bsStyle='danger' onClick={() => this.props.goToProjectsScreen()} >Go back to project screen</Button>
     </div>
   }
 }
 
-function mapStateToProps(state: IState){
+function mapStateToProps(state: IState) {
   return {
     anotherDummyText: state.anomaliesScreen.anotherDummyText
   }
 }
 
-function matchDispatchToProps(dispatch: Dispatch<{}>){
+function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
-    test: anomaliesScreenActionCreators.test,
-    goBackToProjectsScreen: anomaliesScreenActionCreators.goBackToProjectsScreen 
-  },dispatch)
+    goToProjectsScreen: anomaliesScreenActionCreators.goToProjectsScreen
+  }, dispatch)
 }
 
-export default connect(mapStateToProps,matchDispatchToProps)(AnomaliesComponent)
+export default connect(mapStateToProps, matchDispatchToProps)(AnomaliesComponent)

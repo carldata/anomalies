@@ -8,6 +8,7 @@ import thunk from 'redux-thunk'
 import { createHashHistory } from 'history'
 import { Route } from 'react-router'
 import { ConnectedRouter, routerMiddleware, routerReducer } from 'react-router-redux'
+import createSagaMiddleware from 'redux-saga'
 import * as _ from 'lodash'
 
 import { IState } from './state'
@@ -16,6 +17,7 @@ import anomaliesScreenReducer from './anomalies-screen/store-creator'
 
 import Projects from './projects-screen'
 import Anomalies from './anomalies-screen'
+import { rootSaga } from './root-saga'
 
 let reducers = combineReducers<IState>({
   projectsScreen: projectsScreenReducer,
@@ -26,7 +28,12 @@ let reducers = combineReducers<IState>({
 let history = createHashHistory()
 let routingMiddleware = routerMiddleware(history)
 
-const store = createStore(reducers, applyMiddleware(thunk,routingMiddleware))
+//let asyncMiddleware = thunk
+let asyncMiddleware = createSagaMiddleware()
+
+const store = createStore(reducers, applyMiddleware(routingMiddleware,asyncMiddleware))
+
+asyncMiddleware.run(rootSaga)
 
 ReactDOM.render(
   <Provider store={store}>
@@ -41,3 +48,4 @@ ReactDOM.render(
 if (_.isEqual(window.location.hash, "#/")) {
   history.push("/projects");
 }  
+
