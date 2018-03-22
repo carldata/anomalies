@@ -1,3 +1,3 @@
 export interface IProjectsScreenState {
-  dummyText : string
+  dummyText: string;
 }

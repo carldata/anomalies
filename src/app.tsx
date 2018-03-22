@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { applyMiddleware, combineReducers, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import { createHashHistory } from 'history'
-import { Route } from 'react-router'
+import { Route, Redirect } from 'react-router'
 import { ConnectedRouter, routerMiddleware, routerReducer } from 'react-router-redux'
 import createSagaMiddleware from 'redux-saga'
 import * as _ from 'lodash'
@@ -31,7 +31,7 @@ let routingMiddleware = routerMiddleware(history)
 //let asyncMiddleware = thunk
 let asyncMiddleware = createSagaMiddleware()
 
-const store = createStore(reducers, applyMiddleware(routingMiddleware,asyncMiddleware))
+const store = createStore(reducers, applyMiddleware(routingMiddleware, asyncMiddleware))
 
 asyncMiddleware.run(rootSaga)
 
@@ -39,13 +39,10 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div className='container'>
+        <Route exact path="/" render={()=> (<Redirect to="/projects"/>)} />
         <Route path='/projects' component={Projects} />
         <Route path='/anomalies' component={Anomalies} />
       </div>
     </ConnectedRouter>
   </Provider>, document.getElementById('app'))
-
-if (_.isEqual(window.location.hash, "#/")) {
-  history.push("/projects");
-}  
 

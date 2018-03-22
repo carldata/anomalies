@@ -1,37 +1,37 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators, Dispatch } from 'redux'
-import { Button } from 'react-bootstrap'
-import { IState } from '../state'
-import { anomaliesScreenActionCreators } from './action-creators'
+import * as React from 'react';
+import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
+import { IState } from '../state';
+import { anomaliesScreenActionCreators } from './action-creators';
 
 interface IAnomaliesComponentProps {
-  anotherDummyText: string
+  anotherDummyText: string;
 }
 
 interface IAnomaliesComponentActionCreators {
-  goToProjectsScreen: () => any
+  goToProjectsScreen: () => any;
 }
 
-class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators>{
-  render() {
+class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators> {
+  public render() {
     return <div>
       <div> {this.props.anotherDummyText} </div>
       <Button bsStyle='danger' onClick={() => this.props.goToProjectsScreen()} >Go back to project screen</Button>
-    </div>
+    </div>;
   }
 }
 
 function mapStateToProps(state: IState) {
   return {
-    anotherDummyText: state.anomaliesScreen.anotherDummyText
-  }
+    anotherDummyText: state.anomaliesScreen.anotherDummyText,
+  };
 }
 
 function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
-    goToProjectsScreen: anomaliesScreenActionCreators.goToProjectsScreen
-  }, dispatch)
+    goToProjectsScreen: anomaliesScreenActionCreators.goToProjectsScreen,
+  }, dispatch);
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(AnomaliesComponent)
+export default connect(mapStateToProps, matchDispatchToProps)(AnomaliesComponent);

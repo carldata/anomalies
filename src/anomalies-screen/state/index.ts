@@ -1,3 +1,3 @@
 export interface IAnomaliesScreenState {
-  anotherDummyText: string
+  anotherDummyText: string;
 }
