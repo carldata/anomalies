@@ -15,7 +15,7 @@ function* testAsyncCall() {
     const data = yield JSON.stringify(response.data);
     yield put({ type: projectsScreenActionTypes.TEST_ASYNC_CALL_FULFILED, payload: data });
   } catch (error) {
-    yield put({ type: projectsScreenActionTypes.TEST_ASYNC_CALL_REJECTED, payload: error });
+    yield put({ type: projectsScreenActionTypes.TEST_ASYNC_CALL_REJECTED, payload: error.message });
   }
 }
 

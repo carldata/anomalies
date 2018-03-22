@@ -26,8 +26,9 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
       <Form horizontal>
         <FormGroup>
           <ListGroup>
-            {_.map(this.props.projects, (el) => {
-              return <ProjectComponent name={el.name}
+            {_.map(this.props.projects, (el, index) => {
+              return <ProjectComponent key={index}
+                name={el.name}
                 startDate={el.startDate}
                 endDate={el.endDate}
                 splitDate={el.splitDate}
