@@ -10,8 +10,8 @@ export const projectsScreenActionTypes = {
 };
 
 export const projectScreenActionCreators = {
-  goToAnomaliesScreen: () => {
-    return { type: projectsScreenActionTypes.GO_TO_ANOMALIES };
+  goToAnomaliesScreen: (name: string) => {
+    return { type: projectsScreenActionTypes.GO_TO_ANOMALIES, payload: name };
   },
   startTestAsyncCall: () => {
     return { type: projectsScreenActionTypes.TEST_ASYNC_CALL_START };
