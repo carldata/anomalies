@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Col, Dropdown, Form, FormControl, FormGroup } from 'react-bootstrap';
+import { Button, ButtonToolbar, Col, Dropdown, DropdownButton, Form, FormControl, FormGroup, MenuItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { IState } from '../state';
@@ -16,7 +16,7 @@ interface IAnomaliesComponentActionCreators {
 class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators> {
   public render() {
     return <div>
-      <Form>
+      <Form horizontal>
         <FormGroup>
           <Col sm={12}>
             <FormControl.Static style={{ color: '#30608f' }}>
@@ -28,10 +28,24 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
           <Col sm={12}> <b>Start Date:</b> {'Place for Start Date'} <b>End Date:</b> {'Place for End Date'} <b>Split Date:</b> {'Place for Split Date'}  </Col>
         </FormGroup>
         <FormGroup>
-          {/* <Col sm={12}> <b>Channel:</b> <Dropdown id='dpChannels' children={['flow']}/> </Col> */}
+          <Col sm={12}>
+            <b>Channel: </b>
+            <DropdownButton title={'Choose Channel'} bsStyle='primary' id={'dpdChooseChannel'} >
+              <MenuItem eventKey={1} >Flow 1</MenuItem>
+              <MenuItem eventKey={2} >Flow 2</MenuItem>
+              <MenuItem eventKey={3} >Flow 3</MenuItem>
+            </DropdownButton>
+            {/* <select className='form-control' >
+              <option value='first'>first</option>
+              <option value='first'>first</option>
+              <option value='first'>first</option>
+            </select> */}
+            <b> Edited Channel: </b>
+            {'Channel name'}
+            <Button bsStyle='success'>Load Timeseries</Button>
+          </Col>
         </FormGroup>
       </Form>
-      <div> {this.props.anotherDummyText} </div>
       <Button bsStyle='danger' onClick={() => this.props.goToProjectsScreen()} >Go back to project screen</Button>
     </div>;
   }
