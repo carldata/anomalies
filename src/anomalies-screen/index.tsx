@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Col, Dropdown, Form, FormControl, FormGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { IState } from '../state';
@@ -16,6 +16,21 @@ interface IAnomaliesComponentActionCreators {
 class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators> {
   public render() {
     return <div>
+      <Form>
+        <FormGroup>
+          <Col sm={12}>
+            <FormControl.Static style={{ color: '#30608f' }}>
+              {'Here will be project name'}
+            </FormControl.Static>
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col sm={12}> <b>Start Date:</b> {'Place for Start Date'} <b>End Date:</b> {'Place for End Date'} <b>Split Date:</b> {'Place for Split Date'}  </Col>
+        </FormGroup>
+        <FormGroup>
+          {/* <Col sm={12}> <b>Channel:</b> <Dropdown id='dpChannels' children={['flow']}/> </Col> */}
+        </FormGroup>
+      </Form>
       <div> {this.props.anotherDummyText} </div>
       <Button bsStyle='danger' onClick={() => this.props.goToProjectsScreen()} >Go back to project screen</Button>
     </div>;
