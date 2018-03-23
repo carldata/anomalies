@@ -1,51 +1,46 @@
 import '../styles/bootstrap.min.css';
 
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { applyMiddleware, combineReducers, createStore } from 'redux'
-import thunk from 'redux-thunk'
-import { createHashHistory } from 'history'
-import { Route } from 'react-router'
-import { ConnectedRouter, routerMiddleware, routerReducer } from 'react-router-redux'
-import createSagaMiddleware from 'redux-saga'
-import * as _ from 'lodash'
+import { createHashHistory } from 'history';
+import * as _ from 'lodash';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { Redirect, Route } from 'react-router';
+import { ConnectedRouter, routerMiddleware, routerReducer } from 'react-router-redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
-import { IState } from './state'
-import projectsScreenReducer from './projects-screen/store-creator'
-import anomaliesScreenReducer from './anomalies-screen/store-creator'
+import anomaliesScreenReducer from './anomalies-screen/store-creator';
+import projectsScreenReducer from './projects-screen/store-creator';
+import { IState } from './state';
 
-import Projects from './projects-screen'
-import Anomalies from './anomalies-screen'
-import { rootSaga } from './root-saga'
+import Anomalies from './anomalies-screen';
+import Projects from './projects-screen';
 
-let reducers = combineReducers<IState>({
-  projectsScreen: projectsScreenReducer,
+import { rootSaga } from './root-saga';
+
+const reducers = combineReducers<IState>({
   anomaliesScreen: anomaliesScreenReducer,
-  routing: routerReducer
-})
+  projectsScreen: projectsScreenReducer,
+  routing: routerReducer,
+});
 
-let history = createHashHistory()
-let routingMiddleware = routerMiddleware(history)
+const history = createHashHistory();
+const routingMiddleware = routerMiddleware(history);
+const asyncMiddleware = createSagaMiddleware();
 
-//let asyncMiddleware = thunk
-let asyncMiddleware = createSagaMiddleware()
+const store = createStore(reducers, applyMiddleware(routingMiddleware, asyncMiddleware));
 
-const store = createStore(reducers, applyMiddleware(routingMiddleware,asyncMiddleware))
-
-asyncMiddleware.run(rootSaga)
+asyncMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div className='container'>
+        <Route exact path='/' render={() => (<Redirect to='/projects' />)} />
         <Route path='/projects' component={Projects} />
         <Route path='/anomalies' component={Anomalies} />
       </div>
     </ConnectedRouter>
-  </Provider>, document.getElementById('app'))
-
-if (_.isEqual(window.location.hash, "#/")) {
-  history.push("/projects");
-}  
+  </Provider>, document.getElementById('app'));
 

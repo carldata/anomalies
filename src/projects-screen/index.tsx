@@ -1,44 +1,62 @@
-import * as React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators, Dispatch } from 'redux'
-import { Button } from 'react-bootstrap'
-import { IState } from '../state'
-import { projectScreenActionCreators } from './action-creators'
+import * as _ from 'lodash';
+import * as React from 'react';
+import { Button, Form, FormGroup, ListGroup } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
+import { IState } from '../state';
+import { projectScreenActionCreators } from './action-creators';
+import { ProjectComponent } from './project';
+import { IProject } from './state';
 
 
 interface IProjectComponentProps {
-  dummyText: string
+  dummyText: string;
+  projects: IProject[];
 }
 
 interface IProjectComponentActionCreators {
-  test: () => any,
-  goToAnomaliesScreen: () => any,
-  startTestAsyncCall: () => any
+  test: () => any;
+  goToAnomaliesScreen: (name: string) => any;
+  startTestAsyncCall: () => any;
 }
 
 class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators> {
-  render() {
+  public render() {
     return <div>
+      <Form horizontal>
+        <FormGroup>
+          <ListGroup>
+            {_.map(this.props.projects, (el, index) => {
+              return <ProjectComponent key={index}
+                name={el.name}
+                startDate={el.startDate}
+                endDate={el.endDate}
+                splitDate={el.splitDate}
+                goToProjectAnomalies={() => { this.props.goToAnomaliesScreen(el.name); }} />;
+            })}
+          </ListGroup>
+        </FormGroup>
+      </Form>
       <div>{this.props.dummyText}</div>
-      <Button onClick={() => this.props.test() } > Test changing initial text </Button>
+      <Button onClick={() => this.props.test()} > Test changing initial text </Button>
       <Button bsStyle='primary' onClick={() => this.props.startTestAsyncCall()} > Test Async Call </Button>
-      <Button bsStyle='success' onClick={() => this.props.goToAnomaliesScreen() } >Go to Anomalies screen</Button>
-    </div>
+    </div>;
   }
 }
 
 function mapStateToProps(state: IState) {
   return {
-    dummyText: state.projectsScreen.dummyText
-  }
+    dummyText: state.projectsScreen.dummyText,
+    projects: state.projectsScreen.projects,
+  };
 }
 
 function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
-    test: projectScreenActionCreators.test,
     goToAnomaliesScreen: projectScreenActionCreators.goToAnomaliesScreen,
-    startTestAsyncCall: projectScreenActionCreators.startTestAsyncCall
-  }, dispatch)
+    startTestAsyncCall: projectScreenActionCreators.startTestAsyncCall,
+    test: projectScreenActionCreators.test,
+  }, dispatch);
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(ProjectsComponent)
+export default connect(mapStateToProps, matchDispatchToProps)(ProjectsComponent);
