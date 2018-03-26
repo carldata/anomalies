@@ -20,28 +20,23 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         <FormGroup>
           <Col sm={12}>
             <FormControl.Static style={{ color: '#30608f' }}>
-              {'Here will be project name'}
+              {'Project name'}
             </FormControl.Static>
           </Col>
         </FormGroup>
         <FormGroup>
-          <Col sm={12}> <b>Start Date:</b> {'Place for Start Date'} <b>End Date:</b> {'Place for End Date'} <b>Split Date:</b> {'Place for Split Date'}  </Col>
+          <Col sm={12}> <b>Start Date:</b> {'Start Date'} <b>End Date:</b> {'End Date'} <b>Split Date:</b> {'Split Date'}  </Col>
         </FormGroup>
         <FormGroup>
           <Col sm={12}>
             <b>Channel: </b>
-            <DropdownButton title={'Choose Channel'} bsStyle='primary' id={'dpdChooseChannel'} >
-              <MenuItem eventKey={1} >Flow 1</MenuItem>
-              <MenuItem eventKey={2} >Flow 2</MenuItem>
-              <MenuItem eventKey={3} >Flow 3</MenuItem>
-            </DropdownButton>
-            {/* <select className='form-control' >
-              <option value='first'>first</option>
-              <option value='first'>first</option>
-              <option value='first'>first</option>
-            </select> */}
-            <b> Edited Channel: </b>
-            {'Channel name'}
+            <FormControl componentClass='select' className='btn-primary' style={{ width: '15%', display: 'inline' }}>
+              <option value='Flow 1'>Flow 1</option>
+              <option value='Flow 2'>Flow 2</option>
+              <option value='Flow 3'>Flow 3</option>
+              <option value='Flow 4'>Flow 4</option>
+            </FormControl>
+            <b> Edited Channel: </b> {'Channel name' } <span/>
             <Button bsStyle='success'>Load Timeseries</Button>
           </Col>
         </FormGroup>
