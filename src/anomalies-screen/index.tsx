@@ -71,13 +71,8 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
           timeSeriesChartScss={convertHpTimeSeriesChartScss(hpTimeSeriesChartScss)} ></HpTimeSeriesScroller>
       </div>
 
-      <div style={{ height: 80 }}></div>
-
-      <div>
-        <FormControl.Static></FormControl.Static>
-        <Button bsStyle='primary' onClick={() => this.props.goToProjectsScreen()} >Go back to project screen</Button>
-      </div>
-
+      <div style={{ height: 80 }}></div> <br/>
+      <Button bsStyle='primary' onClick={() => this.props.goToProjectsScreen()} >Go back to project screen</Button>
     </div>;
   }
 }
