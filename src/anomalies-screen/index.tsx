@@ -2,6 +2,9 @@ import * as React from 'react';
 import { Button, ButtonGroup, ControlLabel, Form, FormControl, FormGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
+import { convertHpSliderScss, convertHpTimeSeriesChartScss, hpTimeSeriesChartReducerAuxFunctions, HpTimeSeriesScroller, IHpTimeSeriesChartState } from 'time-series-scroller';
+import * as hpSliderScss from 'time-series-scroller/lib/out/sass/hp-slider.scss';
+import * as hpTimeSeriesChartScss from 'time-series-scroller/lib/out/sass/hp-time-series-chart.scss';
 import { IState } from '../state';
 import { anomaliesScreenActionCreators } from './action-creators';
 
@@ -13,7 +16,22 @@ interface IAnomaliesComponentActionCreators {
   goToProjectsScreen: () => any;
 }
 
-class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators> {
+// TODO move that to props
+interface IAnomaliesComponentState {
+  timeSeriesState: IHpTimeSeriesChartState;
+}
+
+class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators, IAnomaliesComponentState> {
+  // TODO remove this constructor when timeSeriesState is in props
+  constructor(props: IAnomaliesComponentProps & IAnomaliesComponentActionCreators) {
+    super(props);
+
+    this.state = {
+      timeSeriesState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
+    };
+
+  }
+
   public render() {
     return <div>
       <form>
@@ -44,12 +62,22 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
             <Button bsStyle='success'>Load Timeseries</Button>
           </FormGroup>
         </Form>
-
-        <FormGroup>
-          <FormControl.Static></FormControl.Static>
-          <Button bsStyle='primary' onClick={() => this.props.goToProjectsScreen()} >Go back to project screen</Button>
-        </FormGroup>
       </form>
+
+      <div style={{maxHeight: 800}}>
+        <HpTimeSeriesScroller
+          chartState={this.state.timeSeriesState}
+          sliderScss={convertHpSliderScss(hpSliderScss)}
+          timeSeriesChartScss={convertHpTimeSeriesChartScss(hpTimeSeriesChartScss)} ></HpTimeSeriesScroller>
+      </div>
+
+      <div style={{ height: 80 }}></div>
+
+      <div>
+        <FormControl.Static></FormControl.Static>
+        <Button bsStyle='primary' onClick={() => this.props.goToProjectsScreen()} >Go back to project screen</Button>
+      </div>
+
     </div>;
   }
 }
