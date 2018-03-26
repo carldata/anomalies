@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, ButtonToolbar, Col, Dropdown, DropdownButton, Form, FormControl, FormGroup, MenuItem } from 'react-bootstrap';
+import { Button, ButtonGroup, ControlLabel, Form, FormControl, FormGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { IState } from '../state';
@@ -16,32 +16,40 @@ interface IAnomaliesComponentActionCreators {
 class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators> {
   public render() {
     return <div>
-      <Form horizontal>
-        <FormGroup>
-          <Col sm={12}>
-            <FormControl.Static style={{ color: '#30608f' }}>
-              {'Project name'}
-            </FormControl.Static>
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col sm={12}> <b>Start Date:</b> {'Start Date'} <b>End Date:</b> {'End Date'} <b>Split Date:</b> {'Split Date'}  </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col sm={12}>
-            <b>Channel: </b>
-            <FormControl componentClass='select' className='btn-primary' style={{ width: '15%', display: 'inline' }}>
+      <form>
+        <FormControl.Static style={{ color: '#30608f' }}>{'Project name'}</FormControl.Static>
+
+        <Form inline>
+          <FormGroup>
+            <ControlLabel>Start Date:</ControlLabel>{' '}
+            <FormControl.Static>{'Start Date'}</FormControl.Static>{' '}
+            <ControlLabel>End Date:</ControlLabel>{' '}
+            <FormControl.Static>{'End Date'}</FormControl.Static>{' '}
+            <ControlLabel>Split Date:</ControlLabel>{' '}
+            <FormControl.Static>{'Split Date'}</FormControl.Static>
+          </FormGroup>
+        </Form>
+
+        <Form inline>
+          <FormGroup>
+            <FormControl.Static> <b>Channel:</b> </FormControl.Static >{' '}
+            <FormControl componentClass='select' className='btn-primary' >
               <option value='Flow 1'>Flow 1</option>
               <option value='Flow 2'>Flow 2</option>
               <option value='Flow 3'>Flow 3</option>
               <option value='Flow 4'>Flow 4</option>
-            </FormControl>
-            <b> Edited Channel: </b> {'Channel name' } <span/>
+            </FormControl>{' '}
+            <FormControl.Static> <b>Edited Channel:</b> </FormControl.Static>{' '}
+            <FormControl.Static> {'Channel name'} </FormControl.Static>{' '}
             <Button bsStyle='success'>Load Timeseries</Button>
-          </Col>
+          </FormGroup>
+        </Form>
+
+        <FormGroup>
+          <FormControl.Static></FormControl.Static>
+          <Button bsStyle='primary' onClick={() => this.props.goToProjectsScreen()} >Go back to project screen</Button>
         </FormGroup>
-      </Form>
-      <Button bsStyle='danger' onClick={() => this.props.goToProjectsScreen()} >Go back to project screen</Button>
+      </form>
     </div>;
   }
 }
