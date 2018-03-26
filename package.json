@@ -19,8 +19,8 @@
   },
   "homepage": "https://github.com/carldata/anomalies#readme",
   "devDependencies": {
-    "@types/lodash": "^4.14.105",
-    "@types/react": "^16.0.40",
+    "@types/lodash": "^4.14.106",
+    "@types/react": "^16.0.41",
     "@types/react-bootstrap": "^0.32.6",
     "@types/react-dom": "^16.0.4",
     "@types/react-redux": "^5.0.15",
@@ -30,12 +30,14 @@
     "@types/redux-actions": "^2.2.4",
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",
+    "node-sass": "^4.8.3",
+    "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
     "ts-loader": "^4.1.0",
     "tslint": "^5.9.1",
     "typescript": "^2.7.2",
-    "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.12",
+    "webpack": "^4.2.0",
+    "webpack-cli": "^2.0.13",
     "webpack-dev-server": "^3.1.1"
   },
   "dependencies": {
@@ -50,6 +52,7 @@
     "react-router-redux": "^5.0.0-alpha.9",
     "redux": "^3.7.2",
     "redux-actions": "^2.3.0",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "time-series-scroller": "^0.5.29"
   }
 }
