@@ -19,7 +19,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       <form>
         <FormControl.Static style={{ color: '#30608f' }}>{'Project name'}</FormControl.Static>
 
-        <Form inline>
+        <Form componentClass='fieldset' inline>
           <FormGroup>
             <ControlLabel>Start Date:</ControlLabel>{' '}
             <FormControl.Static>{'Start Date'}</FormControl.Static>{' '}
@@ -30,7 +30,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
           </FormGroup>
         </Form>
 
-        <Form inline>
+        <Form componentClass='fieldset' inline>
           <FormGroup>
             <FormControl.Static> <b>Channel:</b> </FormControl.Static >{' '}
             <FormControl componentClass='select' className='btn-primary' >
