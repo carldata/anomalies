@@ -14,6 +14,7 @@ interface IAnomaliesComponentProps {
 
 interface IAnomaliesComponentActionCreators {
   goToProjectsScreen: () => any;
+  getAnomaliesForChannel: (channel: string) => any;
 }
 
 // TODO move that to props
@@ -59,7 +60,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
             </FormControl>{' '}
             <FormControl.Static> <b>Edited Channel:</b> </FormControl.Static>{' '}
             <FormControl.Static> {'Channel name'} </FormControl.Static>{' '}
-            <Button bsStyle='success'>Load Timeseries</Button>
+            <Button bsStyle='success' onClick={()=> this.props.getAnomaliesForChannel('7883-11762') } >Load Timeseries</Button>
           </FormGroup>
         </Form>
       </form>
@@ -85,6 +86,7 @@ function mapStateToProps(state: IState) {
 
 function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
+    getAnomaliesForChannel: anomaliesScreenActionCreators.getAnomaliesForChannel,
     goToProjectsScreen: anomaliesScreenActionCreators.goToProjectsScreen,
   }, dispatch);
 }
