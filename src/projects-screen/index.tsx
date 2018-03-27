@@ -18,9 +18,14 @@ interface IProjectComponentActionCreators {
   test: () => any;
   goToAnomaliesScreen: (name: string) => any;
   startTestAsyncCall: () => any;
+  getAllProjectsAsyncCall: () => any;
 }
 
 class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators> {
+  public componentDidMount(){
+    this.props.getAllProjectsAsyncCall();
+  }
+
   public render() {
     return <div>
       <Form horizontal>
@@ -28,6 +33,7 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
           <ListGroup>
             {_.map(this.props.projects, (el, index) => {
               return <ProjectComponent key={index}
+                id={el.id}
                 name={el.name}
                 startDate={el.startDate}
                 endDate={el.endDate}
@@ -55,7 +61,8 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     goToAnomaliesScreen: projectScreenActionCreators.goToAnomaliesScreen,
     startTestAsyncCall: projectScreenActionCreators.startTestAsyncCall,
-    test: projectScreenActionCreators.test,
+    getAllProjectsAsyncCall: projectScreenActionCreators.getAllProjectsAsyncCall,
+    test: projectScreenActionCreators.test
   }, dispatch);
 }
 
