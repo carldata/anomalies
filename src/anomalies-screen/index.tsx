@@ -10,6 +10,7 @@ import { anomaliesScreenActionCreators } from './action-creators';
 
 interface IAnomaliesComponentProps {
   anotherDummyText: string;
+  chartState: IHpTimeSeriesChartState;
 }
 
 interface IAnomaliesComponentActionCreators {
@@ -60,14 +61,14 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
             </FormControl>{' '}
             <FormControl.Static> <b>Edited Channel:</b> </FormControl.Static>{' '}
             <FormControl.Static> {'Channel name'} </FormControl.Static>{' '}
-            <Button bsStyle='success' onClick={()=> this.props.getAnomaliesForChannel('7883-11762') } >Load Timeseries</Button>
+            <Button bsStyle='success' onClick={() => this.props.getAnomaliesForChannel('7883-11762') } >Load Timeseries</Button>
           </FormGroup>
         </Form>
       </form>
 
       <div style={{maxHeight: 800}}>
         <HpTimeSeriesScroller
-          chartState={this.state.timeSeriesState}
+          chartState={this.props.chartState}
           sliderScss={convertHpSliderScss(hpSliderScss)}
           timeSeriesChartScss={convertHpTimeSeriesChartScss(hpTimeSeriesChartScss)} ></HpTimeSeriesScroller>
       </div>
@@ -81,6 +82,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 function mapStateToProps(state: IState) {
   return {
     anotherDummyText: state.anomaliesScreen.anotherDummyText,
+    chartState: state.anomaliesScreen.chartState,
   };
 }
 
