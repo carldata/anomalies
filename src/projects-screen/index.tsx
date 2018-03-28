@@ -15,9 +15,7 @@ interface IProjectComponentProps {
 }
 
 interface IProjectComponentActionCreators {
-  test: () => any;
   goToAnomaliesScreen: (name: string) => any;
-  startTestAsyncCall: () => any;
   getAllProjectsAsyncCall: () => any;
 }
 
@@ -44,25 +42,20 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
         </FormGroup>
       </Form>
       <div>{this.props.dummyText}</div>
-      <Button onClick={() => this.props.test()} > Test changing initial text </Button>
-      <Button bsStyle='primary' onClick={() => this.props.startTestAsyncCall()} > Test Async Call </Button>
     </div>;
   }
 }
 
 function mapStateToProps(state: IState) {
   return {
-    dummyText: state.projectsScreen.dummyText,
-    projects: state.projectsScreen.projects,
+    projects: state.projectsScreen.projects
   };
 }
 
 function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     goToAnomaliesScreen: projectScreenActionCreators.goToAnomaliesScreen,
-    startTestAsyncCall: projectScreenActionCreators.startTestAsyncCall,
-    getAllProjectsAsyncCall: projectScreenActionCreators.getAllProjectsAsyncCall,
-    test: projectScreenActionCreators.test
+    getAllProjectsAsyncCall: projectScreenActionCreators.getAllProjectsAsyncCall
   }, dispatch);
 }
 

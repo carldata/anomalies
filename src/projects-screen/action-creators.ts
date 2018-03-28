@@ -5,22 +5,12 @@ export const projectsScreenActionTypes = {
   GO_TO_ANOMALIES : 'GO_TO_ANOMALIES',
   GET_ALL_PROJECTS_ASYNC_CALL_START : 'GET_ALL_PROJECTS_ASYNC_CALL_START',
   GET_ALL_PROJECTS_ASYNC_CALL_FULFILED: 'GET_ALL_PROJECTS_ASYNC_CALL_FULFILED',
-  GET_ALL_PROJECTS_ASYNC_CALL_REJECTED: 'GET_ALL_PROJECTS_ASYNC_CALL_REJECTED',
-  TEST_ACTION: 'TEST_ACTION',
-  TEST_ASYNC_CALL_FULFILED: 'TEST_ASYNC_CALL_FULFILED',
-  TEST_ASYNC_CALL_REJECTED: 'TEST_ASYNC_CALL_REJECTED',
-  TEST_ASYNC_CALL_START: 'TEST_ASYNC_CALL_START',
+  GET_ALL_PROJECTS_ASYNC_CALL_REJECTED: 'GET_ALL_PROJECTS_ASYNC_CALL_REJECTED'
 };
 
 export const projectScreenActionCreators = {
   goToAnomaliesScreen: (name: string) => {
     return { type: projectsScreenActionTypes.GO_TO_ANOMALIES, payload: name };
-  },
-  startTestAsyncCall: () => {
-    return { type: projectsScreenActionTypes.TEST_ASYNC_CALL_START };
-  },
-  test: () => {
-    return { type: projectsScreenActionTypes.TEST_ACTION, payload: 'It works' };
   },
   getAllProjectsAsyncCall: () => {
     return { type: projectsScreenActionTypes.GET_ALL_PROJECTS_ASYNC_CALL_START }

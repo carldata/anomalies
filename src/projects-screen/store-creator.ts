@@ -4,7 +4,7 @@ import { projectsScreenActionTypes } from './action-creators';
 import { IProject, IProjectsScreenState } from './state';
 
 const initialState = {
-  dummyText: 'initital text'
+
 } as IProjectsScreenState;
 
 export default handleActions<IProjectsScreenState, string | IProject[] >({
