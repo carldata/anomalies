@@ -14,11 +14,11 @@ export function* watchGoToProjects() {
 function* getAnomaliesForChannel(action: any) {
 
   try {
-    //const timeseriesResponse = yield axios.get(`${apiUrl}/data/channel/${action.payload}/data`);
+    const timeseriesResponse = yield axios.get(`${apiUrl}/data/channel/${action.payload}/data`);
     const anomaliesResponse = yield axios.get(`${apiUrl}/anomalies/find?series=${action.payload}`);
-    //const parsedtimeseries = Papa.parse(timeseriesResponse.data, { header: true});
+    const parsedTimeseries = Papa.parse(timeseriesResponse.data, { header: true});
     const parsedAnomalies = Papa.parse(anomaliesResponse.data, { header: true});
-    yield put({ type: anomaliesScreenActionTypes.GET_ANOMALIES_FULFILED, payload: [parsedAnomalies] });
+    yield put({ type: anomaliesScreenActionTypes.GET_ANOMALIES_FULFILED, payload: [parsedTimeseries, parsedAnomalies] });
   } catch (error) {
     yield put({ type: anomaliesScreenActionTypes.GET_ANOMALIES_REJECTED, payload: error.message });
   }
