@@ -54,7 +54,8 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         <HpTimeSeriesScroller
           chartState={this.props.chartState}
           sliderScss={convertHpSliderScss(hpSliderScss)}
-          timeSeriesChartScss={convertHpTimeSeriesChartScss(hpTimeSeriesChartScss)} ></HpTimeSeriesScroller>
+          timeSeriesChartScss={convertHpTimeSeriesChartScss(hpTimeSeriesChartScss)} >
+        </HpTimeSeriesScroller>
       </div>
 
       <div style={{ height: 80 }}></div> <br/>
