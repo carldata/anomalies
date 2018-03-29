@@ -3,7 +3,6 @@ import { Dispatch } from 'redux';
 import { put } from 'redux-saga/effects';
 
 export const anomaliesScreenActionTypes = {
-  ANOMALY_TEST_ACTION: 'ANOMALY_TEST_ACTION',
   GO_TO_PROJECTS: 'GO_TO_PROJECTS',
   GET_ANOMALIES_START: 'GET_ANOMALIES_START',
   GET_ANOMALIES_FETCHING: 'GET_ANOMALIES_FETCHING',
@@ -12,8 +11,8 @@ export const anomaliesScreenActionTypes = {
 };
 
 export const anomaliesScreenActionCreators = {
-  getAnomaliesForChannel: (channel: string) =>{
-    return { type: anomaliesScreenActionTypes.GET_ANOMALIES_START, payload: channel }
+  getAnomaliesForChannel: (channel: string) => {
+    return { type: anomaliesScreenActionTypes.GET_ANOMALIES_START, payload: channel };
   },
   goToProjectsScreen: () => {
     return { type: anomaliesScreenActionTypes.GO_TO_PROJECTS };

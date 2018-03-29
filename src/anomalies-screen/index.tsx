@@ -2,14 +2,13 @@ import * as React from 'react';
 import { Button, ButtonGroup, ControlLabel, Form, FormControl, FormGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import { convertHpSliderScss, convertHpTimeSeriesChartScss, hpTimeSeriesChartReducerAuxFunctions, HpTimeSeriesScroller, IHpTimeSeriesChartState } from 'time-series-scroller';
+import { convertHpSliderScss, convertHpTimeSeriesChartScss, HpTimeSeriesScroller, IHpTimeSeriesChartState } from 'time-series-scroller';
 import * as hpSliderScss from 'time-series-scroller/lib/out/sass/hp-slider.scss';
 import * as hpTimeSeriesChartScss from 'time-series-scroller/lib/out/sass/hp-time-series-chart.scss';
 import { IState } from '../state';
 import { anomaliesScreenActionCreators } from './action-creators';
 
 interface IAnomaliesComponentProps {
-  anotherDummyText: string;
   chartState: IHpTimeSeriesChartState;
 }
 
@@ -18,22 +17,7 @@ interface IAnomaliesComponentActionCreators {
   getAnomaliesForChannel: (channel: string) => any;
 }
 
-// TODO move that to props
-interface IAnomaliesComponentState {
-  timeSeriesState: IHpTimeSeriesChartState;
-}
-
-class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators, IAnomaliesComponentState> {
-  // TODO remove this constructor when timeSeriesState is in props
-  constructor(props: IAnomaliesComponentProps & IAnomaliesComponentActionCreators) {
-    super(props);
-
-    this.state = {
-      timeSeriesState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
-    };
-
-  }
-
+class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators> {
   public render() {
     return <div>
       <form>
@@ -81,7 +65,6 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 
 function mapStateToProps(state: IState) {
   return {
-    anotherDummyText: state.anomaliesScreen.anotherDummyText,
     chartState: state.anomaliesScreen.chartState,
   };
 }
