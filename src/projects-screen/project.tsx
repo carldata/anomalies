@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Col, ControlLabel, FormControl, FormGroup, ListGroupItem } from 'react-bootstrap';
 
 interface IProjectComponentProps {
+  id: string;
   name: string;
   startDate: string;
   endDate: string;
@@ -18,7 +19,7 @@ export class ProjectComponent extends React.Component<IProjectComponentProps & I
       <FormGroup>
         <Col sm={12}>
           <FormControl.Static style={{ color: '#30608f' }}>
-            {this.props.name}
+            {this.props.name} - {this.props.id}
           </FormControl.Static>
         </Col>
       </FormGroup>

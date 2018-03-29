@@ -15,12 +15,15 @@ interface IProjectComponentProps {
 }
 
 interface IProjectComponentActionCreators {
-  test: () => any;
   goToAnomaliesScreen: (name: string) => any;
-  startTestAsyncCall: () => any;
+  getAllProjectsAsyncCall: () => any;
 }
 
 class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators> {
+  public componentDidMount(){
+    this.props.getAllProjectsAsyncCall();
+  }
+
   public render() {
     return <div>
       <Form horizontal>
@@ -28,6 +31,7 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
           <ListGroup>
             {_.map(this.props.projects, (el, index) => {
               return <ProjectComponent key={index}
+                id={el.id}
                 name={el.name}
                 startDate={el.startDate}
                 endDate={el.endDate}
@@ -38,24 +42,20 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
         </FormGroup>
       </Form>
       <div>{this.props.dummyText}</div>
-      <Button onClick={() => this.props.test()} > Test changing initial text </Button>
-      <Button bsStyle='primary' onClick={() => this.props.startTestAsyncCall()} > Test Async Call </Button>
     </div>;
   }
 }
 
 function mapStateToProps(state: IState) {
   return {
-    dummyText: state.projectsScreen.dummyText,
-    projects: state.projectsScreen.projects,
+    projects: state.projectsScreen.projects
   };
 }
 
 function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     goToAnomaliesScreen: projectScreenActionCreators.goToAnomaliesScreen,
-    startTestAsyncCall: projectScreenActionCreators.startTestAsyncCall,
-    test: projectScreenActionCreators.test,
+    getAllProjectsAsyncCall: projectScreenActionCreators.getAllProjectsAsyncCall
   }, dispatch);
 }
 
