@@ -8,7 +8,6 @@ import { projectScreenActionCreators } from './action-creators';
 import { ProjectComponent } from './project';
 import { IProject } from './state';
 
-
 interface IProjectComponentProps {
   dummyText: string;
   projects: IProject[];
