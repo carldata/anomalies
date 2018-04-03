@@ -2,7 +2,7 @@
 import * as React from 'react';
 import * as ReactDataGrid from 'react-data-grid'
 
-export class DataGrid extends React.Component {
+class DataGrid extends React.Component {
   _columns: { key: string; name: string; }[];
   _rows: { id: number; title: string; count: number; }[];
   constructor(props: any, context: any) {
