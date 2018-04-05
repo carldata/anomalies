@@ -7,16 +7,18 @@ import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig 
 import { anomaliesScreenActionTypes } from './action-creators';
 import { IAnomaliesScreenState } from './state';
 import { IState } from '../state';
+import { IDataGridState } from './controls/data-grid/state';
 
 const initialState = {
   chartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
+  gridState: { series: [] }
 } as IAnomaliesScreenState;
 
-export default handleActions<IAnomaliesScreenState, IHpTimeSeriesChartState | ParseResult[]>({
+export default handleActions<IAnomaliesScreenState, IHpTimeSeriesChartState | IDataGridState>({
   [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_CHART_FULFILED]: (state: IAnomaliesScreenState, action: Action<IHpTimeSeriesChartState>) => {
     return _.extend({}, state, { chartState: action.payload });
   },
-  [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_GRID_FULFILED]: (state: IAnomaliesScreenState, action: Action<ParseResult[]>) => {
+  [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_GRID_FULFILED]: (state: IAnomaliesScreenState, action: Action<IDataGridState>) => {
     return _.extend({}, state, {gridState: action.payload});
   }
 }, initialState);

@@ -53,19 +53,16 @@ function* getAnomaliesForChannel(action: any) {
     for(let i = 0; i < parsedTimeseries.data.length; i++){
 
       let buffValue = parsedTimeseries.data[i].time;
-      let anomalyValue = _.find(parsedAnomalies.data, x => x.time == buffValue);
+      let fixedValue = _.find(parsedAnomalies.data, x => x.time == buffValue);
 
-      if(_.isUndefined(anomalyValue)){
-        anomalyValue = '';
-      }
-      else{
-        let asdf = 1+1;
+      if(_.isUndefined(fixedValue)){
+        fixedValue = '';
       }
 
       newGridState.series.push({
         date: parsedTimeseries.data[i].time,
         rawValue: parsedTimeseries.data[i].value,
-        anomalyValue: anomalyValue.value,
+        fixedValue: fixedValue.value,
         editedValue: 4
       })
     }
