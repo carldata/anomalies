@@ -7,10 +7,12 @@ import * as hpSliderScss from 'time-series-scroller/lib/out/sass/hp-slider.scss'
 import * as hpTimeSeriesChartScss from 'time-series-scroller/lib/out/sass/hp-time-series-chart.scss';
 import { IState } from '../state';
 import { anomaliesScreenActionCreators } from './action-creators';
-import DataGrid from './controls/data-grid'
+import { DataGrid } from './controls/data-grid'
+import { IDataGridState } from './controls/data-grid/state';
 
 interface IAnomaliesComponentProps {
   chartState: IHpTimeSeriesChartState;
+  gridState: IDataGridState;
 }
 
 interface IAnomaliesComponentActionCreators {
@@ -62,7 +64,9 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       <div style={{ height: 80 }}></div> <br/>
       <Button bsStyle='primary' onClick={() => this.props.goToProjectsScreen()} >Go back to project screen</Button>
 
-      <DataGrid />
+      <DataGrid
+        gridState={this.props.gridState} >
+      </DataGrid>
     </div>;
   }
 }
@@ -70,6 +74,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 function mapStateToProps(state: IState) {
   return {
     chartState: state.anomaliesScreen.chartState,
+    gridState: state.anomaliesScreen.gridState
   };
 }
 
