@@ -6,39 +6,19 @@ import { EnumTimeSeriesType, hpTimeSeriesChartAuxiliary, hpTimeSeriesChartReduce
 import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig } from 'time-series-scroller/lib/out/hp-time-series-chart/csv-loading/calculations';
 import { anomaliesScreenActionTypes } from './action-creators';
 import { IAnomaliesScreenState } from './state';
+import { IState } from '../state';
+import { IDataGridState } from './controls/data-grid/state';
 
 const initialState = {
   chartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
+  gridState: { series: [] }
 } as IAnomaliesScreenState;
 
-export default handleActions<IAnomaliesScreenState, ParseResult[]>({
-  [anomaliesScreenActionTypes.GET_ANOMALIES_FULFILED]: (state: IAnomaliesScreenState, action: Action<ParseResult[]>) => {
-
-    const sourceTimeSeries: IExternalSourceTimeSeries[] = [];
-
-    sourceTimeSeries.push({
-      color: 'steelblue',
-      name: 'raw',
-      points: csvLoadingCalculations.extractUnixTimePoints(action.payload[0].data, {
-        rawFormat: EnumRawCsvFormat.DateTimeThenValue,
-        timeStampColumnName: 'time',
-        valueColumnName: 'value',
-      } as IExtractUnixTimePointsConfig),
-      type: EnumTimeSeriesType.Line,
-    } as IExternalSourceTimeSeries);
-
-    sourceTimeSeries.push({
-      color: 'red',
-      name: 'anomalies',
-      points: csvLoadingCalculations.extractUnixTimePoints(action.payload[1].data, {
-        rawFormat: EnumRawCsvFormat.DateTimeThenValue,
-        timeStampColumnName: 'time',
-        valueColumnName: 'value',
-      } as IExtractUnixTimePointsConfig),
-      type: EnumTimeSeriesType.Dots,
-    } as IExternalSourceTimeSeries);
-
-    const newChartState = hpTimeSeriesChartAuxiliary.buildStateFromExternalSource(sourceTimeSeries);
-    return _.extend({}, state, { chartState: newChartState } as IAnomaliesScreenState);
+export default handleActions<IAnomaliesScreenState, IHpTimeSeriesChartState | IDataGridState>({
+  [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_CHART_FULFILED]: (state: IAnomaliesScreenState, action: Action<IHpTimeSeriesChartState>) => {
+    return _.extend({}, state, { chartState: action.payload });
   },
+  [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_GRID_FULFILED]: (state: IAnomaliesScreenState, action: Action<IDataGridState>) => {
+    return _.extend({}, state, {gridState: action.payload});
+  }
 }, initialState);

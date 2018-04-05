@@ -1,36 +1,36 @@
 //http://adazzle.github.io/react-data-grid/examples.html#/customRowRenderer
 import * as React from 'react';
 import * as ReactDataGrid from 'react-data-grid'
+import { IState } from '../../../state';
+import { Dispatch, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { IHpTimeSeriesChartState } from 'time-series-scroller';
+import { IDataGridState } from './state';
+import _ = require('lodash');
 
-class DataGrid extends React.Component {
+interface IDataGridComponentProps {
+  gridState: IDataGridState;
+}
+
+interface IDataGridComponentActionCreators {
+  
+}
+
+export class DataGrid extends React.Component<IDataGridComponentProps & IDataGridComponentActionCreators> {
   _columns: { key: string; name: string; }[];
-  _rows: { id: number; title: string; count: number; }[];
+  _rows: any;
   constructor(props: any, context: any) {
     super(props, context);
-    this.createRows();
     this._columns = [
-      { key: 'id', name: 'ID' },
-      { key: 'title', name: 'Title' },
-      { key: 'count', name: 'Count' } ];
+      { key: 'date', name: 'Date' },
+      { key: 'rawValue', name: 'Raw Value' },
+      { key: 'fixedValue', name: 'Fixed Value' } ];
 
     this.state = null;
   }
 
-  createRows = () => {
-    let rows = [];
-    for (let i = 1; i < 1000000; i++) {
-      rows.push({
-        id: i,
-        title: 'Title ' + i,
-        count: i
-      });
-    }
-
-    this._rows = rows;
-  };
-
   rowGetter = (i: any) => {
-    return this._rows[i];
+    return this.props.gridState.series[i];
   };
 
   render() {
@@ -38,9 +38,21 @@ class DataGrid extends React.Component {
       <ReactDataGrid
         columns={this._columns}
         rowGetter={this.rowGetter}
-        rowsCount={this._rows.length}
+        rowsCount={this.props.gridState.series.length}
         minHeight={500} />);
   }
 };
 
-export default DataGrid;
+function mapStateToProps(state: IState) {
+  return {
+    gridState: state.anomaliesScreen.gridState,
+  };
+}
+
+function matchDispatchToProps(dispatch: Dispatch<{}>) {
+  return bindActionCreators({
+    
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(DataGrid);
