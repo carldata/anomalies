@@ -7,17 +7,19 @@ import { IHpTimeSeriesChartState } from 'time-series-scroller';
 import { IDataGridState, IDataGridRow } from './state';
 import _ = require('lodash');
 import update from 'immutability-helper';
+import { Button } from 'react-bootstrap';
 
 interface IDataGridComponentProps {
   gridState: IDataGridState;
 }
 
 interface IDataGridComponentActionCreators {
- 
+  
 }
 
 interface IDataGridComponentState{
   selectedIndexes: any[];
+  series: any[]
 }
 
 interface IRowRendererProps{
@@ -25,22 +27,108 @@ interface IRowRendererProps{
 }
 
 export class DataGrid extends React.Component<IDataGridComponentProps & IDataGridComponentActionCreators, IDataGridComponentState> {
-  _columns: { key: string; name: string; editable?: boolean }[];
+  _columns: { key: string; name: string; editable?: boolean, width?: number, resizable?: boolean }[];
 
   constructor(props: IDataGridComponentProps & IDataGridComponentActionCreators, context: any) {
     super(props, context);
     this._columns = [
-      { key: 'date', name: 'Date', editable: true },
-      { key: 'rawValue', name: 'Raw Value', editable: true },
-      { key: 'editedValue', name: 'Edited Value', editable: true },
-      { key: 'fixedValue', name: 'Fixed Value', editable: true } ];
+      { key: 'date', name: 'Date', resizable: true },
+      { key: 'rawValue', name: 'Raw Value', resizable: true },
+      { key: 'editedValue', name: 'Edited Value', editable: true, resizable: true },
+      { key: 'fixedValue', name: 'Fixed Value', resizable: true } ];
 
-      this.state = { selectedIndexes: [] };
+      this.state = { selectedIndexes: [], series: [] };
+  }
+
+  componentWillReceiveProps(props: IDataGridComponentProps) {
+    this.setState({series: props.gridState.series});
+
+    var data = {
+      rows: props.gridState.series,
+      columns: this._columns
+
+    }
+
+    // this.formatColumns(data);
   }
 
   rowGetter = (i: any) => {
-    return this.props.gridState.series[i];
+    return this.state.series[i];
   };
+
+  // formatColumns(data: any) {
+  //   const gridWidth = parseInt(document.querySelector("#app").clientWidth, 10); //selector for grid
+  //   let combinedColumnWidth = 0;
+
+  //   if(data.length == 0)
+  //     return;
+
+  //   for (let i = 0; i < data.columns.length; i++) {
+  //     data.columns[i].width = this.getTextWidth(data, i);
+  //     combinedColumnWidth += data.columns[i].width;
+  //   }
+
+  //   if (combinedColumnWidth < gridWidth) {
+  //     data.columns = this.distributeRemainingSpace(
+  //       combinedColumnWidth,
+  //       data.columns,
+  //       gridWidth
+  //     );
+  //   }
+  //   return data;
+  // }
+
+  // getTextWidth(data: any, i: any) {
+  //   const rowValues = [];
+  //   const reducer = (a: any, b: any) => (a.length > b.length ? a : b);
+  //   const cellPadding = 16;
+  //   const arrowWidth = 18;
+  //   let longestCellData,
+  //     longestCellDataWidth,
+  //     longestColName,
+  //     longestColNameWidth,
+  //     longestString;
+
+  //   for (let row of data.rows) {
+  //     rowValues.push(row[data.columns[i].key]);
+  //   }
+
+  //   longestCellData = rowValues.reduce(reducer);
+  //   longestColName = data.columns[i].name;
+  //   longestCellDataWidth = Math.ceil(
+  //     this.getCanvas().measureText(longestCellData).width
+  //   );
+  //   longestColNameWidth =
+  //     Math.ceil(this.getCanvas("bold ").measureText(longestColName).width) +
+  //     arrowWidth;
+
+  //   longestString = Math.max(longestCellDataWidth, longestColNameWidth);
+
+  //   return longestString + cellPadding;
+  // }
+
+  // getCanvas(fontWeight = "") {
+  //   if (!this.canvas) {
+  //     this.canvas = document.createElement("canvas");
+  //     this.canvasContext = this.canvas.getContext("2d");
+  //   }
+  //   this.canvasContext.font = `${fontWeight}16px sans-serif`;
+
+  //   return this.canvasContext;
+  // }
+
+  // distributeRemainingSpace(combinedColumnWidth: any, columns: any, gridWidth: any) {
+  //   const spaceLeftOver = gridWidth - combinedColumnWidth;
+  //   const remainder = spaceLeftOver % columns.length;
+  //   const equalSpaceLeft = spaceLeftOver - remainder;
+
+  //   columns[0].width += remainder; //any remaining space after distributing equally should go on first column
+
+  //   for (let col of columns) {
+  //     col.width += equalSpaceLeft / columns.length;
+  //   }
+  //   return columns;
+  // }
 
   handleGridRowsUpdated = ({ fromRow, toRow, updated }: any) => {
     for (let i = fromRow; i <= toRow; i++) {
@@ -59,25 +147,52 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
     this.setState({selectedIndexes: this.state.selectedIndexes.filter(i => rowIndexes.indexOf(i) === -1 )});
   };
 
+  copyRawToEdited = () => {
+    let selectedIndexes = this.state.selectedIndexes;
+    for(let index = 0; index < selectedIndexes.length; index++) {
+      let selectedIndex = selectedIndexes[index];
+      this.props.gridState.series[selectedIndex].editedValue = this.props.gridState.series[selectedIndex].rawValue;
+    }
+    
+    this.setState({series: this.props.gridState.series, selectedIndexes: []});
+  };
+
+  copyFixedToEdited = () => {
+    let selectedIndexes = this.state.selectedIndexes;
+    for(let index = 0; index < selectedIndexes.length; index++) {
+      let selectedIndex = selectedIndexes[index];
+      this.props.gridState.series[selectedIndex].editedValue = this.props.gridState.series[selectedIndex].fixedValue;
+    }
+    
+    this.setState({series: this.props.gridState.series, selectedIndexes: []});
+  };
+
   render() {
     return  (
-      <ReactDataGrid
-        enableCellSelect={true}
-        columns={this._columns}
-        rowGetter={this.rowGetter}
-        rowsCount={this.props.gridState.series.length}
-        minHeight={700} 
-        rowSelection={{
-          showCheckbox: true,
-          enableShiftSelect: true,
-          onRowsSelected: this.onRowsSelected,
-          onRowsDeselected: this.onRowsDeselected,
-          selectBy: {
-            indexes: this.state.selectedIndexes
-          }
-        }}
-        rowRenderer={RowRenderer} 
-        onGridRowsUpdated={this.handleGridRowsUpdated} />);
+      <div>
+        <ReactDataGrid
+          enableCellSelect={true}
+          columns={this._columns}
+          rowGetter={this.rowGetter}
+          rowsCount={this.props.gridState.series.length}
+          minHeight={950} 
+          // minHeight={this.props.gridState.series.length * 35 + 50} 
+          rowSelection={{
+            showCheckbox: true,
+            enableShiftSelect: true,
+            onRowsSelected: this.onRowsSelected,
+            onRowsDeselected: this.onRowsDeselected,
+            selectBy: {
+              indexes: this.state.selectedIndexes
+            }
+          }}
+          rowRenderer={RowRenderer} 
+          onGridRowsUpdated={this.handleGridRowsUpdated} />
+
+          <Button bsStyle='primary' onClick={() => this.copyRawToEdited() }>Copy Selected Raw Values to Edited</Button>
+          <Button bsStyle='primary' onClick={() => this.copyFixedToEdited() }>Copy Selected Fixed Values to Edited</Button>
+      </div>
+      );
   }
 };
 
@@ -94,7 +209,6 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
 }
 
 class RowRenderer extends React.Component<IRowRendererProps> {
-  //row: ReactDataGrid.Row;
   getRowStyle = () => {
     return {
       color: this.getRowBackground()
@@ -109,7 +223,7 @@ class RowRenderer extends React.Component<IRowRendererProps> {
 
     return color;
   };
-  //ref={ node => this.row = node }
+  
   render() {
     return (<div style={this.getRowStyle()}><ReactDataGrid.Row  {...this.props}/></div>);
   }

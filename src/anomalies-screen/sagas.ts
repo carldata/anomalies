@@ -88,3 +88,11 @@ function* getAnomaliesForChannel(action: any) {
 export function* watchGetAnomaliesForChannel() {
   yield takeEvery(anomaliesScreenActionTypes.GET_ANOMALIES_START, getAnomaliesForChannel);
 }
+
+function* copyRawToEdited() {
+  yield put({ type: anomaliesScreenActionTypes.COPY_RAW_TO_EDITED, payload: ''});
+}
+
+export function* watchCopyRawToEdited() {
+  yield takeEvery(anomaliesScreenActionTypes.COPY_RAW_TO_EDITED, copyRawToEdited);
+}

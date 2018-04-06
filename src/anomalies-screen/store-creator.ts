@@ -20,5 +20,8 @@ export default handleActions<IAnomaliesScreenState, IHpTimeSeriesChartState | ID
   },
   [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_GRID_FULFILED]: (state: IAnomaliesScreenState, action: Action<IDataGridState>) => {
     return _.extend({}, state, {gridState: action.payload});
+  },
+  [anomaliesScreenActionTypes.COPY_RAW_TO_EDITED]: (state: IAnomaliesScreenState, action: Action<IDataGridState>) => {
+    return _.extend({}, state, {gridState: action.payload});
   }
 }, initialState);
