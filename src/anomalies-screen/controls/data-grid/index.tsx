@@ -94,7 +94,7 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
 }
 
 class RowRenderer extends React.Component<IRowRendererProps> {
-  row: ReactDataGrid.Row;
+  //row: ReactDataGrid.Row;
   getRowStyle = () => {
     return {
       color: this.getRowBackground()
@@ -109,9 +109,9 @@ class RowRenderer extends React.Component<IRowRendererProps> {
 
     return color;
   };
-
+  //ref={ node => this.row = node }
   render() {
-    return (<div style={this.getRowStyle()}><ReactDataGrid.Row ref={ node => this.row = node } {...this.props}/></div>);
+    return (<div style={this.getRowStyle()}><ReactDataGrid.Row  {...this.props}/></div>);
   }
 }
 
