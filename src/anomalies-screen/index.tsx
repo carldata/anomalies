@@ -18,6 +18,7 @@ interface IAnomaliesComponentProps {
 interface IAnomaliesComponentActionCreators {
   goToProjectsScreen: () => any;
   getAnomaliesForChannel: (channel: string) => any;
+  copyRawToEdited: () => any;
 }
 
 class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators> {
@@ -95,6 +96,7 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     getAnomaliesForChannel: anomaliesScreenActionCreators.getAnomaliesForChannel,
     goToProjectsScreen: anomaliesScreenActionCreators.goToProjectsScreen,
+    copyRawToEdited: anomaliesScreenActionCreators.copyRawToEdited
   }, dispatch);
 }
 
