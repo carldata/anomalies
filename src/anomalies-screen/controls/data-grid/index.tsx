@@ -1,4 +1,3 @@
-//http://adazzle.github.io/react-data-grid/examples.html#/customRowRenderer
 import * as React from 'react';
 import * as ReactDataGrid from 'react-data-grid'
 import { IState } from '../../../state';
@@ -94,8 +93,6 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
   }, dispatch);
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(DataGrid);
-
 class RowRenderer extends React.Component<IRowRendererProps> {
   row: ReactDataGrid.Row;
   getRowStyle = () => {
@@ -117,3 +114,6 @@ class RowRenderer extends React.Component<IRowRendererProps> {
     return (<div style={this.getRowStyle()}><ReactDataGrid.Row ref={ node => this.row = node } {...this.props}/></div>);
   }
 }
+
+export default connect(mapStateToProps, matchDispatchToProps)(DataGrid);
+
