@@ -1,11 +1,10 @@
-//http://adazzle.github.io/react-data-grid/examples.html#/customRowRenderer
 import * as React from 'react';
 import * as ReactDataGrid from 'react-data-grid'
 import { IState } from '../../../state';
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { IHpTimeSeriesChartState } from 'time-series-scroller';
-import { IDataGridState } from './state';
+import { IDataGridState, IDataGridRow } from './state';
 import _ = require('lodash');
 import update from 'immutability-helper';
 
@@ -14,12 +13,19 @@ interface IDataGridComponentProps {
 }
 
 interface IDataGridComponentActionCreators {
-  
+ 
 }
 
-export class DataGrid extends React.Component<IDataGridComponentProps & IDataGridComponentActionCreators> {
+interface IDataGridComponentState{
+  selectedIndexes: any[];
+}
+
+interface IRowRendererProps{
+  row: IDataGridRow;
+}
+
+export class DataGrid extends React.Component<IDataGridComponentProps & IDataGridComponentActionCreators, IDataGridComponentState> {
   _columns: { key: string; name: string; editable?: boolean }[];
-  _rows: any;
 
   constructor(props: IDataGridComponentProps & IDataGridComponentActionCreators, context: any) {
     super(props, context);
@@ -45,11 +51,11 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
   };
 
   onRowsSelected = (rows: any) => {
-    this.setState({selectedIndexes: this.state.selectedIndexes.concat(rows.map(r => r.rowIdx))});
+    this.setState({selectedIndexes: this.state.selectedIndexes.concat(rows.map( (r: any) => r.rowIdx))});
   };
 
   onRowsDeselected = (rows: any) => {
-    let rowIndexes = rows.map(r => r.rowIdx);
+    let rowIndexes = rows.map((r: any) => r.rowIdx);
     this.setState({selectedIndexes: this.state.selectedIndexes.filter(i => rowIndexes.indexOf(i) === -1 )});
   };
 
@@ -60,12 +66,12 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
         columns={this._columns}
         rowGetter={this.rowGetter}
         rowsCount={this.props.gridState.series.length}
-        minHeight={500} 
+        minHeight={700} 
         rowSelection={{
           showCheckbox: true,
           enableShiftSelect: true,
           onRowsSelected: this.onRowsSelected,
-          onRowsDeselected: this.onRowsDeselected//,
+          onRowsDeselected: this.onRowsDeselected,
           selectBy: {
             indexes: this.state.selectedIndexes
           }
@@ -87,10 +93,8 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
   }, dispatch);
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(DataGrid);
-
-class RowRenderer extends React.Component {
-  row: ReactDataGrid.Row;
+class RowRenderer extends React.Component<IRowRendererProps> {
+  //row: ReactDataGrid.Row;
   getRowStyle = () => {
     return {
       color: this.getRowBackground()
@@ -105,8 +109,11 @@ class RowRenderer extends React.Component {
 
     return color;
   };
-
+  //ref={ node => this.row = node }
   render() {
-    return (<div style={this.getRowStyle()}><ReactDataGrid.Row ref={ node => this.row = node } {...this.props}/></div>);
+    return (<div style={this.getRowStyle()}><ReactDataGrid.Row  {...this.props}/></div>);
   }
 }
+
+export default connect(mapStateToProps, matchDispatchToProps)(DataGrid);
+
