@@ -18,6 +18,8 @@ interface IAnomaliesComponentProps {
 interface IAnomaliesComponentActionCreators {
   goToProjectsScreen: () => any;
   getAnomaliesForChannel: (channel: string) => any;
+  copyRawToEdited: () => any;
+  copyFixedToEdited: () => any;
 }
 
 class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators> {
@@ -48,7 +50,10 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
             </FormControl>{' '}
             <FormControl.Static> <b>Edited Channel:</b> </FormControl.Static>{' '}
             <FormControl.Static> {'Channel name'} </FormControl.Static>{' '}
-            <Button bsStyle='success' onClick={() => this.props.getAnomaliesForChannel('7883-11762') } >Load Timeseries</Button>
+            <Button bsStyle='success' onClick={() => {
+              this.props.getAnomaliesForChannel('7883-11762');
+  
+              } } >Load Timeseries</Button>
           </FormGroup>
         </Form>
       </form>
@@ -67,6 +72,9 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       <DataGrid
         gridState={this.props.gridState} >
       </DataGrid>
+
+      <Button bsStyle='primary' onClick={() => this.props.copyRawToEdited()} >Copy Raw to Edited</Button>
+      <Button bsStyle='primary' onClick={() => this.props.goToProjectsScreen()} >Copy Fixed to Edited</Button>
     </div>;
   }
 }
@@ -82,6 +90,7 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     getAnomaliesForChannel: anomaliesScreenActionCreators.getAnomaliesForChannel,
     goToProjectsScreen: anomaliesScreenActionCreators.goToProjectsScreen,
+    copyRawToEdited: anomaliesScreenActionCreators.copyRawToEdited
   }, dispatch);
 }
 
