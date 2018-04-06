@@ -24,7 +24,7 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
   }
 
   public render() {
-    return <div>
+    return <div className='container'>
       <Form horizontal>
         <FormGroup>
           <ListGroup>
