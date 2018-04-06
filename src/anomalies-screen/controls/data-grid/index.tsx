@@ -60,7 +60,7 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
         columns={this._columns}
         rowGetter={this.rowGetter}
         rowsCount={this.props.gridState.series.length}
-        minHeight={500} 
+        minHeight={700} 
         rowSelection={{
           showCheckbox: true,
           enableShiftSelect: true,

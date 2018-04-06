@@ -36,7 +36,7 @@ asyncMiddleware.run(rootSaga);
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <div className='container'>
+      <div >
         <Route exact path='/' render={() => (<Redirect to='/projects' />)} />
         <Route path='/projects' component={Projects} />
         <Route path='/anomalies' component={Anomalies} />
