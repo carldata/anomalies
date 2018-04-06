@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { IHpTimeSeriesChartState } from 'time-series-scroller';
 import { IDataGridState } from './state';
 import _ = require('lodash');
-import { Row } from 'react-data-grid';
 import update from 'immutability-helper';
 
 interface IDataGridComponentProps {
@@ -21,9 +20,8 @@ interface IDataGridComponentActionCreators {
 export class DataGrid extends React.Component<IDataGridComponentProps & IDataGridComponentActionCreators> {
   _columns: { key: string; name: string; editable?: boolean }[];
   _rows: any;
-  _this: any; 
 
-  constructor(props: any, context: any) {
+  constructor(props: IDataGridComponentProps & IDataGridComponentActionCreators, context: any) {
     super(props, context);
     this._columns = [
       { key: 'date', name: 'Date', editable: true },
@@ -109,6 +107,6 @@ class RowRenderer extends React.Component {
   };
 
   render() {
-    return (<div style={this.getRowStyle()}><Row ref={ node => this.row = node } {...this.props}/></div>);
+    return (<div style={this.getRowStyle()}><ReactDataGrid.Row ref={ node => this.row = node } {...this.props}/></div>);
   }
 }
