@@ -9,6 +9,7 @@ import { EnumTimeSeriesType, hpTimeSeriesChartAuxiliary, hpTimeSeriesChartReduce
   IHpTimeSeriesChartState } from 'time-series-scroller';
 import { IDataGridState } from './controls/data-grid/state';
 import _ = require('lodash');
+import { Requests } from '../requests';
 
 const apiUrl = 'http://13.91.93.221:8080';
 
@@ -19,12 +20,9 @@ export function* watchGoToProjects() {
 function* getAnomaliesForChannel(action: any) {
 
   try {
-    // const timeseriesResponse = yield axios.get(`${apiUrl}/data/channel/${action.payload}/data`);
-    // const anomaliesResponse = yield axios.get(`${apiUrl}/anomalies/find?series=${action.payload}`);
-
-    const rawChannelResponse = yield axios.get(`http://13.91.93.221:8080/data/channel/7880-11732/data?startDate=2017-06-01&endDate=2017-06-30`);
-    const fixedAnomaliesResponse = yield axios.get(`http://13.91.93.221:8080/anomalies/find?series=7880-11732&startDate=2017-06-01&endDate=2017-06-31`);
-    const editedChannelResponse = yield axios.get(`http://13.91.93.221:8080/data/channel/7880-11734/data?startDate=2017-06-01&endDate=2017-06-30`);
+    const rawChannelResponse = yield Requests.getRawChannelData();
+    const fixedAnomaliesResponse = yield Requests.getFixedAnomalies();
+    const editedChannelResponse = yield Requests.getEditedChannelData();
 
     const rawChannel = Papa.parse(rawChannelResponse.data, { header: true});
     const fixedAnomalies = Papa.parse(fixedAnomaliesResponse.data, { header: true});
