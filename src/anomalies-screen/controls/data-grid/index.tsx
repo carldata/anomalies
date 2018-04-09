@@ -19,7 +19,7 @@ interface IDataGridComponentActionCreators {
 
 interface IDataGridComponentState{
   selectedIndexes: any[];
-  series: any[]
+  series: IDataGridRow[];
 }
 
 interface IRowRendererProps{
@@ -149,22 +149,24 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
 
   copyRawToEdited = () => {
     let selectedIndexes = this.state.selectedIndexes;
+    let newSeries = _.cloneDeep(this.state.series)
     for(let index = 0; index < selectedIndexes.length; index++) {
       let selectedIndex = selectedIndexes[index];
-      this.props.gridState.series[selectedIndex].editedValue = this.props.gridState.series[selectedIndex].rawValue;
+      newSeries[selectedIndex].editedValue = newSeries[selectedIndex].rawValue;
     }
     
-    this.setState({series: this.props.gridState.series, selectedIndexes: []});
+    this.setState({ series: newSeries, selectedIndexes: []});
   };
 
   copyFixedToEdited = () => {
     let selectedIndexes = this.state.selectedIndexes;
+    let newSeries = _.cloneDeep(this.state.series)
     for(let index = 0; index < selectedIndexes.length; index++) {
       let selectedIndex = selectedIndexes[index];
-      this.props.gridState.series[selectedIndex].editedValue = this.props.gridState.series[selectedIndex].fixedValue;
+      newSeries[selectedIndex].editedValue = newSeries[selectedIndex].fixedValue;
     }
     
-    this.setState({series: this.props.gridState.series, selectedIndexes: []});
+    this.setState({series: newSeries, selectedIndexes: []});
   };
 
   render() {
