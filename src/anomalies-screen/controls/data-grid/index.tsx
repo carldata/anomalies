@@ -27,6 +27,8 @@ interface IRowRendererProps{
 }
 
 export class DataGrid extends React.Component<IDataGridComponentProps & IDataGridComponentActionCreators, IDataGridComponentState> {
+  canvasContext: any;
+  canvas: any;
   _columns: { key: string; name: string; editable?: boolean, width?: number, resizable?: boolean }[];
 
   constructor(props: IDataGridComponentProps & IDataGridComponentActionCreators, context: any) {
@@ -56,79 +58,79 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
     return this.state.series[i];
   };
 
-  // formatColumns(data: any) {
-  //   const gridWidth = parseInt(document.querySelector("#app").clientWidth, 10); //selector for grid
-  //   let combinedColumnWidth = 0;
+  formatColumns(data: any) {
+    const gridWidth = parseInt(document.querySelector("#app").clientWidth, 10); //selector for grid
+    let combinedColumnWidth = 0;
 
-  //   if(data.length == 0)
-  //     return;
+    if(data.length == 0)
+      return;
 
-  //   for (let i = 0; i < data.columns.length; i++) {
-  //     data.columns[i].width = this.getTextWidth(data, i);
-  //     combinedColumnWidth += data.columns[i].width;
-  //   }
+    for (let i = 0; i < data.columns.length; i++) {
+      data.columns[i].width = this.getTextWidth(data, i);
+      combinedColumnWidth += data.columns[i].width;
+    }
 
-  //   if (combinedColumnWidth < gridWidth) {
-  //     data.columns = this.distributeRemainingSpace(
-  //       combinedColumnWidth,
-  //       data.columns,
-  //       gridWidth
-  //     );
-  //   }
-  //   return data;
-  // }
+    if (combinedColumnWidth < gridWidth) {
+      data.columns = this.distributeRemainingSpace(
+        combinedColumnWidth,
+        data.columns,
+        gridWidth
+      );
+    }
+    return data;
+  }
 
-  // getTextWidth(data: any, i: any) {
-  //   const rowValues = [];
-  //   const reducer = (a: any, b: any) => (a.length > b.length ? a : b);
-  //   const cellPadding = 16;
-  //   const arrowWidth = 18;
-  //   let longestCellData,
-  //     longestCellDataWidth,
-  //     longestColName,
-  //     longestColNameWidth,
-  //     longestString;
+  getTextWidth(data: any, i: any) {
+    const rowValues = [];
+    const reducer = (a: any, b: any) => (a.length > b.length ? a : b);
+    const cellPadding = 16;
+    const arrowWidth = 18;
+    let longestCellData,
+      longestCellDataWidth,
+      longestColName,
+      longestColNameWidth,
+      longestString;
 
-  //   for (let row of data.rows) {
-  //     rowValues.push(row[data.columns[i].key]);
-  //   }
+    for (let row of data.rows) {
+      rowValues.push(row[data.columns[i].key]);
+    }
 
-  //   longestCellData = rowValues.reduce(reducer);
-  //   longestColName = data.columns[i].name;
-  //   longestCellDataWidth = Math.ceil(
-  //     this.getCanvas().measureText(longestCellData).width
-  //   );
-  //   longestColNameWidth =
-  //     Math.ceil(this.getCanvas("bold ").measureText(longestColName).width) +
-  //     arrowWidth;
+    longestCellData = rowValues.reduce(reducer);
+    longestColName = data.columns[i].name;
+    longestCellDataWidth = Math.ceil(
+      this.getCanvas().measureText(longestCellData).width
+    );
+    longestColNameWidth =
+      Math.ceil(this.getCanvas("bold ").measureText(longestColName).width) +
+      arrowWidth;
 
-  //   longestString = Math.max(longestCellDataWidth, longestColNameWidth);
+    longestString = Math.max(longestCellDataWidth, longestColNameWidth);
 
-  //   return longestString + cellPadding;
-  // }
+    return longestString + cellPadding;
+  }
 
-  // getCanvas(fontWeight = "") {
-  //   if (!this.canvas) {
-  //     this.canvas = document.createElement("canvas");
-  //     this.canvasContext = this.canvas.getContext("2d");
-  //   }
-  //   this.canvasContext.font = `${fontWeight}16px sans-serif`;
+  getCanvas(fontWeight = "") {
+    if (!this.canvas) {
+      this.canvas = document.createElement("canvas");
+      this.canvasContext = this.canvas.getContext("2d");
+    }
+    this.canvasContext.font = `${fontWeight}16px sans-serif`;
 
-  //   return this.canvasContext;
-  // }
+    return this.canvasContext;
+  }
 
-  // distributeRemainingSpace(combinedColumnWidth: any, columns: any, gridWidth: any) {
-  //   const spaceLeftOver = gridWidth - combinedColumnWidth;
-  //   const remainder = spaceLeftOver % columns.length;
-  //   const equalSpaceLeft = spaceLeftOver - remainder;
+  distributeRemainingSpace(combinedColumnWidth: any, columns: any, gridWidth: any) {
+    const spaceLeftOver = gridWidth - combinedColumnWidth;
+    const remainder = spaceLeftOver % columns.length;
+    const equalSpaceLeft = spaceLeftOver - remainder;
 
-  //   columns[0].width += remainder; //any remaining space after distributing equally should go on first column
+    columns[0].width += remainder; //any remaining space after distributing equally should go on first column
 
-  //   for (let col of columns) {
-  //     col.width += equalSpaceLeft / columns.length;
-  //   }
-  //   return columns;
-  // }
+    for (let col of columns) {
+      col.width += equalSpaceLeft / columns.length;
+    }
+    return columns;
+  }
 
   handleGridRowsUpdated = ({ fromRow, toRow, updated }: any) => {
     for (let i = fromRow; i <= toRow; i++) {
