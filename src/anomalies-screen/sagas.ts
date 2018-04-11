@@ -11,8 +11,6 @@ import { IDataGridState } from './controls/data-grid/state';
 import _ = require('lodash');
 import { Requests } from '../requests';
 
-const apiUrl = 'http://13.91.93.221:8080';
-
 export function* watchGoToProjects() {
   yield takeEvery(anomaliesScreenActionTypes.GO_TO_PROJECTS, function*() { yield put(push('/projects')); });
 }
