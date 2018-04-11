@@ -41,17 +41,18 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
 
       this.state = { selectedIndexes: [], series: [] };
   }
-
+  
   componentWillReceiveProps(props: IDataGridComponentProps) {
     this.setState({series: props.gridState.series});
 
     var data = {
       rows: props.gridState.series,
       columns: this._columns
-
     }
 
-    // this.formatColumns(data);
+    // if(data.rows.length != 0) {
+    //   this.setState({selectedIndexes: [], series: this.formatColumns(data)}); 
+    // }
   }
 
   rowGetter = (i: any) => {
@@ -59,11 +60,8 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
   };
 
   formatColumns(data: any) {
-    const gridWidth = parseInt(document.querySelector("#app").clientWidth, 10); //selector for grid
+    const gridWidth = parseInt(document.querySelector(".react-grid-Container").clientWidth, 10); //selector for grid
     let combinedColumnWidth = 0;
-
-    if(data.length == 0)
-      return;
 
     for (let i = 0; i < data.columns.length; i++) {
       data.columns[i].width = this.getTextWidth(data, i);
@@ -77,12 +75,27 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
         gridWidth
       );
     }
-    return data;
+
+    this._columns = data.columns;
+
+    return data.rows;
   }
 
   getTextWidth(data: any, i: any) {
     const rowValues = [];
-    const reducer = (a: any, b: any) => (a.length > b.length ? a : b);
+
+    const reducer = (a: any, b: any) => {
+      if(_.isUndefined(a)) {
+        a = ' ';
+      }
+
+      if(_.isUndefined(b)) {
+        b = ' ';
+      }
+
+      a.length > b.length ? a : b
+    };
+
     const cellPadding = 16;
     const arrowWidth = 18;
     let longestCellData,
@@ -94,6 +107,7 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
     for (let row of data.rows) {
       rowValues.push(row[data.columns[i].key]);
     }
+
 
     longestCellData = rowValues.reduce(reducer);
     longestColName = data.columns[i].name;
