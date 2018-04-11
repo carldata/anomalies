@@ -1,17 +1,18 @@
 import axios from 'axios';
+import { call } from 'redux-saga/effects'
 import _ = require('lodash');
 
 export class Requests {
 
-    private static apiAddress = 'http://13.91.93.221:8080'; // this is only for testing purposes 13.91.93.221:8080/config/anomaly-tool
-
+    private static apiAddress = 'http://flowworks-http.13.91.222.33.xip.io'; // this is only for testing purposes 13.91.93.221:8080/config/anomaly-tool
+    
     static* getConfiguration(): any {
         let config: any;
-        var aa = 1;
-        config = yield axios.get(`${this.apiAddress}/config/anomaly-tool`)
-                        .catch(error => { console.log(error); });
 
-        if(_.isUndefined(config)) {
+        try{
+            config = yield call(axios.get, `${this.apiAddress}/config/anomaly-tool`);
+        }
+        catch(error) {
             config = { data: [ {id: 'someId', data: { name: 'someName' }} ]};
         }
         
@@ -20,11 +21,11 @@ export class Requests {
 
     static* getRawChannelData() {
         let channelData: any;
-        // const timeseriesResponse = yield axios.get(`${apiUrl}/data/channel/${action.payload}/data`);
-        channelData = yield axios.get(`${this.apiAddress}/data/channel/7880-11732/data?startDate=2017-06-01&endDate=2017-06-30`)
-                        .catch(error => { console.log(error); });
-
-        if(_.isUndefined(channelData)) {
+        
+        try {
+            channelData = yield call(axios.get, `${this.apiAddress}/data/channel/7880-11732/data?startDate=2017-06-01&endDate=2017-06-30`);
+        }
+        catch(error) {
             channelData = { };
         }
 
@@ -33,11 +34,11 @@ export class Requests {
 
     static* getFixedAnomalies() {
         let anomalies: any;
-        // const anomaliesResponse = yield axios.get(`${apiUrl}/anomalies/find?series=${action.payload}`);
-        anomalies = yield axios.get(`${this.apiAddress}/anomalies/find?series=7880-11732&startDate=2017-06-01&endDate=2017-06-31`)
-                    .catch(error => { console.log(error); });
 
-        if(_.isUndefined(anomalies)) {
+        try {
+            anomalies = yield call(axios.get, `${this.apiAddress}/anomalies/find?series=7880-11732&startDate=2017-06-01&endDate=2017-06-31`);
+        }
+        catch(error) {
             anomalies = { };
         }
 
@@ -47,10 +48,10 @@ export class Requests {
     static* getEditedChannelData() {
         let channelData: any;
         
-        channelData = yield axios.get(`${this.apiAddress}/data/channel/7880-11734/data?startDate=2017-06-01&endDate=2017-06-30`)
-                        .catch(error => { console.log(error); });
-
-        if(_.isUndefined(channelData)) {
+        try {
+            channelData = yield call(axios.get, `${this.apiAddress}/data/channel/7880-11734/data?startDate=2017-06-01&endDate=2017-06-30`);
+        }
+        catch(error) {
             channelData = { };
         }
 
