@@ -60,7 +60,8 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
   };
 
   formatColumns(data: any) {
-    const gridWidth = parseInt(document.querySelector(".react-grid-Container").clientWidth, 10); //selector for grid
+    //const gridWidth = parseInt(document.querySelector(".react-grid-Container").clientWidth, 10); //selector for grid
+    const gridWidth = document.querySelector(".react-grid-Container").clientWidth; //selector for grid
     let combinedColumnWidth = 0;
 
     for (let i = 0; i < data.columns.length; i++) {
