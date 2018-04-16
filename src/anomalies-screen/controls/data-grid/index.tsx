@@ -7,22 +7,24 @@ import { IHpTimeSeriesChartState } from 'time-series-scroller';
 import { IDataGridState, IDataGridRow } from './state';
 import _ = require('lodash');
 import update from 'immutability-helper';
-import { Button } from 'react-bootstrap';
+import { Button, ButtonGroup, ControlLabel, Form, FormControl, FormGroup, Row, Col } from 'react-bootstrap';
+import { CSVLink, CSVDownload } from 'react-csv';
 
 interface IDataGridComponentProps {
   gridState: IDataGridState;
 }
 
 interface IDataGridComponentActionCreators {
-  
+
 }
 
-interface IDataGridComponentState{
+interface IDataGridComponentState {
   selectedIndexes: any[];
   series: IDataGridRow[];
+  selectedKey: any;
 }
 
-interface IRowRendererProps{
+interface IRowRendererProps {
   row: IDataGridRow;
 }
 
@@ -34,16 +36,16 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
   constructor(props: IDataGridComponentProps & IDataGridComponentActionCreators, context: any) {
     super(props, context);
     this._columns = [
-      { key: 'date', name: 'Date', resizable: true },
-      { key: 'rawValue', name: 'Raw Value', resizable: true },
-      { key: 'editedValue', name: 'Edited Value', editable: true, resizable: true },
-      { key: 'fixedValue', name: 'Fixed Value', resizable: true } ];
+      { key: 'date', name: 'Timestamp' },
+      { key: 'rawValue', name: 'Raw' },
+      { key: 'editedValue', name: 'Final', editable: true },
+      { key: 'fixedValue', name: 'Fixed' }];
 
-      this.state = { selectedIndexes: [], series: [] };
+    this.state = { selectedIndexes: [], series: [], selectedKey: '' };
   }
-  
+
   componentWillReceiveProps(props: IDataGridComponentProps) {
-    this.setState({series: props.gridState.series});
+    this.setState({ series: props.gridState.series, selectedIndexes: [] });
 
     var data = {
       rows: props.gridState.series,
@@ -60,7 +62,7 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
   };
 
   formatColumns(data: any) {
-    const gridWidth = parseInt(document.querySelector(".react-grid-Container").clientWidth, 10); //selector for grid
+    const gridWidth = document.querySelector(".react-grid-Container").clientWidth; //selector for grid
     let combinedColumnWidth = 0;
 
     for (let i = 0; i < data.columns.length; i++) {
@@ -79,7 +81,7 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
     this._columns = data.columns;
 
     return data.rows;
-  }
+  };
 
   getTextWidth(data: any, i: any) {
     const rowValues = [];
@@ -121,7 +123,7 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
     longestString = Math.max(longestCellDataWidth, longestColNameWidth);
 
     return longestString + cellPadding;
-  }
+  };
 
   getCanvas(fontWeight = "") {
     if (!this.canvas) {
@@ -131,7 +133,7 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
     this.canvasContext.font = `${fontWeight}16px sans-serif`;
 
     return this.canvasContext;
-  }
+  };
 
   distributeRemainingSpace(combinedColumnWidth: any, columns: any, gridWidth: any) {
     const spaceLeftOver = gridWidth - combinedColumnWidth;
@@ -144,73 +146,92 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
       col.width += equalSpaceLeft / columns.length;
     }
     return columns;
-  }
+  };
 
   handleGridRowsUpdated = ({ fromRow, toRow, updated }: any) => {
+    let newSeries = _.cloneDeep(this.state.series)
     for (let i = fromRow; i <= toRow; i++) {
-      let rowToUpdate = this.props.gridState.series[i];
-      let updatedRow = update(rowToUpdate, {$merge: updated});
-      this.props.gridState.series[i] = updatedRow;
+      let rowToUpdate = newSeries[i];
+      let updatedRow = update(rowToUpdate, { $merge: updated });
+      newSeries[i] = updatedRow;
     }
+
+    this.setState({ series: newSeries, selectedIndexes: []})
   };
 
   onRowsSelected = (rows: any) => {
-    this.setState({selectedIndexes: this.state.selectedIndexes.concat(rows.map( (r: any) => r.rowIdx))});
+    this.setState({ selectedIndexes: this.state.selectedIndexes.concat(rows.map((r: any) => r.rowIdx)) });
   };
 
   onRowsDeselected = (rows: any) => {
     let rowIndexes = rows.map((r: any) => r.rowIdx);
-    this.setState({selectedIndexes: this.state.selectedIndexes.filter(i => rowIndexes.indexOf(i) === -1 )});
+    this.setState({ selectedIndexes: this.state.selectedIndexes.filter(i => rowIndexes.indexOf(i) === -1) });
   };
 
   copyRawToEdited = () => {
     let selectedIndexes = this.state.selectedIndexes;
     let newSeries = _.cloneDeep(this.state.series)
-    for(let index = 0; index < selectedIndexes.length; index++) {
+    for (let index = 0; index < selectedIndexes.length; index++) {
       let selectedIndex = selectedIndexes[index];
       newSeries[selectedIndex].editedValue = newSeries[selectedIndex].rawValue;
     }
-    
-    this.setState({ series: newSeries, selectedIndexes: []});
+
+    this.setState({ series: newSeries, selectedIndexes: [] });
   };
 
   copyFixedToEdited = () => {
     let selectedIndexes = this.state.selectedIndexes;
     let newSeries = _.cloneDeep(this.state.series)
-    for(let index = 0; index < selectedIndexes.length; index++) {
+    for (let index = 0; index < selectedIndexes.length; index++) {
       let selectedIndex = selectedIndexes[index];
       newSeries[selectedIndex].editedValue = newSeries[selectedIndex].fixedValue;
     }
-    
-    this.setState({series: newSeries, selectedIndexes: []});
+
+    this.setState({ series: newSeries, selectedIndexes: [] });
   };
 
   render() {
-    return  (
+    return (
       <div>
-        <ReactDataGrid
-          enableCellSelect={true}
-          columns={this._columns}
-          rowGetter={this.rowGetter}
-          rowsCount={this.props.gridState.series.length}
-          minHeight={950} 
-          // minHeight={this.props.gridState.series.length * 35 + 50} 
-          rowSelection={{
-            showCheckbox: true,
-            enableShiftSelect: true,
-            onRowsSelected: this.onRowsSelected,
-            onRowsDeselected: this.onRowsDeselected,
-            selectBy: {
-              indexes: this.state.selectedIndexes
-            }
-          }}
-          rowRenderer={RowRenderer} 
-          onGridRowsUpdated={this.handleGridRowsUpdated} />
-
-          <Button bsStyle='primary' onClick={() => this.copyRawToEdited() }>Copy Selected Raw Values to Edited</Button>
-          <Button bsStyle='primary' onClick={() => this.copyFixedToEdited() }>Copy Selected Fixed Values to Edited</Button>
+        <FormGroup>
+          <ReactDataGrid
+            enableCellSelect={true}
+            columns={this._columns}
+            rowGetter={this.rowGetter}
+            rowsCount={this.state.series.length}
+            minHeight={900}
+            onGridRowsUpdated={this.handleGridRowsUpdated}
+            rowSelection={{
+              showCheckbox: true,
+              enableShiftSelect: true,
+              onRowsSelected: this.onRowsSelected,
+              onRowsDeselected: this.onRowsDeselected,
+              selectBy: {
+                indexes: this.state.selectedIndexes
+              }
+            }}
+            rowRenderer={RowRenderer} />
+          <Row>
+            <Col lg={3}>
+              <Button bsStyle='primary' onClick={() => this.copyRawToEdited()}>Copy Raw to Final</Button>
+            </Col>
+            <Col lg={3}>
+              <Button bsStyle='primary' onClick={() => this.copyFixedToEdited()}>Copy Fixed to Final</Button>
+            </Col>
+            <Col lg={6}>
+              <div className='pull-right'>
+                <CSVLink data={this.state.series}
+                  filename={"series.csv"}
+                  className="btn btn-primary"
+                  target="_blank">
+                  Export To CSV
+              </CSVLink>
+              </div>
+            </Col>
+          </Row>
+        </FormGroup>
       </div>
-      );
+    );
   }
 };
 
@@ -222,7 +243,7 @@ function mapStateToProps(state: IState) {
 
 function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
-    
+
   }, dispatch);
 }
 
@@ -235,15 +256,15 @@ class RowRenderer extends React.Component<IRowRendererProps> {
 
   getRowBackground = () => {
     let color = 'green'
-    if(!_.isUndefined(this.props.row.fixedValue)) {
+    if (!_.isUndefined(this.props.row.fixedValue)) {
       color = '#ff0000';
     }
 
     return color;
   };
-  
+
   render() {
-    return (<div style={this.getRowStyle()}><ReactDataGrid.Row  {...this.props}/></div>);
+    return (<div style={this.getRowStyle()}><ReactDataGrid.Row  {...this.props} /></div>);
   }
 }
 

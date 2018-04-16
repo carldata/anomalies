@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, ButtonGroup, ControlLabel, Form, FormControl, FormGroup, Row, Col } from 'react-bootstrap';
+import { Button, ButtonGroup, ControlLabel, Form, FormControl, FormGroup, Row, Col, Nav, NavItem, Navbar, NavDropdown, MenuItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { convertHpSliderScss, convertHpTimeSeriesChartScss, HpTimeSeriesScroller, IHpTimeSeriesChartState } from 'time-series-scroller';
@@ -9,6 +9,7 @@ import { IState } from '../state';
 import { anomaliesScreenActionCreators } from './action-creators';
 import { DataGrid } from './controls/data-grid'
 import { IDataGridState } from './controls/data-grid/state';
+import { LinkContainer } from 'react-router-bootstrap';
 
 interface IAnomaliesComponentProps {
   chartState: IHpTimeSeriesChartState;
@@ -24,34 +25,44 @@ interface IAnomaliesComponentActionCreators {
 class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators> {
   public render() {
     return <div>
-      <div >
-        <Row>
-          <Col md={6}>
-            <div>
-              <DataGrid
-                gridState={this.props.gridState} >
-              </DataGrid>
-            </div>
-          </Col>
+      <div style={{ marginLeft: 20, marginRight: 20, marginTop: 10, marginBottom: 10 }}>
+        <FormGroup>
+          <Form componentClass='fieldset' inline>
+            <Row>
+              <Col lg={3}>
+                {/* <Navbar inverse collapseOnSelect>
+                  <Navbar.Header>
+                    <Navbar.Brand>
+                      <a href="#">Anomalies</a>
+                    </Navbar.Brand>
+                  </Navbar.Header>
+                  <Navbar.Collapse>
+                    <Nav>
+                      <NavItem eventKey={1} href="#">Filter</NavItem>
+                      <NavItem eventKey={2} href="#">Search</NavItem>
+                    </Nav>
+                    <Nav>
+                      <NavItem eventKey={1} href="#">Sign Up</NavItem>
+                      <NavItem eventKey={2} href="#">Login</NavItem>
+                    </Nav>
+                  </Navbar.Collapse>
+                </Navbar> */}
+                {/* <FormControl.Static style={{ color: '#30608f' }}>{'Project name'}</FormControl.Static> */}
+                <Button className='btn-primary' onClick={() => this.props.goToProjectsScreen()} >Projects</Button>
+              </Col>
+              <Col lg={3}>
+                <ControlLabel>Start Date:</ControlLabel>{' '}
+                <FormControl.Static>{'Start Date'}</FormControl.Static>{' '}
 
-          <Col md={6}>
-          <div>
-            <form>
-              <FormControl.Static style={{ color: '#30608f' }}>{'Project name'}</FormControl.Static>
-
-              <Form componentClass='fieldset' inline>
-                <FormGroup>
-                  <ControlLabel>Start Date:</ControlLabel>{' '}
-                  <FormControl.Static>{'Start Date'}</FormControl.Static>{' '}
-                  <ControlLabel>End Date:</ControlLabel>{' '}
-                  <FormControl.Static>{'End Date'}</FormControl.Static>{' '}
-                  <ControlLabel>Split Date:</ControlLabel>{' '}
-                  <FormControl.Static>{'Split Date'}</FormControl.Static>
-                </FormGroup>
-              </Form>
-
-              <Form componentClass='fieldset' inline>
-                <FormGroup>
+                <ControlLabel>End Date:</ControlLabel>{' '}
+                <FormControl.Static>{'End Date'}</FormControl.Static>{' '}
+              </Col>
+              <Col lg={3}>
+                <FormControl.Static> <b>Edited Channel:</b> </FormControl.Static>{' '}
+                <FormControl.Static> {'Channel name'} </FormControl.Static>{' '}
+              </Col>
+              <Col lg={3}>
+                <div className='pull-right'>
                   <FormControl.Static> <b>Channel:</b> </FormControl.Static >{' '}
                   <FormControl componentClass='select' className='btn-primary' >
                     <option value='Flow 1'>Flow 1</option>
@@ -59,25 +70,33 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                     <option value='Flow 3'>Flow 3</option>
                     <option value='Flow 4'>Flow 4</option>
                   </FormControl>{' '}
-                  <FormControl.Static> <b>Edited Channel:</b> </FormControl.Static>{' '}
-                  <FormControl.Static> {'Channel name'} </FormControl.Static>{' '}
                   <Button bsStyle='success' onClick={() => this.props.getAnomaliesForChannel('7883-11762')} >Load Timeseries</Button>
-                </FormGroup>
-              </Form>
-            </form>
+                </div>
+              </Col>
+            </Row>
+          </Form>
+        </FormGroup>
 
-            <div style={{ maxHeight: 800 }}>
-              <HpTimeSeriesScroller
-                chartState={this.props.chartState}
-                sliderScss={convertHpSliderScss(hpSliderScss)}
-                timeSeriesChartScss={convertHpTimeSeriesChartScss(hpTimeSeriesChartScss)}
-                fitToParentSize={true}>
-              </HpTimeSeriesScroller>
+        <Row>
+          <Col lg={6}>
+            <div>
+              <DataGrid
+                gridState={this.props.gridState} >
+              </DataGrid>
             </div>
+          </Col>
 
-            <div style={{ height: 80 }}></div> <br />
-            <Button bsStyle='primary' onClick={() => this.props.goToProjectsScreen()} >Go back to project screen</Button>
-          </div>
+          <Col lg={6}>
+            <div>
+              <div style={{ maxHeight: 800, marginTop: 150 }}>
+                <HpTimeSeriesScroller
+                  chartState={this.props.chartState}
+                  sliderScss={convertHpSliderScss(hpSliderScss)}
+                  timeSeriesChartScss={convertHpTimeSeriesChartScss(hpTimeSeriesChartScss)}
+                  fitToParentSize={true}>
+                </HpTimeSeriesScroller>
+              </div>
+            </div>
           </Col>
         </Row>
       </div>
