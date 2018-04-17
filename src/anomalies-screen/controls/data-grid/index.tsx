@@ -87,11 +87,11 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
     const rowValues = [];
 
     const reducer = (a: any, b: any) => {
-      if(_.isUndefined(a)) {
+      if (_.isUndefined(a)) {
         a = ' ';
       }
 
-      if(_.isUndefined(b)) {
+      if (_.isUndefined(b)) {
         b = ' ';
       }
 
@@ -156,7 +156,7 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
       newSeries[i] = updatedRow;
     }
 
-    this.setState({ series: newSeries, selectedIndexes: []})
+    this.setState({ series: newSeries, selectedIndexes: this.state.selectedIndexes })
   };
 
   onRowsSelected = (rows: any) => {
