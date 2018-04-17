@@ -47,7 +47,6 @@
     "axios": "^0.18.0",
     "immutability-helper": "^2.6.6",
     "lodash": "^4.17.5",
-    "npm": "^5.8.0",
     "papaparse": "^4.3.7",
     "react": "^16.3.1",
     "react-bootstrap": "^0.32.1",
