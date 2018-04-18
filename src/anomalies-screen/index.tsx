@@ -30,24 +30,6 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
           <Form componentClass='fieldset' inline>
             <Row>
               <Col lg={3}>
-                {/* <Navbar inverse collapseOnSelect>
-                  <Navbar.Header>
-                    <Navbar.Brand>
-                      <a href="#">Anomalies</a>
-                    </Navbar.Brand>
-                  </Navbar.Header>
-                  <Navbar.Collapse>
-                    <Nav>
-                      <NavItem eventKey={1} href="#">Filter</NavItem>
-                      <NavItem eventKey={2} href="#">Search</NavItem>
-                    </Nav>
-                    <Nav>
-                      <NavItem eventKey={1} href="#">Sign Up</NavItem>
-                      <NavItem eventKey={2} href="#">Login</NavItem>
-                    </Nav>
-                  </Navbar.Collapse>
-                </Navbar> */}
-                {/* <FormControl.Static style={{ color: '#30608f' }}>{'Project name'}</FormControl.Static> */}
                 <Button className='btn-primary' onClick={() => this.props.goToProjectsScreen()} >Projects</Button>
               </Col>
               <Col lg={3}>
@@ -78,14 +60,6 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         </FormGroup>
 
         <Row>
-          <Col lg={6}>
-            <div>
-              <DataGrid
-                gridState={this.props.gridState} >
-              </DataGrid>
-            </div>
-          </Col>
-
           <Col lg={6}>
             <div>
               <div style={{ maxHeight: 800, marginTop: 150 }}>
