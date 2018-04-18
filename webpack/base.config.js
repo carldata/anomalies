@@ -5,9 +5,8 @@ module.exports = {
   entry: './src/app.tsx',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname,'../dist')
   },
-  devtool: 'inline-source-map',
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
   },
@@ -48,14 +47,5 @@ module.exports = {
         ]
       }
     ]
-  },
-  plugins: [
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
-  ],
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    hot: true,
-    port: 9000
   }
 }
