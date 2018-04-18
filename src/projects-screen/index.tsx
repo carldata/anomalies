@@ -19,7 +19,7 @@ interface IProjectComponentActionCreators {
 }
 
 class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators> {
-  public componentDidMount(){
+  public componentDidMount() {
     this.props.getAllProjectsAsyncCall();
   }
 
