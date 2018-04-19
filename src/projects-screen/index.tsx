@@ -7,6 +7,7 @@ import { IState } from '../state';
 import { projectScreenActionCreators } from './action-creators';
 import { ProjectComponent } from './project';
 import { IProject } from './state';
+import { AddProjectModal } from './controls/add-project-modal';
 
 interface IProjectComponentProps {
   dummyText: string;
@@ -40,7 +41,8 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
           </ListGroup>
         </FormGroup>
       </Form>
-      <div>{this.props.dummyText}</div>
+      <AddProjectModal id='testid' name='name' site='site' raw='raw' final='final' showModal={true} addProject={(e) => this.props.goToAnomaliesScreen(e)}
+      ></AddProjectModal>
     </div>;
   }
 }
