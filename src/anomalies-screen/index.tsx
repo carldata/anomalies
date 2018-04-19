@@ -10,6 +10,7 @@ import { anomaliesScreenActionCreators } from './action-creators';
 import { DataGrid } from './controls/data-grid'
 import { IDataGridState } from './controls/data-grid/state';
 import { LinkContainer } from 'react-router-bootstrap';
+import { AddChannelControl } from './controls/add-channel-control';
 
 interface IAnomaliesComponentProps {
   chartState: IHpTimeSeriesChartState;
@@ -71,6 +72,12 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                 </HpTimeSeriesScroller>
               </div>
             </div>
+          </Col>
+          <Col lg={6}>
+            <AddChannelControl 
+              controlState={ {siteId: 1, channelId: 2, channelType: ''} }>
+
+            </AddChannelControl>
           </Col>
         </Row>
       </div>
