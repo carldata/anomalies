@@ -10,6 +10,7 @@ import { anomaliesScreenActionCreators } from './action-creators';
 import { DataGrid } from './controls/data-grid'
 import { IDataGridState } from './controls/data-grid/state';
 import { LinkContainer } from 'react-router-bootstrap';
+import { AddChannelModal } from './controls/add-channel-control';
 
 interface IAnomaliesComponentProps {
   chartState: IHpTimeSeriesChartState;
@@ -22,7 +23,18 @@ interface IAnomaliesComponentActionCreators {
   copyRawToEdited: () => any;
 }
 
-class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators> {
+interface IAnomaliesComponentState {
+  showModal: boolean;
+}
+
+class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators, IAnomaliesComponentState> {
+  constructor(props: IAnomaliesComponentProps & IAnomaliesComponentActionCreators, context: any) {
+    super(props, context);
+    this.state = {
+      showModal: false
+    }
+  };
+
   public render() {
     return <div>
       <div style={{ marginLeft: 20, marginRight: 20, marginTop: 10, marginBottom: 10 }}>
@@ -60,7 +72,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         </FormGroup>
 
         <Row>
-          <Col lg={6}>
+          <Col lg={12}>
             <div>
               <div style={{ maxHeight: 800, marginTop: 150 }}>
                 <HpTimeSeriesScroller
@@ -71,7 +83,14 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                 </HpTimeSeriesScroller>
               </div>
             </div>
+            <Button style={{marginTop: 100}} className='btn-primary' onClick={() => this.setState({ showModal: true })} >Add Channel</Button> 
+
           </Col>
+        </Row>
+        <Row>
+          <AddChannelModal showModal={this.state.showModal} addChannel={(arg) => {}}>
+
+          </AddChannelModal>
         </Row>
       </div>
     </div>;
