@@ -5,7 +5,7 @@ import { bindActionCreators, Dispatch } from "redux";
 import { projectScreenActionCreators } from '../../action-creators';
 import * as _ from 'lodash';
 
-export interface IModalProject { // consider using IProject from general state
+export interface IModalProject { // consider using IProject from general state or some other interface
   id: string;
   name: string;
   site: string;
@@ -23,7 +23,7 @@ interface IAddProjectModalComponentProps {
 }
 
 interface IAddProjectModalComponentActionCreators {
-  addProject?: (e: string) => any;
+  addProject?: (e: IModalProject) => any;
 }
 
 interface IAddProjectModalComponentState {
@@ -69,7 +69,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
               Name:
             </Col>
             <Col sm={10}>
-              <FormControl type='text' onChange={(e) => this.setState({ name: (e.target as HTMLInputElement).value })} value={this.state.name}></FormControl>
+              <FormControl id='txtProjectName' type='text' onChange={(e) => this.setState({ name: (e.target as HTMLInputElement).value })} value={this.state.name}></FormControl>
             </Col>
           </FormGroup>
           <FormGroup>
@@ -77,7 +77,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
               Site:
             </Col>
             <Col sm={10}>
-              <FormControl type='text' onChange={(e) => this.setState({ site: (e.target as HTMLInputElement).value })} value={this.state.site}></FormControl>
+              <FormControl id='txtProjectState' type='text' onChange={(e) => this.setState({ site: (e.target as HTMLInputElement).value })} value={this.state.site}></FormControl>
             </Col>
           </FormGroup>
           <FormGroup>
@@ -85,7 +85,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
               Raw:
             </Col>
             <Col sm={10}>
-              <FormControl type='text' onChange={(e) => this.setState({ raw: (e.target as HTMLInputElement).value })} value={this.state.raw} ></FormControl>
+              <FormControl id='txtProjectRawChannel' type='text' onChange={(e) => this.setState({ raw: (e.target as HTMLInputElement).value })} value={this.state.raw} ></FormControl>
             </Col>
           </FormGroup>
           <FormGroup>
@@ -93,7 +93,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
               Final:
             </Col>
             <Col sm={10}>
-              <FormControl type='text' onChange={(e) => this.setState({ final: (e.target as HTMLInputElement).value })} value={this.state.final} ></FormControl>
+              <FormControl id='txtProjectFinalChannel' type='text' onChange={(e) => this.setState({ final: (e.target as HTMLInputElement).value })} value={this.state.final} ></FormControl>
             </Col>
           </FormGroup>
         </Form>
@@ -122,8 +122,8 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
       raw: this.state.raw
     };
 
-    console.log('project to add/edit: ', project);
-    this.props.addProject("cokolwiek")
+    //console.log('project to add/edit: ', project);
+    this.props.addProject(project)
     this.hideModal();
   }
 }

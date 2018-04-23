@@ -7,7 +7,7 @@ import { IState } from '../state';
 import { projectScreenActionCreators } from './action-creators';
 import { ProjectComponent } from './project';
 import { IProject } from './state';
-import { AddProjectModal } from './controls/add-project-modal';
+import { AddProjectModal, IModalProject } from './controls/add-project-modal';
 
 interface IProjectComponentProps {
   dummyText: string;
@@ -17,6 +17,7 @@ interface IProjectComponentProps {
 interface IProjectComponentActionCreators {
   goToAnomaliesScreen: (name: string) => any;
   getAllProjectsAsyncCall: () => any;
+  addProjectStart: (project: IModalProject) => any;
 }
 
 class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators> {
@@ -41,7 +42,7 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
           </ListGroup>
         </FormGroup>
       </Form>
-      <AddProjectModal id='testid' name='name' site='site' raw='raw' final='final' showModal={true} addProject={(e) => this.props.goToAnomaliesScreen(e)}
+      <AddProjectModal id='testid' name='name' site='site' raw='raw' final='final' showModal={false} addProject={(e) => this.props.addProjectStart(e)}
       ></AddProjectModal>
     </div>;
   }
@@ -56,7 +57,8 @@ function mapStateToProps(state: IState) {
 function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     goToAnomaliesScreen: projectScreenActionCreators.goToAnomaliesScreen,
-    getAllProjectsAsyncCall: projectScreenActionCreators.getAllProjectsAsyncCall
+    getAllProjectsAsyncCall: projectScreenActionCreators.getAllProjectsAsyncCall,
+    addProjectStart: projectScreenActionCreators.addProjectStart
   }, dispatch);
 }
 
