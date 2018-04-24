@@ -39,7 +39,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
     super(props)
 
     this.state = {
-      showModal: true,
+      showModal: false,
       name: '',
       site: '',
       raw: '',

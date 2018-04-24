@@ -1,5 +1,4 @@
 export interface IProjectsScreenState {
-  dummyText: string;
   projects: IProject[];
 }
 
