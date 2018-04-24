@@ -23,7 +23,8 @@ interface IAddProjectModalComponentProps {
 }
 
 interface IAddProjectModalComponentActionCreators {
-  addProject?: (e: IModalProject) => any;
+  addProject: (e: IModalProject) => any;
+  hideModal?: () => any;
 }
 
 interface IAddProjectModalComponentState {
@@ -46,7 +47,6 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
       final: ''
     } as IAddProjectModalComponentState;
 
-    this.hideModal = this.hideModal.bind(this);
     this.approveAddProject = this.approveAddProject.bind(this);
   }
 
@@ -61,7 +61,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
   }
 
   render() {
-    return <Modal show={this.state.showModal} onHide={this.hideModal}>
+    return <Modal show={this.state.showModal} onHide={()=>this.props.hideModal()}>
       <Modal.Body>
         <Form horizontal>
           <FormGroup>
@@ -102,15 +102,11 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
         <Button id='btnApproveAddProjectModal' bsStyle='primary' onClick={this.approveAddProject} >
           Add Project
         </Button>
-        <Button id='btnCancelAddProjectModal' onClick={this.hideModal}>
+        <Button id='btnCancelAddProjectModal' onClick={()=>this.props.hideModal()}>
           Cancel
         </Button>
       </Modal.Footer>
     </Modal>
-  }
-
-  hideModal() {
-    this.setState({ showModal: false })
   }
 
   approveAddProject() {
@@ -124,7 +120,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
 
     //console.log('project to add/edit: ', project);
     this.props.addProject(project)
-    this.hideModal();
+    this.props.hideModal();
   }
 }
 

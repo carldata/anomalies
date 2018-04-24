@@ -19,23 +19,23 @@ interface IProjectComponentActionCreators {
   addProjectStart: (project: IModalProject) => any;
 }
 
-interface IProjectComponentState{
+interface IProjectComponentState {
   showModal: boolean;
 }
 
 class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators, IProjectComponentState> {
-  constructor(props: IProjectComponentProps & IProjectComponentActionCreators){
+  constructor(props: IProjectComponentProps & IProjectComponentActionCreators) {
     super(props);
 
     this.state = { showModal: false }
 
     this.showAddProjectModal.bind(this);
   }
-  
-  showAddProjectModal(){
-    this.setState({ showModal: true});
+
+  showAddProjectModal(show: boolean) {
+    this.setState({ showModal: show });
   }
-  
+
   public componentDidMount() {
     this.props.getAllProjectsAsyncCall();
   }
@@ -56,11 +56,12 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
             })}
           </ListGroup>
         </FormGroup>
-        <FormGroup> 
-          <Button id='btnAddProject' bsStyle='primary' onClick={() => this.showAddProjectModal()}>Add Project</Button>
+        <FormGroup>
+          <Button id='btnAddProject' bsStyle='primary' onClick={() => this.showAddProjectModal(true)}>Add Project</Button>
         </FormGroup>
       </Form>
-      <AddProjectModal id='' name='' site='' raw='' final='' showModal={this.state.showModal} addProject={(e) => this.props.addProjectStart(e)}>
+      <AddProjectModal id='' name='' site='' raw='' final='' showModal={this.state.showModal} addProject={(e) => this.props.addProjectStart(e)}
+        hideModal={() => this.showAddProjectModal(false)}>
       </AddProjectModal>
     </div>;
   }
