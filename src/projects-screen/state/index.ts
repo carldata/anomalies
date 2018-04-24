@@ -5,7 +5,7 @@ export interface IProjectsScreenState {
 export interface IProject {
   id: string;
   name: string;
-  startDate: string;
-  endDate: string;
-  splitDate: string;
+  site: string;
+  raw: string;
+  final: string;
 }

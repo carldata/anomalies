@@ -49,9 +49,9 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
               return <ProjectComponent key={index}
                 id={el.id}
                 name={el.name}
-                startDate={el.startDate}
-                endDate={el.endDate}
-                splitDate={el.splitDate}
+                site={el.site}
+                raw={el.raw}
+                final={el.final}
                 goToProjectAnomalies={() => { this.props.goToAnomaliesScreen(el.name); }} />;
             })}
           </ListGroup>
@@ -60,7 +60,7 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
           <Button id='btnAddProject' bsStyle='primary' onClick={() => this.showAddProjectModal()}>Add Project</Button>
         </FormGroup>
       </Form>
-      <AddProjectModal id='testid' name='name' site='site' raw='raw' final='final' showModal={this.state.showModal} addProject={(e) => this.props.addProjectStart(e)}>
+      <AddProjectModal id='' name='' site='' raw='' final='' showModal={this.state.showModal} addProject={(e) => this.props.addProjectStart(e)}>
       </AddProjectModal>
     </div>;
   }

@@ -4,9 +4,9 @@ import { Col, ControlLabel, FormControl, FormGroup, ListGroupItem } from 'react-
 interface IProjectComponentProps {
   id: string;
   name: string;
-  startDate: string;
-  endDate: string;
-  splitDate: string;
+  site: string;
+  raw: string;
+  final: string;
 }
 
 interface IProjectComponentActionCreators {
@@ -18,7 +18,7 @@ export class ProjectComponent extends React.Component<IProjectComponentProps & I
     return <ListGroupItem onClick={() => this.props.goToProjectAnomalies()}>
       <FormGroup>
         <Col sm={12}>
-          <FormControl.Static style={{ color: '#30608f' }} >
+          <FormControl.Static style={{ color: '#4E84F3' }} >
             <strong> {this.props.name} </strong>
           </FormControl.Static>
         </Col>

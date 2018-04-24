@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Modal, Button, Form, FormGroup, FormControl, Col, ControlLabel } from 'react-bootstrap';
+import { Modal, Button, Form, FormGroup, FormControl, Col, ControlLabel, ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from "redux";
 import { projectScreenActionCreators } from '../../action-creators';
 import * as _ from 'lodash';
 
-export interface IModalProject { // consider using IProject from general state or some other interface
+export interface IModalProject { 
   id: string;
   name: string;
   site: string;
@@ -35,7 +35,7 @@ interface IAddProjectModalComponentState {
 }
 
 class AddProjectModalComponent extends React.Component<IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators, IAddProjectModalComponentState> {
-  constructor(props: IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators){
+  constructor(props: IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators) {
     super(props)
 
     this.state = {
@@ -65,45 +65,45 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
       <Modal.Body>
         <Form horizontal>
           <FormGroup>
-            <Col sm={2} componentClass={ControlLabel}>
+            <Col sm={4} componentClass={ControlLabel}>
               Name:
             </Col>
-            <Col sm={10}>
-              <FormControl id='txtProjectName' type='text' onChange={(e) => this.setState({ name: (e.target as HTMLInputElement).value })} value={this.state.name}></FormControl>
+            <Col sm={6}>
+              <FormControl id='txtProjectName' type='text' placeholder='Enter Name' onChange={(e) => this.setState({ name: (e.target as HTMLInputElement).value })} value={this.state.name}></FormControl>
             </Col>
           </FormGroup>
           <FormGroup>
-            <Col sm={2} componentClass={ControlLabel}>
+            <Col sm={4} componentClass={ControlLabel}>
               Site:
             </Col>
-            <Col sm={10}>
-              <FormControl id='txtProjectState' type='text' onChange={(e) => this.setState({ site: (e.target as HTMLInputElement).value })} value={this.state.site}></FormControl>
+            <Col sm={6}>
+              <FormControl id='txtProjectSite' type='text' placeholder='Enter Site' onChange={(e) => this.setState({ site: (e.target as HTMLInputElement).value })} value={this.state.site}></FormControl>
             </Col>
           </FormGroup>
           <FormGroup>
-            <Col sm={2} componentClass={ControlLabel}>
-              Raw:
+            <Col sm={4} componentClass={ControlLabel}>
+              Source Channel:
             </Col>
-            <Col sm={10}>
-              <FormControl id='txtProjectRawChannel' type='text' onChange={(e) => this.setState({ raw: (e.target as HTMLInputElement).value })} value={this.state.raw} ></FormControl>
+            <Col sm={6}>
+              <FormControl id='txtProjectSourceChannel' type='text' placeholder='Enter Channel' onChange={(e) => this.setState({ raw: (e.target as HTMLInputElement).value })} value={this.state.raw} ></FormControl>
             </Col>
           </FormGroup>
           <FormGroup>
-            <Col sm={2} componentClass={ControlLabel}>
-              Final:
+            <Col sm={4} componentClass={ControlLabel}>
+              Final Channel:
             </Col>
-            <Col sm={10}>
-              <FormControl id='txtProjectFinalChannel' type='text' onChange={(e) => this.setState({ final: (e.target as HTMLInputElement).value })} value={this.state.final} ></FormControl>
+            <Col sm={6}>
+              <FormControl id='txtProjectFinalChannel' type='text' placeholder='Enter Channel' onChange={(e) => this.setState({ final: (e.target as HTMLInputElement).value })} value={this.state.final} ></FormControl>
             </Col>
           </FormGroup>
         </Form>
       </Modal.Body>
       <Modal.Footer>
+        <Button id='btnApproveAddProjectModal' bsStyle='primary' onClick={this.approveAddProject} >
+          Add Project
+        </Button>
         <Button id='btnCancelAddProjectModal' onClick={this.hideModal}>
           Cancel
-        </Button>
-        <Button id='btnApproveAddProjectModal' bsStyle='primary' onClick={this.approveAddProject} >
-          Add
         </Button>
       </Modal.Footer>
     </Modal>
@@ -113,12 +113,12 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
     this.setState({ showModal: false })
   }
 
-  approveAddProject(){
+  approveAddProject() {
     let project: IModalProject = {
       id: this.props.id,
       name: this.state.name,
-      site:  this.state.site,
-      final: this. state.final,
+      site: this.state.site,
+      final: this.state.final,
       raw: this.state.raw
     };
 
