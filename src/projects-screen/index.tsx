@@ -10,7 +10,6 @@ import { IProject } from './state';
 import { AddProjectModal, IModalProject } from './controls/add-project-modal';
 
 interface IProjectComponentProps {
-  dummyText: string;
   projects: IProject[];
 }
 
@@ -20,7 +19,23 @@ interface IProjectComponentActionCreators {
   addProjectStart: (project: IModalProject) => any;
 }
 
-class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators> {
+interface IProjectComponentState {
+  showModal: boolean;
+}
+
+class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators, IProjectComponentState> {
+  constructor(props: IProjectComponentProps & IProjectComponentActionCreators) {
+    super(props);
+
+    this.state = { showModal: false }
+
+    this.showAddProjectModal.bind(this);
+  }
+
+  showAddProjectModal(show: boolean) {
+    this.setState({ showModal: show });
+  }
+
   public componentDidMount() {
     this.props.getAllProjectsAsyncCall();
   }
@@ -34,16 +49,20 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
               return <ProjectComponent key={index}
                 id={el.id}
                 name={el.name}
-                startDate={el.startDate}
-                endDate={el.endDate}
-                splitDate={el.splitDate}
+                site={el.site}
+                raw={el.raw}
+                final={el.final}
                 goToProjectAnomalies={() => { this.props.goToAnomaliesScreen(el.name); }} />;
             })}
           </ListGroup>
         </FormGroup>
+        <FormGroup>
+          <Button id='btnAddProject' bsStyle='primary' onClick={() => this.showAddProjectModal(true)}>Add Project</Button>
+        </FormGroup>
       </Form>
-      <AddProjectModal id='testid' name='name' site='site' raw='raw' final='final' showModal={false} addProject={(e) => this.props.addProjectStart(e)}
-      ></AddProjectModal>
+      <AddProjectModal id='' name='' site='' raw='' final='' showModal={this.state.showModal} addProject={(e) => this.props.addProjectStart(e)}
+        hideModal={() => this.showAddProjectModal(false)}>
+      </AddProjectModal>
     </div>;
   }
 }
