@@ -2,13 +2,20 @@ import axios from 'axios';
 import { push } from 'react-router-redux';
 import { put, takeEvery } from 'redux-saga/effects';
 import { projectsScreenActionTypes } from './action-creators';
+import { anomaliesScreenActionTypes } from '../anomalies-screen/action-creators';
 import { IProject } from './state';
 import { Requests } from '../requests';
 import { IState } from '../state';
 import { IModalProject } from '../projects-screen/controls/add-project-modal/index';
 
+function* goToAnomalies(action){
+  yield put({type: anomaliesScreenActionTypes.PASS_PROJECT_TO_ANOMALIES, payload: action.payload });
+  yield put(push('/anomalies'));
+}
+
 export function* watchGoToAnomalies() {
-  yield takeEvery(projectsScreenActionTypes.GO_TO_ANOMALIES, function* () { yield put(push('/anomalies')); });
+  //yield takeEvery(projectsScreenActionTypes.GO_TO_ANOMALIES, function* () { yield put(push('/anomalies')); });
+  yield takeEvery(projectsScreenActionTypes.GO_TO_ANOMALIES, goToAnomalies);
 }
 
 function* getAllProjectsAsyncCall() {
@@ -40,10 +47,11 @@ export function* addNewProject(action) {
         site: (action.payload as IModalProject).site,
         final: (action.payload as IModalProject).final,
         raw: (action.payload as IModalProject).raw,
+        supportingChannels: [],
   } as IProject
     });
   } catch (error) {
-    //todo notify error occured
+    //todo notify error occured 
   }
 }
 

@@ -9,7 +9,8 @@ export const anomaliesScreenActionTypes = {
   GET_ANOMALIES_FOR_CHART_FULFILED: 'GET_ANOMALIES_FOR_CHART_FULFILED',
   GET_ANOMALIES_FOR_GRID_FULFILED: 'GET_ANOMALIES_FOR_GRID_FULFILED',
   GET_ANOMALIES_REJECTED: 'GET_ANOMALIES_REJECTED',
-  COPY_RAW_TO_EDITED: 'COPY_RAW_TO_EDITED'
+  COPY_RAW_TO_EDITED: 'COPY_RAW_TO_EDITED',
+  PASS_PROJECT_TO_ANOMALIES: 'PASS_PROJECT_TO_ANOMALIES',
 };
 
 export const anomaliesScreenActionCreators = {
@@ -21,5 +22,5 @@ export const anomaliesScreenActionCreators = {
   },
   copyRawToEdited: () => {
     return { type: anomaliesScreenActionTypes.COPY_RAW_TO_EDITED };
-  }
+  },
 };

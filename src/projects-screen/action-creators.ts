@@ -1,6 +1,7 @@
 import { push } from 'react-router-redux';
 import { Dispatch } from 'redux';
 import { IModalProject } from '../projects-screen/controls/add-project-modal/index';
+import { IProject } from './state';
 
 export const projectsScreenActionTypes = {
   GO_TO_ANOMALIES: 'GO_TO_ANOMALIES',
@@ -14,8 +15,8 @@ export const projectsScreenActionTypes = {
 };
 
 export const projectScreenActionCreators = {
-  goToAnomaliesScreen: (name: string) => {
-    return { type: projectsScreenActionTypes.GO_TO_ANOMALIES, payload: name };
+  goToAnomaliesScreen: (project: IProject) => {
+    return { type: projectsScreenActionTypes.GO_TO_ANOMALIES, payload: project };
   },
   getAllProjectsAsyncCall: () => {
     return { type: projectsScreenActionTypes.GET_ALL_PROJECTS_ASYNC_CALL_START }

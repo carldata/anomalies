@@ -14,7 +14,7 @@ interface IProjectComponentProps {
 }
 
 interface IProjectComponentActionCreators {
-  goToAnomaliesScreen: (name: string) => any;
+  goToAnomaliesScreen: (project: IProject) => any;
   getAllProjectsAsyncCall: () => any;
   addProjectStart: (project: IModalProject) => any;
 }
@@ -28,7 +28,6 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
     super(props);
 
     this.state = { showModal: false }
-
     this.showAddProjectModal.bind(this);
   }
 
@@ -52,7 +51,7 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
                 site={el.site}
                 raw={el.raw}
                 final={el.final}
-                goToProjectAnomalies={() => { this.props.goToAnomaliesScreen(el.name); }} />;
+                goToProjectAnomalies={() => { this.props.goToAnomaliesScreen(_.find(this.props.projects, (proj)=> proj.id === el.id )); }} />;
             })}
           </ListGroup>
         </FormGroup>
