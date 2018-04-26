@@ -24,7 +24,14 @@ function* getAllProjectsAsyncCall() {
     const response = yield Requests.getConfiguration()
 
     for (let element of response.data) {
-      projectsArray.push({ id: element.id, name: element.data.name })
+      projectsArray.push({ 
+        id: element.id, 
+        name: element.data.name,
+        final: element.data.final,
+        raw: element.data.raw,
+        site: element.data.site,
+        supportingChannels: element.data.supportingChannels,
+      } as IProject);
     }
 
     yield put({ type: projectsScreenActionTypes.GET_ALL_PROJECTS_ASYNC_CALL_FULFILED, payload: projectsArray });

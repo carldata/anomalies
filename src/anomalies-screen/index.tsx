@@ -16,7 +16,7 @@ import { AddChannelModal } from './controls/add-channel-control';
 interface IAnomaliesComponentProps {
   chartState: IHpTimeSeriesChartState;
   gridState: IDataGridState;
-  project?: IProject;
+  project: IProject;
 }
 
 interface IAnomaliesComponentActionCreators {
@@ -103,7 +103,8 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 function mapStateToProps(state: IState) {
   return {
     chartState: state.anomaliesScreen.chartState,
-    gridState: state.anomaliesScreen.gridState
+    gridState: state.anomaliesScreen.gridState,
+    project: state.anomaliesScreen.project,
   };
 }
 
