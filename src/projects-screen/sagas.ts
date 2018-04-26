@@ -14,7 +14,6 @@ function* goToAnomalies(action){
 }
 
 export function* watchGoToAnomalies() {
-  //yield takeEvery(projectsScreenActionTypes.GO_TO_ANOMALIES, function* () { yield put(push('/anomalies')); });
   yield takeEvery(projectsScreenActionTypes.GO_TO_ANOMALIES, goToAnomalies);
 }
 

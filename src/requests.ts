@@ -20,11 +20,11 @@ export class Requests {
         return config;
     }
 
-    static * getRawChannelData() {
+    static * getChannelData(channel: string, startDate: string, endDate: string) {
         let channelData: any;
 
         try {
-            channelData = yield call(axios.get, `${this.apiAddress}/data/channel/7880-11732/data?startDate=2017-06-01&endDate=2017-06-30`);
+            channelData = yield call(axios.get, `${this.apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
         }
         catch (error) {
             //TODO notify error
@@ -34,11 +34,11 @@ export class Requests {
         return channelData;
     }
 
-    static * getFixedAnomalies() {
+    static * getFixedAnomalies(channel: string, startDate: string, endDate: string) {
         let anomalies: any;
 
         try {
-            anomalies = yield call(axios.get, `${this.apiAddress}/anomalies/find?series=7880-11732&startDate=2017-06-01&endDate=2017-06-31`);
+            anomalies = yield call(axios.get, `${this.apiAddress}/anomalies/find?series=${channel}&startDate=${startDate}&endDate=${endDate}`);
         }
         catch (error) {
             //TODO notify error
@@ -48,11 +48,11 @@ export class Requests {
         return anomalies;
     }
 
-    static * getEditedChannelData() {
+    static * getEditedChannelData(channel: string, startDate: string, endDate: string) {
         let channelData: any;
 
         try {
-            channelData = yield call(axios.get, `${this.apiAddress}/data/channel/7880-11734/data?startDate=2017-06-01&endDate=2017-06-30`);
+            channelData = yield call(axios.get, `${this.apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
         }
         catch (error) {
             //TODO notify error

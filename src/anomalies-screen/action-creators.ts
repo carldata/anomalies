@@ -14,8 +14,8 @@ export const anomaliesScreenActionTypes = {
 };
 
 export const anomaliesScreenActionCreators = {
-  getAnomaliesForChannel: (channel: string) => {
-    return { type: anomaliesScreenActionTypes.GET_ANOMALIES_START, payload: channel };
+  getAnomaliesForProject: (projectInfo) => {
+    return { type: anomaliesScreenActionTypes.GET_ANOMALIES_START, payload: projectInfo };
   },
   goToProjectsScreen: () => {
     return { type: anomaliesScreenActionTypes.GO_TO_PROJECTS };

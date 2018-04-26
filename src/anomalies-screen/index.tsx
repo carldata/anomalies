@@ -21,7 +21,7 @@ interface IAnomaliesComponentProps {
 
 interface IAnomaliesComponentActionCreators {
   goToProjectsScreen: () => any;
-  getAnomaliesForChannel: (channel: string) => any;
+  getAnomaliesForProject: (project: any) => any;
   copyRawToEdited: () => any;
 }
 
@@ -67,7 +67,11 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                     <option value='Flow 3'>Flow 3</option>
                     <option value='Flow 4'>Flow 4</option>
                   </FormControl>{' '} */}
-                  <Button bsStyle='success' onClick={() => this.props.getAnomaliesForChannel('7883-11762')} >Load Timeseries</Button>
+                  <Button bsStyle='success' onClick={() => this.props.getAnomaliesForProject({
+                     project:  this.props.project,
+                     startDate: '',
+                     endDate: '',
+                     })} >Load Timeseries</Button>
                 </div>
               </Col>
             </Row>
@@ -110,7 +114,7 @@ function mapStateToProps(state: IState) {
 
 function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
-    getAnomaliesForChannel: anomaliesScreenActionCreators.getAnomaliesForChannel,
+    getAnomaliesForProject: anomaliesScreenActionCreators.getAnomaliesForProject,
     goToProjectsScreen: anomaliesScreenActionCreators.goToProjectsScreen,
     copyRawToEdited: anomaliesScreenActionCreators.copyRawToEdited
   }, dispatch);
