@@ -18,9 +18,9 @@ export function* watchGoToProjects() {
 function* getAnomaliesForChannel(action: any) {
 
   try {
-    const rawChannelResponse = yield Requests.getChannelData(action.payload.project.raw,action.payload.startDate,action.payload.endDate);
-    const fixedAnomaliesResponse = yield Requests.getFixedAnomalies(action.payload.project.raw,action.payload.startDate,action.payload.endDate);
-    const editedChannelResponse = yield Requests.getChannelData(action.payload.project.final,action.payload.startDate,action.payload.endDate);
+    const rawChannelResponse = yield Requests.getChannelData(action.payload.project.site + '-' + action.payload.project.raw,action.payload.startDate,action.payload.endDate);
+    const fixedAnomaliesResponse = yield Requests.getFixedAnomalies(action.payload.project.site + '-' + action.payload.project.raw,action.payload.startDate,action.payload.endDate);
+    const editedChannelResponse = yield Requests.getChannelData(action.payload.project.site + '-' + action.payload.project.final,action.payload.startDate,action.payload.endDate);
 
     const rawChannel = Papa.parse(rawChannelResponse.data, { header: true});
     const fixedAnomalies = Papa.parse(fixedAnomaliesResponse.data, { header: true});

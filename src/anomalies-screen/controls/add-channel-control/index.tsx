@@ -93,17 +93,17 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
   };
 };
 
-function mapStateToProps(state: IState) {
-  return {
-    // showModal: state.
-  };
-}
+// function mapStateToProps(state: IState) {
+//   return {
+//     // showModal: state.
+//   };
+// }
 
-function matchDispatchToProps(dispatch: Dispatch<{}>) {
-  return bindActionCreators({
+// function matchDispatchToProps(dispatch: Dispatch<{}>) {
+//   return bindActionCreators({
 
-  }, dispatch);
-}
+//   }, dispatch);
+// }
 
-export const AddChannelModal = connect(mapStateToProps, matchDispatchToProps)(AddChannelModalComponent);
+export const AddChannelModal = AddChannelModalComponent;
 

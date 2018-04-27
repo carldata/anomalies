@@ -21,7 +21,7 @@ interface IAnomaliesComponentProps {
 
 interface IAnomaliesComponentActionCreators {
   goToProjectsScreen: () => any;
-  getAnomaliesForProject: (project: any) => any;
+  getAnomaliesForProject: (projectAndRange: any) => any;
   copyRawToEdited: () => any;
 }
 
@@ -69,8 +69,8 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                   </FormControl>{' '} */}
                   <Button bsStyle='success' onClick={() => this.props.getAnomaliesForProject({
                      project:  this.props.project,
-                     startDate: '',
-                     endDate: '',
+                     startDate: '2017-06-01',
+                     endDate: '2017-06-30',
                      })} >Load Timeseries</Button>
                 </div>
               </Col>
