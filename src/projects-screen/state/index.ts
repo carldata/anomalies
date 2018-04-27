@@ -8,4 +8,5 @@ export interface IProject {
   site: string;
   raw: string;
   final: string;
+  supportingChannels: string[];
 }
