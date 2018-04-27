@@ -10,6 +10,7 @@ import { EnumTimeSeriesType, hpTimeSeriesChartAuxiliary, hpTimeSeriesChartReduce
 import { IDataGridState } from './controls/data-grid/state';
 import _ = require('lodash');
 import { Requests } from '../requests';
+import { IProject } from '../projects-screen/state';
 
 export function* watchGoToProjects() {
   yield takeEvery(anomaliesScreenActionTypes.GO_TO_PROJECTS, function*() { yield put(push('/projects')); });
@@ -17,10 +18,14 @@ export function* watchGoToProjects() {
 
 function* getAnomaliesForChannel(action: any) {
 
+  let project: IProject = action.payload.project;
+  let startDate: string = action.payload.startDate;
+  let endDate: string = action.payload.endDate;
+
   try {
-    const rawChannelResponse = yield Requests.getChannelData(action.payload.project.site + '-' + action.payload.project.raw,action.payload.startDate,action.payload.endDate);
-    const fixedAnomaliesResponse = yield Requests.getFixedAnomalies(action.payload.project.site + '-' + action.payload.project.raw,action.payload.startDate,action.payload.endDate);
-    const editedChannelResponse = yield Requests.getChannelData(action.payload.project.site + '-' + action.payload.project.final,action.payload.startDate,action.payload.endDate);
+    const rawChannelResponse = yield Requests.getChannelData(project.site + '-' + project.raw,startDate,endDate);
+    const fixedAnomaliesResponse = yield Requests.getFixedAnomalies(project.site + '-' + project.raw,startDate,endDate);
+    const editedChannelResponse = yield Requests.getChannelData(project.site + '-' + project.final,startDate, endDate);
 
     const rawChannel = Papa.parse(rawChannelResponse.data, { header: true});
     const fixedAnomalies = Papa.parse(fixedAnomaliesResponse.data, { header: true});
