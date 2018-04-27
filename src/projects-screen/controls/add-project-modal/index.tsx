@@ -4,14 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from "redux";
 import { projectScreenActionCreators } from '../../action-creators';
 import * as _ from 'lodash';
-
-export interface IModalProject { 
-  id: string;
-  name: string;
-  site: string;
-  raw: string;
-  final: string;
-}
+import { IProject } from '../../state';
 
 interface IAddProjectModalComponentProps {
   showModal: boolean;
@@ -20,10 +13,11 @@ interface IAddProjectModalComponentProps {
   site: string;
   raw: string;
   final: string;
+  supportingChannels? : string[];
 }
 
 interface IAddProjectModalComponentActionCreators {
-  addProject: (e: IModalProject) => any;
+  addProject: (e: IProject) => any;
   hideModal?: () => any;
 }
 
@@ -110,12 +104,13 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
   }
 
   approveAddProject() {
-    let project: IModalProject = {
+    let project: IProject = {
       id: this.props.id,
       name: this.state.name,
       site: this.state.site,
       final: this.state.final,
-      raw: this.state.raw
+      raw: this.state.raw,
+      supportingChannels: [],
     };
 
     //console.log('project to add/edit: ', project);

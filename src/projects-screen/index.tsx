@@ -7,7 +7,7 @@ import { IState } from '../state';
 import { projectScreenActionCreators } from './action-creators';
 import { ProjectComponent } from './project';
 import { IProject } from './state';
-import { AddProjectModal, IModalProject } from './controls/add-project-modal';
+import { AddProjectModal } from './controls/add-project-modal';
 
 interface IProjectComponentProps {
   projects: IProject[];
@@ -16,7 +16,7 @@ interface IProjectComponentProps {
 interface IProjectComponentActionCreators {
   goToAnomaliesScreen: (project: IProject) => any;
   getAllProjectsAsyncCall: () => any;
-  addProjectStart: (project: IModalProject) => any;
+  addProjectStart: (project: IProject) => any;
 }
 
 interface IProjectComponentState {

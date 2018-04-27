@@ -1,6 +1,5 @@
 import { push } from 'react-router-redux';
 import { Dispatch } from 'redux';
-import { IModalProject } from '../projects-screen/controls/add-project-modal/index';
 import { IProject } from './state';
 
 export const projectsScreenActionTypes = {
@@ -21,7 +20,7 @@ export const projectScreenActionCreators = {
   getAllProjectsAsyncCall: () => {
     return { type: projectsScreenActionTypes.GET_ALL_PROJECTS_ASYNC_CALL_START }
   },
-  addProjectStart: (project: IModalProject) => {
+  addProjectStart: (project: IProject) => {
     return { type: projectsScreenActionTypes.ADD_PROJECT_START, payload: project}
   }
 };
