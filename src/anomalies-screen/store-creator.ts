@@ -29,6 +29,6 @@ export default handleActions<IAnomaliesScreenState, IHpTimeSeriesChartState | ID
     return _.extend({}, state, { gridState: action.payload });
   },
   [anomaliesScreenActionTypes.PASS_PROJECT_TO_ANOMALIES]: (state: IAnomaliesScreenState, action: Action<IProject>) => {
-    return _.extend({}, state, { project: action.payload } as IAnomaliesScreenState)
+    return _.extend({}, state, { project: action.payload, chartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState()  } as IAnomaliesScreenState)
   },
 }, initialState);
