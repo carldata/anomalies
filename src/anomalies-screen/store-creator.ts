@@ -15,14 +15,7 @@ import { IProject } from '../projects-screen/state';
 const initialState = {
   chartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
   gridState: { series: [] },
-  project: {
-    final: '',
-    id: '',
-    name: '',
-    raw: '',
-    site: '',
-    supportingChannels: [],
-  } as IProject,
+  project: {} as IProject,
 } as IAnomaliesScreenState;
 
 export default handleActions<IAnomaliesScreenState, IHpTimeSeriesChartState | IDataGridState | IProject>({

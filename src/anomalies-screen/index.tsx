@@ -13,6 +13,7 @@ import { IDataGridState } from './controls/data-grid/state';
 import { LinkContainer } from 'react-router-bootstrap';
 import { AddChannelModal } from './controls/add-channel-control';
 import * as dateFns from 'date-fns';
+import * as _ from 'lodash';
 
 interface IAnomaliesComponentProps {
   chartState: IHpTimeSeriesChartState;
@@ -28,8 +29,8 @@ interface IAnomaliesComponentActionCreators {
 
 interface IAnomaliesComponentState {
   showModal: boolean;
-  startDate?: string;
-  endDate?: string;
+  startDate: string;
+  endDate: string;
 }
 
 class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators, IAnomaliesComponentState> {
@@ -37,8 +38,8 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
     super(props, context);
     this.state = {
       showModal: false,
-      startDate: dateFns.format(dateFns.startOfDay(new Date()),'YYYY-MM-DDTHH:mm:ss'),
-      endDate: dateFns.format( dateFns.subMonths(dateFns.startOfDay(new Date()),3) ,'YYYY-MM-DDTHH:mm:ss'),
+      startDate: dateFns.format(dateFns.subMonths(dateFns.startOfDay(new Date()), 3), 'YYYY-MM-DDTHH:mm:ss'),
+      endDate: dateFns.format(dateFns.startOfDay(new Date()), 'YYYY-MM-DDTHH:mm:ss'),
     }
   };
 
@@ -46,54 +47,54 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
     return <div>
       <Navbar fluid>
         <Navbar.Header>
-            <Navbar.Brand>
-              <div style={{cursor: 'pointer'}} onClick={() =>this.props.goToProjectsScreen()}>Anomaly</div>
-            </Navbar.Brand>
+          <Navbar.Brand>
+            <div style={{ cursor: 'pointer' }} onClick={() => this.props.goToProjectsScreen()}>Anomaly</div>
+          </Navbar.Brand>
         </Navbar.Header>
       </Navbar>
       <div style={{ marginLeft: 20, marginRight: 20, marginTop: 10, marginBottom: 10 }}>
-        <FormGroup>
-          <Form componentClass='fieldset' inline>
-            <Row>
-              <Col lg={3}>
-                <Button className='btn-primary' onClick={() => this.props.goToProjectsScreen()} >Projects</Button>
-              </Col>
-              <Col lg={3}>
-                <ControlLabel>Start Date:</ControlLabel>{' '}
-                <FormControl.Static>{'Start Date'}</FormControl.Static>{' '}
+        <Form>
+          <FormGroup>
+            <ControlLabel style={{ fontWeight: 'bold' }}>{ _.isEmpty(this.props.project) ? ' ' : this.props.project.name}</ControlLabel>{' '}
+            <Button bsStyle='primary' disabled={ _.isEmpty(this.props.project)} onClick={() => this.props.getAnomaliesForProject({
+              project: this.props.project,
+              startDate: this.state.startDate,
+              endDate: this.state.endDate,
+            })}>Load Timeseries</Button>
+          </FormGroup>
+        </Form>
 
-                <ControlLabel>End Date:</ControlLabel>{' '}
-                <FormControl.Static>{'End Date'}</FormControl.Static>{' '}
-              </Col>
-              <Col lg={3}>
-                <FormControl.Static> <b>Edited Channel:</b> </FormControl.Static>{' '}
-                <FormControl.Static> {this.props.project.final} </FormControl.Static>{' '}
-              </Col>
-              <Col lg={3}>
-                <div className='pull-right'>
-                  <FormControl.Static> <b>Channel:</b> </FormControl.Static >{' '}
-                  <FormControl.Static> {this.props.project.raw} </FormControl.Static>{' '}
-                  {/* <FormControl componentClass='select' className='btn-primary' >
-                    <option value='Flow 1'>Flow 1</option>
-                    <option value='Flow 2'>Flow 2</option>
-                    <option value='Flow 3'>Flow 3</option>
-                    <option value='Flow 4'>Flow 4</option>
-                  </FormControl>{' '} */}
-                  <Button bsStyle='success' onClick={() => this.props.getAnomaliesForProject({
-                    project: this.props.project,
-                    startDate: '2017-06-01',
-                    endDate: '2017-06-30',
-                  })} >Load Timeseries</Button>
-                </div>
-              </Col>
-            </Row>
-          </Form>
-        </FormGroup>
+        <Form inline>
+          <FormGroup>
+            <ControlLabel>Site: </ControlLabel>
+            <FormControl.Static>{_.isEmpty(this.props.project) ? ' ' : this.props.project.site}</FormControl.Static>
+          </FormGroup>
+          {' '}
+          <FormGroup>
+            <ControlLabel>Source: </ControlLabel>
+            <FormControl.Static>{_.isEmpty(this.props.project) ? ' ' : this.props.project.raw}</FormControl.Static>
+          </FormGroup>
+          {' '}
+          <FormGroup>
+            <ControlLabel>Final: </ControlLabel>
+            <FormControl.Static>{_.isEmpty(this.props.project) ? ' ' : this.props.project.final}</FormControl.Static>
+          </FormGroup>
+          {' '}
+          <FormGroup className='pull-right'>
+            <ControlLabel>Start Date:</ControlLabel>
+            {' '}
+            <FormControl type='text' value={this.state.startDate} onChange={(e) => this.setState({ startDate: (e.target as HTMLInputElement).value })}></FormControl>
+            {' '}
+            <ControlLabel>End Date:</ControlLabel>
+            {' '}
+            <FormControl type='text' value={this.state.endDate} onChange={(e) => this.setState({ endDate: (e.target as HTMLInputElement).value })}></FormControl>
+          </FormGroup>
+        </Form>
 
         <Row>
           <Col lg={12}>
             <div>
-              <div style={{ maxHeight: 400}}>
+              <div style={{ maxHeight: 400 }}>
                 <HpTimeSeriesScroller
                   chartState={this.props.chartState}
                   sliderScss={convertHpSliderScss(hpSliderScss)}
