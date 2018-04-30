@@ -12,6 +12,7 @@ import { DataGrid } from './controls/data-grid'
 import { IDataGridState } from './controls/data-grid/state';
 import { LinkContainer } from 'react-router-bootstrap';
 import { AddChannelModal } from './controls/add-channel-control';
+import * as dateFns from 'date-fns';
 
 interface IAnomaliesComponentProps {
   chartState: IHpTimeSeriesChartState;
@@ -27,13 +28,17 @@ interface IAnomaliesComponentActionCreators {
 
 interface IAnomaliesComponentState {
   showModal: boolean;
+  startDate?: string;
+  endDate?: string;
 }
 
 class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators, IAnomaliesComponentState> {
   constructor(props: IAnomaliesComponentProps & IAnomaliesComponentActionCreators, context: any) {
     super(props, context);
     this.state = {
-      showModal: false
+      showModal: false,
+      startDate: dateFns.format(dateFns.startOfDay(new Date()),'YYYY-MM-DDTHH:mm:ss'),
+      endDate: dateFns.format( dateFns.subMonths(dateFns.startOfDay(new Date()),3) ,'YYYY-MM-DDTHH:mm:ss'),
     }
   };
 
@@ -88,7 +93,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         <Row>
           <Col lg={12}>
             <div>
-              <div style={{ maxHeight: 800, marginTop: 150 }}>
+              <div style={{ maxHeight: 400}}>
                 <HpTimeSeriesScroller
                   chartState={this.props.chartState}
                   sliderScss={convertHpSliderScss(hpSliderScss)}
