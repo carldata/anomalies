@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button, ButtonGroup, ControlLabel, Form, FormControl, FormGroup, Row, Col, Nav, NavItem, Navbar, NavDropdown, MenuItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import { convertHpSliderScss, convertHpTimeSeriesChartScss, HpTimeSeriesScroller, IHpTimeSeriesChartState, HpSlider, EnumHandleType, IUnixFromTo, handleMovedCallback } from 'time-series-scroller';
+import { convertHpSliderScss, convertHpTimeSeriesChartScss, HpTimeSeriesScroller, IHpTimeSeriesChartState, HpSlider, EnumHandleType, IUnixFromTo, handleMovedCallback, HpTimeSeriesChart, hpTimeSeriesChartReducerAuxFunctions } from 'time-series-scroller';
 import * as hpSliderScss from 'time-series-scroller/lib/out/sass/hp-slider.scss';
 import * as hpTimeSeriesChartScss from 'time-series-scroller/lib/out/sass/hp-time-series-chart.scss';
 import { IState } from '../state';
@@ -42,19 +42,32 @@ interface IAnomaliesComponentState {
 }
 
 class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators, IAnomaliesComponentState> {
+  private scss;
+
   constructor(props: IAnomaliesComponentProps & IAnomaliesComponentActionCreators, context: any) {
     super(props, context);
+
+    this.scss = {
+      slider: convertHpSliderScss(hpSliderScss),
+      timeSeries: convertHpTimeSeriesChartScss(hpTimeSeriesChartScss)
+    }
+
     this.state = {
       showModal: false,
       startDate: dateFns.format(dateFns.subMonths(dateFns.startOfDay(new Date()), 3), 'YYYY-MM-DDTHH:mm:ss'),
       endDate: dateFns.format(dateFns.startOfDay(new Date()), 'YYYY-MM-DDTHH:mm:ss'),
       windowUnixFrom: props.mainChartState.dateRangeUnixFrom,
       windowUnixTo: props.mainChartState.dateRangeUnixTo,
+      mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
     }
   };
 
   componentWillReceiveProps(nextProps: IAnomaliesComponentProps & IAnomaliesComponentActionCreators) {
-
+    this.setState({
+      mainChartState: _.cloneDeep(this.props.mainChartState),
+      windowUnixFrom: this.props.mainChartState.dateRangeUnixFrom,
+      windowUnixTo: this.props.mainChartState.dateRangeUnixTo,
+    });
   }
 
   public render() {
@@ -81,17 +94,17 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         <Form inline>
           <FormGroup>
             <ControlLabel>Site: </ControlLabel>
-            <FormControl.Static>{_.isEmpty(this.props.project) ? ' ' : this.props.project.site}</FormControl.Static>
+            <FormControl.Static>{_.isEmpty(this.props.project) ? 'No site' : this.props.project.site}</FormControl.Static>
           </FormGroup>
           {' '}
           <FormGroup>
             <ControlLabel>Source: </ControlLabel>
-            <FormControl.Static>{_.isEmpty(this.props.project) ? ' ' : this.props.project.raw}</FormControl.Static>
+            <FormControl.Static>{_.isEmpty(this.props.project) ? 'No source ' : this.props.project.raw}</FormControl.Static>
           </FormGroup>
           {' '}
           <FormGroup>
             <ControlLabel>Final: </ControlLabel>
-            <FormControl.Static>{_.isEmpty(this.props.project) ? ' ' : this.props.project.final}</FormControl.Static>
+            <FormControl.Static>{_.isEmpty(this.props.project) ? 'No final' : this.props.project.final}</FormControl.Static>
           </FormGroup>
           {' '}
           <FormGroup>
@@ -116,26 +129,43 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
           </Col>
         </Row> */}
 
-        <Row style={{ minHeight: 80, marginLeft: 0 }}>
-          <Col sm={12}>
+        <Row style={{ minHeight: this.scss.slider.heightPx, marginLeft: this.scss.timeSeries.paddingLeftPx, marginTop: 20 }}>
+          <Col>
             <HpSlider
               scss={convertHpSliderScss(hpSliderScss)}
               domain={{ domainMin: this.props.mainChartState.dateRangeUnixFrom, domainMax: this.props.mainChartState.dateRangeUnixTo } as IDomain<number>}
               displayDragBar={true}
               handleValues={{ left: this.state.windowUnixFrom, right: this.state.windowUnixTo } as IHpSliderHandleValues<number>}
               handleMoved={(value: number | number[], type: EnumHandleType) => {
-                let { windowUnixFrom, windowUnixTo } = handleMovedCallback(value, type, { 
-                  windowUnixFrom: this.state.windowUnixFrom, 
-                  windowUnixTo: this.state.windowUnixTo } as IUnixFromTo)
+                let { windowUnixFrom, windowUnixTo } = handleMovedCallback(value, type, {
+                  windowUnixFrom: this.state.windowUnixFrom,
+                  windowUnixTo: this.state.windowUnixTo
+                } as IUnixFromTo)
 
-                  this.setState({
+                this.setState({
+                  windowUnixFrom: windowUnixFrom,
+                  windowUnixTo: windowUnixTo,
+                  mainChartState: {
+                    ...this.state.mainChartState,
                     windowUnixFrom: windowUnixFrom,
                     windowUnixTo: windowUnixTo,
-                  })
+                  } as IHpTimeSeriesChartState,
+                })
               }}
-              fitToParent={{ toWidth: true, offsetWidth: 35 }}
+              fitToParent={{ toWidth: true }}
             ></HpSlider>
+          </Col>
+        </Row>
 
+        <Row>
+          <Col md={12} >
+            <div style={{ height: 250 }} >
+              <HpTimeSeriesChart
+                scss={this.scss.timeSeries}
+                state={this.state.mainChartState}
+                fitToParent={{ toHeight: true, toWidth: true }}
+              ></HpTimeSeriesChart>
+            </div>
           </Col>
         </Row>
 
