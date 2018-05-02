@@ -55,8 +55,8 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       <div style={{ marginLeft: 20, marginRight: 20, marginTop: 10, marginBottom: 10 }}>
         <Form>
           <FormGroup>
-            <ControlLabel style={{ fontWeight: 'bold' }}>{ _.isEmpty(this.props.project) ? ' ' : this.props.project.name}</ControlLabel>{' '}
-            <Button bsStyle='primary' disabled={ _.isEmpty(this.props.project)} onClick={() => this.props.getAnomaliesForProject({
+            <ControlLabel style={{ fontWeight: 'bold' }}>{_.isEmpty(this.props.project) ? ' ' : this.props.project.name}</ControlLabel>{' '}
+            <Button bsStyle='primary' disabled={_.isEmpty(this.props.project)} onClick={() => this.props.getAnomaliesForProject({
               project: this.props.project,
               startDate: this.state.startDate,
               endDate: this.state.endDate,
@@ -91,22 +91,19 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
           </FormGroup>
         </Form>
 
-        <Row>
-          <Col lg={12}>
-            <div>
-              <div style={{ maxHeight: 400 }}>
-                <HpTimeSeriesScroller
-                  chartState={this.props.chartState}
-                  sliderScss={convertHpSliderScss(hpSliderScss)}
-                  timeSeriesChartScss={convertHpTimeSeriesChartScss(hpTimeSeriesChartScss)}
-                  fitToParentSize={true}>
-                </HpTimeSeriesScroller>
-              </div>
-            </div>
-            <Button style={{ marginTop: 100 }} className='btn-primary' onClick={() => this.setState({ showModal: true })} >Add Channel</Button>
-
-          </Col>
-        </Row>
+        <Form>
+          <FormGroup style={{ maxHeight: 300 }}>
+                  <HpTimeSeriesScroller
+                    chartState={this.props.chartState}
+                    sliderScss={convertHpSliderScss(hpSliderScss)}
+                    timeSeriesChartScss={convertHpTimeSeriesChartScss(hpTimeSeriesChartScss)}
+                    fitToParentSize={true}>
+                  </HpTimeSeriesScroller>
+           </FormGroup>
+          <FormGroup>
+              <Button style={{ marginTop: 100 }} className='btn-primary' onClick={() => this.setState({ showModal: true })} >Add Channel</Button>
+           </FormGroup>
+        </Form>
         <Row>
           <AddChannelModal showModal={this.state.showModal} addChannel={(arg) => { }}>
 
