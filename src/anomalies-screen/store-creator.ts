@@ -13,14 +13,14 @@ import { IDataGridState } from './controls/data-grid/state';
 import { IProject } from '../projects-screen/state';
 
 const initialState = {
-  chartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
+  mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
   gridState: { series: [] },
   project: {} as IProject,
 } as IAnomaliesScreenState;
 
 export default handleActions<IAnomaliesScreenState, IHpTimeSeriesChartState | IDataGridState | IProject>({
   [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_CHART_FULFILED]: (state: IAnomaliesScreenState, action: Action<IHpTimeSeriesChartState>) => {
-    return _.extend({}, state, { chartState: action.payload });
+    return _.extend({}, state, { mainChartState: action.payload });
   },
   [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_GRID_FULFILED]: (state: IAnomaliesScreenState, action: Action<IDataGridState>) => {
     return _.extend({}, state, { gridState: action.payload });
@@ -29,6 +29,6 @@ export default handleActions<IAnomaliesScreenState, IHpTimeSeriesChartState | ID
     return _.extend({}, state, { gridState: action.payload });
   },
   [anomaliesScreenActionTypes.PASS_PROJECT_TO_ANOMALIES]: (state: IAnomaliesScreenState, action: Action<IProject>) => {
-    return _.extend({}, state, { project: action.payload, chartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState()  } as IAnomaliesScreenState)
+    return _.extend({}, state, { project: action.payload, mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState()  } as IAnomaliesScreenState)
   },
 }, initialState);

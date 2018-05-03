@@ -3,7 +3,7 @@ import { IDataGridState } from '../controls/data-grid/state';
 import { IProject } from '../../projects-screen/state';
 
 export interface IAnomaliesScreenState {
-  chartState: IHpTimeSeriesChartState;
+  mainChartState: IHpTimeSeriesChartState;
   gridState: IDataGridState;
   project: IProject;
 }

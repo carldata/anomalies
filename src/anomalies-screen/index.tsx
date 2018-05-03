@@ -129,7 +129,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
           </Col>
         </Row> */}
 
-        <Row style={{ minHeight: this.scss.slider.heightPx, marginLeft: this.scss.timeSeries.paddingLeftPx, marginTop: 20 }}>
+        <Row style={{ minHeight: this.scss.slider.heightPx, marginLeft: this.scss.timeSeries.paddingLeftPx, marginTop: 20, marginBottom:20 }}>
           <Col>
             <HpSlider
               scss={convertHpSliderScss(hpSliderScss)}
@@ -160,6 +160,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         <Row>
           <Col md={12} >
             <div style={{ height: 250 }} >
+            <p style={{fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx}}>ML Corrections</p>
               <HpTimeSeriesChart
                 scss={this.scss.timeSeries}
                 state={this.state.mainChartState}
@@ -171,10 +172,10 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 
         <Row>
           <Col sm={12}>
-            <Button style={{ marginTop: 100 }} className='btn-primary' onClick={() => this.setState({ showModal: true })} >Add Channel</Button>
+            <Button className='pull-right' bsStyle='primary' onClick={() => this.setState({ showModal: true })} >Add Channel</Button>
           </Col>
         </Row>
-        {/* </Form> */}
+       
         <Row>
           <AddChannelModal showModal={this.state.showModal} addChannel={(arg) => { }}>
 
@@ -191,7 +192,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 
 function mapStateToProps(state: IState) {
   return {
-    mainChartState: state.anomaliesScreen.chartState,
+    mainChartState: state.anomaliesScreen.mainChartState,
     gridState: state.anomaliesScreen.gridState,
     project: state.anomaliesScreen.project,
   };
