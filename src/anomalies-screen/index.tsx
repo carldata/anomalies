@@ -18,8 +18,8 @@ import { IDomain, IHpSliderHandleValues } from 'time-series-scroller/lib/out/hp-
 
 interface IAnomaliesComponentProps {
   mainChartState: IHpTimeSeriesChartState;
-  finalChartState?: IHpTimeSeriesChartState;
-  supportingChannels?: { site: string, channel: string, IHpTimeSeriesChartState }[];
+  finalChartState: IHpTimeSeriesChartState;
+  supportingChannels: { site: string, channel: string, chartState: IHpTimeSeriesChartState }[];
   gridState: IDataGridState;
   project: IProject;
 }
@@ -31,9 +31,9 @@ interface IAnomaliesComponentActionCreators {
 }
 
 interface IAnomaliesComponentState {
-  mainChartState?: IHpTimeSeriesChartState;
-  finalChartState?: IHpTimeSeriesChartState;
-  supportingChannels?: { site: string, channel: string, chartState: IHpTimeSeriesChartState }[];
+  mainChartState: IHpTimeSeriesChartState;
+  finalChartState: IHpTimeSeriesChartState;
+  supportingChannels: { site: string, channel: string, chartState: IHpTimeSeriesChartState }[];
   showModal: boolean;
   startDate: string;
   endDate: string;
@@ -59,14 +59,19 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       windowUnixFrom: props.mainChartState.dateRangeUnixFrom,
       windowUnixTo: props.mainChartState.dateRangeUnixTo,
       mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
+      finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
+      supportingChannels: props.supportingChannels,
     }
   };
 
-  componentWillReceiveProps(nextProps: IAnomaliesComponentProps & IAnomaliesComponentActionCreators) {
+   componentWillReceiveProps(nextProps: IAnomaliesComponentProps ) {
+    let x =2;
     this.setState({
-      mainChartState: _.cloneDeep(this.props.mainChartState),
-      windowUnixFrom: this.props.mainChartState.dateRangeUnixFrom,
-      windowUnixTo: this.props.mainChartState.dateRangeUnixTo,
+      mainChartState: _.cloneDeep(nextProps.mainChartState),
+      finalChartState: _.cloneDeep(nextProps.finalChartState),
+      supportingChannels: _.cloneDeep(nextProps.supportingChannels),
+      windowUnixFrom: nextProps.mainChartState.dateRangeUnixFrom,
+      windowUnixTo: nextProps.mainChartState.dateRangeUnixTo,
     });
   }
 
@@ -171,6 +176,23 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         </Row>
 
         <Row>
+          <Col md={12} >
+            <div style={{ height: 250 }} >
+            <p style={{fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx}}>Final</p>
+              <HpTimeSeriesChart
+                scss={this.scss.timeSeries}
+                state={this.state.finalChartState}
+                fitToParent={{ toHeight: true, toWidth: true }}
+              ></HpTimeSeriesChart>
+            </div>
+          </Col>
+        </Row>
+        
+        {_.map(this.state.supportingChannels, (el, idx) => {
+          return (<p>{el.site}</p>)
+        })}
+
+        <Row>
           <Col sm={12}>
             <Button className='pull-right' bsStyle='primary' onClick={() => this.setState({ showModal: true })} >Add Channel</Button>
           </Col>
@@ -182,9 +204,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
           </AddChannelModal>
         </Row>
 
-        {_.map(this.state.supportingChannels, (el, idx) => {
-          return (<p>{el.site}</p>)
-        })}
+       
       </div>
     </div>;
   }
@@ -194,6 +214,8 @@ function mapStateToProps(state: IState) {
   return {
     mainChartState: state.anomaliesScreen.mainChartState,
     gridState: state.anomaliesScreen.gridState,
+    finalChartState: state.anomaliesScreen.finalChartState,
+    supportingChannels: state.anomaliesScreen.supportingChannels,
     project: state.anomaliesScreen.project,
   };
 }
