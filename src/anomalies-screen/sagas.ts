@@ -1,19 +1,21 @@
 import axios from 'axios';
 import * as Papa from 'papaparse';
 import { push } from 'react-router-redux';
-import { takeEvery } from 'redux-saga/effects';
-import { put } from 'redux-saga/effects';
+import { takeEvery, call } from 'redux-saga/effects';
+import { all, put } from 'redux-saga/effects';
 import { anomaliesScreenActionTypes } from './action-creators';
 import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig } from 'time-series-scroller/lib/out/hp-time-series-chart/csv-loading/calculations';
-import { EnumTimeSeriesType, hpTimeSeriesChartAuxiliary, hpTimeSeriesChartReducerAuxFunctions, IExternalSourceTimeSeries,
-  IHpTimeSeriesChartState } from 'time-series-scroller';
+import {
+  EnumTimeSeriesType, hpTimeSeriesChartAuxiliary, hpTimeSeriesChartReducerAuxFunctions, IExternalSourceTimeSeries,
+  IHpTimeSeriesChartState
+} from 'time-series-scroller';
 import { IDataGridState } from './controls/data-grid/state';
 import _ = require('lodash');
 import { Requests } from '../requests';
 import { IProject } from '../projects-screen/state';
 
 export function* watchGoToProjects() {
-  yield takeEvery(anomaliesScreenActionTypes.GO_TO_PROJECTS, function*() { yield put(push('/projects')); });
+  yield takeEvery(anomaliesScreenActionTypes.GO_TO_PROJECTS, function* () { yield put(push('/projects')); });
 }
 
 function* getAnomaliesForChannel(action: any) {
@@ -23,13 +25,47 @@ function* getAnomaliesForChannel(action: any) {
   let endDate: string = action.payload.endDate;
 
   try {
-    const rawChannelResponse = yield Requests.getChannelData(project.site + '-' + project.raw,startDate,endDate);
-    const fixedAnomaliesResponse = yield Requests.getFixedAnomalies(project.site + '-' + project.raw,startDate,endDate);
-    const editedChannelResponse = yield Requests.getChannelData(project.site + '-' + project.final,startDate, endDate);
+    let supportingChannelsResults: any[] = [];
+    if (project.supportingChannels.length > 0) {
+      supportingChannelsResults = yield all(
+        _.map(project.supportingChannels, (el) =>
+          call(axios.get, `${'http://flowworks-http.13.91.222.33.xip.io'}/anomalies/find?series=${el.site + '-' + el.channel}&startDate=${startDate}&endDate=${endDate}`)));
+    }
 
-    const rawChannel = Papa.parse(rawChannelResponse.data, { header: true});
-    const fixedAnomalies = Papa.parse(fixedAnomaliesResponse.data, { header: true});
-    const editedChannel = Papa.parse(editedChannelResponse.data, { header: true});
+    let supportingChannels = _.map(project.supportingChannels, (el, idx) => {
+
+      let parsedResult = Papa.parse(supportingChannelsResults[idx].data, { header: true });;
+      let chartState;
+      
+      if (parsedResult.errors.length === 0) {
+        chartState = hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
+          color: 'steelblue',
+          name: el.site + ' ' + el.channel,
+          points: csvLoadingCalculations.extractUnixTimePoints(parsedResult.data, {
+            rawFormat: EnumRawCsvFormat.DateTimeThenValue,
+            timeStampColumnName: 'time',
+            valueColumnName: 'value',
+          } as IExtractUnixTimePointsConfig),
+          type: EnumTimeSeriesType.Line
+        } as IExternalSourceTimeSeries])
+      }else{
+        chartState = hpTimeSeriesChartReducerAuxFunctions.buildInitialState();
+      }
+
+      return {
+        site: el.site,
+        channel: el.channel,
+        chartState: chartState,
+      };
+    })
+
+    const rawChannelResponse = yield Requests.getChannelData(project.site + '-' + project.raw, startDate, endDate);
+    const fixedAnomaliesResponse = yield Requests.getFixedAnomalies(project.site + '-' + project.raw, startDate, endDate);
+    const editedChannelResponse = yield Requests.getChannelData(project.site + '-' + project.final, startDate, endDate);
+
+    const rawChannel = Papa.parse(rawChannelResponse.data, { header: true });
+    const fixedAnomalies = Papa.parse(fixedAnomaliesResponse.data, { header: true });
+    const editedChannel = Papa.parse(editedChannelResponse.data, { header: true });
 
     const sourceTimeSeries: IExternalSourceTimeSeries[] = [];
 
@@ -56,17 +92,56 @@ function* getAnomaliesForChannel(action: any) {
     } as IExternalSourceTimeSeries);
 
     const newChartState = hpTimeSeriesChartAuxiliary.buildStateFromExternalSource(sourceTimeSeries) as IHpTimeSeriesChartState;
+
+    const editedChartState =
+      hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
+        color: 'steelblue',
+        name: 'final',
+        points: csvLoadingCalculations.extractUnixTimePoints(editedChannel.data, {
+          rawFormat: EnumRawCsvFormat.DateTimeThenValue,
+          timeStampColumnName: 'time',
+          valueColumnName: 'value',
+        } as IExtractUnixTimePointsConfig),
+        type: EnumTimeSeriesType.Line
+      } as IExternalSourceTimeSeries])
+    editedChartState.dateRangeUnixFrom = newChartState.dateRangeUnixFrom;
+    editedChartState.dateRangeUnixTo = newChartState.dateRangeUnixTo;
+    editedChartState.windowUnixFrom = newChartState.windowUnixFrom;
+    editedChartState.windowUnixTo = newChartState.windowUnixTo;
+
+    // let supportingChannels = _.map(project.supportingChannels, (el, idx) => {
+
+    //   let parsedResult = Papa.parse(supportingChannelsResults[idx], { header: true });;
+
+    //   let chartState = hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
+    //     color: 'steelblue',
+    //     name: el.site + ' ' + el.channel,
+    //     points: csvLoadingCalculations.extractUnixTimePoints(parsedResult.data, {
+    //       rawFormat: EnumRawCsvFormat.DateTimeThenValue,
+    //       timeStampColumnName: 'time',
+    //       valueColumnName: 'value',
+    //     } as IExtractUnixTimePointsConfig),
+    //     type: EnumTimeSeriesType.Line
+    //   } as IExternalSourceTimeSeries])
+
+    //   return {
+    //     site: el.site,
+    //     channel: el.channel,
+    //     chartState: chartState,
+    //   };
+    // });
+
     var newGridState: IDataGridState = { series: [] };
-    for(let i = 0; i < rawChannel.data.length; i++){
+    for (let i = 0; i < rawChannel.data.length; i++) {
 
       let fixedValue = _.find(fixedAnomalies.data, x => x.time == rawChannel.data[i].time);
       let editedValue = _.find(editedChannel.data, x => x.time == rawChannel.data[i].time);
-      
-      if(_.isUndefined(fixedValue)){
+
+      if (_.isUndefined(fixedValue)) {
         fixedValue = '';
       }
 
-      if(_.isUndefined(editedValue)){
+      if (_.isUndefined(editedValue)) {
         editedValue = '';
       }
 
@@ -91,7 +166,7 @@ export function* watchGetAnomaliesForChannel() {
 }
 
 function* copyRawToEdited() {
-  yield put({ type: anomaliesScreenActionTypes.COPY_RAW_TO_EDITED, payload: ''});
+  yield put({ type: anomaliesScreenActionTypes.COPY_RAW_TO_EDITED, payload: '' });
 }
 
 export function* watchCopyRawToEdited() {
