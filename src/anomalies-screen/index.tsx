@@ -65,7 +65,6 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
   };
 
   componentWillReceiveProps(nextProps: IAnomaliesComponentProps) {
-    let x = 2;
     this.setState({
       mainChartState: _.cloneDeep(nextProps.mainChartState),
       finalChartState: _.cloneDeep(nextProps.finalChartState),
