@@ -60,7 +60,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       windowUnixTo: props.mainChartState.dateRangeUnixTo,
       mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
-      supportingChannels: props.supportingChannels,
+      supportingChannels: _.cloneDeep(props.supportingChannels),
     }
   };
 
@@ -123,17 +123,6 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
           </FormGroup>
         </Form>
 
-        {/* <Row style={{ maxHeight: 300 }} >
-          <Col sm={12}>
-            <HpTimeSeriesScroller
-              chartState={this.props.mainChartState}
-              sliderScss={convertHpSliderScss(hpSliderScss)}
-              timeSeriesChartScss={convertHpTimeSeriesChartScss(hpTimeSeriesChartScss)}
-              fitToParentSize={true}>
-            </HpTimeSeriesScroller>
-          </Col>
-        </Row> */}
-
         <Row style={{ minHeight: this.scss.slider.heightPx, marginLeft: this.scss.timeSeries.paddingLeftPx, marginTop: 20, marginBottom: 20 }}>
           <Col>
             <HpSlider
@@ -147,6 +136,18 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                   windowUnixTo: this.state.windowUnixTo
                 } as IUnixFromTo)
 
+                const newSupportingChannelsState = _.map(this.state.supportingChannels, (el) => {
+                  return {
+                    site: el.site,
+                    channel: el.channel,
+                    chartState: {
+                      ...el.chartState,
+                      windowUnixFrom: windowUnixFrom,
+                      windowUnixTo: windowUnixTo,
+                    } as IHpTimeSeriesChartState
+                  };
+                })
+
                 this.setState({
                   windowUnixFrom: windowUnixFrom,
                   windowUnixTo: windowUnixTo,
@@ -155,6 +156,12 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                     windowUnixFrom: windowUnixFrom,
                     windowUnixTo: windowUnixTo,
                   } as IHpTimeSeriesChartState,
+                  finalChartState: {
+                    ...this.state.finalChartState,
+                    windowUnixFrom: windowUnixFrom,
+                    windowUnixTo: windowUnixTo,
+                  } as IHpTimeSeriesChartState,
+                  supportingChannels: newSupportingChannelsState,
                 })
               }}
               fitToParent={{ toWidth: true }}
@@ -189,21 +196,28 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         </Row>
 
         {_.map(this.state.supportingChannels, (el, idx) => {
-          return <Row>
-            <Col md={12} >
-              <div style={{ height: 250 }} >
-                <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>{el.site + '-' + el.channel}</p>
-                <HpTimeSeriesChart
-                  scss={this.scss.timeSeries}
-                  state={el.chartState}
-                  fitToParent={{ toHeight: true, toWidth: true }}
-                ></HpTimeSeriesChart>
-              </div>
-            </Col>
-          </Row>
+          return <div style={{background: '#F8F8F8'}}>
+            <Row>
+              <Col md={12} >
+                <div style={{ height: 250 }} >
+                  <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>{el.site + '-' + el.channel}</p>
+                  <HpTimeSeriesChart
+                    scss={this.scss.timeSeries}
+                    state={el.chartState}
+                    fitToParent={{ toHeight: true, toWidth: true }}
+                  ></HpTimeSeriesChart>
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={12}> 
+                <Button className='pull-right' bsStyle='primary'>Delete</Button>
+              </Col>
+            </Row>
+          </div>
         })}
 
-        <Row>
+        <Row style={{marginTop: 4}}>
           <Col sm={12}>
             <Button className='pull-right' bsStyle='primary' onClick={() => this.setState({ showModal: true })} >Add Channel</Button>
           </Col>

@@ -13,6 +13,12 @@ import { IDataGridState } from './controls/data-grid/state';
 import { IProject } from '../projects-screen/state';
 import { channel } from 'redux-saga';
 
+export interface IAnomaliesCharts{
+  mainChartState: IHpTimeSeriesChartState;
+  finalChartState: IHpTimeSeriesChartState;
+  supportingChannels: { site: string, channel: string, chartState: IHpTimeSeriesChartState }[];
+}
+
 const initialState = {
   mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
   finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
@@ -21,9 +27,13 @@ const initialState = {
   project: {} as IProject,
 } as IAnomaliesScreenState;
 
-export default handleActions<IAnomaliesScreenState, IHpTimeSeriesChartState | IDataGridState | IProject>({
-  [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_CHART_FULFILED]: (state: IAnomaliesScreenState, action: Action<IHpTimeSeriesChartState>) => {
-    return _.extend({}, state, { mainChartState: action.payload });
+export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGridState | IProject>({
+  [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_CHART_FULFILED]: (state: IAnomaliesScreenState, action: Action<IAnomaliesCharts>) => {
+    return _.extend({}, state, { 
+      mainChartState: action.payload.mainChartState,
+      finalChartState: action.payload.finalChartState,
+      supportingChannels: action.payload.supportingChannels,
+     });
   },
   [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_GRID_FULFILED]: (state: IAnomaliesScreenState, action: Action<IDataGridState>) => {
     return _.extend({}, state, { gridState: action.payload });

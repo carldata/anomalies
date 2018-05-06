@@ -13,6 +13,7 @@ import { IDataGridState } from './controls/data-grid/state';
 import _ = require('lodash');
 import { Requests } from '../requests';
 import { IProject } from '../projects-screen/state';
+import { IAnomaliesCharts } from '../anomalies-screen/store-creator';
 
 export function* watchGoToProjects() {
   yield takeEvery(anomaliesScreenActionTypes.GO_TO_PROJECTS, function* () { yield put(push('/projects')); });
@@ -25,40 +26,6 @@ function* getAnomaliesForChannel(action: any) {
   let endDate: string = action.payload.endDate;
 
   try {
-    let supportingChannelsResults: any[] = [];
-    if (project.supportingChannels.length > 0) {
-      supportingChannelsResults = yield all(
-        _.map(project.supportingChannels, (el) =>
-          call(axios.get, `${'http://flowworks-http.13.91.222.33.xip.io'}/anomalies/find?series=${el.site + '-' + el.channel}&startDate=${startDate}&endDate=${endDate}`)));
-    }
-
-    let supportingChannels = _.map(project.supportingChannels, (el, idx) => {
-
-      let parsedResult = Papa.parse(supportingChannelsResults[idx].data, { header: true });;
-      let chartState;
-      
-      if (parsedResult.errors.length === 0) {
-        chartState = hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
-          color: 'steelblue',
-          name: el.site + ' ' + el.channel,
-          points: csvLoadingCalculations.extractUnixTimePoints(parsedResult.data, {
-            rawFormat: EnumRawCsvFormat.DateTimeThenValue,
-            timeStampColumnName: 'time',
-            valueColumnName: 'value',
-          } as IExtractUnixTimePointsConfig),
-          type: EnumTimeSeriesType.Line
-        } as IExternalSourceTimeSeries])
-      }else{
-        chartState = hpTimeSeriesChartReducerAuxFunctions.buildInitialState();
-      }
-
-      return {
-        site: el.site,
-        channel: el.channel,
-        chartState: chartState,
-      };
-    })
-
     const rawChannelResponse = yield Requests.getChannelData(project.site + '-' + project.raw, startDate, endDate);
     const fixedAnomaliesResponse = yield Requests.getFixedAnomalies(project.site + '-' + project.raw, startDate, endDate);
     const editedChannelResponse = yield Requests.getChannelData(project.site + '-' + project.final, startDate, endDate);
@@ -93,7 +60,9 @@ function* getAnomaliesForChannel(action: any) {
 
     const newChartState = hpTimeSeriesChartAuxiliary.buildStateFromExternalSource(sourceTimeSeries) as IHpTimeSeriesChartState;
 
-    const editedChartState =
+    let editedChartState;
+    if(editedChannel.errors.length == 0){
+    editedChartState =
       hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
         color: 'steelblue',
         name: 'final',
@@ -103,33 +72,53 @@ function* getAnomaliesForChannel(action: any) {
           valueColumnName: 'value',
         } as IExtractUnixTimePointsConfig),
         type: EnumTimeSeriesType.Line
-      } as IExternalSourceTimeSeries])
+      } as IExternalSourceTimeSeries]);
+    }else{
+      editedChartState = hpTimeSeriesChartReducerAuxFunctions.buildInitialState();
+    }
+    //check if this is necessary
     editedChartState.dateRangeUnixFrom = newChartState.dateRangeUnixFrom;
     editedChartState.dateRangeUnixTo = newChartState.dateRangeUnixTo;
     editedChartState.windowUnixFrom = newChartState.windowUnixFrom;
     editedChartState.windowUnixTo = newChartState.windowUnixTo;
 
-    // let supportingChannels = _.map(project.supportingChannels, (el, idx) => {
+    let supportingChannelsResults: any[] = [];
+    if (project.supportingChannels.length > 0) {
+      supportingChannelsResults = yield Requests.getSupportingChannels(project.supportingChannels, startDate, endDate);
+    }
 
-    //   let parsedResult = Papa.parse(supportingChannelsResults[idx], { header: true });;
+    let supportingChannels = _.map(project.supportingChannels, (el, idx) => {
 
-    //   let chartState = hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
-    //     color: 'steelblue',
-    //     name: el.site + ' ' + el.channel,
-    //     points: csvLoadingCalculations.extractUnixTimePoints(parsedResult.data, {
-    //       rawFormat: EnumRawCsvFormat.DateTimeThenValue,
-    //       timeStampColumnName: 'time',
-    //       valueColumnName: 'value',
-    //     } as IExtractUnixTimePointsConfig),
-    //     type: EnumTimeSeriesType.Line
-    //   } as IExternalSourceTimeSeries])
+      let parsedResult = Papa.parse(supportingChannelsResults[idx].data, { header: true });;
+      let chartState;
 
-    //   return {
-    //     site: el.site,
-    //     channel: el.channel,
-    //     chartState: chartState,
-    //   };
-    // });
+      if (parsedResult.errors.length === 0) {
+        chartState = hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
+          color: 'steelblue',
+          name: el.site + ' ' + el.channel,
+          points: csvLoadingCalculations.extractUnixTimePoints(parsedResult.data, {
+            rawFormat: EnumRawCsvFormat.DateTimeThenValue,
+            timeStampColumnName: 'time',
+            valueColumnName: 'value',
+          } as IExtractUnixTimePointsConfig),
+          type: EnumTimeSeriesType.Line
+        } as IExternalSourceTimeSeries])
+      } else {
+        chartState = hpTimeSeriesChartReducerAuxFunctions.buildInitialState();
+      }
+
+      //consider if this is necessary
+      chartState.dateRangeUnixFrom = newChartState.dateRangeUnixFrom;
+      chartState.dateRangeUnixTo = newChartState.dateRangeUnixTo;
+      chartState.windowUnixFrom = newChartState.windowUnixFrom;
+      chartState.windowUnixTo = newChartState.windowUnixTo;
+
+      return {
+        site: el.site,
+        channel: el.channel,
+        chartState: chartState,
+      };
+    });
 
     var newGridState: IDataGridState = { series: [] };
     for (let i = 0; i < rawChannel.data.length; i++) {
@@ -153,7 +142,11 @@ function* getAnomaliesForChannel(action: any) {
       })
     }
 
-    yield put({ type: anomaliesScreenActionTypes.GET_ANOMALIES_FOR_CHART_FULFILED, payload: newChartState });
+    yield put({ type: anomaliesScreenActionTypes.GET_ANOMALIES_FOR_CHART_FULFILED, payload: {
+      mainChartState: newChartState,
+      finalChartState: editedChartState,
+      supportingChannels: supportingChannels,
+    } as IAnomaliesCharts });
     yield put({ type: anomaliesScreenActionTypes.GET_ANOMALIES_FOR_GRID_FULFILED, payload: newGridState });
 
   } catch (error) {

@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { call } from 'redux-saga/effects'
+import { all, call } from 'redux-saga/effects'
 import _ = require('lodash');
+import { channel } from 'redux-saga';
 
 export class Requests {
 
@@ -43,7 +44,10 @@ export class Requests {
     let channelData: any;
 
     try {
-      channelData = yield call(axios.get, `${this.apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
+      // TODO when data endpoint starts to work use it instead of anomalies endpoint
+      //channelData = yield call(axios.get, `${this.apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
+      channelData = yield call(axios.get, `${this.apiAddress}/anomalies/find?series=${channel}&startDate=${startDate}&endDate=${endDate}`);
+      
     }
     catch (error) {
       //TODO notify error
@@ -67,6 +71,7 @@ export class Requests {
     return anomalies;
   }
 
+  //TODO - remove  getEditedChannelData and use only getChannelData
   static * getEditedChannelData(channel: string, startDate: string, endDate: string) {
     let channelData: any;
 
@@ -79,6 +84,20 @@ export class Requests {
     }
 
     return channelData;
+  }
+
+  static * getSupportingChannels(supportingChannels: { site: string, channel: string}[], startDate: string, endDate: string){
+    let supportingChannelsResult: any[] = [];
+
+    //TODO - change this to get data for channels instead of anomalies when endpoint starts to work
+    try{
+     supportingChannelsResult = yield all(_.map(supportingChannels, (el) =>
+          call(axios.get, `${this.apiAddress}/anomalies/find?series=${el.site + '-' + el.channel}&startDate=${startDate}&endDate=${endDate}`)));
+    }catch(error){
+      //TODO throw error
+    }
+
+    return supportingChannelsResult;
   }
 
   static * addProject(data) {
