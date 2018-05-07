@@ -232,13 +232,12 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
               console.log(e);
               this.setState({ showModal: false });
               if (this.state.mainChartState.series[0].points.length == 0) {
-                console.log('addChannel - no points in mainChart');
                 this.props.addEmptyChannel(e, this.state.mainChartState.dateRangeUnixFrom, this.state.mainChartState.dateRangeUnixTo);
-              }else{
+              } else {
                 console.log('addChannel - there are points');
-                this.props.addAndPopulateChannel(e, 
-                  dateFns.format(new Date(this.state.mainChartState.dateRangeUnixFrom),'YYYY-MM-DDTHH:mm:ss'),
-                  dateFns.format(new Date(this.state.mainChartState.dateRangeUnixTo),'YYYY-MM-DDTHH:mm:ss')); 
+                this.props.addAndPopulateChannel(e,
+                  this.state.startDate,
+                  this.state.endDate);
               }
             }}
             hideModal={() => { this.setState({ showModal: false }) }} >
@@ -266,7 +265,7 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
     copyRawToEdited: anomaliesScreenActionCreators.copyRawToEdited,
     addEmptyChannel: anomaliesScreenActionCreators.addEmptyChannel,
     addAndPopulateChannel: anomaliesScreenActionCreators.addAndPopulateChannel,
-    }, dispatch);
+  }, dispatch);
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(AnomaliesComponent);

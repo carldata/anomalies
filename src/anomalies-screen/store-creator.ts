@@ -72,5 +72,23 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
         chartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(), 
       })
     }
+  },
+  [anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FULFILED]: (state: IAnomaliesScreenState, action: Action<any>) => {
+    return {
+      ...state,
+      project: {
+        ...state.project,
+        supportingChannels: _.concat(state.project.supportingChannels,{ 
+          site: action.payload.siteChannelInfo.site, 
+          channel: action.payload.siteChannelInfo.channel,
+          type: action.payload.siteChannelInfo.type, 
+        })
+      },
+      supportingChannels: _.concat(state.supportingChannels,{
+        site: action.payload.siteChannelInfo.site,
+        channel: action.payload.siteChannelInfo.channel,
+        chartState: action.payload.channelChartState, 
+      })
+    }
   }
 }, initialState);
