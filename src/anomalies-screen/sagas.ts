@@ -165,3 +165,23 @@ function* copyRawToEdited() {
 export function* watchCopyRawToEdited() {
   yield takeEvery(anomaliesScreenActionTypes.COPY_RAW_TO_EDITED, copyRawToEdited);
 }
+
+
+function* addAndPopulateChannel(action: any){
+  let x = 1; 
+  console.log('addAndPopulateChannel - worker saga',action);
+}
+
+export function* watchAddAndPopulateChannel(){
+  yield takeEvery(anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_START,addAndPopulateChannel);
+}
+
+function* addEmptyChannel(action: any){
+  let x = 2;
+  console.log('addEmptyChannel - worker saga',action);
+
+}
+
+export function* watchAddEmptyChannel(){
+  yield takeEvery(anomaliesScreenActionTypes.ADD_EMPTY_CHANNEL_START,addEmptyChannel);
+}
