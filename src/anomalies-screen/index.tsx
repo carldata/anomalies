@@ -35,6 +35,13 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
     }
   };
 
+  public RenderColumn() {
+    return 
+    <div>
+      
+    </div>
+  }
+
   public render() {
     return <div>
       <div style={{ marginLeft: 20, marginRight: 20, marginTop: 10, marginBottom: 10 }}>
@@ -74,7 +81,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         <Row>
           <Col lg={12}>
             <div>
-              <div style={{ maxHeight: 800, marginTop: 150 }}>
+              <div style={{ maxHeight: 800, marginTop: 150, marginBottom: 90 }}>
                 <HpTimeSeriesScroller
                   chartState={this.props.chartState}
                   sliderScss={convertHpSliderScss(hpSliderScss)}
@@ -83,7 +90,9 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                 </HpTimeSeriesScroller>
               </div>
             </div>
-            <Button style={{marginTop: 100}} className='btn-primary' onClick={() => this.setState({ showModal: true })} >Add Channel</Button> 
+            <DataGrid gridState={this.props.gridState}>
+            </DataGrid>
+            <Button style={{marginTop: -80, marginLeft: 130}} className='btn-primary' onClick={() => this.setState({ showModal: true })} >Add Channel</Button> 
 
           </Col>
         </Row>
