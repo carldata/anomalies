@@ -7,18 +7,34 @@ import { IState } from '../state';
 import { projectScreenActionCreators } from './action-creators';
 import { ProjectComponent } from './project';
 import { IProject } from './state';
+import { AddProjectModal } from './controls/add-project-modal';
 
 interface IProjectComponentProps {
-  dummyText: string;
   projects: IProject[];
 }
 
 interface IProjectComponentActionCreators {
-  goToAnomaliesScreen: (name: string) => any;
+  goToAnomaliesScreen: (project: IProject) => any;
   getAllProjectsAsyncCall: () => any;
+  addProjectStart: (project: IProject) => any;
 }
 
-class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators> {
+interface IProjectComponentState {
+  showModal: boolean;
+}
+
+class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators, IProjectComponentState> {
+  constructor(props: IProjectComponentProps & IProjectComponentActionCreators) {
+    super(props);
+
+    this.state = { showModal: false }
+    this.showAddProjectModal.bind(this);
+  }
+
+  showAddProjectModal(show: boolean) {
+    this.setState({ showModal: show });
+  }
+
   public componentDidMount() {
     this.props.getAllProjectsAsyncCall();
   }
@@ -32,15 +48,20 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
               return <ProjectComponent key={index}
                 id={el.id}
                 name={el.name}
-                startDate={el.startDate}
-                endDate={el.endDate}
-                splitDate={el.splitDate}
-                goToProjectAnomalies={() => { this.props.goToAnomaliesScreen(el.name); }} />;
+                site={el.site}
+                raw={el.raw}
+                final={el.final}
+                goToProjectAnomalies={() => { this.props.goToAnomaliesScreen(_.find(this.props.projects, (proj)=> proj.id === el.id )); }} />;
             })}
           </ListGroup>
         </FormGroup>
+        <FormGroup>
+          <Button id='btnAddProject' bsStyle='primary' onClick={() => this.showAddProjectModal(true)}>Add Project</Button>
+        </FormGroup>
       </Form>
-      <div>{this.props.dummyText}</div>
+      <AddProjectModal id='' name='' site='' raw='' final='' showModal={this.state.showModal} addProject={(e) => this.props.addProjectStart(e)}
+        hideModal={() => this.showAddProjectModal(false)}>
+      </AddProjectModal>
     </div>;
   }
 }
@@ -54,7 +75,8 @@ function mapStateToProps(state: IState) {
 function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     goToAnomaliesScreen: projectScreenActionCreators.goToAnomaliesScreen,
-    getAllProjectsAsyncCall: projectScreenActionCreators.getAllProjectsAsyncCall
+    getAllProjectsAsyncCall: projectScreenActionCreators.getAllProjectsAsyncCall,
+    addProjectStart: projectScreenActionCreators.addProjectStart
   }, dispatch);
 }
 
