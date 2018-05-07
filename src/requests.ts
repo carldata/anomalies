@@ -1,83 +1,121 @@
 import axios from 'axios';
-import { call } from 'redux-saga/effects'
+import { all, call } from 'redux-saga/effects'
 import _ = require('lodash');
+import { channel } from 'redux-saga';
 
 export class Requests {
 
-    private static apiAddress = 'http://flowworks-http.13.91.222.33.xip.io'; 
+  private static apiAddress = 'http://flowworks-http.13.91.222.33.xip.io';
 
-    static * getConfiguration(): any {
-        let config: any;
+  static * getConfiguration(): any {
+    let config: any;
 
-        try {
-            config = yield call(axios.get, `${this.apiAddress}/config/anomaly-tool`);
-        }
-        catch (error) {
-            //TODO notify error
-            config = { data: [{ id: 'someId', data: { name: 'someName' } }] };
-        }
-
-        return config;
+    try {
+      config = yield call(axios.get, `${this.apiAddress}/config/anomaly-tool`);
+    }
+    catch (error) {
+      //TODO notify error
+      config = {
+        data: [{
+          id: 'someId', data: {
+            name: 'someName',
+            site: '7880',
+            raw: '11732',
+            final: '11734',
+            supportingChannels: [
+              {
+                site: '7880',
+                channel: '11734',
+              },
+              {
+                site: '7880',
+                channel: '11734',
+              },
+            ],
+          }
+        }]
+      };
     }
 
-    static * getChannelData(channel: string, startDate: string, endDate: string) {
-        let channelData: any;
+    return config;
+  }
 
-        try {
-            channelData = yield call(axios.get, `${this.apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
-        }
-        catch (error) {
-            //TODO notify error
-            channelData = {};
-        }
+  static * getChannelData(channel: string, startDate: string, endDate: string) {
+    let channelData: any;
 
-        return channelData;
+    try {
+      // TODO when data endpoint starts to work use it instead of anomalies endpoint
+      //channelData = yield call(axios.get, `${this.apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
+      channelData = yield call(axios.get, `${this.apiAddress}/anomalies/find?series=${channel}&startDate=${startDate}&endDate=${endDate}`);
+      
+    }
+    catch (error) {
+      //TODO notify error
+      channelData = {};
     }
 
-    static * getFixedAnomalies(channel: string, startDate: string, endDate: string) {
-        let anomalies: any;
+    return channelData;
+  }
 
-        try {
-            anomalies = yield call(axios.get, `${this.apiAddress}/anomalies/find?series=${channel}&startDate=${startDate}&endDate=${endDate}`);
-        }
-        catch (error) {
-            //TODO notify error
-            anomalies = {};
-        }
+  static * getFixedAnomalies(channel: string, startDate: string, endDate: string) {
+    let anomalies: any;
 
-        return anomalies;
+    try {
+      anomalies = yield call(axios.get, `${this.apiAddress}/anomalies/find?series=${channel}&startDate=${startDate}&endDate=${endDate}`);
+    }
+    catch (error) {
+      //TODO notify error
+      anomalies = {};
     }
 
-    static * getEditedChannelData(channel: string, startDate: string, endDate: string) {
-        let channelData: any;
+    return anomalies;
+  }
 
-        try {
-            channelData = yield call(axios.get, `${this.apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
-        }
-        catch (error) {
-            //TODO notify error
-            channelData = {};
-        }
+  //TODO - remove  getEditedChannelData and use only getChannelData
+  static * getEditedChannelData(channel: string, startDate: string, endDate: string) {
+    let channelData: any;
 
-        return channelData;
+    try {
+      channelData = yield call(axios.get, `${this.apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
+    }
+    catch (error) {
+      //TODO notify error
+      channelData = {};
     }
 
-    static * addProject(data) {
-        let projectId: string = '';
+    return channelData;
+  }
 
-        try {
-            let response = yield call(axios.post, `${this.apiAddress}/config/anomaly-tool`, {
-                name: data.name,
-                site: data.site,
-                final: data.final,
-                raw: data.raw,
-            });
-            projectId = response.data;
-        }
-        catch (error) {
-            //TODO notify error
-        }
+  static * getSupportingChannels(supportingChannels: { site: string, channel: string}[], startDate: string, endDate: string){
+    let supportingChannelsResult: any[] = [];
 
-        return projectId;
+    //TODO - change this to get data for channels instead of anomalies when endpoint starts to work
+    try{
+     supportingChannelsResult = yield all(_.map(supportingChannels, (el) =>
+          call(axios.get, `${this.apiAddress}/anomalies/find?series=${el.site + '-' + el.channel}&startDate=${startDate}&endDate=${endDate}`)));
+    }catch(error){
+      //TODO throw error
     }
+
+    return supportingChannelsResult;
+  }
+
+  static * addProject(data) {
+    let projectId: string = '';
+
+    try {
+      let response = yield call(axios.post, `${this.apiAddress}/config/anomaly-tool`, {
+        name: data.name,
+        site: data.site,
+        final: data.final,
+        raw: data.raw,
+      });
+      projectId = response.data;
+    }
+    catch (error) {
+      //TODO notify error
+    }
+
+    return projectId;
+  }
 }

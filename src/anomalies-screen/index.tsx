@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button, ButtonGroup, ControlLabel, Form, FormControl, FormGroup, Row, Col, Nav, NavItem, Navbar, NavDropdown, MenuItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import { convertHpSliderScss, convertHpTimeSeriesChartScss, HpTimeSeriesScroller, IHpTimeSeriesChartState } from 'time-series-scroller';
+import { convertHpSliderScss, convertHpTimeSeriesChartScss, HpTimeSeriesScroller, IHpTimeSeriesChartState, HpSlider, EnumHandleType, IUnixFromTo, handleMovedCallback, HpTimeSeriesChart, hpTimeSeriesChartReducerAuxFunctions } from 'time-series-scroller';
 import * as hpSliderScss from 'time-series-scroller/lib/out/sass/hp-slider.scss';
 import * as hpTimeSeriesChartScss from 'time-series-scroller/lib/out/sass/hp-time-series-chart.scss';
 import { IState } from '../state';
@@ -12,91 +12,235 @@ import { DataGrid } from './controls/data-grid'
 import { IDataGridState } from './controls/data-grid/state';
 import { LinkContainer } from 'react-router-bootstrap';
 import { AddChannelModal } from './controls/add-channel-control';
+import * as dateFns from 'date-fns';
+import * as _ from 'lodash';
+import { IDomain, IHpSliderHandleValues } from 'time-series-scroller/lib/out/hp-slider/interfaces';
 
 interface IAnomaliesComponentProps {
-  chartState: IHpTimeSeriesChartState;
+  mainChartState: IHpTimeSeriesChartState;
+  finalChartState: IHpTimeSeriesChartState;
+  supportingChannels: { site: string, channel: string, chartState: IHpTimeSeriesChartState }[];
   gridState: IDataGridState;
   project: IProject;
 }
 
 interface IAnomaliesComponentActionCreators {
   goToProjectsScreen: () => any;
-  getAnomaliesForProject: (project: any) => any;
+  getAnomaliesForProject: (projectAndRange: any) => any;
   copyRawToEdited: () => any;
+  addAndPopulateChannel: (siteChannelInfo: any, startDate: string, endDate: string) => any;
+  addEmptyChannel: (siteChannelInfo: any, dateRangeUnixFrom: number, dateRangeUnixTo: number) => any;
 }
 
 interface IAnomaliesComponentState {
+  mainChartState: IHpTimeSeriesChartState;
+  finalChartState: IHpTimeSeriesChartState;
+  supportingChannels: { site: string, channel: string, chartState: IHpTimeSeriesChartState }[];
   showModal: boolean;
+  startDate: string;
+  endDate: string;
+  windowUnixFrom: number;
+  windowUnixTo: number;
 }
 
 class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators, IAnomaliesComponentState> {
+  private scss;
+
   constructor(props: IAnomaliesComponentProps & IAnomaliesComponentActionCreators, context: any) {
     super(props, context);
+
+    this.scss = {
+      slider: convertHpSliderScss(hpSliderScss),
+      timeSeries: convertHpTimeSeriesChartScss(hpTimeSeriesChartScss)
+    }
+
     this.state = {
-      showModal: false
+      showModal: false,
+      startDate: dateFns.format(dateFns.subMonths(dateFns.startOfDay(new Date()), 3), 'YYYY-MM-DDTHH:mm:ss'),
+      endDate: dateFns.format(dateFns.startOfDay(new Date()), 'YYYY-MM-DDTHH:mm:ss'),
+      windowUnixFrom: props.mainChartState.dateRangeUnixFrom,
+      windowUnixTo: props.mainChartState.dateRangeUnixTo,
+      mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
+      finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
+      supportingChannels: _.cloneDeep(props.supportingChannels),
+
     }
   };
 
+  componentWillReceiveProps(nextProps: IAnomaliesComponentProps) {
+    this.setState({
+      mainChartState: _.cloneDeep(nextProps.mainChartState),
+      finalChartState: _.cloneDeep(nextProps.finalChartState),
+      supportingChannels: _.cloneDeep(nextProps.supportingChannels),
+      windowUnixFrom: nextProps.mainChartState.dateRangeUnixFrom,
+      windowUnixTo: nextProps.mainChartState.dateRangeUnixTo,
+    });
+  }
+
   public render() {
     return <div>
+      <Navbar fluid>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <div style={{ cursor: 'pointer' }} onClick={() => this.props.goToProjectsScreen()}>Anomaly</div>
+          </Navbar.Brand>
+        </Navbar.Header>
+      </Navbar>
       <div style={{ marginLeft: 20, marginRight: 20, marginTop: 10, marginBottom: 10 }}>
-        <FormGroup>
-          <Form componentClass='fieldset' inline>
-            <Row>
-              <Col lg={3}>
-                <Button className='btn-primary' onClick={() => this.props.goToProjectsScreen()} >Projects</Button>
-              </Col>
-              <Col lg={3}>
-                <ControlLabel>Start Date:</ControlLabel>{' '}
-                <FormControl.Static>{'Start Date'}</FormControl.Static>{' '}
+        <Form>
+          <FormGroup>
+            <ControlLabel style={{ fontWeight: 'bold' }}>{_.isEmpty(this.props.project) ? ' ' : this.props.project.name}</ControlLabel>{' '}
+            <Button bsStyle='primary' disabled={_.isEmpty(this.props.project)} onClick={() => this.props.getAnomaliesForProject({
+              project: this.props.project,
+              startDate: this.state.startDate,
+              endDate: this.state.endDate,
+            })}>Load Timeseries</Button>
+          </FormGroup>
+        </Form>
 
-                <ControlLabel>End Date:</ControlLabel>{' '}
-                <FormControl.Static>{'End Date'}</FormControl.Static>{' '}
-              </Col>
-              <Col lg={3}>
-                <FormControl.Static> <b>Edited Channel:</b> </FormControl.Static>{' '}
-                <FormControl.Static> {this.props.project.final} </FormControl.Static>{' '}
-              </Col>
-              <Col lg={3}>
-                <div className='pull-right'>
-                  <FormControl.Static> <b>Channel:</b> </FormControl.Static >{' '}
-                  <FormControl.Static> { this.props.project.raw } </FormControl.Static>{' '}
-                  {/* <FormControl componentClass='select' className='btn-primary' >
-                    <option value='Flow 1'>Flow 1</option>
-                    <option value='Flow 2'>Flow 2</option>
-                    <option value='Flow 3'>Flow 3</option>
-                    <option value='Flow 4'>Flow 4</option>
-                  </FormControl>{' '} */}
-                  <Button bsStyle='success' onClick={() => this.props.getAnomaliesForProject({
-                     project:  this.props.project,
-                     startDate: '',
-                     endDate: '',
-                     })} >Load Timeseries</Button>
+        <Form inline>
+          <FormGroup>
+            <ControlLabel>Site: </ControlLabel>
+            <FormControl.Static>{_.isEmpty(this.props.project) ? 'No site' : this.props.project.site}</FormControl.Static>
+          </FormGroup>
+          {' '}
+          <FormGroup>
+            <ControlLabel>Source: </ControlLabel>
+            <FormControl.Static>{_.isEmpty(this.props.project) ? 'No source ' : this.props.project.raw}</FormControl.Static>
+          </FormGroup>
+          {' '}
+          <FormGroup>
+            <ControlLabel>Final: </ControlLabel>
+            <FormControl.Static>{_.isEmpty(this.props.project) ? 'No final' : this.props.project.final}</FormControl.Static>
+          </FormGroup>
+          {' '}
+          <FormGroup>
+            <ControlLabel>Start Date:</ControlLabel>
+            {' '}
+            <FormControl type='text' value={this.state.startDate} onChange={(e) => this.setState({ startDate: (e.target as HTMLInputElement).value })}></FormControl>
+            {' '}
+            <ControlLabel>End Date:</ControlLabel>
+            {' '}
+            <FormControl type='text' value={this.state.endDate} onChange={(e) => this.setState({ endDate: (e.target as HTMLInputElement).value })}></FormControl>
+          </FormGroup>
+        </Form>
+
+        <Row style={{ minHeight: this.scss.slider.heightPx, marginLeft: this.scss.timeSeries.paddingLeftPx, marginTop: 20, marginBottom: 20 }}>
+          <Col>
+            <HpSlider
+              scss={convertHpSliderScss(hpSliderScss)}
+              domain={{ domainMin: this.props.mainChartState.dateRangeUnixFrom, domainMax: this.props.mainChartState.dateRangeUnixTo } as IDomain<number>}
+              displayDragBar={true}
+              handleValues={{ left: this.state.windowUnixFrom, right: this.state.windowUnixTo } as IHpSliderHandleValues<number>}
+              handleMoved={(value: number | number[], type: EnumHandleType) => {
+                let { windowUnixFrom, windowUnixTo } = handleMovedCallback(value, type, {
+                  windowUnixFrom: this.state.windowUnixFrom,
+                  windowUnixTo: this.state.windowUnixTo
+                } as IUnixFromTo)
+
+                const newSupportingChannelsState = _.map(this.state.supportingChannels, (el) => {
+                  return {
+                    site: el.site,
+                    channel: el.channel,
+                    chartState: {
+                      ...el.chartState,
+                      windowUnixFrom: windowUnixFrom,
+                      windowUnixTo: windowUnixTo,
+                    } as IHpTimeSeriesChartState
+                  };
+                })
+
+                this.setState({
+                  windowUnixFrom: windowUnixFrom,
+                  windowUnixTo: windowUnixTo,
+                  mainChartState: {
+                    ...this.state.mainChartState,
+                    windowUnixFrom: windowUnixFrom,
+                    windowUnixTo: windowUnixTo,
+                  } as IHpTimeSeriesChartState,
+                  finalChartState: {
+                    ...this.state.finalChartState,
+                    windowUnixFrom: windowUnixFrom,
+                    windowUnixTo: windowUnixTo,
+                  } as IHpTimeSeriesChartState,
+                  supportingChannels: newSupportingChannelsState,
+                })
+              }}
+              fitToParent={{ toWidth: true }}
+            ></HpSlider>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col md={12} >
+            <div style={{ height: 250 }} >
+              <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>ML Corrections</p>
+              <HpTimeSeriesChart
+                scss={this.scss.timeSeries}
+                state={this.state.mainChartState}
+                fitToParent={{ toHeight: true, toWidth: true }}
+              ></HpTimeSeriesChart>
+            </div>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col md={12} >
+            <div style={{ height: 250 }} >
+              <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>Final</p>
+              <HpTimeSeriesChart
+                scss={this.scss.timeSeries}
+                state={this.state.finalChartState}
+                fitToParent={{ toHeight: true, toWidth: true }}
+              ></HpTimeSeriesChart>
+            </div>
+          </Col>
+        </Row>
+
+        {_.map(this.state.supportingChannels, (el, idx) => {
+          return <div style={{ background: '#F8F8F8' }}>
+            <Row>
+              <Col md={12} >
+                <div style={{ height: 250 }} >
+                  <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>{el.site + '-' + el.channel}</p>
+                  <HpTimeSeriesChart
+                    scss={this.scss.timeSeries}
+                    state={el.chartState}
+                    fitToParent={{ toHeight: true, toWidth: true }}
+                  ></HpTimeSeriesChart>
                 </div>
               </Col>
             </Row>
-          </Form>
-        </FormGroup>
+            <Row>
+              <Col md={12}>
+                <Button className='pull-right' bsStyle='primary'>Delete</Button>
+              </Col>
+            </Row>
+          </div>
+        })}
 
-        <Row>
-          <Col lg={12}>
-            <div>
-              <div style={{ maxHeight: 800, marginTop: 150 }}>
-                <HpTimeSeriesScroller
-                  chartState={this.props.chartState}
-                  sliderScss={convertHpSliderScss(hpSliderScss)}
-                  timeSeriesChartScss={convertHpTimeSeriesChartScss(hpTimeSeriesChartScss)}
-                  fitToParentSize={true}>
-                </HpTimeSeriesScroller>
-              </div>
-            </div>
-            <Button style={{marginTop: 100}} className='btn-primary' onClick={() => this.setState({ showModal: true })} >Add Channel</Button> 
-
+        <Row style={{ marginTop: 4 }}>
+          <Col sm={12}>
+            <Button className='pull-right' bsStyle='primary' onClick={() => this.setState({ showModal: true })} >Add Channel</Button>
           </Col>
         </Row>
-        <Row>
-          <AddChannelModal showModal={this.state.showModal} addChannel={(arg) => {}}>
 
+        <Row>
+          <AddChannelModal
+            showModal={this.state.showModal}
+            addChannel={(e) => {
+              console.log(e);
+              this.setState({ showModal: false });
+              if (this.state.mainChartState.series[0].points.length == 0) {
+                this.props.addEmptyChannel(e, this.state.mainChartState.dateRangeUnixFrom, this.state.mainChartState.dateRangeUnixTo);
+              } else {
+                console.log('addChannel - there are points');
+                this.props.addAndPopulateChannel(e,
+                  this.state.startDate,
+                  this.state.endDate);
+              }
+            }}
+            hideModal={() => { this.setState({ showModal: false }) }} >
           </AddChannelModal>
         </Row>
       </div>
@@ -106,8 +250,10 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 
 function mapStateToProps(state: IState) {
   return {
-    chartState: state.anomaliesScreen.chartState,
+    mainChartState: state.anomaliesScreen.mainChartState,
     gridState: state.anomaliesScreen.gridState,
+    finalChartState: state.anomaliesScreen.finalChartState,
+    supportingChannels: state.anomaliesScreen.supportingChannels,
     project: state.anomaliesScreen.project,
   };
 }
@@ -116,7 +262,9 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     getAnomaliesForProject: anomaliesScreenActionCreators.getAnomaliesForProject,
     goToProjectsScreen: anomaliesScreenActionCreators.goToProjectsScreen,
-    copyRawToEdited: anomaliesScreenActionCreators.copyRawToEdited
+    copyRawToEdited: anomaliesScreenActionCreators.copyRawToEdited,
+    addEmptyChannel: anomaliesScreenActionCreators.addEmptyChannel,
+    addAndPopulateChannel: anomaliesScreenActionCreators.addAndPopulateChannel,
   }, dispatch);
 }
 
