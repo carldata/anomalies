@@ -36,6 +36,7 @@ interface IAnomaliesComponentState {
   mainChartState: IHpTimeSeriesChartState;
   finalChartState: IHpTimeSeriesChartState;
   supportingChannels: { site: string, channel: string, chartState: IHpTimeSeriesChartState }[];
+  gridState: IDataGridState;
   showModal: boolean;
   startDate: string;
   endDate: string;
@@ -63,7 +64,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       supportingChannels: _.cloneDeep(props.supportingChannels),
-
+      gridState: {series: []}
     }
   };
 
@@ -81,6 +82,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       supportingChannels: _.cloneDeep(nextProps.supportingChannels),
       windowUnixFrom: nextProps.mainChartState.dateRangeUnixFrom,
       windowUnixTo: nextProps.mainChartState.dateRangeUnixTo,
+      gridState: nextProps.gridState
     });
   }
 
@@ -190,9 +192,6 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                 ></HpTimeSeriesChart>
               </div>
             </div>
-            <DataGrid gridState={this.props.gridState}>
-            </DataGrid>
-            <Button style={{ marginTop: -80, marginLeft: 130 }} className='btn-primary' onClick={() => this.setState({ showModal: true })} >Add Channel</Button>
           </Col>
         </Row>
 
@@ -236,7 +235,12 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
             <Button className='pull-right' bsStyle='primary' onClick={() => this.setState({ showModal: true })} >Add Channel</Button>
           </Col>
         </Row>
-
+        <Row>
+          <Col md={12}>
+            <DataGrid gridState={this.state.gridState} supportingChannels={this.state.supportingChannels} >
+            </DataGrid>
+          </Col>
+        </Row>
         <Row>
           <AddChannelModal
             showModal={this.state.showModal}
