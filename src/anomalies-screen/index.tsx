@@ -28,6 +28,8 @@ interface IAnomaliesComponentActionCreators {
   goToProjectsScreen: () => any;
   getAnomaliesForProject: (projectAndRange: any) => any;
   copyRawToEdited: () => any;
+  addAndPopulateChannel: (siteChannelInfo: any, startDate: string, endDate: string) => any;
+  addEmptyChannel: (siteChannelInfo: any, dateRangeUnixFrom: number, dateRangeUnixTo: number) => any;
 }
 
 interface IAnomaliesComponentState {
@@ -61,6 +63,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       supportingChannels: _.cloneDeep(props.supportingChannels),
+
     }
   };
 
@@ -195,7 +198,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         </Row>
 
         {_.map(this.state.supportingChannels, (el, idx) => {
-          return <div style={{background: '#F8F8F8'}}>
+          return <div style={{ background: '#F8F8F8' }}>
             <Row>
               <Col md={12} >
                 <div style={{ height: 250 }} >
@@ -209,26 +212,38 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
               </Col>
             </Row>
             <Row>
-              <Col md={12}> 
+              <Col md={12}>
                 <Button className='pull-right' bsStyle='primary'>Delete</Button>
               </Col>
             </Row>
           </div>
         })}
 
-        <Row style={{marginTop: 4}}>
+        <Row style={{ marginTop: 4 }}>
           <Col sm={12}>
             <Button className='pull-right' bsStyle='primary' onClick={() => this.setState({ showModal: true })} >Add Channel</Button>
           </Col>
         </Row>
 
         <Row>
-          <AddChannelModal showModal={this.state.showModal} addChannel={(arg) => { }}>
-
+          <AddChannelModal
+            showModal={this.state.showModal}
+            addChannel={(e) => {
+              console.log(e);
+              this.setState({ showModal: false });
+              if (this.state.mainChartState.series[0].points.length == 0) {
+                console.log('addChannel - no points in mainChart');
+                this.props.addEmptyChannel(e, this.state.mainChartState.dateRangeUnixFrom, this.state.mainChartState.dateRangeUnixTo);
+              }else{
+                console.log('addChannel - there are points');
+                this.props.addAndPopulateChannel(e, 
+                  dateFns.format(new Date(this.state.mainChartState.dateRangeUnixFrom),'YYYY-MM-DDTHH:mm:ss'),
+                  dateFns.format(new Date(this.state.mainChartState.dateRangeUnixTo),'YYYY-MM-DDTHH:mm:ss')); 
+              }
+            }}
+            hideModal={() => { this.setState({ showModal: false }) }} >
           </AddChannelModal>
         </Row>
-
-
       </div>
     </div>;
   }
@@ -248,8 +263,10 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     getAnomaliesForProject: anomaliesScreenActionCreators.getAnomaliesForProject,
     goToProjectsScreen: anomaliesScreenActionCreators.goToProjectsScreen,
-    copyRawToEdited: anomaliesScreenActionCreators.copyRawToEdited
-  }, dispatch);
+    copyRawToEdited: anomaliesScreenActionCreators.copyRawToEdited,
+    addEmptyChannel: anomaliesScreenActionCreators.addEmptyChannel,
+    addAndPopulateChannel: anomaliesScreenActionCreators.addAndPopulateChannel,
+    }, dispatch);
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(AnomaliesComponent);

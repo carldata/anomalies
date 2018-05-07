@@ -15,7 +15,8 @@ interface IAddChannelComponentProps {
 }
 
 interface IAddChannelComponentActionCreators {
-  addChannel: (channel: any) => any;
+  addChannel: (siteChannelInfo: any) => any;
+  hideModal: () => any;
 }
 
 interface IAddChannelComponentState {
@@ -30,29 +31,22 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
     super(props, context);
     this.state = {
       showModal: false,
-      siteId: '0',
-      channelId: '0',
+      siteId: '',
+      channelId: '',
       channelType: ''
     }
-
-    this.hideModal = this.hideModal.bind(this);
-    this.approveAddChannel = this.approveAddChannel.bind(this);
   };
 
   componentWillReceiveProps(props: IAddChannelComponentProps) {
     this.setState({ showModal: props.showModal });
   };
 
-  hideModal() {
-    this.setState({ showModal: false });
-  };
-
   approveAddChannel() {
-    this.hideModal();
+  //   this.hideModal();
   };
 
   render() {
-    return <Modal show={this.state.showModal} onHide={this.hideModal}>
+    return <Modal show={this.state.showModal} onHide={ () => this.props.hideModal()}>
         <Modal.Body>
           <Form horizontal>
             <FormGroup>
@@ -82,28 +76,20 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button id='btnCancelAddChannelModal' onClick={this.hideModal}>
+          <Button id='btnCancelAddChannelModal' onClick={() => this.props.hideModal()}>
             Cancel
         </Button>
-          <Button id='btnApproveAddChannelModal' bsStyle='primary' onClick={this.approveAddChannel} >
+          <Button id='btnApproveAddChannelModal' bsStyle='primary' onClick={()=> this.props.addChannel({
+            site: this.state.siteId,
+            channel: this.state.channelId,
+            type: this.state.channelType,
+          }) } >
             Add
         </Button>
         </Modal.Footer>
       </Modal>
   };
 };
-
-// function mapStateToProps(state: IState) {
-//   return {
-//     // showModal: state.
-//   };
-// }
-
-// function matchDispatchToProps(dispatch: Dispatch<{}>) {
-//   return bindActionCreators({
-
-//   }, dispatch);
-// }
 
 export const AddChannelModal = AddChannelModalComponent;
 
