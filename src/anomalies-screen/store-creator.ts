@@ -27,7 +27,7 @@ const initialState = {
   project: {} as IProject,
 } as IAnomaliesScreenState;
 
-export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGridState | IProject>({
+export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGridState | IProject | any>({
   [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_CHART_FULFILED]: (state: IAnomaliesScreenState, action: Action<IAnomaliesCharts>) => {
     return _.extend({}, state, { 
       mainChartState: action.payload.mainChartState,
@@ -55,4 +55,22 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
       }),
     } as IAnomaliesScreenState)
   },
+  [anomaliesScreenActionTypes.ADD_EMPTY_CHANNEL]: (state: IAnomaliesScreenState, action: Action<any>) => {
+    return {
+      ...state,
+      project: {
+        ...state.project,
+        supportingChannels: _.concat(state.project.supportingChannels,{ 
+          site: action.payload.siteChannelInfo.site, 
+          channel: action.payload.siteChannelInfo.channel,
+          type: action.payload.siteChannelInfo.type, 
+        })
+      },
+      supportingChannels: _.concat(state.supportingChannels,{
+        site: action.payload.siteChannelInfo.site,
+        channel: action.payload.siteChannelInfo.channel,
+        chartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(), 
+      })
+    }
+  }
 }, initialState);

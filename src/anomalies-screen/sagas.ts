@@ -179,7 +179,7 @@ export function* watchAddAndPopulateChannel(){
 function* addEmptyChannel(action: any){
   let x = 2;
   console.log('addEmptyChannel - worker saga',action);
-
+  yield put({type: anomaliesScreenActionTypes.ADD_EMPTY_CHANNEL, payload: action.payload });
 }
 
 export function* watchAddEmptyChannel(){
