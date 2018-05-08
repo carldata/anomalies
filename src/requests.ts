@@ -2,6 +2,8 @@ import axios from 'axios';
 import { all, call } from 'redux-saga/effects'
 import _ = require('lodash');
 import { channel } from 'redux-saga';
+import { watchSaveProject } from './anomalies-screen/sagas';
+import { IProject } from './projects-screen/state';
 
 export class Requests {
 
@@ -109,6 +111,7 @@ export class Requests {
         site: data.site,
         final: data.final,
         raw: data.raw,
+        supportingChannels: [],
       });
       projectId = response.data;
     }
@@ -116,6 +119,24 @@ export class Requests {
       //TODO notify error
     }
 
+    return projectId;
+  }
+
+  static * saveProject(project: IProject){
+    let projectId;
+    try{
+      let response =  yield call(axios.put,`${this.apiAddress}/config/anomaly-tool/${project.id}`,{
+        name: project.name,
+        site: project.site,
+        final: project.final,
+        raw: project.raw,
+        supportingChannels: _.cloneDeep(project.supportingChannels),
+      });
+      projectId = response.data;
+    }
+    catch(error){
+      //TODO throw error
+    }
     return projectId;
   }
 }

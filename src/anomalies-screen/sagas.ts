@@ -14,7 +14,7 @@ import _ = require('lodash');
 import { Requests } from '../requests';
 import { IProject } from '../projects-screen/state';
 import { IAnomaliesCharts } from '../anomalies-screen/store-creator';
-import * as dateFns from 'date-fns'; 
+import * as dateFns from 'date-fns';
 
 export function* watchGoToProjects() {
   yield takeEvery(anomaliesScreenActionTypes.GO_TO_PROJECTS, function* () { yield put(push('/projects')); });
@@ -185,28 +185,30 @@ function* addAndPopulateChannel(action: any) {
     const channelParseResult = Papa.parse(channelData.data, { header: true });
 
     let channelChartState: IHpTimeSeriesChartState;
-    if(channelParseResult.errors.length === 0){
+    if (channelParseResult.errors.length === 0) {
       channelChartState =
-      hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
-        color: 'steelblue',
-        name: site + ' ' + channel,
-        points: csvLoadingCalculations.extractUnixTimePoints(channelParseResult.data, {
-          rawFormat: EnumRawCsvFormat.DateTimeThenValue,
-          timeStampColumnName: 'time',
-          valueColumnName: 'value',
-        } as IExtractUnixTimePointsConfig),
-        type: EnumTimeSeriesType.Line
-      } as IExternalSourceTimeSeries]);
-    }else{
+        hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
+          color: 'steelblue',
+          name: site + ' ' + channel,
+          points: csvLoadingCalculations.extractUnixTimePoints(channelParseResult.data, {
+            rawFormat: EnumRawCsvFormat.DateTimeThenValue,
+            timeStampColumnName: 'time',
+            valueColumnName: 'value',
+          } as IExtractUnixTimePointsConfig),
+          type: EnumTimeSeriesType.Line
+        } as IExternalSourceTimeSeries]);
+    } else {
       channelChartState = hpTimeSeriesChartReducerAuxFunctions.buildInitialState();
       channelChartState.dateRangeUnixFrom = dateFns.parse(startDate).getMilliseconds();
       channelChartState.dateRangeUnixTo = dateFns.parse(endDate).getMilliseconds();
     }
 
-    yield put({ type: anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FULFILED, payload:{
-      siteChannelInfo: action.payload.siteChannelInfo,
-      channelChartState: channelChartState,
-    }})
+    yield put({
+      type: anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FULFILED, payload: {
+        siteChannelInfo: action.payload.siteChannelInfo,
+        channelChartState: channelChartState,
+      }
+    })
 
   }
   catch (error) {
@@ -219,8 +221,6 @@ export function* watchAddAndPopulateChannel() {
 }
 
 function* addEmptyChannel(action: any) {
-  let x = 2;
-  console.log('addEmptyChannel - worker saga', action);
   yield put({ type: anomaliesScreenActionTypes.ADD_EMPTY_CHANNEL, payload: action.payload });
 }
 
@@ -228,10 +228,24 @@ export function* watchAddEmptyChannel() {
   yield takeEvery(anomaliesScreenActionTypes.ADD_EMPTY_CHANNEL_START, addEmptyChannel);
 }
 
-function deleteSupportingChannel(action){
-  put(action);
+function* deleteSupportingChannel(action) {
+  yield put({type: anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL, payload: action.payload });
 }
 
-export function* watchDeleteSupportingChannel(){
-  yield takeEvery(anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL,deleteSupportingChannel)
+export function* watchDeleteSupportingChannel() {
+  yield takeEvery(anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL_START, deleteSupportingChannel)
+}
+
+function* saveProject(action) {
+  yield put({type: anomaliesScreenActionTypes.SAVE_PROJECT_FETCHING});
+  try{
+    yield Requests.saveProject(action.payload);
+    yield put({type: anomaliesScreenActionTypes.SAVE_PROJECT_FULFILED});
+  }catch(error){
+    yield put({type: anomaliesScreenActionTypes.SAVE_PROJECT_REJECTED});
+  }
+}
+
+export function* watchSaveProject() {
+  yield takeEvery(anomaliesScreenActionTypes.SAVE_PROJECT_START, saveProject);
 }
