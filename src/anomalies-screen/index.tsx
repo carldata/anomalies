@@ -36,6 +36,7 @@ interface IAnomaliesComponentState {
   mainChartState: IHpTimeSeriesChartState;
   finalChartState: IHpTimeSeriesChartState;
   supportingChannels: { site: string, channel: string, chartState: IHpTimeSeriesChartState }[];
+  gridState: IDataGridState;
   showModal: boolean;
   startDate: string;
   endDate: string;
@@ -63,9 +64,13 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       supportingChannels: _.cloneDeep(props.supportingChannels),
-
+      gridState: {series: []}
     }
   };
+
+  public RenderColumn() {
+    return(<div></div>)
+  }
 
   componentWillReceiveProps(nextProps: IAnomaliesComponentProps) {
     this.setState({
@@ -74,6 +79,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       supportingChannels: _.cloneDeep(nextProps.supportingChannels),
       windowUnixFrom: nextProps.mainChartState.dateRangeUnixFrom,
       windowUnixTo: nextProps.mainChartState.dateRangeUnixTo,
+      gridState: nextProps.gridState,
     });
   }
 
@@ -172,14 +178,16 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         </Row>
 
         <Row>
-          <Col md={12} >
-            <div style={{ height: 250 }} >
-              <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>ML Corrections</p>
-              <HpTimeSeriesChart
-                scss={this.scss.timeSeries}
-                state={this.state.mainChartState}
-                fitToParent={{ toHeight: true, toWidth: true }}
-              ></HpTimeSeriesChart>
+          <Col lg={12}>
+            <div>
+              <div style={{ height: 250 }} >
+                <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>ML Corrections</p>
+                <HpTimeSeriesChart
+                  scss={this.scss.timeSeries}
+                  state={this.state.mainChartState}
+                  fitToParent={{ toHeight: true, toWidth: true }}
+                ></HpTimeSeriesChart>
+              </div>
             </div>
           </Col>
         </Row>
@@ -224,7 +232,12 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
             <Button className='pull-right' bsStyle='primary' onClick={() => this.setState({ showModal: true })} >Add Channel</Button>
           </Col>
         </Row>
-
+        <Row>
+          <Col md={12}>
+            <DataGrid gridState={this.state.gridState} supportingChannels={this.state.supportingChannels} >
+            </DataGrid>
+          </Col>
+        </Row>
         <Row>
           <AddChannelModal
             showModal={this.state.showModal}

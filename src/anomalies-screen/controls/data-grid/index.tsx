@@ -12,6 +12,7 @@ import { CSVLink, CSVDownload } from 'react-csv';
 
 interface IDataGridComponentProps {
   gridState: IDataGridState;
+  supportingChannels: any;
 }
 
 interface IDataGridComponentActionCreators {
@@ -21,7 +22,8 @@ interface IDataGridComponentActionCreators {
 interface IDataGridComponentState {
   selectedIndexes: any[];
   series: IDataGridRow[];
-  selectedKey: any;
+  columns: { key: string; name: string; editable?: boolean, width?: number, resizable?: boolean }[];
+  supportingChannels: any;
 }
 
 interface IRowRendererProps {
@@ -35,22 +37,35 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
 
   constructor(props: IDataGridComponentProps & IDataGridComponentActionCreators, context: any) {
     super(props, context);
+    this._columns = [];
+
+    this.state = { selectedIndexes: [], series: [], columns: [], supportingChannels: [] };
+  }
+
+  componentWillReceiveProps(props: IDataGridComponentProps) {   
     this._columns = [
       { key: 'date', name: 'Timestamp' },
       { key: 'rawValue', name: 'Raw' },
-      { key: 'editedValue', name: 'Final', editable: true },
-      { key: 'fixedValue', name: 'Fixed' }];
+      { key: 'editedValue', name: 'Final' },
+      { key: 'fixedValue', name: 'Fixed' }
+    ];
 
-    this.state = { selectedIndexes: [], series: [], selectedKey: '' };
-  }
+    for(var channelInfo of props.supportingChannels) {
+      var columnKey = channelInfo.site + '_' + channelInfo.channel;
+      var columnName = channelInfo.site + ' ' + channelInfo.channel;
+      this._columns.push({key: columnKey, name: columnName})
 
-  componentWillReceiveProps(props: IDataGridComponentProps) {
-    this.setState({ series: props.gridState.series, selectedIndexes: [] });
-
-    var data = {
-      rows: props.gridState.series,
-      columns: this._columns
+      for(let seriesIndex in channelInfo.chartState.series) {
+        var points = channelInfo.chartState.series[seriesIndex].points;
+        for(var pointIndex in points) {
+          var point = points[pointIndex];
+          var prop = Object.defineProperty({}, columnKey, { value: point.value, enumerable: false})
+          props.gridState.series[pointIndex] = _.extend(prop, props.gridState.series[pointIndex]);
+        }
+      }
     }
+
+    this.setState({ series: props.gridState.series, selectedIndexes: [] });
   }
 
   rowGetter = (i: any) => {
@@ -104,31 +119,15 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
       <div>
         <FormGroup>
           <ReactDataGrid
-            enableCellSelect={true}
             columns={this._columns}
             rowGetter={this.rowGetter}
             rowsCount={this.state.series.length}
-            minHeight={900}
+            minHeight={500}
             onGridRowsUpdated={this.handleGridRowsUpdated}
-            rowSelection={{
-              showCheckbox: true,
-              enableShiftSelect: true,
-              onRowsSelected: this.onRowsSelected,
-              onRowsDeselected: this.onRowsDeselected,
-              selectBy: {
-                indexes: this.state.selectedIndexes
-              }
-            }}
             rowRenderer={RowRenderer} />
           <Row>
-            <Col lg={3}>
-              <Button bsStyle='primary' onClick={() => this.copyRawToEdited()}>Copy Raw to Final</Button>
-            </Col>
-            <Col lg={3}>
-              <Button bsStyle='primary' onClick={() => this.copyFixedToEdited()}>Copy Fixed to Final</Button>
-            </Col>
-            <Col lg={6}>
-              <div className='pull-right'>
+            <Col lg={12}>
+              <div className='pull-left'>
                 <CSVLink data={this.state.series}
                   filename={"series.csv"}
                   className="btn btn-primary"
