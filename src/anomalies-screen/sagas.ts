@@ -227,3 +227,11 @@ function* addEmptyChannel(action: any) {
 export function* watchAddEmptyChannel() {
   yield takeEvery(anomaliesScreenActionTypes.ADD_EMPTY_CHANNEL_START, addEmptyChannel);
 }
+
+function deleteSupportingChannel(action){
+  put(action);
+}
+
+export function* watchDeleteSupportingChannel(){
+  yield takeEvery(anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL,deleteSupportingChannel)
+}

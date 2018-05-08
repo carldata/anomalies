@@ -14,7 +14,7 @@ import { IProject } from '../projects-screen/state';
 import { channel } from 'redux-saga';
 import * as dateFns from 'date-fns';
 
-export interface IAnomaliesCharts{
+export interface IAnomaliesCharts {
   mainChartState: IHpTimeSeriesChartState;
   finalChartState: IHpTimeSeriesChartState;
   supportingChannels: { site: string, channel: string, chartState: IHpTimeSeriesChartState }[];
@@ -30,19 +30,19 @@ const initialState = {
   supportingChannels: [],
   gridState: { series: [] },
   project: {} as IProject,
-  lastStartDate: dateFns.format(dateFns.subMonths(endDate,3),'YYYY-MM-DDTHH:mm:ss'),
-  lastEndDate: dateFns.format(endDate,'YYYY-MM-DDTHH:mm:ss'),
+  lastStartDate: dateFns.format(dateFns.subMonths(endDate, 3), 'YYYY-MM-DDTHH:mm:ss'),
+  lastEndDate: dateFns.format(endDate, 'YYYY-MM-DDTHH:mm:ss'),
 } as IAnomaliesScreenState;
 
-export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGridState | IProject | any>({
+export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGridState | IProject | number | any>({
   [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_CHART_FULFILED]: (state: IAnomaliesScreenState, action: Action<IAnomaliesCharts>) => {
-    return _.extend({}, state, { 
+    return _.extend({}, state, {
       mainChartState: action.payload.mainChartState,
       finalChartState: action.payload.finalChartState,
       supportingChannels: action.payload.supportingChannels,
       lastStartDate: action.payload.lastStartDate,
       lastEndDate: action.payload.lastEndDate,
-     });
+    });
   },
   [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_GRID_FULFILED]: (state: IAnomaliesScreenState, action: Action<IDataGridState>) => {
     return _.extend({}, state, { gridState: action.payload });
@@ -51,12 +51,12 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
     return _.extend({}, state, { gridState: action.payload });
   },
   [anomaliesScreenActionTypes.PASS_PROJECT_TO_ANOMALIES]: (state: IAnomaliesScreenState, action: Action<IProject>) => {
-    return _.extend({}, state, { 
-      project: action.payload, 
+    return _.extend({}, state, {
+      project: action.payload,
       mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
-      supportingChannels: _.map(action.payload.supportingChannels,(el) =>{
-        return { 
+      supportingChannels: _.map(action.payload.supportingChannels, (el) => {
+        return {
           site: el.site,
           channel: el.channel,
           chartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
@@ -69,16 +69,16 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
       ...state,
       project: {
         ...state.project,
-        supportingChannels: _.concat(state.project.supportingChannels,{ 
-          site: action.payload.siteChannelInfo.site, 
+        supportingChannels: _.concat(state.project.supportingChannels, {
+          site: action.payload.siteChannelInfo.site,
           channel: action.payload.siteChannelInfo.channel,
-          type: action.payload.siteChannelInfo.type, 
+          type: action.payload.siteChannelInfo.type,
         })
       },
-      supportingChannels: _.concat(state.supportingChannels,{
+      supportingChannels: _.concat(state.supportingChannels, {
         site: action.payload.siteChannelInfo.site,
         channel: action.payload.siteChannelInfo.channel,
-        chartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(), 
+        chartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       })
     }
   },
@@ -87,17 +87,26 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
       ...state,
       project: {
         ...state.project,
-        supportingChannels: _.concat(state.project.supportingChannels,{ 
-          site: action.payload.siteChannelInfo.site, 
+        supportingChannels: _.concat(state.project.supportingChannels, {
+          site: action.payload.siteChannelInfo.site,
           channel: action.payload.siteChannelInfo.channel,
-          type: action.payload.siteChannelInfo.type, 
+          type: action.payload.siteChannelInfo.type,
         })
       },
-      supportingChannels: _.concat(state.supportingChannels,{
+      supportingChannels: _.concat(state.supportingChannels, {
         site: action.payload.siteChannelInfo.site,
         channel: action.payload.siteChannelInfo.channel,
-        chartState: action.payload.channelChartState, 
+        chartState: action.payload.channelChartState,
       })
+    }
+  },
+  [anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL]: (state: IAnomaliesScreenState, action: Action<number>) => {
+    return {
+      ...state,
+      supportingChannels: [
+        ..._.slice(state.supportingChannels, 0, action.payload),
+        ..._.slice(state.supportingChannels, action.payload + 1, state.supportingChannels.length)
+      ]
     }
   }
 }, initialState);
