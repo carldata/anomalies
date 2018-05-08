@@ -148,6 +148,8 @@ function* getAnomaliesForChannel(action: any) {
         mainChartState: newChartState,
         finalChartState: editedChartState,
         supportingChannels: supportingChannels,
+        lastStartDate: startDate,
+        lastEndDate: endDate,
       } as IAnomaliesCharts
     });
     yield put({ type: anomaliesScreenActionTypes.GET_ANOMALIES_FOR_GRID_FULFILED, payload: newGridState });

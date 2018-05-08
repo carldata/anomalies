@@ -22,6 +22,8 @@ interface IAnomaliesComponentProps {
   supportingChannels: { site: string, channel: string, chartState: IHpTimeSeriesChartState }[];
   gridState: IDataGridState;
   project: IProject;
+  lastStartDate: string;
+  lastEndDate: string;
 }
 
 interface IAnomaliesComponentActionCreators {
@@ -249,8 +251,8 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
               } else {
                 console.log('addChannel - there are points');
                 this.props.addAndPopulateChannel(e,
-                  this.state.startDate,
-                  this.state.endDate);
+                  this.props.lastStartDate,
+                  this.props.lastEndDate);
               }
             }}
             hideModal={() => { this.setState({ showModal: false }) }} >
@@ -268,6 +270,8 @@ function mapStateToProps(state: IState) {
     finalChartState: state.anomaliesScreen.finalChartState,
     supportingChannels: state.anomaliesScreen.supportingChannels,
     project: state.anomaliesScreen.project,
+    lastStartDate:  state.anomaliesScreen.lastStartDate,
+    lastEndDate: state.anomaliesScreen.lastEndDate,
   };
 }
 

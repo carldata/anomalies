@@ -12,12 +12,17 @@ import { IState } from '../state';
 import { IDataGridState } from './controls/data-grid/state';
 import { IProject } from '../projects-screen/state';
 import { channel } from 'redux-saga';
+import * as dateFns from 'date-fns';
 
 export interface IAnomaliesCharts{
   mainChartState: IHpTimeSeriesChartState;
   finalChartState: IHpTimeSeriesChartState;
   supportingChannels: { site: string, channel: string, chartState: IHpTimeSeriesChartState }[];
+  lastStartDate: string;
+  lastEndDate: string;
 }
+
+const endDate = dateFns.startOfDay(new Date());
 
 const initialState = {
   mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
@@ -25,6 +30,8 @@ const initialState = {
   supportingChannels: [],
   gridState: { series: [] },
   project: {} as IProject,
+  lastStartDate: dateFns.format(dateFns.subMonths(endDate,3),'YYYY-MM-DDTHH:mm:ss'),
+  lastEndDate: dateFns.format(endDate,'YYYY-MM-DDTHH:mm:ss'),
 } as IAnomaliesScreenState;
 
 export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGridState | IProject | any>({
@@ -33,6 +40,8 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
       mainChartState: action.payload.mainChartState,
       finalChartState: action.payload.finalChartState,
       supportingChannels: action.payload.supportingChannels,
+      lastStartDate: action.payload.lastStartDate,
+      lastEndDate: action.payload.lastEndDate,
      });
   },
   [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_GRID_FULFILED]: (state: IAnomaliesScreenState, action: Action<IDataGridState>) => {
