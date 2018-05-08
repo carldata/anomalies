@@ -39,7 +39,7 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
     super(props, context);
     this._columns = [];
 
-    this.state = { selectedIndexes: [], series: [], columns: [] };
+    this.state = { selectedIndexes: [], series: [], columns: [], supportingChannels: [] };
   }
 
   componentWillReceiveProps(props: IDataGridComponentProps) {   

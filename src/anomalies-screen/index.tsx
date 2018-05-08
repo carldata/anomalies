@@ -69,10 +69,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
   };
 
   public RenderColumn() {
-    return
-    <div>
-
-    </div>
+    return(<div></div>)
   }
 
   componentWillReceiveProps(nextProps: IAnomaliesComponentProps) {
@@ -82,7 +79,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       supportingChannels: _.cloneDeep(nextProps.supportingChannels),
       windowUnixFrom: nextProps.mainChartState.dateRangeUnixFrom,
       windowUnixTo: nextProps.mainChartState.dateRangeUnixTo,
-      gridState: nextProps.gridState
+      gridState: nextProps.gridState,
     });
   }
 
