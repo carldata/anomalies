@@ -103,6 +103,13 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
   [anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL]: (state: IAnomaliesScreenState, action: Action<number>) => {
     return {
       ...state,
+      project: {
+        ...state.project,
+        supportingChannels: [
+          ..._.slice(state.project.supportingChannels,0,action.payload),
+          ..._.slice(state.project.supportingChannels,action.payload + 1, state.project.supportingChannels.length)
+        ]
+      },
       supportingChannels: [
         ..._.slice(state.supportingChannels, 0, action.payload),
         ..._.slice(state.supportingChannels, action.payload + 1, state.supportingChannels.length)
