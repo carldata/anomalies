@@ -148,6 +148,8 @@ function* getAnomaliesForChannel(action: any) {
         mainChartState: newChartState,
         finalChartState: editedChartState,
         supportingChannels: supportingChannels,
+        lastStartDate: startDate,
+        lastEndDate: endDate,
       } as IAnomaliesCharts
     });
     yield put({ type: anomaliesScreenActionTypes.GET_ANOMALIES_FOR_GRID_FULFILED, payload: newGridState });
@@ -224,4 +226,12 @@ function* addEmptyChannel(action: any) {
 
 export function* watchAddEmptyChannel() {
   yield takeEvery(anomaliesScreenActionTypes.ADD_EMPTY_CHANNEL_START, addEmptyChannel);
+}
+
+function deleteSupportingChannel(action){
+  put(action);
+}
+
+export function* watchDeleteSupportingChannel(){
+  yield takeEvery(anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL,deleteSupportingChannel)
 }

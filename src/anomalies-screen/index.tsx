@@ -22,6 +22,8 @@ interface IAnomaliesComponentProps {
   supportingChannels: { site: string, channel: string, chartState: IHpTimeSeriesChartState }[];
   gridState: IDataGridState;
   project: IProject;
+  lastStartDate: string;
+  lastEndDate: string;
 }
 
 interface IAnomaliesComponentActionCreators {
@@ -30,6 +32,7 @@ interface IAnomaliesComponentActionCreators {
   copyRawToEdited: () => any;
   addAndPopulateChannel: (siteChannelInfo: any, startDate: string, endDate: string) => any;
   addEmptyChannel: (siteChannelInfo: any, dateRangeUnixFrom: number, dateRangeUnixTo: number) => any;
+  deleteSupportingChannel: (idx: number) => any;
 }
 
 interface IAnomaliesComponentState {
@@ -64,12 +67,12 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       supportingChannels: _.cloneDeep(props.supportingChannels),
-      gridState: {series: []}
+      gridState: { series: [] }
     }
   };
 
   public RenderColumn() {
-    return(<div></div>)
+    return (<div></div>)
   }
 
   componentWillReceiveProps(nextProps: IAnomaliesComponentProps) {
@@ -221,7 +224,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
             </Row>
             <Row>
               <Col md={12}>
-                <Button className='pull-right' bsStyle='primary'>Delete</Button>
+                <Button className='pull-right' bsStyle='primary' onClick={() => this.props.deleteSupportingChannel(idx)}>Delete</Button>
               </Col>
             </Row>
           </div>
@@ -249,8 +252,8 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
               } else {
                 console.log('addChannel - there are points');
                 this.props.addAndPopulateChannel(e,
-                  this.state.startDate,
-                  this.state.endDate);
+                  this.props.lastStartDate,
+                  this.props.lastEndDate);
               }
             }}
             hideModal={() => { this.setState({ showModal: false }) }} >
@@ -268,6 +271,8 @@ function mapStateToProps(state: IState) {
     finalChartState: state.anomaliesScreen.finalChartState,
     supportingChannels: state.anomaliesScreen.supportingChannels,
     project: state.anomaliesScreen.project,
+    lastStartDate: state.anomaliesScreen.lastStartDate,
+    lastEndDate: state.anomaliesScreen.lastEndDate,
   };
 }
 
@@ -278,6 +283,7 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
     copyRawToEdited: anomaliesScreenActionCreators.copyRawToEdited,
     addEmptyChannel: anomaliesScreenActionCreators.addEmptyChannel,
     addAndPopulateChannel: anomaliesScreenActionCreators.addAndPopulateChannel,
+    deleteSupportingChannel: anomaliesScreenActionCreators.deleteSupportingChannel,
   }, dispatch);
 }
 

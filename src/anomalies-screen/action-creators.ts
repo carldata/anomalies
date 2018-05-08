@@ -17,6 +17,7 @@ export const anomaliesScreenActionTypes = {
   ADD_EMPTY_CHANNEL: 'ADD_EMPTY_CHANNEL',
   COPY_RAW_TO_EDITED: 'COPY_RAW_TO_EDITED',
   PASS_PROJECT_TO_ANOMALIES: 'PASS_PROJECT_TO_ANOMALIES',
+  DELETE_SUPPORTING_CHANNEL: 'DELETE_SUPPORTING_CHANNEL',
 };
 
 export const anomaliesScreenActionCreators = {
@@ -49,4 +50,10 @@ export const anomaliesScreenActionCreators = {
   copyRawToEdited: () => {
     return { type: anomaliesScreenActionTypes.COPY_RAW_TO_EDITED };
   },
+  deleteSupportingChannel: (idx) =>{
+    return {
+      type: anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL,
+      payload: idx,
+     }
+  }
 };
