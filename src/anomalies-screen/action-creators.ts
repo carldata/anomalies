@@ -1,6 +1,7 @@
 import { push } from 'react-router-redux';
 import { Dispatch } from 'redux';
 import { put } from 'redux-saga/effects';
+import { IProject } from '../projects-screen/state';
 
 export const anomaliesScreenActionTypes = {
   GO_TO_PROJECTS: 'GO_TO_PROJECTS',
@@ -17,7 +18,12 @@ export const anomaliesScreenActionTypes = {
   ADD_EMPTY_CHANNEL: 'ADD_EMPTY_CHANNEL',
   COPY_RAW_TO_EDITED: 'COPY_RAW_TO_EDITED',
   PASS_PROJECT_TO_ANOMALIES: 'PASS_PROJECT_TO_ANOMALIES',
+  DELETE_SUPPORTING_CHANNEL_START: 'DELETE_SUPPORTING_CHANNEL_START',
   DELETE_SUPPORTING_CHANNEL: 'DELETE_SUPPORTING_CHANNEL',
+  SAVE_PROJECT_START: 'SAVE_PROJECT_START',
+  SAVE_PROJECT_FETCHING: 'SAVE_PROJECT_FETCHING',
+  SAVE_PROJECT_FULFILED: 'SAVE_PROJECT_FULFILED',
+  SAVE_PROJECT_REJECTED: 'SAVE_PROJECT_REJECTED',
 };
 
 export const anomaliesScreenActionCreators = {
@@ -52,8 +58,14 @@ export const anomaliesScreenActionCreators = {
   },
   deleteSupportingChannel: (idx) =>{
     return {
-      type: anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL,
+      type: anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL_START,
       payload: idx,
      }
+  },
+  saveProject: (project: IProject) =>{
+    return{
+      type: anomaliesScreenActionTypes.SAVE_PROJECT_START,
+      payload: project,
+    }
   }
 };
