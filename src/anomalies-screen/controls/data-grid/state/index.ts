@@ -1,10 +1,8 @@
-export interface IDataGridState
-{
+export interface IDataGridState {
     series: IDataGridRow[]
 }
 
-export interface IDataGridRow
-{
+export interface IDataGridRow {
     date: any;
     rawValue: any;
     editedValue: any;

@@ -100,7 +100,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         <Form>
           <FormGroup>
             <ControlLabel style={{ fontWeight: 'bold' }}>{_.isEmpty(this.props.project) ? ' ' : this.props.project.name}</ControlLabel>{' '}
-            <Button disabled={_.isEmpty(this.props.project)} onClick={()=> this.props.saveProject(this.props.project)} >Save Project</Button>{' '}
+            <Button disabled={_.isEmpty(this.props.project)} onClick={() => this.props.saveProject(this.props.project)} >Save Project</Button>{' '}
             <Button bsStyle='primary' disabled={_.isEmpty(this.props.project)} onClick={() => this.props.getAnomaliesForProject({
               project: this.props.project,
               startDate: this.state.startDate,
