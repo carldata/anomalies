@@ -42,7 +42,7 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
     this.state = { selectedIndexes: [], series: [], columns: [], supportingChannels: [] };
   }
 
-  componentWillReceiveProps(props: IDataGridComponentProps) {   
+  componentWillReceiveProps(props: IDataGridComponentProps) {
     this._columns = [
       { key: 'date', name: 'Timestamp' },
       { key: 'rawValue', name: 'Raw' },
@@ -50,17 +50,18 @@ export class DataGrid extends React.Component<IDataGridComponentProps & IDataGri
       { key: 'fixedValue', name: 'Fixed' }
     ];
 
-    for(var channelInfo of props.supportingChannels) {
+    for (var channelInfo of props.supportingChannels) {
       var columnKey = channelInfo.site + '_' + channelInfo.channel;
       var columnName = channelInfo.site + ' ' + channelInfo.channel;
-      this._columns.push({key: columnKey, name: columnName})
+      this._columns.push({ key: columnKey, name: columnName })
 
-      for(let seriesIndex in channelInfo.chartState.series) {
+      for (let seriesIndex in channelInfo.chartState.series) {
         var points = channelInfo.chartState.series[seriesIndex].points;
-        for(var pointIndex in points) {
+        for (var pointIndex in points) {
           var point = points[pointIndex];
-          var prop = Object.defineProperty({}, columnKey, { value: point.value, enumerable: false})
-          props.gridState.series[pointIndex] = _.extend(prop, props.gridState.series[pointIndex]);
+          var prop = Object.defineProperty({}, columnKey, { value: point.value, enumerable: true })
+          var extendedProp = _.extend(prop, props.gridState.series[pointIndex]);
+          props.gridState.series[pointIndex] = extendedProp;
         }
       }
     }

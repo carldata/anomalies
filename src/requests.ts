@@ -49,7 +49,7 @@ export class Requests {
       // TODO when data endpoint starts to work use it instead of anomalies endpoint
       channelData = yield call(axios.get, `${this.apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
       //channelData = yield call(axios.get, `${this.apiAddress}/anomalies/find?series=${channel}&startDate=${startDate}&endDate=${endDate}`);
-      
+
     }
     catch (error) {
       //TODO notify error
@@ -88,14 +88,14 @@ export class Requests {
     return channelData;
   }
 
-  static * getSupportingChannels(supportingChannels: { site: string, channel: string}[], startDate: string, endDate: string){
+  static * getSupportingChannels(supportingChannels: { site: string, channel: string }[], startDate: string, endDate: string) {
     let supportingChannelsResult: any[] = [];
 
     //TODO - change this to get data for channels instead of anomalies when endpoint starts to work
-    try{
-     supportingChannelsResult = yield all(_.map(supportingChannels, (el) =>
-          call(axios.get, `${this.apiAddress}/data/channel/${el.site + '-' + el.channel}/data?startDate=${startDate}&endDate=${endDate}`)));
-    }catch(error){
+    try {
+      supportingChannelsResult = yield all(_.map(supportingChannels, (el) =>
+        call(axios.get, `${this.apiAddress}/data/channel/${el.site + '-' + el.channel}/data?startDate=${startDate}&endDate=${endDate}`)));
+    } catch (error) {
       //TODO throw error
     }
 
@@ -122,10 +122,10 @@ export class Requests {
     return projectId;
   }
 
-  static * saveProject(project: IProject){
+  static * saveProject(project: IProject) {
     let projectId;
-    try{
-      let response =  yield call(axios.put,`${this.apiAddress}/config/anomaly-tool/${project.id}`,{
+    try {
+      let response = yield call(axios.put, `${this.apiAddress}/config/anomaly-tool/${project.id}`, {
         name: project.name,
         site: project.site,
         final: project.final,
@@ -134,7 +134,7 @@ export class Requests {
       });
       projectId = response.data;
     }
-    catch(error){
+    catch (error) {
       //TODO throw error
     }
     return projectId;
