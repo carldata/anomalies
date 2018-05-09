@@ -94,7 +94,7 @@ export class Requests {
     //TODO - change this to get data for channels instead of anomalies when endpoint starts to work
     try{
      supportingChannelsResult = yield all(_.map(supportingChannels, (el) =>
-          call(axios.get, `${this.apiAddress}/anomalies/find?series=${el.site + '-' + el.channel}&startDate=${startDate}&endDate=${endDate}`)));
+          call(axios.get, `${this.apiAddress}/data/channel/${el.site + '-' + el.channel}/data?startDate=${startDate}&endDate=${endDate}`)));
     }catch(error){
       //TODO throw error
     }
