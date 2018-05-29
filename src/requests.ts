@@ -7,7 +7,7 @@ import { IProject } from './projects-screen/state';
 
 export class Requests {
 
-  private static apiAddress = 'http://flowworks-http.13.91.222.33.xip.io';
+  private static apiAddress = 'http://13.77.168.238';
 
   static * getConfiguration(): any {
     let config: any;
