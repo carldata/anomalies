@@ -70,6 +70,12 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       supportingChannels: _.cloneDeep(props.supportingChannels),
       gridState: { series: [] }
     }
+
+    this.props.getAnomaliesForProject({
+      project: this.props.project,
+      startDate: this.state.startDate,
+      endDate: this.state.endDate,
+    });
   };
 
   public RenderColumn() {

@@ -56,14 +56,14 @@ export const anomaliesScreenActionCreators = {
   copyRawToEdited: () => {
     return { type: anomaliesScreenActionTypes.COPY_RAW_TO_EDITED };
   },
-  deleteSupportingChannel: (idx) =>{
+  deleteSupportingChannel: (idx) => {
     return {
       type: anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL_START,
       payload: idx,
-     }
+    }
   },
-  saveProject: (project: IProject) =>{
-    return{
+  saveProject: (project: IProject) => {
+    return {
       type: anomaliesScreenActionTypes.SAVE_PROJECT_START,
       payload: project,
     }
