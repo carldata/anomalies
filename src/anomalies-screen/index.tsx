@@ -68,18 +68,18 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       supportingChannels: _.cloneDeep(props.supportingChannels),
-      gridState: { series: [] }
+      gridState: { series: [] },
     }
+  }
 
-    this.props.getAnomaliesForProject({
-      project: this.props.project,
-      startDate: this.state.startDate,
-      endDate: this.state.endDate,
-    });
-  };
-
-  public RenderColumn() {
-    return (<div></div>)
+  public componentDidMount() {
+    if (!_.isEmpty(this.props.project)){
+      this.props.getAnomaliesForProject({
+        project: this.props.project,
+        startDate: this.state.startDate,
+        endDate: this.state.endDate,
+      });
+    }
   }
 
   componentWillReceiveProps(nextProps: IAnomaliesComponentProps) {
