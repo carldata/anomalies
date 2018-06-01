@@ -106,8 +106,8 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
       project: {
         ...state.project,
         supportingChannels: [
-          ..._.slice(state.project.supportingChannels,0,action.payload),
-          ..._.slice(state.project.supportingChannels,action.payload + 1, state.project.supportingChannels.length)
+          ..._.slice(state.project.supportingChannels, 0, action.payload),
+          ..._.slice(state.project.supportingChannels, action.payload + 1, state.project.supportingChannels.length)
         ]
       },
       supportingChannels: [

@@ -51,7 +51,7 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
                 site={el.site}
                 raw={el.raw}
                 final={el.final}
-                goToProjectAnomalies={() => { this.props.goToAnomaliesScreen(_.find(this.props.projects, (proj)=> proj.id === el.id )); }} />;
+                goToProjectAnomalies={() => { this.props.goToAnomaliesScreen(_.find(this.props.projects, (proj) => proj.id === el.id)); }} />;
             })}
           </ListGroup>
         </FormGroup>
