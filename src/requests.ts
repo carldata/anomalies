@@ -7,15 +7,14 @@ import { IProject } from './projects-screen/state';
 
 export class Requests {
 
-  private static apiAddress = 'http://13.77.168.238';
+  static apiAddress = 'http://13.77.168.238';
 
   static * getConfiguration(): any {
     let config: any;
 
     try {
       config = yield call(axios.get, `${this.apiAddress}/config/anomaly-tool`);
-    }
-    catch (error) {
+    } catch (error) {
       //TODO notify error
       config = {
         data: [{
@@ -74,7 +73,7 @@ export class Requests {
   }
 
   //TODO - remove  getEditedChannelData and use only getChannelData
-  static * getEditedChannelData(channel: string, startDate: string, endDate: string) {
+  public static * getEditedChannelData(channel: string, startDate: string, endDate: string) {
     let channelData: any;
 
     try {
@@ -88,15 +87,15 @@ export class Requests {
     return channelData;
   }
 
-  static * getSupportingChannels(supportingChannels: { site: string, channel: string }[], startDate: string, endDate: string) {
+  static * getSupportingChannels(supportingChannels: Array<{ site: string, channel: string }>, startDate: string, endDate: string) {
     let supportingChannelsResult: any[] = [];
 
-    //TODO - change this to get data for channels instead of anomalies when endpoint starts to work
+    // TODO - change this to get data for channels instead of anomalies when endpoint starts to work
     try {
       supportingChannelsResult = yield all(_.map(supportingChannels, (el) =>
         call(axios.get, `${this.apiAddress}/data/channel/${el.site + '-' + el.channel}/data?startDate=${startDate}&endDate=${endDate}`)));
     } catch (error) {
-      //TODO throw error
+      // TODO throw error
     }
 
     return supportingChannelsResult;
@@ -114,9 +113,8 @@ export class Requests {
         supportingChannels: [],
       });
       projectId = response.data;
-    }
-    catch (error) {
-      //TODO notify error
+    } catch (error) {
+      // TODO notify error
     }
 
     return projectId;
@@ -133,10 +131,34 @@ export class Requests {
         supportingChannels: _.cloneDeep(project.supportingChannels),
       });
       projectId = response.data;
-    }
-    catch (error) {
-      //TODO throw error
+    } catch (error) {
+      // TODO throw error
     }
     return projectId;
+  }
+
+  static * getSites(token: string) {
+    let sites: number[] = [];
+    try {
+      let response = yield call(axios.get, `${this.apiAddress}/data/site/FlowMetrix?token=${token}`, {});
+      sites = response.data;
+    } catch (error) {
+      // TODO throw error
+    }
+    return sites;
+  }
+
+  static * getChannels(token: string, siteId: number) {
+    let channels: number[] = [];
+    try {
+      let response = yield call(axios.get, `${this.apiAddress}/data/channel/${siteId}?token=${token}`, {});
+      let response1 = yield call(axios.get, `${this.apiAddress}/data/channel/${siteId}?token=${token}`, {});
+      let response2 = yield call(axios.put,  `${this.apiAddress}/data/channel/${siteId}?token=${token}`, { siteid: siteId});
+
+      channels = response.data;
+    } catch (error) {
+      // TODO throw error
+    }
+    return channels;
   }
 }
