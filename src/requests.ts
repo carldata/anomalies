@@ -4,10 +4,12 @@ import _ = require('lodash');
 import { channel } from 'redux-saga';
 import { watchSaveProject } from './anomalies-screen/sagas';
 import { IProject } from './projects-screen/state';
+import { ISite, IChannel } from './model';
 
 export class Requests {
 
   static apiAddress = 'http://13.77.168.238';
+  static token = 'oasdob123a23hnaovnfaewd123akjwpod';
 
   static * getConfiguration(): any {
     let config: any;
@@ -137,25 +139,22 @@ export class Requests {
     return projectId;
   }
 
-  static * getSites(token: string) {
-    let sites: number[] = [];
+  static * getSites(db: string) {
+    let sites: ISite[] = [];
     try {
-      let response = yield call(axios.get, `${this.apiAddress}/data/site/FlowMetrix?token=${token}`, {});
-      sites = response.data;
+      const response = yield call(axios.get, `${this.apiAddress}/data/site/${db}?token=${this.token}`);
+      sites = _.map(response.data, (el) => ({ id: el.id, name: el.name } as ISite));
     } catch (error) {
       // TODO throw error
     }
     return sites;
   }
 
-  static * getChannels(token: string, siteId: number) {
-    let channels: number[] = [];
+  static * getChannels(siteId: number) {
+    let channels: IChannel[] = [];
     try {
-      let response = yield call(axios.get, `${this.apiAddress}/data/channel/${siteId}?token=${token}`, {});
-      let response1 = yield call(axios.get, `${this.apiAddress}/data/channel/${siteId}?token=${token}`, {});
-      let response2 = yield call(axios.put,  `${this.apiAddress}/data/channel/${siteId}?token=${token}`, { siteid: siteId});
-
-      channels = response.data;
+      const response = yield call(axios.get, `${this.apiAddress}/data/channel/${siteId}?token=${this.token}`);
+      channels = _.map(response.data, (el) => ({ id: el.id, name: el.name } as IChannel));
     } catch (error) {
       // TODO throw error
     }

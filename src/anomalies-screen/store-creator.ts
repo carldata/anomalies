@@ -10,7 +10,7 @@ import { anomaliesScreenActionTypes } from './action-creators';
 import { IAnomaliesScreenState } from './state';
 import { IState } from '../state';
 import { IDataGridState } from './controls/data-grid/state';
-import { IProject } from '../projects-screen/state';
+import { IProject, IProjectSupportingChannel } from '../projects-screen/state';
 import { channel } from 'redux-saga';
 import * as dateFns from 'date-fns';
 
@@ -60,9 +60,9 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
           site: el.site,
           channel: el.channel,
           chartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
-        }
+        };
       }),
-    } as IAnomaliesScreenState)
+    } as IAnomaliesScreenState);
   },
   [anomaliesScreenActionTypes.ADD_EMPTY_CHANNEL]: (state: IAnomaliesScreenState, action: Action<any>) => {
     return {
@@ -71,9 +71,11 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
         ...state.project,
         supportingChannels: _.concat(state.project.supportingChannels, {
           site: action.payload.siteChannelInfo.site,
+          siteId: '',
           channel: action.payload.siteChannelInfo.channel,
+          channelId: '',
           type: action.payload.siteChannelInfo.type,
-        })
+        } as IProjectSupportingChannel),
       },
       supportingChannels: _.concat(state.supportingChannels, {
         site: action.payload.siteChannelInfo.site,
@@ -89,9 +91,11 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
         ...state.project,
         supportingChannels: _.concat(state.project.supportingChannels, {
           site: action.payload.siteChannelInfo.site,
+          siteId: '',
           channel: action.payload.siteChannelInfo.channel,
+          channelId: '',
           type: action.payload.siteChannelInfo.type,
-        })
+        } as IProjectSupportingChannel),
       },
       supportingChannels: _.concat(state.supportingChannels, {
         site: action.payload.siteChannelInfo.site,

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Modal, Button, Form, FormGroup, FormControl, Col, ControlLabel, ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from "redux";
+import { bindActionCreators, Dispatch } from 'redux';
 import { projectScreenActionCreators } from '../../action-creators';
 import * as _ from 'lodash';
-import { IProject } from '../../state';
+import { IProject, IProjectSupportingChannel } from '../../state';
 
 interface IAddProjectModalComponentProps {
   showModal: boolean;
@@ -13,7 +13,6 @@ interface IAddProjectModalComponentProps {
   site: string;
   raw: string;
   final: string;
-  supportingChannels? : string[];
 }
 
 interface IAddProjectModalComponentActionCreators {
@@ -31,31 +30,31 @@ interface IAddProjectModalComponentState {
 
 class AddProjectModalComponent extends React.Component<IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators, IAddProjectModalComponentState> {
   constructor(props: IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators) {
-    super(props)
+    super(props);
 
     this.state = {
       showModal: false,
       name: '',
       site: '',
       raw: '',
-      final: ''
+      final: '',
     } as IAddProjectModalComponentState;
 
     this.approveAddProject = this.approveAddProject.bind(this);
   }
 
-  componentWillReceiveProps(nextProps: IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators) {
+  public componentWillReceiveProps(nextProps: IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators) {
     this.setState({
       showModal: nextProps.showModal,
       name: nextProps.name,
       site: nextProps.site,
       raw: nextProps.raw,
-      final: nextProps.final
+      final: nextProps.final,
     });
   }
 
-  render() {
-    return <Modal show={this.state.showModal} onHide={()=>this.props.hideModal()}>
+  public render() {
+    return <Modal show={this.state.showModal} onHide={() => this.props.hideModal()}>
       <Modal.Body>
         <Form horizontal>
           <FormGroup>
@@ -63,7 +62,11 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
               Name:
             </Col>
             <Col sm={6}>
-              <FormControl id='txtProjectName' type='text' placeholder='Enter Name' onChange={(e) => this.setState({ name: (e.target as HTMLInputElement).value })} value={this.state.name}></FormControl>
+              <FormControl id='txtProjectName'
+                type='text'
+                placeholder='Enter Name'
+                onChange={(e) => this.setState({ name: (e.target as HTMLInputElement).value })}
+                value={this.state.name}></FormControl>
             </Col>
           </FormGroup>
           <FormGroup>
@@ -71,7 +74,11 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
               Site:
             </Col>
             <Col sm={6}>
-              <FormControl id='txtProjectSite' type='text' placeholder='Enter Site' onChange={(e) => this.setState({ site: (e.target as HTMLInputElement).value })} value={this.state.site}></FormControl>
+              <FormControl id='txtProjectSite'
+                type='text'
+                placeholder='Enter Site'
+                onChange={(e) => this.setState({ site: (e.target as HTMLInputElement).value })}
+                value={this.state.site}></FormControl>
             </Col>
           </FormGroup>
           <FormGroup>
@@ -79,7 +86,11 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
               Source Channel:
             </Col>
             <Col sm={6}>
-              <FormControl id='txtProjectSourceChannel' type='text' placeholder='Enter Channel' onChange={(e) => this.setState({ raw: (e.target as HTMLInputElement).value })} value={this.state.raw} ></FormControl>
+              <FormControl id='txtProjectSourceChannel'
+                type='text'
+                placeholder='Enter Channel'
+                onChange={(e) => this.setState({ raw: (e.target as HTMLInputElement).value })}
+                value={this.state.raw} ></FormControl>
             </Col>
           </FormGroup>
           <FormGroup>
@@ -87,7 +98,11 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
               Final Channel:
             </Col>
             <Col sm={6}>
-              <FormControl id='txtProjectFinalChannel' type='text' placeholder='Enter Channel' onChange={(e) => this.setState({ final: (e.target as HTMLInputElement).value })} value={this.state.final} ></FormControl>
+              <FormControl id='txtProjectFinalChannel'
+                type='text'
+                placeholder='Enter Channel'
+                onChange={(e) => this.setState({ final: (e.target as HTMLInputElement).value })}
+                value={this.state.final} ></FormControl>
             </Col>
           </FormGroup>
         </Form>
@@ -96,25 +111,27 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
         <Button id='btnApproveAddProjectModal' bsStyle='primary' onClick={this.approveAddProject} >
           Add Project
         </Button>
-        <Button id='btnCancelAddProjectModal' onClick={()=>this.props.hideModal()}>
+        <Button id='btnCancelAddProjectModal' onClick={() => this.props.hideModal()}>
           Cancel
         </Button>
       </Modal.Footer>
     </Modal>
   }
 
-  approveAddProject() {
-    let project: IProject = {
+  private approveAddProject() {
+    const project: IProject = {
       id: this.props.id,
       name: this.state.name,
       site: this.state.site,
+      siteId: '',
       final: this.state.final,
+      finalId: '',
       raw: this.state.raw,
+      rawId: '',
       supportingChannels: [],
     };
 
-    //console.log('project to add/edit: ', project);
-    this.props.addProject(project)
+    this.props.addProject(project);
     this.props.hideModal();
   }
 }

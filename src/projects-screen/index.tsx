@@ -8,15 +8,20 @@ import { projectScreenActionCreators } from './action-creators';
 import { ProjectComponent } from './project';
 import { IProject } from './state';
 import { AddProjectModal } from './controls/add-project-modal';
+import { ISite, IChannel } from '../model';
 
 interface IProjectComponentProps {
   projects: IProject[];
+  sites: ISite[];
+  channels: IChannel[];
 }
 
 interface IProjectComponentActionCreators {
   goToAnomaliesScreen: (project: IProject) => any;
   getAllProjectsAsyncCall: () => any;
   addProjectStart: (project: IProject) => any;
+  getSites: (db: string) => any;
+  getChannels: (siteId: string) => any;
 }
 
 interface IProjectComponentState {
@@ -29,10 +34,6 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
 
     this.state = { showModal: false }
     this.showAddProjectModal.bind(this);
-  }
-
-  showAddProjectModal(show: boolean) {
-    this.setState({ showModal: show });
   }
 
   public componentDidMount() {
@@ -64,11 +65,18 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
       </AddProjectModal>
     </div>;
   }
+
+  private showAddProjectModal(show: boolean) {
+    this.props.getSites('FlowMetrix');
+    this.setState({ showModal: show });
+  }
 }
 
 function mapStateToProps(state: IState) {
   return {
-    projects: state.projectsScreen.projects
+    projects: state.projectsScreen.projects,
+    sites: state.projectsScreen.sites,
+    channels: state.projectsScreen.channels,
   };
 }
 
@@ -76,7 +84,9 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     goToAnomaliesScreen: projectScreenActionCreators.goToAnomaliesScreen,
     getAllProjectsAsyncCall: projectScreenActionCreators.getAllProjectsAsyncCall,
-    addProjectStart: projectScreenActionCreators.addProjectStart
+    addProjectStart: projectScreenActionCreators.addProjectStart,
+    getSites: projectScreenActionCreators.getSites,
+    getChannels: projectScreenActionCreators.getChannels,
   }, dispatch);
 }
 
