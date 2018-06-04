@@ -57,19 +57,33 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
           </ListGroup>
         </FormGroup>
         <FormGroup>
-          <Button id='btnAddProject' bsStyle='primary' onClick={() => this.showAddProjectModal(true)}>Add Project</Button>
+          <Button id='btnAddProject' bsStyle='primary' onClick={() => this.addProject()}>Add Project</Button>
         </FormGroup>
       </Form>
-      <AddProjectModal id='' name='' site='' raw='' final='' showModal={this.state.showModal} addProject={(e) => this.props.addProjectStart(e)}
+      <AddProjectModal
+        id=''
+        name=''
+        site=''
+        raw=''
+        final=''
+        sites={this.props.sites}
+        channels={this.props.channels}
+        showModal={this.state.showModal}
+        addProject={(e) => this.props.addProjectStart(e)}
         hideModal={() => this.showAddProjectModal(false)}>
       </AddProjectModal>
     </div>;
   }
 
   private showAddProjectModal(show: boolean) {
-    this.props.getSites('FlowMetrix');
     this.setState({ showModal: show });
   }
+
+  private addProject() {
+    this.props.getSites('FlowMetrix');
+    this.showAddProjectModal(true);
+  }
+
 }
 
 function mapStateToProps(state: IState) {

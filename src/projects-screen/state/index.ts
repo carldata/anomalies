@@ -1,4 +1,4 @@
-import { ISite, IChannel } from "../../model";
+import { ISite, IChannel } from '../../model';
 
 export interface IProjectsScreenState {
   projects: IProject[];

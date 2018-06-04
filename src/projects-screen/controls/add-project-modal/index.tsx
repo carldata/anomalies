@@ -5,6 +5,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { projectScreenActionCreators } from '../../action-creators';
 import * as _ from 'lodash';
 import { IProject, IProjectSupportingChannel } from '../../state';
+import { ISite, IChannel } from '../../../model';
 
 interface IAddProjectModalComponentProps {
   showModal: boolean;
@@ -13,6 +14,8 @@ interface IAddProjectModalComponentProps {
   site: string;
   raw: string;
   final: string;
+  sites: ISite[];
+  channels: IChannel[];
 }
 
 interface IAddProjectModalComponentActionCreators {
@@ -24,8 +27,11 @@ interface IAddProjectModalComponentState {
   showModal: boolean;
   name: string;
   site: string;
+  siteId: string;
   raw: string;
+  rawId: string;
   final: string;
+  finalId: string;
 }
 
 class AddProjectModalComponent extends React.Component<IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators, IAddProjectModalComponentState> {
@@ -36,20 +42,27 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
       showModal: false,
       name: '',
       site: '',
+      siteId: '',
       raw: '',
+      rawId: '',
       final: '',
+      finalId: '',
     } as IAddProjectModalComponentState;
 
     this.approveAddProject = this.approveAddProject.bind(this);
   }
 
   public componentWillReceiveProps(nextProps: IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators) {
+    // this.setState({
+    //   showModal: nextProps.showModal,
+    //   name: nextProps.name,
+    //   site: nextProps.site,
+    //   raw: nextProps.raw,
+    //   final: nextProps.final,
+    // });
+
     this.setState({
       showModal: nextProps.showModal,
-      name: nextProps.name,
-      site: nextProps.site,
-      raw: nextProps.raw,
-      final: nextProps.final,
     });
   }
 
@@ -74,11 +87,19 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
               Site:
             </Col>
             <Col sm={6}>
-              <FormControl id='txtProjectSite'
-                type='text'
-                placeholder='Enter Site'
-                onChange={(e) => this.setState({ site: (e.target as HTMLInputElement).value })}
-                value={this.state.site}></FormControl>
+              <select id='selectProjectSite' className='form-control' value={this.state.siteId} onChange={(e) => {
+                const selectElement = e.target as HTMLSelectElement;
+                console.log(selectElement.value);
+                console.log(selectElement.options[selectElement.selectedIndex].innerText);
+                this.setState({
+                  siteId: selectElement.value,
+                  site: selectElement.options[selectElement.selectedIndex].innerText,
+                });
+              }} >
+                {
+                  this.props.sites.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
+                }
+              </select>
             </Col>
           </FormGroup>
           <FormGroup>
@@ -86,11 +107,24 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
               Source Channel:
             </Col>
             <Col sm={6}>
-              <FormControl id='txtProjectSourceChannel'
+              {/* <FormControl id='txtProjectSourceChannel'
                 type='text'
                 placeholder='Enter Channel'
                 onChange={(e) => this.setState({ raw: (e.target as HTMLInputElement).value })}
-                value={this.state.raw} ></FormControl>
+                value={this.state.raw} ></FormControl> */}
+              <select id='selectChannelsRaw' className='form-control' value={this.state.rawId} onChange={(el) => {
+                const selectRawChannel = el.target as HTMLSelectElement;
+                console.log(selectRawChannel.value);
+                console.log(selectRawChannel.options[selectRawChannel.selectedIndex].innerText);
+                this.setState({
+                  raw: selectRawChannel.options[selectRawChannel.selectedIndex].innerText,
+                  rawId: selectRawChannel.value,
+                });
+              }}>
+                {
+                  this.props.channels.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
+                }
+              </select>
             </Col>
           </FormGroup>
           <FormGroup>
@@ -98,11 +132,24 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
               Final Channel:
             </Col>
             <Col sm={6}>
-              <FormControl id='txtProjectFinalChannel'
+              {/* <FormControl id='txtProjectFinalChannel'
                 type='text'
                 placeholder='Enter Channel'
                 onChange={(e) => this.setState({ final: (e.target as HTMLInputElement).value })}
-                value={this.state.final} ></FormControl>
+                value={this.state.final} ></FormControl> */}
+              <select id='selectChannelsFinal' className='form-control' value={this.state.finalId} onChange={(el) => {
+                const selectFinalChannel = el.target as HTMLSelectElement;
+                console.log(selectFinalChannel.value);
+                console.log(selectFinalChannel.options[selectFinalChannel.selectedIndex].innerText);
+                this.setState({
+                  final: selectFinalChannel.options[selectFinalChannel.selectedIndex].innerText,
+                  finalId: selectFinalChannel.value,
+                });
+              }}>
+                {
+                  this.props.channels.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
+                }
+              </select>
             </Col>
           </FormGroup>
         </Form>
