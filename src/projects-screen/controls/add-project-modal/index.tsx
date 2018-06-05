@@ -107,11 +107,6 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
               Source Channel:
             </Col>
             <Col sm={6}>
-              {/* <FormControl id='txtProjectSourceChannel'
-                type='text'
-                placeholder='Enter Channel'
-                onChange={(e) => this.setState({ raw: (e.target as HTMLInputElement).value })}
-                value={this.state.raw} ></FormControl> */}
               <select id='selectChannelsRaw' className='form-control' value={this.state.rawId} onChange={(el) => {
                 const selectRawChannel = el.target as HTMLSelectElement;
                 console.log(selectRawChannel.value);
@@ -132,11 +127,6 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
               Final Channel:
             </Col>
             <Col sm={6}>
-              {/* <FormControl id='txtProjectFinalChannel'
-                type='text'
-                placeholder='Enter Channel'
-                onChange={(e) => this.setState({ final: (e.target as HTMLInputElement).value })}
-                value={this.state.final} ></FormControl> */}
               <select id='selectChannelsFinal' className='form-control' value={this.state.finalId} onChange={(el) => {
                 const selectFinalChannel = el.target as HTMLSelectElement;
                 console.log(selectFinalChannel.value);
@@ -178,7 +168,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
       supportingChannels: [],
     };
 
-    this.props.addProject(project);
+    // this.props.addProject(project);
     this.props.hideModal();
   }
 }

@@ -32,7 +32,7 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
   constructor(props: IProjectComponentProps & IProjectComponentActionCreators) {
     super(props);
 
-    this.state = { showModal: false }
+    this.state = { showModal: false };
     this.showAddProjectModal.bind(this);
   }
 
