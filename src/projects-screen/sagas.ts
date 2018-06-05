@@ -47,7 +47,6 @@ export function* watchGetAllProjectsAsyncCall() {
 export function* showAddProject(action) {
   try {
     yield put({type: projectsScreenActionTypes.SHOW_ADD_PROJECT_FETCHING});
-    console.log('ShowAddProject saga');
     const sites: ISite[] = yield Requests.getSites('FlowMetrix');
     const channels: IChannel[] = yield Requests.getChannels(_.head(sites).id);
     yield put({
