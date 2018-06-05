@@ -18,6 +18,7 @@ export default handleActions<IProjectsScreenState, IProject[] | IProject | ISite
   [projectsScreenActionTypes.ADD_PROJECT_FULFILED]: (state: IProjectsScreenState, action: Action<IProject>) => {
     return _.extend({}, state, {
       projects: _.concat(state.projects, action.payload),
+      showModal: false,
     } as IProjectsScreenState);
   },
   [projectsScreenActionTypes.GET_SITES_FOR_PROJECT_FULFILED]: (state: IProjectsScreenState, action: Action<ISite[]>) => {

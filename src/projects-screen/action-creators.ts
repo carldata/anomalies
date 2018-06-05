@@ -33,8 +33,8 @@ export const projectScreenActionCreators = {
   getAllProjectsAsyncCall: () => {
     return { type: projectsScreenActionTypes.GET_ALL_PROJECTS_ASYNC_CALL_START };
   },
-  showAddProject: (project: IProject) => {
-    return { type: projectsScreenActionTypes.SHOW_ADD_PROJECT_START, payload: project };
+  showAddProject: () => {
+    return { type: projectsScreenActionTypes.SHOW_ADD_PROJECT_START };
   },
   cancelShowAddProject: () => {
     return { type: projectsScreenActionTypes.CANCEL_SHOW_ADD_PROJECT };

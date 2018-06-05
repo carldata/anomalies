@@ -77,8 +77,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
             <Col sm={6}>
               <select id='selectProjectSite' className='form-control' onChange={(e) => {
                 const selectElement = e.target as HTMLSelectElement;
-                // console.log(selectElement.value);
-                // console.log(selectElement.options[selectElement.selectedIndex].innerText);
+                // selectElement.options[selectElement.selectedIndex].innerText;
                 this.siteId = selectElement.value;
                 this.site = selectElement.value; // todo later change it to selected option name
                 this.props.getChannels(selectElement.value);
@@ -96,8 +95,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
             <Col sm={6}>
               <select id='selectChannelsRaw' className='form-control' onChange={(el) => {
                 const selectRawChannel = el.target as HTMLSelectElement;
-                // console.log(selectRawChannel.value);
-                // console.log(selectRawChannel.options[selectRawChannel.selectedIndex].innerText);
+                // selectRawChannel.options[selectRawChannel.selectedIndex].innerText;
                 this.rawId = selectRawChannel.value;
                 this.raw = selectRawChannel.value; // todo change it later to element name
               }}>
@@ -114,8 +112,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
             <Col sm={6}>
               <select id='selectChannelsFinal' className='form-control' onChange={(el) => {
                 const selectFinalChannel = el.target as HTMLSelectElement;
-                // console.log(selectFinalChannel.value);
-                // console.log(selectFinalChannel.options[selectFinalChannel.selectedIndex].innerText);
+                // selectFinalChannel.options[selectFinalChannel.selectedIndex].innerText;
                 this.finalId = selectFinalChannel.value;
                 this.final = selectFinalChannel.value; // todo change it later to element name
               }}>
@@ -139,21 +136,19 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
   }
 
   private approveAddProject() {
-    // const project: IProject = {
-    //   id: this.props.id,
-    //   name: this.state.name,
-    //   site: this.state.site,
-    //   siteId: '',
-    //   final: this.state.final,
-    //   finalId: '',
-    //   raw: this.state.raw,
-    //   rawId: '',
-    //   supportingChannels: [],
-    // };
+    const project: IProject = {
+      id: '',
+      name: this.state.name,
+      site: this.site,
+      siteId: this.siteId,
+      final: this.final,
+      finalId: this.finalId,
+      raw: this.raw,
+      rawId: this.rawId,
+      supportingChannels: [],
+    };
 
-    // this.props.addProject(project);
-      console.log('Parameters, projectName: ' + this.state.name + ' siteId: ' + this.siteId + ' site: ' +  this.site + ' rawId: ' + this.rawId + ' raw: ' + this.raw +
-     ' finalId: ' + this.finalId + ' final: ' + this.final);
+    this.props.addProject(project);
   }
 }
 

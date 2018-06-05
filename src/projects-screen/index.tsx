@@ -12,8 +12,6 @@ import { ISite, IChannel } from '../model';
 
 interface IProjectComponentProps {
   projects: IProject[];
-  sites: ISite[];
-  channels: IChannel[];
 }
 
 interface IProjectComponentActionCreators {
@@ -22,19 +20,12 @@ interface IProjectComponentActionCreators {
   addProjectStart: (project: IProject) => any;
   getSites: (db: string) => any;
   getChannels: (siteId: string) => any;
-  showAddProject: (project: any) => any;
+  showAddProject: () => any;
 }
 
-interface IProjectComponentState {
-  showModal: boolean;
-}
-
-class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators, IProjectComponentState> {
+class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators> {
   constructor(props: IProjectComponentProps & IProjectComponentActionCreators) {
     super(props);
-
-    this.state = { showModal: false };
-    this.showAddProjectModal.bind(this);
   }
 
   public componentDidMount() {
@@ -58,40 +49,18 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
           </ListGroup>
         </FormGroup>
         <FormGroup>
-          <Button id='btnAddProject' bsStyle='primary' onClick={() => this.props.showAddProject({})}>Add Project</Button>
+          <Button id='btnAddProject' bsStyle='primary' onClick={() => this.props.showAddProject()}>Add Project</Button>
         </FormGroup>
       </Form>
-      <AddProjectModal>
-        // id=''
-        // name=''
-        // site=''
-        // raw=''
-        // final=''
-        // sites={this.props.sites}
-        // channels={this.props.channels}
-        // showModal={this.state.showModal}
-        // addProject={(e) => this.props.addProjectStart(e)}
-        // hideModal={() => this.showAddProjectModal(false)}
-      </AddProjectModal>
+      <AddProjectModal></AddProjectModal>
     </div>;
   }
-
-  private showAddProjectModal(show: boolean) {
-    this.setState({ showModal: show });
-  }
-
-  // private addProject() {
-  //   this.props.getSites('FlowMetrix');
-  //   this.showAddProjectModal(true);
-  // }
 
 }
 
 function mapStateToProps(state: IState) {
   return {
     projects: state.projectsScreen.projects,
-    sites: state.projectsScreen.sites,
-    channels: state.projectsScreen.channels,
   };
 }
 
