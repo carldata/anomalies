@@ -1,24 +1,21 @@
 import * as _ from 'lodash';
 import * as Papa from 'papaparse';
+import * as dateFns from 'date-fns';
 import axios from 'axios';
 import { push } from 'react-router-redux';
-import { takeEvery, call } from 'redux-saga/effects';
-import { all, put } from 'redux-saga/effects';
-import { anomaliesScreenActionTypes } from './action-creators';
+import { takeEvery, call, all, put } from 'redux-saga/effects';
+import { anomaliesScreenActionTypes } from '../action-creators';
+// TODO: verify csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig should be exported in time-series-scroller
 import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig } from 'time-series-scroller/lib/out/hp-time-series-chart/csv-loading/calculations';
 import {
   EnumTimeSeriesType, hpTimeSeriesChartAuxiliary, hpTimeSeriesChartReducerAuxFunctions, IExternalSourceTimeSeries, IHpTimeSeriesChartState,
 } from 'time-series-scroller';
-import { IDataGridState } from './controls/data-grid/state';
-import { Requests } from '../requests';
-import { IProject } from '../projects-screen/state';
-import { IAnomaliesCharts } from '../anomalies-screen/store-creator';
-import * as dateFns from 'date-fns';
-import { ParseResult } from 'papaparse';
+import { IDataGridState } from '../controls/data-grid/state';
+import { Requests } from '../../requests';
+import { IProject } from '../../projects-screen/state';
+import { IAnomaliesCharts } from '../../anomalies-screen/store-creator';
 
-export function* watchGoToProjects() {
-  yield takeEvery(anomaliesScreenActionTypes.GO_TO_PROJECTS, function* () { yield put(push('/projects')); });
-}
+import { ParseResult } from 'papaparse';
 
 function* getAnomaliesForChannel(action: any) {
 
@@ -175,91 +172,4 @@ function* getAnomaliesForChannel(action: any) {
 
 export function* watchGetAnomaliesForChannel() {
   yield takeEvery(anomaliesScreenActionTypes.GET_ANOMALIES_START, getAnomaliesForChannel);
-}
-
-function* copyRawToEdited() {
-  yield put({ type: anomaliesScreenActionTypes.COPY_RAW_TO_EDITED, payload: '' });
-}
-
-export function* watchCopyRawToEdited() {
-  yield takeEvery(anomaliesScreenActionTypes.COPY_RAW_TO_EDITED, copyRawToEdited);
-}
-
-
-function* addAndPopulateChannel(action: any) {
-  try {
-    yield put({ type: anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FETCHING })
-
-    let site: string = action.payload.siteChannelInfo.site;
-    let channel: string = action.payload.siteChannelInfo.channel;
-    let startDate: string = action.payload.startDate;
-    let endDate: string = action.payload.endDate;
-
-    const channelData = yield Requests.getChannelData(site + '-' + channel, startDate, endDate);
-    const channelParseResult = Papa.parse(channelData.data, { header: true });
-
-    let channelChartState: IHpTimeSeriesChartState;
-    if (channelParseResult.errors.length === 0) {
-      channelChartState =
-        hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
-          color: 'steelblue',
-          name: site + ' ' + channel,
-          points: csvLoadingCalculations.extractUnixTimePoints(channelParseResult.data, {
-            rawFormat: EnumRawCsvFormat.DateTimeThenValue,
-            timeStampColumnName: 'time',
-            valueColumnName: 'value',
-          } as IExtractUnixTimePointsConfig),
-          type: EnumTimeSeriesType.Line
-        } as IExternalSourceTimeSeries]);
-    } else {
-      channelChartState = hpTimeSeriesChartReducerAuxFunctions.buildInitialState();
-      channelChartState.dateRangeUnixFrom = dateFns.parse(startDate).getMilliseconds();
-      channelChartState.dateRangeUnixTo = dateFns.parse(endDate).getMilliseconds();
-    }
-
-    yield put({
-      type: anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FULFILED, payload: {
-        siteChannelInfo: action.payload.siteChannelInfo,
-        channelChartState: channelChartState,
-      }
-    })
-
-  }
-  catch (error) {
-    yield put({ type: anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_REJECTED, payload: error })
-  }
-}
-
-export function* watchAddAndPopulateChannel() {
-  yield takeEvery(anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_START, addAndPopulateChannel);
-}
-
-function* addEmptyChannel(action: any) {
-  yield put({ type: anomaliesScreenActionTypes.ADD_EMPTY_CHANNEL, payload: action.payload });
-}
-
-export function* watchAddEmptyChannel() {
-  yield takeEvery(anomaliesScreenActionTypes.ADD_EMPTY_CHANNEL_START, addEmptyChannel);
-}
-
-function* deleteSupportingChannel(action) {
-  yield put({type: anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL, payload: action.payload });
-}
-
-export function* watchDeleteSupportingChannel() {
-  yield takeEvery(anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL_START, deleteSupportingChannel)
-}
-
-function* saveProject(action) {
-  yield put({type: anomaliesScreenActionTypes.SAVE_PROJECT_FETCHING});
-  try{
-    yield Requests.saveProject(action.payload);
-    yield put({type: anomaliesScreenActionTypes.SAVE_PROJECT_FULFILED});
-  }catch(error){
-    yield put({type: anomaliesScreenActionTypes.SAVE_PROJECT_REJECTED});
-  }
-}
-
-export function* watchSaveProject() {
-  yield takeEvery(anomaliesScreenActionTypes.SAVE_PROJECT_START, saveProject);
 }
