@@ -10,10 +10,11 @@ import update from 'immutability-helper';
 import { Button, ButtonGroup, ControlLabel, Form, FormControl, FormGroup, Row, Col, DropdownButton, MenuItem, Modal } from 'react-bootstrap';
 import { CSVLink, CSVDownload } from 'react-csv';
 import Select from 'react-select';
+import { ISite } from '../../../model';
 
 interface IAddChannelComponentProps {
   showModal: boolean;
-  sites: any;
+  sites: ISite[];
 }
 
 interface IAddChannelComponentActionCreators {
@@ -26,6 +27,7 @@ interface IAddChannelComponentState {
   channelId: string;
   channelType: string;
   showModal: boolean;
+  sites: ISite[];
 }
 
 export class AddChannelModalComponent extends React.Component<IAddChannelComponentProps & IAddChannelComponentActionCreators, IAddChannelComponentState> {
@@ -35,12 +37,13 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
       showModal: false,
       siteId: '',
       channelId: '',
-      channelType: ''
+      channelType: '',
+      sites: [],
     }
   };
 
   componentWillReceiveProps(props: IAddChannelComponentProps) {
-    this.setState({ showModal: props.showModal });
+    this.setState({ showModal: props.showModal, sites: props.sites });
   };
 
   approveAddChannel() {
@@ -62,7 +65,7 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
                 console.log(selectElement.options[selectElement.selectedIndex].innerText);
               }} >
                 {
-                  this.props.sites.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
+                  this.state.sites.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
                 }
               </select>
             </Col>

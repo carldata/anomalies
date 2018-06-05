@@ -15,6 +15,7 @@ import { IProject } from '../projects-screen/state';
 import { IAnomaliesCharts } from '../anomalies-screen/store-creator';
 import * as dateFns from 'date-fns';
 import { ParseResult } from 'papaparse';
+import { ISite } from '../model';
 
 export function* watchGoToProjects() {
   yield takeEvery(anomaliesScreenActionTypes.GO_TO_PROJECTS, function* () { yield put(push('/projects')); });
@@ -232,20 +233,19 @@ function* addAndPopulateChannel(action: any) {
 
 function* getSitesForProject() {
   try {
-    const siteIds = yield Requests.getSites('');
+    yield put({ type: anomaliesScreenActionTypes.GET_SITE_IDS_FETCHING });
+    const sites: ISite[] = yield Requests.getSites('');
 
-    yield put({
-      type: anomaliesScreenActionTypes.GET_SITE_IDS_FULFILED,
-      payload: {
-        siteIds: siteIds
-      }
-    });
+    sites.push({ id: '1', name: 'Site1'});
+    sites.push({ id: '2', name: 'Site2'});
+
+    yield put({ type: anomaliesScreenActionTypes.GET_SITE_IDS_FULFILED, payload: { sites } });
   } catch (error) {
     //
   }
 }
 
-export function* watchGetSitesForProject() {
+export function* watchGetSitesForProjectAnomaliesScreen() {
   yield takeEvery(anomaliesScreenActionTypes.GET_SITE_IDS_START, getSitesForProject);
 }
 

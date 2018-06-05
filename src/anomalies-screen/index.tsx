@@ -78,7 +78,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
   }
 
   public componentDidMount() {
-    if (!_.isEmpty(this.props.project)){
+    if (!_.isEmpty(this.props.project)) {
       this.props.getAnomaliesForProject({
         project: this.props.project,
         startDate: this.state.startDate,
@@ -86,7 +86,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       });
     }
 
-    if (_.isEmpty(this.props.sites)){
+    if (_.isEmpty(this.props.sites)) {
       this.props.getSitesForProject();
     }
   }
@@ -268,7 +268,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                   _.map(this.state.supportingChannels, (c) => ({
                     key: `extendedValue${_.indexOf(this.state.supportingChannels, c) + 1}`,
                     name: `${c.site} ${c.channel}`,
-                  }) as Column ))}
+                  }) as Column))}
               rows={this.state.gridState.rows}
             />
           </Col>
@@ -288,7 +288,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                   this.props.lastEndDate);
               }
             }}
-            hideModal={() => { this.setState({ showModal: false }) }} 
+            hideModal={() => { this.setState({ showModal: false }) }}
             sites={this.state.sites}>
           </AddChannelModal>
         </Row>
