@@ -7,6 +7,7 @@ import { IProject } from './state';
 import { Requests } from '../requests';
 import { IState } from '../state';
 import * as _ from 'lodash';
+import { ISite, IChannel, ISitesChannels } from '../model';
 
 function* goToAnomalies(action) {
   yield put({ type: anomaliesScreenActionTypes.PASS_PROJECT_TO_ANOMALIES, payload: action.payload });
@@ -43,6 +44,27 @@ export function* watchGetAllProjectsAsyncCall() {
   yield takeEvery(projectsScreenActionTypes.GET_ALL_PROJECTS_ASYNC_CALL_START, getAllProjectsAsyncCall);
 }
 
+export function* showAddProject(action) {
+  try {
+    yield put({type: projectsScreenActionTypes.SHOW_ADD_PROJECT_FETCHING});
+    const sites: ISite[] = yield Requests.getSites('FlowMetrix');
+    const channels: IChannel[] = yield Requests.getChannels(_.head(sites).id);
+    yield put({
+       type: projectsScreenActionTypes.SHOW_ADD_PROJECT_FULFILED,
+       payload: {
+         sites,
+         channels,
+       } as ISitesChannels,
+      });
+  } catch (error) {
+    // todo notify when error occurs
+  }
+}
+
+export function* watchShowAddNewProject() {
+  yield takeEvery(projectsScreenActionTypes.SHOW_ADD_PROJECT_START, showAddProject);
+}
+
 export function* addNewProject(action) {
   try {
     let projectId: string = yield Requests.addProject(action.payload);
@@ -50,10 +72,38 @@ export function* addNewProject(action) {
       type: projectsScreenActionTypes.ADD_PROJECT_FULFILED, payload: _.extend({}, action.payload, { id: projectId } as IProject)
     });
   } catch (error) {
-    //todo notify error occured 
+    // todo notify error occured 
   }
 }
 
 export function* watchAddNewProject() {
   yield takeEvery(projectsScreenActionTypes.ADD_PROJECT_START, addNewProject)
+}
+
+function* getSitesForProject(action) {
+  try {
+    yield put({ type: projectsScreenActionTypes.GET_SITES_FOR_PROJECT_FETCHING });
+    const sites: ISite[] = yield Requests.getSites(action.payload);
+    yield put({ type: projectsScreenActionTypes.GET_SITES_FOR_PROJECT_FULFILED, payload: sites });
+  } catch (error) {
+    // todo notify when error occurred
+  }
+}
+
+export function* watchGetSitesForProject() {
+  yield takeEvery(projectsScreenActionTypes.GET_SITES_FOR_PROJECT_START, getSitesForProject);
+}
+
+function* getChannelsForSite(action) {
+  try {
+    yield put({ type: projectsScreenActionTypes.GET_CHANNELS_FOR_SITE_FETCHING });
+    const channels: IChannel[] = yield Requests.getChannels(action.payload);
+    yield put({ type: projectsScreenActionTypes.GET_CHANNELS_FOR_SITE_FULFILED, payload: channels });
+  } catch (error) {
+    // todo notify error
+  }
+}
+
+export function* watchGetChannelsForSite() {
+  yield takeEvery(projectsScreenActionTypes.GET_CHANNELS_FOR_SITE_START, getChannelsForSite);
 }
