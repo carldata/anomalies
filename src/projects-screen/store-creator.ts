@@ -8,9 +8,11 @@ const initialState = {
   projects: [],
   sites: [],
   channels: [],
+  selectedProject: {},
+  showModal: false,
 } as IProjectsScreenState;
 
-export default handleActions<IProjectsScreenState, IProject[] | IProject | ISite[] | IChannel[]>({
+export default handleActions<IProjectsScreenState, IProject[] | IProject | ISite[] | IChannel[] | any>({
   [projectsScreenActionTypes.GET_ALL_PROJECTS_ASYNC_CALL_FULFILED]: (state: IProjectsScreenState, action: Action<IProject[]>) => {
     return _.extend({}, state, { projects: action.payload } as IProjectsScreenState);
   },
@@ -30,5 +32,20 @@ export default handleActions<IProjectsScreenState, IProject[] | IProject | ISite
       ...state,
       channels: action.payload,
     } as IProjectsScreenState;
+  },
+  [projectsScreenActionTypes.SHOW_ADD_PROJECT_FULFILED]: (state: IProjectsScreenState, action: Action<any>) => {
+    return {
+      ...state,
+      showModal: true,
+      sites: action.payload.sites,
+      channels: action.payload.channels,
+    };
+  },
+  [projectsScreenActionTypes.CANCEL_SHOW_ADD_PROJECT]: (state: IProjectsScreenState) => {
+    return {
+      ...state,
+      showModal: false,
+      selectedProject: {},
+    };
   },
 }, initialState);

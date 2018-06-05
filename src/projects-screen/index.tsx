@@ -22,6 +22,7 @@ interface IProjectComponentActionCreators {
   addProjectStart: (project: IProject) => any;
   getSites: (db: string) => any;
   getChannels: (siteId: string) => any;
+  showAddProject: (project: any) => any;
 }
 
 interface IProjectComponentState {
@@ -57,20 +58,20 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
           </ListGroup>
         </FormGroup>
         <FormGroup>
-          <Button id='btnAddProject' bsStyle='primary' onClick={() => this.addProject()}>Add Project</Button>
+          <Button id='btnAddProject' bsStyle='primary' onClick={() => this.props.showAddProject({})}>Add Project</Button>
         </FormGroup>
       </Form>
-      <AddProjectModal
-        id=''
-        name=''
-        site=''
-        raw=''
-        final=''
-        sites={this.props.sites}
-        channels={this.props.channels}
-        showModal={this.state.showModal}
-        addProject={(e) => this.props.addProjectStart(e)}
-        hideModal={() => this.showAddProjectModal(false)}>
+      <AddProjectModal>
+        // id=''
+        // name=''
+        // site=''
+        // raw=''
+        // final=''
+        // sites={this.props.sites}
+        // channels={this.props.channels}
+        // showModal={this.state.showModal}
+        // addProject={(e) => this.props.addProjectStart(e)}
+        // hideModal={() => this.showAddProjectModal(false)}
       </AddProjectModal>
     </div>;
   }
@@ -79,10 +80,10 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
     this.setState({ showModal: show });
   }
 
-  private addProject() {
-    this.props.getSites('FlowMetrix');
-    this.showAddProjectModal(true);
-  }
+  // private addProject() {
+  //   this.props.getSites('FlowMetrix');
+  //   this.showAddProjectModal(true);
+  // }
 
 }
 
@@ -101,6 +102,7 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
     addProjectStart: projectScreenActionCreators.addProjectStart,
     getSites: projectScreenActionCreators.getSites,
     getChannels: projectScreenActionCreators.getChannels,
+    showAddProject: projectScreenActionCreators.showAddProject,
   }, dispatch);
 }
 

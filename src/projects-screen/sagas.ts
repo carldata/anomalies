@@ -44,6 +44,28 @@ export function* watchGetAllProjectsAsyncCall() {
   yield takeEvery(projectsScreenActionTypes.GET_ALL_PROJECTS_ASYNC_CALL_START, getAllProjectsAsyncCall);
 }
 
+export function* showAddProject(action) {
+  try {
+    yield put({type: projectsScreenActionTypes.SHOW_ADD_PROJECT_FETCHING});
+    console.log('ShowAddProject saga');
+    const sites: ISite[] = yield Requests.getSites('FlowMetrix');
+    const channels: IChannel[] = yield Requests.getChannels(_.head(sites).id);
+    yield put({
+       type: projectsScreenActionTypes.SHOW_ADD_PROJECT_FULFILED,
+       payload: {
+         sites,
+         channels,
+       },
+      });
+  } catch (error) {
+    // todo notify when error occurs
+  }
+}
+
+export function* watchShowAddNewProject() {
+  yield takeEvery(projectsScreenActionTypes.SHOW_ADD_PROJECT_START, showAddProject);
+}
+
 export function* addNewProject(action) {
   try {
     let projectId: string = yield Requests.addProject(action.payload);

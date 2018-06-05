@@ -3,7 +3,7 @@ import {
   watchSaveProject, watchDeleteSupportingChannel, watchAddEmptyChannel,
   watchAddAndPopulateChannel, watchGetAnomaliesForChannel, watchGoToProjects, watchCopyRawToEdited,
 } from './anomalies-screen/sagas';
-import { watchGoToAnomalies, watchGetAllProjectsAsyncCall, watchAddNewProject, watchGetSitesForProject, watchGetChannelsForSite } from './projects-screen/sagas';
+import { watchGoToAnomalies, watchGetAllProjectsAsyncCall, watchAddNewProject, watchGetSitesForProject, watchGetChannelsForSite, watchShowAddNewProject } from './projects-screen/sagas';
 
 export function* rootSaga() {
   return yield all([
@@ -19,5 +19,6 @@ export function* rootSaga() {
     fork(watchSaveProject),
     fork(watchGetSitesForProject),
     fork(watchGetChannelsForSite),
+    fork(watchShowAddNewProject),
   ]);
 }

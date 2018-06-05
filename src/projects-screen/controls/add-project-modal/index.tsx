@@ -4,23 +4,20 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { projectScreenActionCreators } from '../../action-creators';
 import * as _ from 'lodash';
-import { IProject, IProjectSupportingChannel } from '../../state';
+import { IProject, IProjectSupportingChannel, IProjectsScreenState } from '../../state';
 import { ISite, IChannel } from '../../../model';
+import { IState } from '../../../state';
 
 interface IAddProjectModalComponentProps {
   showModal: boolean;
-  id: string;
-  name: string;
-  site: string;
-  raw: string;
-  final: string;
+  project: IProject;
   sites: ISite[];
   channels: IChannel[];
 }
 
 interface IAddProjectModalComponentActionCreators {
   addProject: (e: IProject) => any;
-  hideModal?: () => any;
+  cancelModal: () => any;
 }
 
 interface IAddProjectModalComponentState {
@@ -61,13 +58,13 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
     //   final: nextProps.final,
     // });
 
-    this.setState({
-      showModal: nextProps.showModal,
-    });
+    // this.setState({
+    //   showModal: nextProps.showModal,
+    // });
   }
 
   public render() {
-    return <Modal show={this.state.showModal} onHide={() => this.props.hideModal()}>
+    return <Modal show={this.props.showModal} onHide={() => this.props.cancelModal()}>
       <Modal.Body>
         <Form horizontal>
           <FormGroup>
@@ -148,7 +145,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
         <Button id='btnApproveAddProjectModal' bsStyle='primary' onClick={this.approveAddProject} >
           Add Project
         </Button>
-        <Button id='btnCancelAddProjectModal' onClick={() => this.props.hideModal()}>
+        <Button id='btnCancelAddProjectModal' onClick={() => this.props.cancelModal()}>
           Cancel
         </Button>
       </Modal.Footer>
@@ -156,21 +153,37 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
   }
 
   private approveAddProject() {
-    const project: IProject = {
-      id: this.props.id,
-      name: this.state.name,
-      site: this.state.site,
-      siteId: '',
-      final: this.state.final,
-      finalId: '',
-      raw: this.state.raw,
-      rawId: '',
-      supportingChannels: [],
-    };
+    // const project: IProject = {
+    //   id: this.props.id,
+    //   name: this.state.name,
+    //   site: this.state.site,
+    //   siteId: '',
+    //   final: this.state.final,
+    //   finalId: '',
+    //   raw: this.state.raw,
+    //   rawId: '',
+    //   supportingChannels: [],
+    // };
 
     // this.props.addProject(project);
-    this.props.hideModal();
+    //this.props.hideModal();
   }
 }
 
-export const AddProjectModal = AddProjectModalComponent;
+function mapStateToProps(state: IState) {
+  return {
+    project: state.projectsScreen.selectedProject,
+    showModal: state.projectsScreen.showModal,
+    sites:  state.projectsScreen.sites,
+    channels: state.projectsScreen.channels,
+  };
+}
+
+function matchDispatchToProps(dispatch: Dispatch<{}>) {
+  return bindActionCreators({
+    addProject: projectScreenActionCreators.addProjectStart,
+    cancelModal: projectScreenActionCreators.cancelShowAddProject,
+  }, dispatch);
+}
+
+export const AddProjectModal = connect(mapStateToProps,matchDispatchToProps)(AddProjectModalComponent);

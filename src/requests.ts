@@ -150,7 +150,7 @@ export class Requests {
     return sites;
   }
 
-  static * getChannels(siteId: number) {
+  static * getChannels(siteId: string) {
     let channels: IChannel[] = [];
     try {
       const response = yield call(axios.get, `${this.apiAddress}/data/channel/${siteId}?token=${this.token}`);

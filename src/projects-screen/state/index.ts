@@ -4,6 +4,8 @@ export interface IProjectsScreenState {
   projects: IProject[];
   sites: ISite[];
   channels: IChannel[];
+  selectedProject: any;
+  showModal: boolean;
 }
 
 export interface IProject {
