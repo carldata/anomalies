@@ -10,4 +10,5 @@ export interface IAnomaliesScreenState {
   project: IProject;
   lastStartDate: string;
   lastEndDate: string;
+  sites: any;
 }

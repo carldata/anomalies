@@ -82,6 +82,9 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
       })
     }
   },
+  [anomaliesScreenActionTypes.GET_SITE_IDS_FULFILED]: (state: IAnomaliesScreenState, action: Action<any>) => {
+    return _.extend({}, state, { sites: action.payload.siteIds });
+  },
   [anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FULFILED]: (state: IAnomaliesScreenState, action: Action<any>) => {
     return {
       ...state,

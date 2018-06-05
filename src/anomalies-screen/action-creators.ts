@@ -24,11 +24,17 @@ export const anomaliesScreenActionTypes = {
   SAVE_PROJECT_FETCHING: 'SAVE_PROJECT_FETCHING',
   SAVE_PROJECT_FULFILED: 'SAVE_PROJECT_FULFILED',
   SAVE_PROJECT_REJECTED: 'SAVE_PROJECT_REJECTED',
+  GET_SITE_IDS_START: 'GET_SITE_IDS_START',
+  GET_SITE_IDS_FULFILED: 'GET_SITE_IDS_FULFILED',
+  GET_SITE_IDS_REJECTED: 'GET_SITE_IDS_REJECTED'
 };
 
 export const anomaliesScreenActionCreators = {
   getAnomaliesForProject: (projectInfo) => {
     return { type: anomaliesScreenActionTypes.GET_ANOMALIES_START, payload: projectInfo };
+  },
+  getSitesForProject: () => {
+    return { type: anomaliesScreenActionTypes.GET_SITE_IDS_START };
   },
   addAndPopulateChannel: (siteChannelInfo: any, startDate: string, endDate: string) => {
     return {

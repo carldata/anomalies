@@ -9,9 +9,11 @@ import _ = require('lodash');
 import update from 'immutability-helper';
 import { Button, ButtonGroup, ControlLabel, Form, FormControl, FormGroup, Row, Col, DropdownButton, MenuItem, Modal } from 'react-bootstrap';
 import { CSVLink, CSVDownload } from 'react-csv';
+import Select from 'react-select';
 
 interface IAddChannelComponentProps {
   showModal: boolean;
+  sites: any;
 }
 
 interface IAddChannelComponentActionCreators {
@@ -42,52 +44,60 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
   };
 
   approveAddChannel() {
-  //   this.hideModal();
+    //   this.hideModal();
   };
 
   render() {
-    return <Modal show={this.state.showModal} onHide={ () => this.props.hideModal()}>
-        <Modal.Body>
-          <Form horizontal>
-            <FormGroup>
-              <Col sm={2} componentClass={ControlLabel}>
-                Site:
+    return <Modal show={this.state.showModal} onHide={() => this.props.hideModal()}>
+      <Modal.Body>
+        <Form horizontal>
+          <FormGroup>
+            <Col sm={2} componentClass={ControlLabel}>
+              Site:
             </Col>
-              <Col sm={10}>
-                <FormControl type='text' onChange={(e) => this.setState({ siteId: (e.target as HTMLInputElement).value })} value={this.state.siteId}></FormControl>
-              </Col>
-            </FormGroup>
-            <FormGroup>
-              <Col sm={2} componentClass={ControlLabel}>
-                Channel:
+            <Col sm={10}>
+              <select id='selectProjectSite' className='form-control' onChange={(e) => {
+                const selectElement = (e.target as HTMLSelectElement);
+                console.log(selectElement.value);
+                console.log(selectElement.options[selectElement.selectedIndex].innerText);
+              }} >
+                {
+                  this.props.sites.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
+                }
+              </select>
             </Col>
-              <Col sm={10}>
-                <FormControl type='text' onChange={(e) => this.setState({ channelId: (e.target as HTMLInputElement).value })} value={this.state.channelId}></FormControl>
-              </Col>
-            </FormGroup>
-            <FormGroup>
-              <Col sm={2} componentClass={ControlLabel}>
-                Type:
+          </FormGroup>
+          <FormGroup>
+            <Col sm={2} componentClass={ControlLabel}>
+              Channel:
             </Col>
-              <Col sm={10}>
-                <FormControl type='text' onChange={(e) => this.setState({ channelType: (e.target as HTMLInputElement).value })} value={this.state.channelType}></FormControl>
-              </Col>
-            </FormGroup>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button id='btnCancelAddChannelModal' onClick={() => this.props.hideModal()}>
-            Cancel
+            <Col sm={10}>
+              <FormControl type='text' onChange={(e) => this.setState({ channelId: (e.target as HTMLInputElement).value })} value={this.state.channelId}></FormControl>
+            </Col>
+          </FormGroup>
+          <FormGroup>
+            <Col sm={2} componentClass={ControlLabel}>
+              Type:
+            </Col>
+            <Col sm={10}>
+              <FormControl type='text' onChange={(e) => this.setState({ channelType: (e.target as HTMLInputElement).value })} value={this.state.channelType}></FormControl>
+            </Col>
+          </FormGroup>
+        </Form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button id='btnCancelAddChannelModal' onClick={() => this.props.hideModal()}>
+          Cancel
         </Button>
-          <Button id='btnApproveAddChannelModal' bsStyle='primary' onClick={()=> this.props.addChannel({
-            site: this.state.siteId,
-            channel: this.state.channelId,
-            type: this.state.channelType,
-          }) } >
-            Add
+        <Button id='btnApproveAddChannelModal' bsStyle='primary' onClick={() => this.props.addChannel({
+          site: this.state.siteId,
+          channel: this.state.channelId,
+          type: this.state.channelType,
+        })} >
+          Add
         </Button>
-        </Modal.Footer>
-      </Modal>
+      </Modal.Footer>
+    </Modal>
   };
 };
 

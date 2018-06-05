@@ -152,9 +152,6 @@ export class Requests {
     let channels: number[] = [];
     try {
       let response = yield call(axios.get, `${this.apiAddress}/data/channel/${siteId}?token=${token}`, {});
-      let response1 = yield call(axios.get, `${this.apiAddress}/data/channel/${siteId}?token=${token}`, {});
-      let response2 = yield call(axios.put,  `${this.apiAddress}/data/channel/${siteId}?token=${token}`, { siteid: siteId});
-
       channels = response.data;
     } catch (error) {
       // TODO throw error

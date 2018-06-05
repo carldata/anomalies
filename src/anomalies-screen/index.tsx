@@ -24,12 +24,14 @@ interface IAnomaliesComponentProps {
   project: IProject;
   lastStartDate: string;
   lastEndDate: string;
+  sites: any;
 }
 
 interface IAnomaliesComponentActionCreators {
   goToProjectsScreen: () => any;
   saveProject: (project: IProject) => any;
   getAnomaliesForProject: (projectAndRange: any) => any;
+  getSitesForProject: () => any;
   copyRawToEdited: () => any;
   addAndPopulateChannel: (siteChannelInfo: any, startDate: string, endDate: string) => any;
   addEmptyChannel: (siteChannelInfo: any, dateRangeUnixFrom: number, dateRangeUnixTo: number) => any;
@@ -46,6 +48,7 @@ interface IAnomaliesComponentState {
   endDate: string;
   windowUnixFrom: number;
   windowUnixTo: number;
+  sites: any;
 }
 
 class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators, IAnomaliesComponentState> {
@@ -69,6 +72,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       supportingChannels: _.cloneDeep(props.supportingChannels),
       gridState: { series: [] },
+      sites: '',
     }
   }
 
@@ -80,6 +84,10 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         endDate: this.state.endDate,
       });
     }
+
+    if (_.isEmpty(this.props.sites)){
+      this.props.getSitesForProject();
+    }
   }
 
   componentWillReceiveProps(nextProps: IAnomaliesComponentProps) {
@@ -90,6 +98,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       windowUnixFrom: nextProps.mainChartState.dateRangeUnixFrom,
       windowUnixTo: nextProps.mainChartState.dateRangeUnixTo,
       gridState: nextProps.gridState,
+      sites: nextProps.sites,
     });
   }
 
@@ -264,7 +273,8 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                   this.props.lastEndDate);
               }
             }}
-            hideModal={() => { this.setState({ showModal: false }) }} >
+            hideModal={() => { this.setState({ showModal: false }) }} 
+            sites={this.state.sites}>
           </AddChannelModal>
         </Row>
       </div>
@@ -281,6 +291,7 @@ function mapStateToProps(state: IState) {
     project: state.anomaliesScreen.project,
     lastStartDate: state.anomaliesScreen.lastStartDate,
     lastEndDate: state.anomaliesScreen.lastEndDate,
+    sites: state.anomaliesScreen.sites,
   };
 }
 
@@ -288,6 +299,7 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     saveProject: anomaliesScreenActionCreators.saveProject,
     getAnomaliesForProject: anomaliesScreenActionCreators.getAnomaliesForProject,
+    getSitesForProject: anomaliesScreenActionCreators.getSitesForProject,
     goToProjectsScreen: anomaliesScreenActionCreators.goToProjectsScreen,
     copyRawToEdited: anomaliesScreenActionCreators.copyRawToEdited,
     addEmptyChannel: anomaliesScreenActionCreators.addEmptyChannel,

@@ -216,6 +216,25 @@ function* addAndPopulateChannel(action: any) {
   }
 }
 
+function* getSitesForProject() {
+  try {
+    const siteIds = yield Requests.getSites('');
+
+    yield put({
+      type: anomaliesScreenActionTypes.GET_SITE_IDS_FULFILED,
+      payload: {
+        siteIds: siteIds
+      }
+    });
+  } catch (error) {
+    //
+  }
+}
+
+export function* watchGetSitesForProject() {
+  yield takeEvery(anomaliesScreenActionTypes.GET_SITE_IDS_START, getSitesForProject);
+}
+
 export function* watchAddAndPopulateChannel() {
   yield takeEvery(anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_START, addAndPopulateChannel);
 }
@@ -229,7 +248,7 @@ export function* watchAddEmptyChannel() {
 }
 
 function* deleteSupportingChannel(action) {
-  yield put({type: anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL, payload: action.payload });
+  yield put({ type: anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL, payload: action.payload });
 }
 
 export function* watchDeleteSupportingChannel() {
@@ -237,12 +256,12 @@ export function* watchDeleteSupportingChannel() {
 }
 
 function* saveProject(action) {
-  yield put({type: anomaliesScreenActionTypes.SAVE_PROJECT_FETCHING});
-  try{
+  yield put({ type: anomaliesScreenActionTypes.SAVE_PROJECT_FETCHING });
+  try {
     yield Requests.saveProject(action.payload);
-    yield put({type: anomaliesScreenActionTypes.SAVE_PROJECT_FULFILED});
-  }catch(error){
-    yield put({type: anomaliesScreenActionTypes.SAVE_PROJECT_REJECTED});
+    yield put({ type: anomaliesScreenActionTypes.SAVE_PROJECT_FULFILED });
+  } catch (error) {
+    yield put({ type: anomaliesScreenActionTypes.SAVE_PROJECT_REJECTED });
   }
 }
 
