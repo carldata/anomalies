@@ -28,7 +28,7 @@ const initialState = {
   mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
   finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
   supportingChannels: [],
-  gridState: { series: [] },
+  gridState: { rows: [] },
   project: {} as IProject,
   lastStartDate: dateFns.format(dateFns.subMonths(endDate, 3), 'YYYY-MM-DDTHH:mm:ss'),
   lastEndDate: dateFns.format(endDate, 'YYYY-MM-DDTHH:mm:ss'),

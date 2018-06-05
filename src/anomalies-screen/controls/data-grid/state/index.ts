@@ -1,10 +1,15 @@
 export interface IDataGridState {
-    series: IDataGridRow[]
+  rows: IDataGridRow[];
 }
 
 export interface IDataGridRow {
-    date: any;
-    rawValue: any;
-    editedValue: any;
-    fixedValue: any;
+  date: any;
+  rawValue: any;
+  editedValue: any;
+  fixedValue: any;
+  extendedValue1?: any;
+  extendedValue2?: any;
+  extendedValue3?: any;
+  extendedValue4?: any;
+  extendedValue5?: any;
 }
