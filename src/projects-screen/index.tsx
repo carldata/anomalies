@@ -8,6 +8,7 @@ import { projectScreenActionCreators } from './action-creators';
 import { ProjectComponent } from './project';
 import { IProject } from './state';
 import { AddProjectModal } from './controls/add-project-modal';
+import { ISite, IChannel } from '../model';
 
 interface IProjectComponentProps {
   projects: IProject[];
@@ -17,22 +18,14 @@ interface IProjectComponentActionCreators {
   goToAnomaliesScreen: (project: IProject) => any;
   getAllProjectsAsyncCall: () => any;
   addProjectStart: (project: IProject) => any;
+  getSites: (db: string) => any;
+  getChannels: (siteId: string) => any;
+  showAddProject: () => any;
 }
 
-interface IProjectComponentState {
-  showModal: boolean;
-}
-
-class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators, IProjectComponentState> {
+class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators> {
   constructor(props: IProjectComponentProps & IProjectComponentActionCreators) {
     super(props);
-
-    this.state = { showModal: false }
-    this.showAddProjectModal.bind(this);
-  }
-
-  showAddProjectModal(show: boolean) {
-    this.setState({ showModal: show });
   }
 
   public componentDidMount() {
@@ -56,19 +49,18 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
           </ListGroup>
         </FormGroup>
         <FormGroup>
-          <Button id='btnAddProject' bsStyle='primary' onClick={() => this.showAddProjectModal(true)}>Add Project</Button>
+          <Button id='btnAddProject' bsStyle='primary' onClick={() => this.props.showAddProject()}>Add Project</Button>
         </FormGroup>
       </Form>
-      <AddProjectModal id='' name='' site='' raw='' final='' showModal={this.state.showModal} addProject={(e) => this.props.addProjectStart(e)}
-        hideModal={() => this.showAddProjectModal(false)}>
-      </AddProjectModal>
+      <AddProjectModal></AddProjectModal>
     </div>;
   }
+
 }
 
 function mapStateToProps(state: IState) {
   return {
-    projects: state.projectsScreen.projects
+    projects: state.projectsScreen.projects,
   };
 }
 
@@ -76,7 +68,10 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     goToAnomaliesScreen: projectScreenActionCreators.goToAnomaliesScreen,
     getAllProjectsAsyncCall: projectScreenActionCreators.getAllProjectsAsyncCall,
-    addProjectStart: projectScreenActionCreators.addProjectStart
+    addProjectStart: projectScreenActionCreators.addProjectStart,
+    getSites: projectScreenActionCreators.getSites,
+    getChannels: projectScreenActionCreators.getChannels,
+    showAddProject: projectScreenActionCreators.showAddProject,
   }, dispatch);
 }
 
