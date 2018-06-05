@@ -7,7 +7,7 @@ import { IProject } from './state';
 import { Requests } from '../requests';
 import { IState } from '../state';
 import * as _ from 'lodash';
-import { ISite, IChannel } from '../model';
+import { ISite, IChannel, ISitesChannels } from '../model';
 
 function* goToAnomalies(action) {
   yield put({ type: anomaliesScreenActionTypes.PASS_PROJECT_TO_ANOMALIES, payload: action.payload });
@@ -54,7 +54,7 @@ export function* showAddProject(action) {
        payload: {
          sites,
          channels,
-       },
+       } as ISitesChannels,
       });
   } catch (error) {
     // todo notify when error occurs

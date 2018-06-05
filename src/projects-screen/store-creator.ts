@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import { Action, combineActions, handleActions } from 'redux-actions';
 import { projectsScreenActionTypes } from './action-creators';
 import { IProject, IProjectsScreenState } from './state';
-import { ISite, IChannel } from '../model';
+import { ISite, IChannel, ISitesChannels } from '../model';
 
 const initialState = {
   projects: [],
@@ -11,7 +11,7 @@ const initialState = {
   showModal: false,
 } as IProjectsScreenState;
 
-export default handleActions<IProjectsScreenState, IProject[] | IProject | ISite[] | IChannel[] | any>({
+export default handleActions<IProjectsScreenState, IProject[] | IProject | ISite[] | IChannel[] | ISitesChannels>({
   [projectsScreenActionTypes.GET_ALL_PROJECTS_ASYNC_CALL_FULFILED]: (state: IProjectsScreenState, action: Action<IProject[]>) => {
     return _.extend({}, state, { projects: action.payload } as IProjectsScreenState);
   },
@@ -33,7 +33,7 @@ export default handleActions<IProjectsScreenState, IProject[] | IProject | ISite
       channels: action.payload,
     } as IProjectsScreenState;
   },
-  [projectsScreenActionTypes.SHOW_ADD_PROJECT_FULFILED]: (state: IProjectsScreenState, action: Action<any>) => {
+  [projectsScreenActionTypes.SHOW_ADD_PROJECT_FULFILED]: (state: IProjectsScreenState, action: Action<ISitesChannels>) => {
     return {
       ...state,
       showModal: true,

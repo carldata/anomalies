@@ -7,3 +7,8 @@ export interface IChannel {
   id: string;
   name: string;
 }
+
+export interface ISitesChannels {
+  sites: ISite[];
+  channels: IChannel[];
+}
