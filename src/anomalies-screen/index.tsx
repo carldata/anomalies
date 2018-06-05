@@ -15,6 +15,7 @@ import { AddChannelModal } from './controls/add-channel-control';
 import * as dateFns from 'date-fns';
 import * as _ from 'lodash';
 import { IDomain, IHpSliderHandleValues } from 'time-series-scroller/lib/out/hp-slider/interfaces';
+import { Column } from 'react-data-grid';
 
 interface IAnomaliesComponentProps {
   mainChartState: IHpTimeSeriesChartState;
@@ -68,7 +69,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       supportingChannels: _.cloneDeep(props.supportingChannels),
-      gridState: { series: [] },
+      gridState: { rows: [] },
     }
   }
 
@@ -150,10 +151,10 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
               displayDragBar={true}
               handleValues={{ left: this.state.windowUnixFrom, right: this.state.windowUnixTo } as IHpSliderHandleValues<number>}
               handleMoved={(value: number | number[], type: EnumHandleType) => {
-                let { windowUnixFrom, windowUnixTo } = handleMovedCallback(value, type, {
+                const { windowUnixFrom, windowUnixTo } = handleMovedCallback(value, type, {
                   windowUnixFrom: this.state.windowUnixFrom,
-                  windowUnixTo: this.state.windowUnixTo
-                } as IUnixFromTo)
+                  windowUnixTo: this.state.windowUnixTo,
+                } as IUnixFromTo);
 
                 const newSupportingChannelsState = _.map(this.state.supportingChannels, (el) => {
                   return {
@@ -161,27 +162,28 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                     channel: el.channel,
                     chartState: {
                       ...el.chartState,
-                      windowUnixFrom: windowUnixFrom,
-                      windowUnixTo: windowUnixTo,
-                    } as IHpTimeSeriesChartState
+                      windowUnixFrom,
+                      windowUnixTo,
+                    } as IHpTimeSeriesChartState,
                   };
-                })
+                });
 
                 this.setState({
-                  windowUnixFrom: windowUnixFrom,
-                  windowUnixTo: windowUnixTo,
+                  windowUnixFrom,
+                  windowUnixTo,
                   mainChartState: {
                     ...this.state.mainChartState,
-                    windowUnixFrom: windowUnixFrom,
-                    windowUnixTo: windowUnixTo,
+                    windowUnixFrom,
+                    windowUnixTo,
                   } as IHpTimeSeriesChartState,
                   finalChartState: {
                     ...this.state.finalChartState,
-                    windowUnixFrom: windowUnixFrom,
-                    windowUnixTo: windowUnixTo,
+                    windowUnixFrom,
+                    windowUnixTo,
                   } as IHpTimeSeriesChartState,
                   supportingChannels: newSupportingChannelsState,
-                })
+                });
+
               }}
               fitToParent={{ toWidth: true }}
             ></HpSlider>
@@ -245,8 +247,21 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         </Row>
         <Row>
           <Col md={12}>
-            <DataGrid gridState={this.state.gridState} supportingChannels={this.state.supportingChannels} >
-            </DataGrid>
+            <DataGrid
+              columns={
+                _.concat(
+                  [
+                    { key: 'date', name: 'Timestamp' },
+                    { key: 'rawValue', name: 'Raw' },
+                    { key: 'editedValue', name: 'Final' },
+                    { key: 'fixedValue', name: 'Fixed' },
+                  ] as Column[],
+                  _.map(this.state.supportingChannels, (c) => ({
+                    key: `extendedValue${_.indexOf(this.state.supportingChannels, c) + 1}`,
+                    name: `${c.site} ${c.channel}`,
+                  }) as Column ))}
+              rows={this.state.gridState.rows}
+            />
           </Col>
         </Row>
         <Row>
