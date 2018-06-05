@@ -8,7 +8,6 @@ const initialState = {
   projects: [],
   sites: [],
   channels: [],
-  selectedProject: {},
   showModal: false,
 } as IProjectsScreenState;
 
@@ -45,7 +44,6 @@ export default handleActions<IProjectsScreenState, IProject[] | IProject | ISite
     return {
       ...state,
       showModal: false,
-      selectedProject: {},
     };
   },
 }, initialState);

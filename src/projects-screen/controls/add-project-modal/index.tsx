@@ -10,7 +10,6 @@ import { IState } from '../../../state';
 
 interface IAddProjectModalComponentProps {
   showModal: boolean;
-  project: IProject;
   sites: ISite[];
   channels: IChannel[];
 }
@@ -160,7 +159,6 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
 
 function mapStateToProps(state: IState) {
   return {
-    project: state.projectsScreen.selectedProject,
     showModal: state.projectsScreen.showModal,
     sites: state.projectsScreen.sites,
     channels: state.projectsScreen.channels,
