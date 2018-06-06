@@ -5,52 +5,57 @@ import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { IHpTimeSeriesChartState } from 'time-series-scroller';
 import { IAddChannelState } from './state';
-import _ = require('lodash');
+import * as _ from 'lodash';
 import update from 'immutability-helper';
 import { Button, ButtonGroup, ControlLabel, Form, FormControl, FormGroup, Row, Col, DropdownButton, MenuItem, Modal } from 'react-bootstrap';
 import { CSVLink, CSVDownload } from 'react-csv';
-import { ISite } from '../../../model';
+import { ISite, IChannel } from '../../../model';
+import { anomaliesScreenActionCreators } from '../../action-creators';
 
 interface IAddChannelComponentProps {
   showModal: boolean;
   sites: ISite[];
+  channels?: IChannel[];
 }
 
 interface IAddChannelComponentActionCreators {
-  addChannel: (siteChannelInfo: any) => any;
+  addAndPopulateChannel: (siteChannelInfo: any) => any;
+  addEmptyChannel: (siteChannelIfno: any) => any;
   hideModal: () => any;
 }
 
 interface IAddChannelComponentState {
-  siteId: string;
-  channelId: string;
   channelType: string;
-  showModal: boolean;
-  sites: ISite[];
 }
 
 export class AddChannelModalComponent extends React.Component<IAddChannelComponentProps & IAddChannelComponentActionCreators, IAddChannelComponentState> {
+  private siteId: string;
+  private site: string;
+  private channelId: string;
+  private channel: string;
+
   constructor(props: IAddChannelComponentProps & IAddChannelComponentActionCreators, context: any) {
     super(props, context);
+    this.siteId = '';
+    this.site = '';
+    this.channelId = '';
+    this.channel = '';
     this.state = {
-      showModal: false,
-      siteId: '',
-      channelId: '',
       channelType: '',
-      sites: [],
-    }
-  };
+    };
+  }
 
-  componentWillReceiveProps(props: IAddChannelComponentProps) {
-    this.setState({ showModal: props.showModal, sites: props.sites });
-  };
+  // componentWillReceiveProps(props: IAddChannelComponentProps) {
+  //   this.setState({ showModal: props.showModal, sites: props.sites });
+  // };
 
-  approveAddChannel() {
-    //   this.hideModal();
-  };
+  //approveAddChannel() {
+  //   this.hideModal();
+  //};
 
-  render() {
-    return <Modal show={this.state.showModal} onHide={() => this.props.hideModal()}>
+
+  public render() {
+    return <Modal show={this.props.showModal} onHide={() => this.props.hideModal()}>
       <Modal.Body>
         <Form horizontal>
           <FormGroup>
@@ -58,13 +63,15 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
               Site:
             </Col>
             <Col sm={10}>
-              <select id='selectProjectSite' className='form-control' onChange={(e) => {
+              <select id='selectProjectSiteAnomalies' className='form-control' onChange={(e) => {
                 const selectElement = (e.target as HTMLSelectElement);
                 console.log(selectElement.value);
                 console.log(selectElement.options[selectElement.selectedIndex].innerText);
+                this.siteId = selectElement.value;
+                this.site = selectElement.value;
               }} >
                 {
-                  // this.state.sites.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
+                  this.props.sites.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
                 }
               </select>
             </Col>
@@ -74,7 +81,18 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
               Channel:
             </Col>
             <Col sm={10}>
-              <FormControl type='text' onChange={(e) => this.setState({ channelId: (e.target as HTMLInputElement).value })} value={this.state.channelId}></FormControl>
+              {/* <FormControl type='text' onChange={(e) => this.setState({ channelId: (e.target as HTMLInputElement).value })} value={this.state.channelId}></FormControl> */}
+              <select id='selectProjectSiteAnomalies' className='form-control' onChange={(e) => {
+                const selectChannelElement = (e.target as HTMLSelectElement);
+                console.log(selectChannelElement.value);
+                console.log(selectChannelElement.options[selectChannelElement.selectedIndex].innerText);
+                this.channelId = selectChannelElement.value;
+                this.channel = selectChannelElement.value;
+              }} >
+                {
+                  this.props.channels.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
+                }
+              </select>
             </Col>
           </FormGroup>
           <FormGroup>
@@ -91,17 +109,36 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
         <Button id='btnCancelAddChannelModal' onClick={() => this.props.hideModal()}>
           Cancel
         </Button>
-        <Button id='btnApproveAddChannelModal' bsStyle='primary' onClick={() => this.props.addChannel({
-          site: this.state.siteId,
-          channel: this.state.channelId,
+        <Button id='btnApproveAddChannelModal' bsStyle='primary' onClick={() => this.addChannel({
+          site: this.siteId,
+          channel: this.channelId,
           type: this.state.channelType,
         })} >
           Add
         </Button>
       </Modal.Footer>
-    </Modal>
+    </Modal>;
+  }
+
+ private addChannel(siteChannelInfo: any) {
+   
+}
+}
+
+function mapStateToProps(state: IState) {
+  return {
+    showModal: state.anomaliesScreen.showModal,
+    sites: state.anomaliesScreen.sites,
+    channels: state.anomaliesScreen.channels,
   };
-};
+}
+
+function matchDispatchToProps(dispatch: Dispatch<{}>) {
+  return bindActionCreators({
+    addAndPopulateChannel: anomaliesScreenActionCreators.addAndPopulateChannel,
+    addEmptyChannel: anomaliesScreenActionCreators.addEmptyChannel,
+  }, dispatch);
+}
 
 export const AddChannelModal = AddChannelModalComponent;
 

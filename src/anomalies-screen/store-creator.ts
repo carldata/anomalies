@@ -13,6 +13,7 @@ import { IDataGridState } from './controls/data-grid/state';
 import { IProject, IProjectSupportingChannel } from '../projects-screen/state';
 import { channel } from 'redux-saga';
 import * as dateFns from 'date-fns';
+import { ISitesChannels } from '../model';
 
 export interface IAnomaliesCharts {
   mainChartState: IHpTimeSeriesChartState;
@@ -32,9 +33,12 @@ const initialState = {
   project: {} as IProject,
   lastStartDate: dateFns.format(dateFns.subMonths(endDate, 3), 'YYYY-MM-DDTHH:mm:ss'),
   lastEndDate: dateFns.format(endDate, 'YYYY-MM-DDTHH:mm:ss'),
+  showModal: false,
+  sites: [],
+  channels: [],
 } as IAnomaliesScreenState;
 
-export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGridState | IProject | number | any>({
+export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGridState | IProject | number | any | ISitesChannels>({
   [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_CHART_FULFILED]: (state: IAnomaliesScreenState, action: Action<IAnomaliesCharts>) => {
     return _.extend({}, state, {
       mainChartState: action.payload.mainChartState,
@@ -122,5 +126,12 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
         ..._.slice(state.supportingChannels, action.payload + 1, state.supportingChannels.length)
       ]
     }
-  }
+  },
+  [anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FULFILED]: (state: IAnomaliesScreenState, action: Action<ISitesChannels>) => {
+    return {
+      ...state,
+      sites: action.payload.sites,
+      channels: action.payload.channels,
+    }
+  },
 }, initialState);

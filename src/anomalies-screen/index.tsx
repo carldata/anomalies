@@ -16,6 +16,7 @@ import * as dateFns from 'date-fns';
 import * as _ from 'lodash';
 import { IDomain, IHpSliderHandleValues } from 'time-series-scroller/lib/out/hp-slider/interfaces';
 import { Column } from 'react-data-grid';
+import { ISite } from '../model';
 
 interface IAnomaliesComponentProps {
   mainChartState: IHpTimeSeriesChartState;
@@ -49,7 +50,6 @@ interface IAnomaliesComponentState {
   endDate: string;
   windowUnixFrom: number;
   windowUnixTo: number;
-  sites: any;
 }
 
 class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators, IAnomaliesComponentState> {
@@ -72,7 +72,6 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       supportingChannels: _.cloneDeep(props.supportingChannels),
-      sites: '',
       gridState: { rows: [] },
     }
   }
@@ -99,7 +98,6 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       windowUnixFrom: nextProps.mainChartState.dateRangeUnixFrom,
       windowUnixTo: nextProps.mainChartState.dateRangeUnixTo,
       gridState: nextProps.gridState,
-      sites: nextProps.sites,
     });
   }
 
@@ -274,7 +272,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
           </Col>
         </Row>
         <Row>
-          <AddChannelModal
+          {/* <AddChannelModal
             showModal={this.state.showModal}
             addChannel={(e) => {
               console.log(e);
@@ -290,7 +288,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
             }}
             hideModal={() => { this.setState({ showModal: false }) }}
             sites={this.state.sites}>
-          </AddChannelModal>
+          </AddChannelModal> */}
         </Row>
       </div>
     </div>;
@@ -306,7 +304,6 @@ function mapStateToProps(state: IState) {
     project: state.anomaliesScreen.project,
     lastStartDate: state.anomaliesScreen.lastStartDate,
     lastEndDate: state.anomaliesScreen.lastEndDate,
-    sites: state.anomaliesScreen.sites,
   };
 }
 
