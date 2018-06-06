@@ -9,7 +9,6 @@ import _ = require('lodash');
 import update from 'immutability-helper';
 import { Button, ButtonGroup, ControlLabel, Form, FormControl, FormGroup, Row, Col, DropdownButton, MenuItem, Modal } from 'react-bootstrap';
 import { CSVLink, CSVDownload } from 'react-csv';
-import Select from 'react-select';
 import { ISite } from '../../../model';
 
 interface IAddChannelComponentProps {

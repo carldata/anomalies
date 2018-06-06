@@ -233,7 +233,7 @@ function* addAndPopulateChannel(action: any) {
 
 function* getSitesForProject() {
   try {
-    yield put({ type: anomaliesScreenActionTypes.GET_SITE_IDS_FETCHING });
+    // yield put({ type: anomaliesScreenActionTypes.GET_SITE_IDS_FETCHING });
     const sites: ISite[] = yield Requests.getSites('');
 
     sites.push({ id: '1', name: 'Site1'});
