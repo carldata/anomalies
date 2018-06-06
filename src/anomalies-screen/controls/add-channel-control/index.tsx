@@ -64,7 +64,7 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
                 console.log(selectElement.options[selectElement.selectedIndex].innerText);
               }} >
                 {
-                  this.state.sites.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
+                  // this.state.sites.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
                 }
               </select>
             </Col>
