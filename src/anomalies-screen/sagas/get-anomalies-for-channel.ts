@@ -148,7 +148,7 @@ function* getAnomaliesForChannel(action: any) {
         extendedValue1: _.size(supportingChannelsValuesMap) > 0 ?
           supportingChannelsValuesMap[0].has(timeKey) ? supportingChannelsValuesMap[0].get(timeKey) : null
           : null,
-        extendedValue2: _.size(supportingChannelsValuesMap) > 0 ?
+        extendedValue2: _.size(supportingChannelsValuesMap) > 1 ?
           supportingChannelsValuesMap[1].has(timeKey) ? supportingChannelsValuesMap[1].get(timeKey) : null
           : null,
       });
