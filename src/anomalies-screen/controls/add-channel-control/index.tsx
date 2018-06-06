@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactDataGrid from 'react-data-grid'
+import * as ReactDataGrid from 'react-data-grid';
 import { IState } from '../../../state';
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -15,13 +15,13 @@ import { anomaliesScreenActionCreators } from '../../action-creators';
 interface IAddChannelComponentProps {
   showModal: boolean;
   sites: ISite[];
-  channels?: IChannel[];
+  channels: IChannel[];
 }
 
 interface IAddChannelComponentActionCreators {
   addAndPopulateChannel: (siteChannelInfo: any) => any;
   addEmptyChannel: (siteChannelIfno: any) => any;
-  hideModal: () => any;
+  cancelShowModal: () => any;
 }
 
 interface IAddChannelComponentState {
@@ -43,19 +43,12 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
     this.state = {
       channelType: '',
     };
+
+    this.addChannel = this.addChannel.bind(this);
   }
 
-  // componentWillReceiveProps(props: IAddChannelComponentProps) {
-  //   this.setState({ showModal: props.showModal, sites: props.sites });
-  // };
-
-  //approveAddChannel() {
-  //   this.hideModal();
-  //};
-
-
   public render() {
-    return <Modal show={this.props.showModal} onHide={() => this.props.hideModal()}>
+    return <Modal show={this.props.showModal} onHide={() => this.props.cancelShowModal()}>
       <Modal.Body>
         <Form horizontal>
           <FormGroup>
@@ -106,12 +99,14 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button id='btnCancelAddChannelModal' onClick={() => this.props.hideModal()}>
+        <Button id='btnCancelAddChannelModal' onClick={() => this.props.cancelShowModal()}>
           Cancel
         </Button>
         <Button id='btnApproveAddChannelModal' bsStyle='primary' onClick={() => this.addChannel({
-          site: this.siteId,
-          channel: this.channelId,
+          siteId: this.siteId,
+          site: this.site,
+          channelId: this.channelId,
+          channel: this.channel,
           type: this.state.channelType,
         })} >
           Add
@@ -120,9 +115,9 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
     </Modal>;
   }
 
- private addChannel(siteChannelInfo: any) {
-   
-}
+  private addChannel(siteChannelInfo: any) {
+    console.log(siteChannelInfo);
+  }
 }
 
 function mapStateToProps(state: IState) {
@@ -137,8 +132,9 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     addAndPopulateChannel: anomaliesScreenActionCreators.addAndPopulateChannel,
     addEmptyChannel: anomaliesScreenActionCreators.addEmptyChannel,
+    cancelShowModal: anomaliesScreenActionCreators.cancelShowAddChannel,
   }, dispatch);
 }
 
-export const AddChannelModal = AddChannelModalComponent;
+export const AddChannelModal = connect(mapStateToProps, matchDispatchToProps)(AddChannelModalComponent);
 

@@ -26,7 +26,6 @@ interface IAnomaliesComponentProps {
   project: IProject;
   lastStartDate: string;
   lastEndDate: string;
-  sites: any;
 }
 
 interface IAnomaliesComponentActionCreators {
@@ -37,6 +36,7 @@ interface IAnomaliesComponentActionCreators {
   copyRawToEdited: () => any;
   addAndPopulateChannel: (siteChannelInfo: any, startDate: string, endDate: string) => any;
   addEmptyChannel: (siteChannelInfo: any, dateRangeUnixFrom: number, dateRangeUnixTo: number) => any;
+  showAddChannelModal: () => any;
   deleteSupportingChannel: (idx: number) => any;
 }
 
@@ -85,9 +85,9 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       });
     }
 
-    if (_.isEmpty(this.props.sites)) {
-      this.props.getSitesForProject();
-    }
+    // if (_.isEmpty(this.props.sites)) {
+    //   this.props.getSitesForProject();
+    // }
   }
 
   componentWillReceiveProps(nextProps: IAnomaliesComponentProps) {
@@ -249,7 +249,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 
         <Row style={{ marginTop: 4 }}>
           <Col sm={12}>
-            <Button className='pull-right' bsStyle='primary' onClick={() => this.setState({ showModal: true })} >Add Channel</Button>
+            <Button className='pull-right' bsStyle='primary' onClick={ () => { this.props.showAddChannelModal(); } }>Add Channel</Button>
           </Col>
         </Row>
         <Row>
@@ -272,6 +272,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
           </Col>
         </Row>
         <Row>
+          <AddChannelModal/>
           {/* <AddChannelModal
             showModal={this.state.showModal}
             addChannel={(e) => {
@@ -317,6 +318,7 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
     addEmptyChannel: anomaliesScreenActionCreators.addEmptyChannel,
     addAndPopulateChannel: anomaliesScreenActionCreators.addAndPopulateChannel,
     deleteSupportingChannel: anomaliesScreenActionCreators.deleteSupportingChannel,
+    showAddChannelModal: anomaliesScreenActionCreators.showAddChannel,
   }, dispatch);
 }
 

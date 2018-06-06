@@ -4,7 +4,7 @@ import { anomaliesScreenActionTypes } from '../action-creators';
 import { Requests } from '../../requests';
 import { IChannel, ISite, ISitesChannels } from '../../model';
 
-function* showAddChannel(action) {
+function* showAddChannel() {
   try {
     yield put({type: anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_FETCHING});
     const sites: ISite[] = yield Requests.getSites('FlowMetrix');
@@ -21,6 +21,6 @@ function* showAddChannel(action) {
   }
 }
 
-export function* watchShowAddNewProject() {
+export function* watchShowAddNewChannel() {
   yield takeEvery(anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_START, showAddChannel);
 }

@@ -36,6 +36,7 @@ export const anomaliesScreenActionTypes = {
   SHOW_ADD_CHANNEL_FETCHING: 'SHOW_ADD_CHANNEL_FETCHING',
   SHOW_ADD_CHANNEL_FULFILED: 'SHOW_ADD_CHANNEL_FULFILED',
   SHOW_ADD_CHANNEL_REJECTED: 'SHOW_ADD_CHANNEL_REJECTED',
+  CANCEL_SHOW_ADD_CHANNEL: 'CANCEL_SHOW_ADD_CHANNEL',
 };
 
 export const anomaliesScreenActionCreators = {
@@ -78,7 +79,7 @@ export const anomaliesScreenActionCreators = {
     return {
       type: anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL_START,
       payload: idx,
-    }
+    };
   },
   saveProject: (project: IProject) => {
     return {
@@ -86,10 +87,14 @@ export const anomaliesScreenActionCreators = {
       payload: project,
     };
   },
-  showAddChannel: (populateChannel: boolean) => {
+  showAddChannel: () => {
     return {
       type: anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_START,
-      payload: populateChannel,
+    };
+  },
+  cancelShowAddChannel: () => {
+    return {
+      type: anomaliesScreenActionTypes.CANCEL_SHOW_ADD_CHANNEL,
     };
   },
 };

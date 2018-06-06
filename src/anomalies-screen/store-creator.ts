@@ -3,7 +3,7 @@ import { ParseResult } from 'papaparse';
 import { Action, handleActions } from 'redux-actions';
 import {
   EnumTimeSeriesType, hpTimeSeriesChartAuxiliary, hpTimeSeriesChartReducerAuxFunctions, IExternalSourceTimeSeries,
-  IHpTimeSeriesChartState
+  IHpTimeSeriesChartState,
 } from 'time-series-scroller';
 import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig } from 'time-series-scroller/lib/out/hp-time-series-chart/csv-loading/calculations';
 import { anomaliesScreenActionTypes } from './action-creators';
@@ -108,8 +108,8 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
         site: action.payload.siteChannelInfo.site,
         channel: action.payload.siteChannelInfo.channel,
         chartState: action.payload.channelChartState,
-      })
-    }
+      }),
+    };
   },
   [anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL]: (state: IAnomaliesScreenState, action: Action<number>) => {
     return {
@@ -119,19 +119,33 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
         supportingChannels: [
           ..._.slice(state.project.supportingChannels, 0, action.payload),
           ..._.slice(state.project.supportingChannels, action.payload + 1, state.project.supportingChannels.length)
-        ]
+        ],
       },
       supportingChannels: [
         ..._.slice(state.supportingChannels, 0, action.payload),
         ..._.slice(state.supportingChannels, action.payload + 1, state.supportingChannels.length)
-      ]
-    }
+      ],
+    };
   },
   [anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FULFILED]: (state: IAnomaliesScreenState, action: Action<ISitesChannels>) => {
     return {
       ...state,
       sites: action.payload.sites,
       channels: action.payload.channels,
+    };
+  },
+  [anomaliesScreenActionTypes.CANCEL_SHOW_ADD_CHANNEL]: (state: IAnomaliesScreenState) => {
+    return {
+      ...state,
+      showModal: false,
+    };
+  },
+  [anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_FULFILED]: (state: IAnomaliesScreenState, action: Action<ISitesChannels>) =>{
+    return {
+      ...state,
+      sites:  action.payload.sites,
+      channels: action.payload.channels,
+      showModal: true,
     }
   },
 }, initialState);
