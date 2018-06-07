@@ -292,7 +292,6 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     saveProject: anomaliesScreenActionCreators.saveProject,
     getAnomaliesForProject: anomaliesScreenActionCreators.getAnomaliesForProject,
-    // getSitesForProject: anomaliesScreenActionCreators.getSitesForProject,
     goToProjectsScreen: anomaliesScreenActionCreators.goToProjectsScreen,
     copyRawToEdited: anomaliesScreenActionCreators.copyRawToEdited,
     deleteSupportingChannel: anomaliesScreenActionCreators.deleteSupportingChannel,
