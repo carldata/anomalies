@@ -24,11 +24,23 @@ export const anomaliesScreenActionTypes = {
   SAVE_PROJECT_FETCHING: 'SAVE_PROJECT_FETCHING',
   SAVE_PROJECT_FULFILED: 'SAVE_PROJECT_FULFILED',
   SAVE_PROJECT_REJECTED: 'SAVE_PROJECT_REJECTED',
+  GET_CHANNELS_FOR_SITE_ANOMALIES_START: 'GET_CHANNELS_FOR_SITE_ANOMALIES_START',
+  GET_CHANNELS_FOR_SITE_ANOMALIES_FETCHING: 'GET_CHANNELS_FOR_SITE_ANOMALIES_FETCHING',
+  GET_CHANNELS_FOR_SITE_ANOMALIES_FULFILED: 'GET_CHANNELS_FOR_SITE_ANOMALIES_FULFILED',
+  GET_CHANNELS_FOR_SITE_ANOMALIES_REJECTED: 'GET_CHANNELS_FOR_SITE_ANOMALIES_REJECTED',
+  SHOW_ADD_CHANNEL_START: 'SHOW_ADD_CHANNEL_START',
+  SHOW_ADD_CHANNEL_FETCHING: 'SHOW_ADD_CHANNEL_FETCHING',
+  SHOW_ADD_CHANNEL_FULFILED: 'SHOW_ADD_CHANNEL_FULFILED',
+  SHOW_ADD_CHANNEL_REJECTED: 'SHOW_ADD_CHANNEL_REJECTED',
+  CANCEL_SHOW_ADD_CHANNEL: 'CANCEL_SHOW_ADD_CHANNEL',
 };
 
 export const anomaliesScreenActionCreators = {
   getAnomaliesForProject: (projectInfo) => {
     return { type: anomaliesScreenActionTypes.GET_ANOMALIES_START, payload: projectInfo };
+  },
+  getChannelsForSite: (siteId: string) => {
+    return { type: anomaliesScreenActionTypes.GET_CHANNELS_FOR_SITE_ANOMALIES_START, payload: siteId };
   },
   addAndPopulateChannel: (siteChannelInfo: any, startDate: string, endDate: string) => {
     return {
@@ -40,15 +52,13 @@ export const anomaliesScreenActionCreators = {
       }
     }
   },
-  addEmptyChannel: (siteChannelInfo: any, dateRangeUnixFrom: number, dateRangeUnixTo: number) => {
+  addEmptyChannel: (siteChannelInfo: any) => {
     return {
       type: anomaliesScreenActionTypes.ADD_EMPTY_CHANNEL_START,
       payload: {
-        siteChannelInfo: siteChannelInfo,
-        dateRangeUnixFrom: dateRangeUnixFrom,
-        dateRangeUnixTo: dateRangeUnixTo,
-      }
-    }
+        siteChannelInfo,
+      },
+    };
   },
   goToProjectsScreen: () => {
     return { type: anomaliesScreenActionTypes.GO_TO_PROJECTS };
@@ -60,12 +70,23 @@ export const anomaliesScreenActionCreators = {
     return {
       type: anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL_START,
       payload: idx,
-    }
+    };
   },
   saveProject: (project: IProject) => {
     return {
       type: anomaliesScreenActionTypes.SAVE_PROJECT_START,
       payload: project,
-    }
-  }
+    };
+  },
+  showAddChannel: (mainChartEmpty: boolean) => {
+    return {
+      type: anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_START,
+      payload: mainChartEmpty,
+    };
+  },
+  cancelShowAddChannel: () => {
+    return {
+      type: anomaliesScreenActionTypes.CANCEL_SHOW_ADD_CHANNEL,
+    };
+  },
 };

@@ -5,3 +5,5 @@ export { watchDeleteSupportingChannel } from './delete-supporting-channel';
 export { watchGetAnomaliesForChannel } from './get-anomalies-for-channel';
 export { watchGoToProjects } from './go-to-projects';
 export { watchSaveProject } from './save-project';
+export { watchShowAddNewChannel } from './show-add-new-channel';
+export { watchGetChannelsForSiteAnomalies } from './get-channels-for-site';

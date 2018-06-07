@@ -10,6 +10,7 @@ import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig 
 import {
   EnumTimeSeriesType, hpTimeSeriesChartAuxiliary, hpTimeSeriesChartReducerAuxFunctions, IExternalSourceTimeSeries, IHpTimeSeriesChartState,
 } from 'time-series-scroller';
+
 import { IDataGridState } from '../controls/data-grid/state';
 import { Requests } from '../../requests';
 import { IProject } from '../../projects-screen/state';

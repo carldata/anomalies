@@ -3,7 +3,7 @@ import { ParseResult } from 'papaparse';
 import { Action, handleActions } from 'redux-actions';
 import {
   EnumTimeSeriesType, hpTimeSeriesChartAuxiliary, hpTimeSeriesChartReducerAuxFunctions, IExternalSourceTimeSeries,
-  IHpTimeSeriesChartState
+  IHpTimeSeriesChartState,
 } from 'time-series-scroller';
 import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig } from 'time-series-scroller/lib/out/hp-time-series-chart/csv-loading/calculations';
 import { anomaliesScreenActionTypes } from './action-creators';
@@ -13,6 +13,7 @@ import { IDataGridState } from './controls/data-grid/state';
 import { IProject, IProjectSupportingChannel } from '../projects-screen/state';
 import { channel } from 'redux-saga';
 import * as dateFns from 'date-fns';
+import { ISitesChannels, IShowAddChannelPayload, IChannel } from '../model';
 
 export interface IAnomaliesCharts {
   mainChartState: IHpTimeSeriesChartState;
@@ -32,9 +33,13 @@ const initialState = {
   project: {} as IProject,
   lastStartDate: dateFns.format(dateFns.subMonths(endDate, 3), 'YYYY-MM-DDTHH:mm:ss'),
   lastEndDate: dateFns.format(endDate, 'YYYY-MM-DDTHH:mm:ss'),
+  showModal: false,
+  sites: [],
+  channels: [],
+  mainChartEmpty: true,
 } as IAnomaliesScreenState;
 
-export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGridState | IProject | number | any>({
+export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGridState | IProject | number | any | ISitesChannels| IShowAddChannelPayload | IChannel[]>({
   [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_CHART_FULFILED]: (state: IAnomaliesScreenState, action: Action<IAnomaliesCharts>) => {
     return _.extend({}, state, {
       mainChartState: action.payload.mainChartState,
@@ -81,8 +86,9 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
         site: action.payload.siteChannelInfo.site,
         channel: action.payload.siteChannelInfo.channel,
         chartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
-      })
-    }
+      }),
+      showModal: false,
+    };
   },
   [anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FULFILED]: (state: IAnomaliesScreenState, action: Action<any>) => {
     return {
@@ -101,8 +107,9 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
         site: action.payload.siteChannelInfo.site,
         channel: action.payload.siteChannelInfo.channel,
         chartState: action.payload.channelChartState,
-      })
-    }
+      }),
+      showModal: false,
+    };
   },
   [anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL]: (state: IAnomaliesScreenState, action: Action<number>) => {
     return {
@@ -112,12 +119,33 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
         supportingChannels: [
           ..._.slice(state.project.supportingChannels, 0, action.payload),
           ..._.slice(state.project.supportingChannels, action.payload + 1, state.project.supportingChannels.length)
-        ]
+        ],
       },
       supportingChannels: [
         ..._.slice(state.supportingChannels, 0, action.payload),
         ..._.slice(state.supportingChannels, action.payload + 1, state.supportingChannels.length)
-      ]
-    }
-  }
+      ],
+    };
+  },
+  [anomaliesScreenActionTypes.CANCEL_SHOW_ADD_CHANNEL]: (state: IAnomaliesScreenState) => {
+    return {
+      ...state,
+      showModal: false,
+    };
+  },
+  [anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_FULFILED]: (state: IAnomaliesScreenState, action: Action<IShowAddChannelPayload>) =>{
+    return {
+      ...state,
+      sites:  action.payload.sites,
+      channels: action.payload.channels,
+      showModal: true,
+      mainChartEmpty: action.payload.mainChartEmpty,
+    };
+  },
+  [anomaliesScreenActionTypes.GET_CHANNELS_FOR_SITE_ANOMALIES_FULFILED] : (state: IAnomaliesScreenState, action: Action<IChannel[]>) => {
+    return {
+      ...state,
+      channels: action.payload,
+    };
+  },
 }, initialState);
