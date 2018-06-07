@@ -35,8 +35,6 @@ interface IAnomaliesComponentActionCreators {
   getAnomaliesForProject: (projectAndRange: any) => any;
   getSitesForProject: () => any;
   copyRawToEdited: () => any;
-  addAndPopulateChannel: (siteChannelInfo: any, startDate: string, endDate: string) => any;
-  addEmptyChannel: (siteChannelInfo: any, dateRangeUnixFrom: number, dateRangeUnixTo: number) => any;
   showAddChannelModal: (mainChartEmpty: boolean) => any;
   deleteSupportingChannel: (idx: number) => any;
 }
@@ -294,11 +292,9 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     saveProject: anomaliesScreenActionCreators.saveProject,
     getAnomaliesForProject: anomaliesScreenActionCreators.getAnomaliesForProject,
-    getSitesForProject: anomaliesScreenActionCreators.getSitesForProject,
+    // getSitesForProject: anomaliesScreenActionCreators.getSitesForProject,
     goToProjectsScreen: anomaliesScreenActionCreators.goToProjectsScreen,
     copyRawToEdited: anomaliesScreenActionCreators.copyRawToEdited,
-    addEmptyChannel: anomaliesScreenActionCreators.addEmptyChannel,
-    addAndPopulateChannel: anomaliesScreenActionCreators.addAndPopulateChannel,
     deleteSupportingChannel: anomaliesScreenActionCreators.deleteSupportingChannel,
     showAddChannelModal: anomaliesScreenActionCreators.showAddChannel,
   }, dispatch);

@@ -24,10 +24,10 @@ export const anomaliesScreenActionTypes = {
   SAVE_PROJECT_FETCHING: 'SAVE_PROJECT_FETCHING',
   SAVE_PROJECT_FULFILED: 'SAVE_PROJECT_FULFILED',
   SAVE_PROJECT_REJECTED: 'SAVE_PROJECT_REJECTED',
-  GET_SITES_FOR_PROJECT_ANOMALIES_START: 'GET_SITES_FOR_PROJECT_ANOMALIES_START',
-  GET_SITES_FOR_PROJECT_ANOMALIES_FETCHING: 'GET_SITES_FOR_PROJECT_ANOMALIES_FETCHING',
-  GET_SITES_FOR_PROJECT_ANOMALIES_FULFILED: 'GET_SITES_FOR_PROJECT_ANOMALIES_FULFILED',
-  GET_SITES_FOR_PROJECT_ANOMALIES_REJECTED: 'GET_SITES_FOR_PROJECT_ANOMALIES_REJECTED',
+  // GET_SITES_FOR_PROJECT_ANOMALIES_START: 'GET_SITES_FOR_PROJECT_ANOMALIES_START',
+  // GET_SITES_FOR_PROJECT_ANOMALIES_FETCHING: 'GET_SITES_FOR_PROJECT_ANOMALIES_FETCHING',
+  // GET_SITES_FOR_PROJECT_ANOMALIES_FULFILED: 'GET_SITES_FOR_PROJECT_ANOMALIES_FULFILED',
+  // GET_SITES_FOR_PROJECT_ANOMALIES_REJECTED: 'GET_SITES_FOR_PROJECT_ANOMALIES_REJECTED',
   GET_CHANNELS_FOR_SITE_ANOMALIES_START: 'GET_CHANNELS_FOR_SITE_ANOMALIES_START',
   GET_CHANNELS_FOR_SITE_ANOMALIES_FETCHING: 'GET_CHANNELS_FOR_SITE_ANOMALIES_FETCHING',
   GET_CHANNELS_FOR_SITE_ANOMALIES_FULFILED: 'GET_CHANNELS_FOR_SITE_ANOMALIES_FULFILED',
@@ -43,9 +43,9 @@ export const anomaliesScreenActionCreators = {
   getAnomaliesForProject: (projectInfo) => {
     return { type: anomaliesScreenActionTypes.GET_ANOMALIES_START, payload: projectInfo };
   },
-  getSitesForProject: () => {
-    return { type: anomaliesScreenActionTypes.GET_SITES_FOR_PROJECT_ANOMALIES_START };
-  },
+  // getSitesForProject: () => {
+  //   return { type: anomaliesScreenActionTypes.GET_SITES_FOR_PROJECT_ANOMALIES_START };
+  // },
   getChannelsForSite: (siteId: string) => {
     return { type: anomaliesScreenActionTypes.GET_CHANNELS_FOR_SITE_ANOMALIES_START, payload: siteId };
   },
@@ -59,15 +59,13 @@ export const anomaliesScreenActionCreators = {
       }
     }
   },
-  addEmptyChannel: (siteChannelInfo: any, dateRangeUnixFrom: number, dateRangeUnixTo: number) => {
+  addEmptyChannel: (siteChannelInfo: any) => {
     return {
       type: anomaliesScreenActionTypes.ADD_EMPTY_CHANNEL_START,
       payload: {
-        siteChannelInfo: siteChannelInfo,
-        dateRangeUnixFrom: dateRangeUnixFrom,
-        dateRangeUnixTo: dateRangeUnixTo,
-      }
-    }
+        siteChannelInfo,
+      },
+    };
   },
   goToProjectsScreen: () => {
     return { type: anomaliesScreenActionTypes.GO_TO_PROJECTS };

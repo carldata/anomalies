@@ -22,7 +22,7 @@ interface IAddChannelComponentProps {
 }
 
 interface IAddChannelComponentActionCreators {
-  addAndPopulateChannel: (siteChannelInfoWithDatese: any) => any;
+  addAndPopulateChannel: (siteChannelInfo: any, startDate: string, endDate: string) => any;
   addEmptyChannel: (siteChannelInfo: any) => any;
   cancelShowModal: () => any;
 }
@@ -125,21 +125,18 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
   private addChannel() {
     if (this.props.mainChartEmpty) {
       this.props.addEmptyChannel({
-        siteChannelInfo: {
-          site: this.siteId,
-          channel: this.channelId,
-          type: this.state.channelType,
-        }});
+        site: this.siteId,
+        channel: this.channelId,
+        type: this.state.channelType,
+      });
     } else {
       this.props.addAndPopulateChannel({
-          siteChannelInfo: {
-            site: this.siteId,
-            channel: this.channelId,
-            type: this.state.channelType,
+        site: this.siteId,
+        channel: this.channelId,
+        type: this.state.channelType,
       },
-      startDate: this.props.lastStartDate,
-      endDate: this.props.lastEndDate,
-    });
+        this.props.lastStartDate,
+        this.props.lastEndDate);
     }
   }
 }

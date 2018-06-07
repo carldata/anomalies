@@ -87,11 +87,12 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
         channel: action.payload.siteChannelInfo.channel,
         chartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       }),
+      showModal: false,
     };
   },
-  [anomaliesScreenActionTypes.GET_SITES_FOR_PROJECT_ANOMALIES_FULFILED]: (state: IAnomaliesScreenState, action: Action<any>) => {
-    return _.extend({}, state, { sites: action.payload.sites });
-  },
+  // [anomaliesScreenActionTypes.GET_SITES_FOR_PROJECT_ANOMALIES_FULFILED]: (state: IAnomaliesScreenState, action: Action<any>) => {
+  //   return _.extend({}, state, { sites: action.payload.sites });
+  // },
   [anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FULFILED]: (state: IAnomaliesScreenState, action: Action<any>) => {
     return {
       ...state,
@@ -110,6 +111,7 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
         channel: action.payload.siteChannelInfo.channel,
         chartState: action.payload.channelChartState,
       }),
+      showModal: false,
     };
   },
   [anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL]: (state: IAnomaliesScreenState, action: Action<number>) => {
@@ -126,13 +128,6 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
         ..._.slice(state.supportingChannels, 0, action.payload),
         ..._.slice(state.supportingChannels, action.payload + 1, state.supportingChannels.length)
       ],
-    };
-  },
-  [anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FULFILED]: (state: IAnomaliesScreenState, action: Action<ISitesChannels>) => {
-    return {
-      ...state,
-      sites: action.payload.sites,
-      channels: action.payload.channels,
     };
   },
   [anomaliesScreenActionTypes.CANCEL_SHOW_ADD_CHANNEL]: (state: IAnomaliesScreenState) => {
