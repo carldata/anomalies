@@ -26,9 +26,9 @@ function* getAnomaliesForChannel(action: any) {
 
   try {
     yield put(_.toPlainObject(new ShowModalAction()));
-    const rawChannelResponse = yield Requests.getChannelData(`${project.site}-${project.raw}`, startDate, endDate);
-    const fixedAnomaliesResponse = yield Requests.getFixedAnomalies(`${project.site}-${project.raw}`, startDate, endDate);
-    const editedChannelResponse = yield Requests.getChannelData(`${project.site}-${project.raw}`, startDate, endDate);
+    const rawChannelResponse = yield Requests.getChannelData(`${project.site}-${project.final}`, startDate, endDate);
+    const fixedAnomaliesResponse = yield Requests.getFixedAnomalies(`${project.site}-${project.final}`, startDate, endDate);
+    const editedChannelResponse = yield Requests.getChannelData(`${project.site}-${project.final}`, startDate, endDate);
     yield put(_.toPlainObject(new HideModalAction()));
 
     const rawChannelParseResult = Papa.parse(rawChannelResponse.data, { header: true });
