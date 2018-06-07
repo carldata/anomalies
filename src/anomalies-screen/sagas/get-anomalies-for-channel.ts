@@ -70,7 +70,7 @@ function* getAnomaliesForChannel(action: any) {
       type: EnumTimeSeriesType.Dots,
     } as IExternalSourceTimeSeries);
 
-    const newChartState = hpTimeSeriesChartAuxiliary.buildStateFromExternalSource(sourceTimeSeries) as IHpTimeSeriesChartState;
+    let newChartState = hpTimeSeriesChartAuxiliary.buildStateFromExternalSource(sourceTimeSeries) as IHpTimeSeriesChartState;
 
     let editedChartState;
     if (editedChannelParseResult.errors.length === 0) {
@@ -155,6 +155,14 @@ function* getAnomaliesForChannel(action: any) {
           supportingChannelsValuesMap[1].has(timeKey) ? supportingChannelsValuesMap[1].get(timeKey) : null
           : null,
       });
+    }
+
+    if(_.isUndefined(newChartState.yMax) && _.isUndefined(newChartState.yMin)) {
+      newChartState = hpTimeSeriesChartReducerAuxFunctions.buildInitialState();
+    }
+
+    if(editedChartState.yMax === 0 && editedChartState.yMin === 0) {
+      editedChartState = hpTimeSeriesChartReducerAuxFunctions.buildInitialState();
     }
 
     yield put({
