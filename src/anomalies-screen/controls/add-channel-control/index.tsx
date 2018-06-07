@@ -24,6 +24,7 @@ interface IAddChannelComponentProps {
 interface IAddChannelComponentActionCreators {
   addAndPopulateChannel: (siteChannelInfo: any, startDate: string, endDate: string) => any;
   addEmptyChannel: (siteChannelInfo: any) => any;
+  getChannelsForSite: (siteId: string) => any;
   cancelShowModal: () => any;
 }
 
@@ -75,6 +76,7 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
                 console.log(selectElement.options[selectElement.selectedIndex].innerText);
                 this.siteId = selectElement.value;
                 this.site = selectElement.value;
+                this.props.getChannelsForSite(selectElement.value);
               }} >
                 {
                   this.props.sites.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
@@ -157,6 +159,7 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
     addAndPopulateChannel: anomaliesScreenActionCreators.addAndPopulateChannel,
     addEmptyChannel: anomaliesScreenActionCreators.addEmptyChannel,
     cancelShowModal: anomaliesScreenActionCreators.cancelShowAddChannel,
+    getChannelsForSite: anomaliesScreenActionCreators.getChannelsForSite,
   }, dispatch);
 }
 
