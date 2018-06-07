@@ -13,7 +13,7 @@ import { IDataGridState } from './controls/data-grid/state';
 import { IProject, IProjectSupportingChannel } from '../projects-screen/state';
 import { channel } from 'redux-saga';
 import * as dateFns from 'date-fns';
-import { ISitesChannels, IShowAddChannelPayload } from '../model';
+import { ISitesChannels, IShowAddChannelPayload, IChannel } from '../model';
 
 export interface IAnomaliesCharts {
   mainChartState: IHpTimeSeriesChartState;
@@ -39,7 +39,7 @@ const initialState = {
   mainChartEmpty: true,
 } as IAnomaliesScreenState;
 
-export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGridState | IProject | number | any | ISitesChannels| IShowAddChannelPayload>({
+export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGridState | IProject | number | any | ISitesChannels| IShowAddChannelPayload | IChannel[]>({
   [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_CHART_FULFILED]: (state: IAnomaliesScreenState, action: Action<IAnomaliesCharts>) => {
     return _.extend({}, state, {
       mainChartState: action.payload.mainChartState,
@@ -90,9 +90,6 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
       showModal: false,
     };
   },
-  // [anomaliesScreenActionTypes.GET_SITES_FOR_PROJECT_ANOMALIES_FULFILED]: (state: IAnomaliesScreenState, action: Action<any>) => {
-  //   return _.extend({}, state, { sites: action.payload.sites });
-  // },
   [anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FULFILED]: (state: IAnomaliesScreenState, action: Action<any>) => {
     return {
       ...state,
@@ -143,6 +140,12 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
       channels: action.payload.channels,
       showModal: true,
       mainChartEmpty: action.payload.mainChartEmpty,
+    };
+  },
+  [anomaliesScreenActionTypes.GET_CHANNELS_FOR_SITE_ANOMALIES_FULFILED] : (state: IAnomaliesScreenState, action: Action<IChannel[]>) => {
+    return {
+      ...state,
+      channels: action.payload,
     };
   },
 }, initialState);
