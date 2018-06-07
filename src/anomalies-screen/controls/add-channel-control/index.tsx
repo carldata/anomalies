@@ -47,6 +47,16 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
     this.addChannel = this.addChannel.bind(this);
   }
 
+  public componentWillReceiveProps(nextProps: IAddChannelComponentProps & IAddChannelComponentActionCreators) {
+    if (!this.props.showModal && nextProps.showModal) {
+      this.siteId = _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).id;
+      this.site = _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).id;
+    }
+    const firstChannel: IChannel = _.head(nextProps.channels);
+    this.channelId = _.isUndefined(firstChannel) ? '' : firstChannel.id;
+    this.channel = _.isUndefined(firstChannel) ? '' : firstChannel.id;
+  }
+
   public render() {
     return <Modal show={this.props.showModal} onHide={() => this.props.cancelShowModal()}>
       <Modal.Body>
