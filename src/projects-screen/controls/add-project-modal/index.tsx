@@ -43,7 +43,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
   }
 
   public componentWillReceiveProps(nextProps: IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators) {
-    if (this.props.showModal === false && nextProps.showModal) {
+    if (!this.props.showModal && nextProps.showModal) {
       this.siteId = _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).id;
       this.site = _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).id; // todo chage it to name when UI and projects will be adjusted
     }
