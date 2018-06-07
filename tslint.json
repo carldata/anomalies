@@ -23,12 +23,15 @@
       ]
     },
     "ordered-imports": false,
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "local-package-modules-at-the-top": true,
+    "local-package-modules-sorted-alphabetically": true
   },
   "jsRules": {
     "max-line-length": {
       "options": [120]
     }
   },
+  "rulesDirectory": "./ts-lint-rules",
   "defaultSeverity": "warning"
 }
