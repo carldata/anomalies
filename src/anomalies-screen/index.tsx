@@ -1,23 +1,23 @@
+import * as dateFns from 'date-fns';
+import * as _ from 'lodash';
 import * as React from 'react';
 import { Button, ButtonGroup, ControlLabel, Form, FormControl, FormGroup, Row, Col, Nav, NavItem, Navbar, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Column } from 'react-data-grid';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { convertHpSliderScss, convertHpTimeSeriesChartScss, HpTimeSeriesScroller, IHpTimeSeriesChartState, HpSlider, EnumHandleType,
    IUnixFromTo, handleMovedCallback, HpTimeSeriesChart, hpTimeSeriesChartReducerAuxFunctions } from 'time-series-scroller';
+import { IDomain, IHpSliderHandleValues } from 'time-series-scroller/lib/out/hp-slider/interfaces';
 import * as hpSliderScss from 'time-series-scroller/lib/out/sass/hp-slider.scss';
 import * as hpTimeSeriesChartScss from 'time-series-scroller/lib/out/sass/hp-time-series-chart.scss';
 import { IState } from '../state';
-import { IProject } from '../projects-screen/state'
+import { IProject } from '../projects-screen/state';
 import { anomaliesScreenActionCreators } from './action-creators';
-import { DataGrid } from './controls/data-grid'
+import { DataGrid } from './controls/data-grid';
 import { IDataGridState } from './controls/data-grid/state';
-import { LinkContainer } from 'react-router-bootstrap';
 import { AddChannelModal } from './controls/add-channel-control';
-import * as dateFns from 'date-fns';
-import * as _ from 'lodash';
-import { IDomain, IHpSliderHandleValues } from 'time-series-scroller/lib/out/hp-slider/interfaces';
-import { Column } from 'react-data-grid';
 import { ISite } from '../model';
+import { ModalContainer } from '../components/modal';
 
 interface IAnomaliesComponentProps {
   mainChartState: IHpTimeSeriesChartState;
@@ -97,182 +97,185 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
   }
 
   public render() {
-    return <div>
-      <Navbar fluid>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <div style={{ cursor: 'pointer' }} onClick={() => this.props.goToProjectsScreen()}>Anomaly</div>
-          </Navbar.Brand>
-        </Navbar.Header>
-      </Navbar>
-      <div style={{ marginLeft: 20, marginRight: 20, marginTop: 10, marginBottom: 10 }}>
-        <Form>
-          <FormGroup>
-            <ControlLabel style={{ fontWeight: 'bold' }}>{_.isEmpty(this.props.project) ? ' ' : this.props.project.name}</ControlLabel>{' '}
-            <Button disabled={_.isEmpty(this.props.project)} onClick={() => this.props.saveProject(this.props.project)} >Save Project</Button>{' '}
-            <Button bsStyle='primary' disabled={_.isEmpty(this.props.project)} onClick={() => this.props.getAnomaliesForProject({
-              project: this.props.project,
-              startDate: this.state.startDate,
-              endDate: this.state.endDate,
-            })}>Load Timeseries</Button>
-          </FormGroup>
-        </Form>
+    return <>
+      <ModalContainer />
+      <div>
+        <Navbar fluid>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <div style={{ cursor: 'pointer' }} onClick={() => this.props.goToProjectsScreen()}>Anomaly</div>
+            </Navbar.Brand>
+          </Navbar.Header>
+        </Navbar>
+        <div style={{ marginLeft: 20, marginRight: 20, marginTop: 10, marginBottom: 10 }}>
+          <Form>
+            <FormGroup>
+              <ControlLabel style={{ fontWeight: 'bold' }}>{_.isEmpty(this.props.project) ? ' ' : this.props.project.name}</ControlLabel>{' '}
+              <Button disabled={_.isEmpty(this.props.project)} onClick={() => this.props.saveProject(this.props.project)} >Save Project</Button>{' '}
+              <Button bsStyle='primary' disabled={_.isEmpty(this.props.project)} onClick={() => this.props.getAnomaliesForProject({
+                project: this.props.project,
+                startDate: this.state.startDate,
+                endDate: this.state.endDate,
+              })}>Load Timeseries</Button>
+            </FormGroup>
+          </Form>
 
-        <Form inline>
-          <FormGroup>
-            <ControlLabel>Site: </ControlLabel>
-            <FormControl.Static>{_.isEmpty(this.props.project) ? 'No site' : this.props.project.site}</FormControl.Static>
-          </FormGroup>
-          {' '}
-          <FormGroup>
-            <ControlLabel>Source: </ControlLabel>
-            <FormControl.Static>{_.isEmpty(this.props.project) ? 'No source ' : this.props.project.raw}</FormControl.Static>
-          </FormGroup>
-          {' '}
-          <FormGroup>
-            <ControlLabel>Final: </ControlLabel>
-            <FormControl.Static>{_.isEmpty(this.props.project) ? 'No final' : this.props.project.final}</FormControl.Static>
-          </FormGroup>
-          {' '}
-          <FormGroup>
-            <ControlLabel>Start Date:</ControlLabel>
+          <Form inline>
+            <FormGroup>
+              <ControlLabel>Site: </ControlLabel>
+              <FormControl.Static>{_.isEmpty(this.props.project) ? 'No site' : this.props.project.site}</FormControl.Static>
+            </FormGroup>
             {' '}
-            <FormControl type='text' value={this.state.startDate} onChange={(e) => this.setState({ startDate: (e.target as HTMLInputElement).value })}></FormControl>
+            <FormGroup>
+              <ControlLabel>Source: </ControlLabel>
+              <FormControl.Static>{_.isEmpty(this.props.project) ? 'No source ' : this.props.project.raw}</FormControl.Static>
+            </FormGroup>
             {' '}
-            <ControlLabel>End Date:</ControlLabel>
+            <FormGroup>
+              <ControlLabel>Final: </ControlLabel>
+              <FormControl.Static>{_.isEmpty(this.props.project) ? 'No final' : this.props.project.final}</FormControl.Static>
+            </FormGroup>
             {' '}
-            <FormControl type='text' value={this.state.endDate} onChange={(e) => this.setState({ endDate: (e.target as HTMLInputElement).value })}></FormControl>
-          </FormGroup>
-        </Form>
+            <FormGroup>
+              <ControlLabel>Start Date:</ControlLabel>
+              {' '}
+              <FormControl type='text' value={this.state.startDate} onChange={(e) => this.setState({ startDate: (e.target as HTMLInputElement).value })}></FormControl>
+              {' '}
+              <ControlLabel>End Date:</ControlLabel>
+              {' '}
+              <FormControl type='text' value={this.state.endDate} onChange={(e) => this.setState({ endDate: (e.target as HTMLInputElement).value })}></FormControl>
+            </FormGroup>
+          </Form>
 
-        <Row style={{ minHeight: this.scss.slider.heightPx, marginLeft: this.scss.timeSeries.paddingLeftPx, marginTop: 20, marginBottom: 20 }}>
-          <Col>
-            <HpSlider
-              scss={convertHpSliderScss(hpSliderScss)}
-              domain={{ domainMin: this.props.mainChartState.dateRangeUnixFrom, domainMax: this.props.mainChartState.dateRangeUnixTo } as IDomain<number>}
-              displayDragBar={true}
-              handleValues={{ left: this.state.windowUnixFrom, right: this.state.windowUnixTo } as IHpSliderHandleValues<number>}
-              handleMoved={(value: number | number[], type: EnumHandleType) => {
-                const { windowUnixFrom, windowUnixTo } = handleMovedCallback(value, type, {
-                  windowUnixFrom: this.state.windowUnixFrom,
-                  windowUnixTo: this.state.windowUnixTo,
-                } as IUnixFromTo);
+          <Row style={{ minHeight: this.scss.slider.heightPx, marginLeft: this.scss.timeSeries.paddingLeftPx, marginTop: 20, marginBottom: 20 }}>
+            <Col>
+              <HpSlider
+                scss={convertHpSliderScss(hpSliderScss)}
+                domain={{ domainMin: this.props.mainChartState.dateRangeUnixFrom, domainMax: this.props.mainChartState.dateRangeUnixTo } as IDomain<number>}
+                displayDragBar={true}
+                handleValues={{ left: this.state.windowUnixFrom, right: this.state.windowUnixTo } as IHpSliderHandleValues<number>}
+                handleMoved={(value: number | number[], type: EnumHandleType) => {
+                  const { windowUnixFrom, windowUnixTo } = handleMovedCallback(value, type, {
+                    windowUnixFrom: this.state.windowUnixFrom,
+                    windowUnixTo: this.state.windowUnixTo,
+                  } as IUnixFromTo);
 
-                const newSupportingChannelsState = _.map(this.state.supportingChannels, (el) => {
-                  return {
-                    site: el.site,
-                    channel: el.channel,
-                    chartState: {
-                      ...el.chartState,
+                  const newSupportingChannelsState = _.map(this.state.supportingChannels, (el) => {
+                    return {
+                      site: el.site,
+                      channel: el.channel,
+                      chartState: {
+                        ...el.chartState,
+                        windowUnixFrom,
+                        windowUnixTo,
+                      } as IHpTimeSeriesChartState,
+                    };
+                  });
+
+                  this.setState({
+                    windowUnixFrom,
+                    windowUnixTo,
+                    mainChartState: {
+                      ...this.state.mainChartState,
                       windowUnixFrom,
                       windowUnixTo,
                     } as IHpTimeSeriesChartState,
-                  };
-                });
+                    finalChartState: {
+                      ...this.state.finalChartState,
+                      windowUnixFrom,
+                      windowUnixTo,
+                    } as IHpTimeSeriesChartState,
+                    supportingChannels: newSupportingChannelsState,
+                  });
 
-                this.setState({
-                  windowUnixFrom,
-                  windowUnixTo,
-                  mainChartState: {
-                    ...this.state.mainChartState,
-                    windowUnixFrom,
-                    windowUnixTo,
-                  } as IHpTimeSeriesChartState,
-                  finalChartState: {
-                    ...this.state.finalChartState,
-                    windowUnixFrom,
-                    windowUnixTo,
-                  } as IHpTimeSeriesChartState,
-                  supportingChannels: newSupportingChannelsState,
-                });
+                }}
+                fitToParent={{ toWidth: true }}
+              ></HpSlider>
+            </Col>
+          </Row>
 
-              }}
-              fitToParent={{ toWidth: true }}
-            ></HpSlider>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col lg={12}>
-            <div>
-              <div style={{ height: 250 }} >
-                <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>ML Corrections</p>
-                <HpTimeSeriesChart
-                  scss={this.scss.timeSeries}
-                  state={this.state.mainChartState}
-                  fitToParent={{ toHeight: true, toWidth: true }}
-                ></HpTimeSeriesChart>
-              </div>
-            </div>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col md={12} >
-            <div style={{ height: 250 }} >
-              <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>Final</p>
-              <HpTimeSeriesChart
-                scss={this.scss.timeSeries}
-                state={this.state.finalChartState}
-                fitToParent={{ toHeight: true, toWidth: true }}
-              ></HpTimeSeriesChart>
-            </div>
-          </Col>
-        </Row>
-
-        {_.map(this.state.supportingChannels, (el, idx) => {
-          return <div style={{ background: '#F8F8F8' }}>
-            <Row>
-              <Col md={12} >
+          <Row>
+            <Col lg={12}>
+              <div>
                 <div style={{ height: 250 }} >
-                  <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>{el.site + '-' + el.channel}</p>
+                  <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>ML Corrections</p>
                   <HpTimeSeriesChart
                     scss={this.scss.timeSeries}
-                    state={el.chartState}
+                    state={this.state.mainChartState}
                     fitToParent={{ toHeight: true, toWidth: true }}
                   ></HpTimeSeriesChart>
                 </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={12}>
-                <Button className='pull-right' bsStyle='primary' onClick={() => this.props.deleteSupportingChannel(idx)}>Delete</Button>
-              </Col>
-            </Row>
-          </div>
-        })}
+              </div>
+            </Col>
+          </Row>
 
-        <Row style={{ marginTop: 4 }}>
-          <Col sm={12}>
-            <Button className='pull-right' bsStyle='primary' onClick={ () => {
-              this.props.showAddChannelModal( (this.state.mainChartState.series.length === 1) && _.isEmpty(_.head(this.state.mainChartState.series).points));
-              } }>Add Channel</Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={12}>
-            <DataGrid
-              columns={
-                _.concat(
-                  [
-                    { key: 'date', name: 'Timestamp' },
-                    { key: 'rawValue', name: 'Raw' },
-                    { key: 'editedValue', name: 'Final' },
-                    { key: 'fixedValue', name: 'Fixed' },
-                  ] as Column[],
-                  _.map(this.state.supportingChannels, (c) => ({
-                    key: `extendedValue${_.indexOf(this.state.supportingChannels, c) + 1}`,
-                    name: `${c.site} ${c.channel}`,
-                  }) as Column))}
-              rows={this.state.gridState.rows}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <AddChannelModal/>
-        </Row>
-      </div>
-    </div>;
+          <Row>
+            <Col md={12} >
+              <div style={{ height: 250 }} >
+                <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>Final</p>
+                <HpTimeSeriesChart
+                  scss={this.scss.timeSeries}
+                  state={this.state.finalChartState}
+                  fitToParent={{ toHeight: true, toWidth: true }}
+                ></HpTimeSeriesChart>
+              </div>
+            </Col>
+          </Row>
+
+          {_.map(this.state.supportingChannels, (el, idx) => {
+            return <div style={{ background: '#F8F8F8' }}>
+              <Row>
+                <Col md={12} >
+                  <div style={{ height: 250 }} >
+                    <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>{el.site + '-' + el.channel}</p>
+                    <HpTimeSeriesChart
+                      scss={this.scss.timeSeries}
+                      state={el.chartState}
+                      fitToParent={{ toHeight: true, toWidth: true }}
+                    ></HpTimeSeriesChart>
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col md={12}>
+                  <Button className='pull-right' bsStyle='primary' onClick={() => this.props.deleteSupportingChannel(idx)}>Delete</Button>
+                </Col>
+              </Row>
+            </div>
+          })}
+
+          <Row style={{ marginTop: 4 }}>
+            <Col sm={12}>
+              <Button className='pull-right' bsStyle='primary' onClick={ () => {
+                this.props.showAddChannelModal( (this.state.mainChartState.series.length === 1) && _.isEmpty(_.head(this.state.mainChartState.series).points));
+                } }>Add Channel</Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              <DataGrid
+                columns={
+                  _.concat(
+                    [
+                      { key: 'date', name: 'Timestamp' },
+                      { key: 'rawValue', name: 'Raw' },
+                      { key: 'editedValue', name: 'Final' },
+                      { key: 'fixedValue', name: 'Fixed' },
+                    ] as Column[],
+                    _.map(this.state.supportingChannels, (c) => ({
+                      key: `extendedValue${_.indexOf(this.state.supportingChannels, c) + 1}`,
+                      name: `${c.site} ${c.channel}`,
+                    }) as Column))}
+                rows={this.state.gridState.rows}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <AddChannelModal/>
+          </Row>
+        </div>
+      </div>;
+    </>
   }
 }
 

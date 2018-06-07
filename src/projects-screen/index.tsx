@@ -9,6 +9,7 @@ import { ProjectComponent } from './project';
 import { IProject } from './state';
 import { AddProjectModal } from './controls/add-project-modal';
 import { ISite, IChannel } from '../model';
+import { ModalContainer } from '../components/modal';
 
 interface IProjectComponentProps {
   projects: IProject[];
@@ -33,27 +34,30 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
   }
 
   public render() {
-    return <div className='container'>
-      <Form horizontal>
-        <FormGroup>
-          <ListGroup>
-            {_.map(this.props.projects, (el, index) => {
-              return <ProjectComponent key={index}
-                id={el.id}
-                name={el.name}
-                site={el.site}
-                raw={el.raw}
-                final={el.final}
-                goToProjectAnomalies={() => { this.props.goToAnomaliesScreen(_.find(this.props.projects, (proj) => proj.id === el.id)); }} />;
-            })}
-          </ListGroup>
-        </FormGroup>
-        <FormGroup>
-          <Button id='btnAddProject' bsStyle='primary' onClick={() => this.props.showAddProject()}>Add Project</Button>
-        </FormGroup>
-      </Form>
-      <AddProjectModal></AddProjectModal>
-    </div>;
+    return <>
+      <ModalContainer />
+      <div className='container'>
+        <Form horizontal>
+          <FormGroup>
+            <ListGroup>
+              {_.map(this.props.projects, (el, index) => {
+                return <ProjectComponent key={index}
+                  id={el.id}
+                  name={el.name}
+                  site={el.site}
+                  raw={el.raw}
+                  final={el.final}
+                  goToProjectAnomalies={() => { this.props.goToAnomaliesScreen(_.find(this.props.projects, (proj) => proj.id === el.id)); }} />;
+              })}
+            </ListGroup>
+          </FormGroup>
+          <FormGroup>
+            <Button id='btnAddProject' bsStyle='primary' onClick={() => this.props.showAddProject()}>Add Project</Button>
+          </FormGroup>
+        </Form>
+        <AddProjectModal></AddProjectModal>
+      </div>
+    </>;
   }
 
 }

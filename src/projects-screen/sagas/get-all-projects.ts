@@ -4,11 +4,14 @@ import { projectsScreenActionTypes } from '../action-creators';
 import { Requests } from '../../requests';
 import { IChannel } from '../../model';
 import { IProject } from '../state';
+import { ShowModalAction, HideModalAction } from '../../components/modal';
 
 function* getAllProjectsAsyncCall() {
   try {
     const projectsArray = [];
-    const response = yield Requests.getConfiguration()
+    yield put(_.toPlainObject(new ShowModalAction()));
+    const response = yield Requests.getConfiguration();
+    yield put(_.toPlainObject(new HideModalAction()));
 
     for (const element of response.data) {
       projectsArray.push({

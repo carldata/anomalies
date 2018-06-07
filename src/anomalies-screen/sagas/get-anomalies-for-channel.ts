@@ -1,22 +1,22 @@
+import axios from 'axios';
+import * as dateFns from 'date-fns';
 import * as _ from 'lodash';
 import * as Papa from 'papaparse';
-import * as dateFns from 'date-fns';
-import axios from 'axios';
 import { push } from 'react-router-redux';
 import { takeEvery, call, all, put } from 'redux-saga/effects';
-import { anomaliesScreenActionTypes } from '../action-creators';
-// TODO: verify csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig should be exported in time-series-scroller
-import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig } from 'time-series-scroller/lib/out/hp-time-series-chart/csv-loading/calculations';
 import {
   EnumTimeSeriesType, hpTimeSeriesChartAuxiliary, hpTimeSeriesChartReducerAuxFunctions, IExternalSourceTimeSeries, IHpTimeSeriesChartState,
 } from 'time-series-scroller';
+// TODO: verify csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig should be exported in time-series-scroller
+import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig } from 'time-series-scroller/lib/out/hp-time-series-chart/csv-loading/calculations';
 
+import { anomaliesScreenActionTypes } from '../action-creators';
 import { IDataGridState } from '../controls/data-grid/state';
 import { Requests } from '../../requests';
 import { IProject } from '../../projects-screen/state';
 import { IAnomaliesCharts } from '../../anomalies-screen/store-creator';
+import { ShowModalAction, HideModalAction } from '../../components/modal';
 
-import { ParseResult } from 'papaparse';
 
 function* getAnomaliesForChannel(action: any) {
 
@@ -25,14 +25,16 @@ function* getAnomaliesForChannel(action: any) {
   const endDate: string = action.payload.endDate;
 
   try {
+    yield put(_.toPlainObject(new ShowModalAction()));
     const rawChannelResponse = yield Requests.getChannelData(`${project.site}-${project.raw}`, startDate, endDate);
     const fixedAnomaliesResponse = yield Requests.getFixedAnomalies(`${project.site}-${project.raw}`, startDate, endDate);
-    const editedChannelResponse = yield Requests.getChannelData(`${project.site}-${project.raw}`, startDate, endDate);
+    const editedChannelResponse = yield Requests.getChannelData(`${project.site}-${project.final}`, startDate, endDate);
+    yield put(_.toPlainObject(new HideModalAction()));
 
     const rawChannelParseResult = Papa.parse(rawChannelResponse.data, { header: true });
     const fixedAnomaliesParseResult = Papa.parse(fixedAnomaliesResponse.data, { header: true });
     const editedChannelParseResult = Papa.parse(editedChannelResponse.data, { header: true });
-    const supportingChannelsParseResults: ParseResult[] = [];
+    const supportingChannelsParseResults: Papa.ParseResult[] = [];
 
     const fixedAnomaliesValuesMap: Map<number, number> = _.reduce(
       fixedAnomaliesParseResult.data,

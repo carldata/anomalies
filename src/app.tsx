@@ -18,10 +18,12 @@ import Anomalies from './anomalies-screen';
 import Projects from './projects-screen';
 
 import { rootSaga } from './root-saga';
+import { ModalContainer, modalContainerReducer } from './components/modal';
 
 const reducers = combineReducers<IState>({
   anomaliesScreen: anomaliesScreenReducer,
   projectsScreen: projectsScreenReducer,
+  modalState: modalContainerReducer,
   routing: routerReducer,
 });
 
