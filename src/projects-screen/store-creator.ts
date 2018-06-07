@@ -3,6 +3,7 @@ import { Action, combineActions, handleActions } from 'redux-actions';
 import { projectsScreenActionTypes } from './action-creators';
 import { IProject, IProjectsScreenState } from './state';
 import { ISite, IChannel, ISitesChannels } from '../model';
+import { GET_ALL_PROJECTS_ASYNC_CALL_FULFILED } from './action-types';
 
 const initialState = {
   projects: [],
@@ -12,7 +13,7 @@ const initialState = {
 } as IProjectsScreenState;
 
 export default handleActions<IProjectsScreenState, IProject[] | IProject | ISite[] | IChannel[] | ISitesChannels>({
-  [projectsScreenActionTypes.GET_ALL_PROJECTS_ASYNC_CALL_FULFILED]: (state: IProjectsScreenState, action: Action<IProject[]>) => {
+  [GET_ALL_PROJECTS_ASYNC_CALL_FULFILED]: (state: IProjectsScreenState, action: Action<IProject[]>) => {
     return _.extend({}, state, { projects: action.payload } as IProjectsScreenState);
   },
   [projectsScreenActionTypes.ADD_PROJECT_FULFILED]: (state: IProjectsScreenState, action: Action<IProject>) => {

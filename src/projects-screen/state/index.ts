@@ -9,13 +9,13 @@ export interface IProjectsScreenState {
 
 export interface IProject {
   id: string;
-  name: string;
-  site: string;
+  projectName: string;
+  siteName: string;
   siteId: string;
-  raw: string;
-  rawId: string;
-  final: string;
-  finalId: string;
+  rawChannelName: string;
+  rawChannelId: string;
+  finalChannelName: string;
+  finalChannelId: string;
   supportingChannels?: IProjectSupportingChannel[];
 }
 

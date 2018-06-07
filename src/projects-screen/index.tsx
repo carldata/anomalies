@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, ListGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { IState } from '../state';
-import { projectScreenActionCreators } from './action-creators';
+import { projectScreenActionCreators, IGetAllProjectsActionCreator, getAllProjects } from './action-creators';
 import { ProjectComponent } from './project';
 import { IProject } from './state';
 import { AddProjectModal } from './controls/add-project-modal';
@@ -17,7 +17,7 @@ interface IProjectComponentProps {
 
 interface IProjectComponentActionCreators {
   goToAnomaliesScreen: (project: IProject) => any;
-  getAllProjectsAsyncCall: () => any;
+  getAllProjects: IGetAllProjectsActionCreator;
   addProjectStart: (project: IProject) => any;
   getSites: (db: string) => any;
   getChannels: (siteId: string) => any;
@@ -30,7 +30,7 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
   }
 
   public componentDidMount() {
-    this.props.getAllProjectsAsyncCall();
+    this.props.getAllProjects();
   }
 
   public render() {
@@ -43,10 +43,10 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
               {_.map(this.props.projects, (el, index) => {
                 return <ProjectComponent key={index}
                   id={el.id}
-                  name={el.name}
-                  site={el.site}
-                  raw={el.raw}
-                  final={el.final}
+                  name={el.projectName}
+                  site={el.siteName}
+                  raw={el.rawChannelName}
+                  final={el.finalChannelName}
                   goToProjectAnomalies={() => { this.props.goToAnomaliesScreen(_.find(this.props.projects, (proj) => proj.id === el.id)); }} />;
               })}
             </ListGroup>
@@ -71,7 +71,7 @@ function mapStateToProps(state: IState) {
 function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     goToAnomaliesScreen: projectScreenActionCreators.goToAnomaliesScreen,
-    getAllProjectsAsyncCall: projectScreenActionCreators.getAllProjectsAsyncCall,
+    getAllProjects,
     addProjectStart: projectScreenActionCreators.addProjectStart,
     getSites: projectScreenActionCreators.getSites,
     getChannels: projectScreenActionCreators.getChannels,
