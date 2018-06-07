@@ -16,11 +16,14 @@ interface IAddChannelComponentProps {
   showModal: boolean;
   sites: ISite[];
   channels: IChannel[];
+  mainChartEmpty: boolean;
+  lastStartDate: string;
+  lastEndDate: string;
 }
 
 interface IAddChannelComponentActionCreators {
-  addAndPopulateChannel: (siteChannelInfo: any) => any;
-  addEmptyChannel: (siteChannelIfno: any) => any;
+  addAndPopulateChannel: (siteChannelInfoWithDatese: any) => any;
+  addEmptyChannel: (siteChannelInfo: any) => any;
   cancelShowModal: () => any;
 }
 
@@ -112,21 +115,32 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
         <Button id='btnCancelAddChannelModal' onClick={() => this.props.cancelShowModal()}>
           Cancel
         </Button>
-        <Button id='btnApproveAddChannelModal' bsStyle='primary' onClick={() => this.addChannel({
-          siteId: this.siteId,
-          site: this.site,
-          channelId: this.channelId,
-          channel: this.channel,
-          type: this.state.channelType,
-        })} >
+        <Button id='btnApproveAddChannelModal' bsStyle='primary' onClick={() => this.addChannel()} >
           Add
         </Button>
       </Modal.Footer>
     </Modal>;
   }
 
-  private addChannel(siteChannelInfo: any) {
-    console.log(siteChannelInfo);
+  private addChannel() {
+    if (this.props.mainChartEmpty) {
+      this.props.addEmptyChannel({
+        siteChannelInfo: {
+          site: this.siteId,
+          channel: this.channelId,
+          type: this.state.channelType,
+        }});
+    } else {
+      this.props.addAndPopulateChannel({
+          siteChannelInfo: {
+            site: this.siteId,
+            channel: this.channelId,
+            type: this.state.channelType,
+      },
+      startDate: this.props.lastStartDate,
+      endDate: this.props.lastEndDate,
+    });
+    }
   }
 }
 
@@ -135,6 +149,9 @@ function mapStateToProps(state: IState) {
     showModal: state.anomaliesScreen.showModal,
     sites: state.anomaliesScreen.sites,
     channels: state.anomaliesScreen.channels,
+    mainChartEmpty: state.anomaliesScreen.mainChartEmpty,
+    lastStartDate: state.anomaliesScreen.lastStartDate,
+    lastEndDate: state.anomaliesScreen.lastEndDate,
   };
 }
 

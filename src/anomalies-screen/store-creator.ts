@@ -13,7 +13,7 @@ import { IDataGridState } from './controls/data-grid/state';
 import { IProject, IProjectSupportingChannel } from '../projects-screen/state';
 import { channel } from 'redux-saga';
 import * as dateFns from 'date-fns';
-import { ISitesChannels } from '../model';
+import { ISitesChannels, IShowAddChannelPayload } from '../model';
 
 export interface IAnomaliesCharts {
   mainChartState: IHpTimeSeriesChartState;
@@ -36,9 +36,10 @@ const initialState = {
   showModal: false,
   sites: [],
   channels: [],
+  mainChartEmpty: true,
 } as IAnomaliesScreenState;
 
-export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGridState | IProject | number | any | ISitesChannels>({
+export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGridState | IProject | number | any | ISitesChannels| IShowAddChannelPayload>({
   [anomaliesScreenActionTypes.GET_ANOMALIES_FOR_CHART_FULFILED]: (state: IAnomaliesScreenState, action: Action<IAnomaliesCharts>) => {
     return _.extend({}, state, {
       mainChartState: action.payload.mainChartState,
@@ -85,8 +86,8 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
         site: action.payload.siteChannelInfo.site,
         channel: action.payload.siteChannelInfo.channel,
         chartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
-      })
-    }
+      }),
+    };
   },
   [anomaliesScreenActionTypes.GET_SITES_FOR_PROJECT_ANOMALIES_FULFILED]: (state: IAnomaliesScreenState, action: Action<any>) => {
     return _.extend({}, state, { sites: action.payload.sites });
@@ -140,12 +141,13 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
       showModal: false,
     };
   },
-  [anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_FULFILED]: (state: IAnomaliesScreenState, action: Action<ISitesChannels>) =>{
+  [anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_FULFILED]: (state: IAnomaliesScreenState, action: Action<IShowAddChannelPayload>) =>{
     return {
       ...state,
       sites:  action.payload.sites,
       channels: action.payload.channels,
       showModal: true,
-    }
+      mainChartEmpty: action.payload.mainChartEmpty,
+    };
   },
 }, initialState);

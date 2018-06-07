@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Button, ButtonGroup, ControlLabel, Form, FormControl, FormGroup, Row, Col, Nav, NavItem, Navbar, NavDropdown, MenuItem } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import { convertHpSliderScss, convertHpTimeSeriesChartScss, HpTimeSeriesScroller, IHpTimeSeriesChartState, HpSlider, EnumHandleType, IUnixFromTo, handleMovedCallback, HpTimeSeriesChart, hpTimeSeriesChartReducerAuxFunctions } from 'time-series-scroller';
+import { convertHpSliderScss, convertHpTimeSeriesChartScss, HpTimeSeriesScroller, IHpTimeSeriesChartState, HpSlider, EnumHandleType,
+   IUnixFromTo, handleMovedCallback, HpTimeSeriesChart, hpTimeSeriesChartReducerAuxFunctions } from 'time-series-scroller';
 import * as hpSliderScss from 'time-series-scroller/lib/out/sass/hp-slider.scss';
 import * as hpTimeSeriesChartScss from 'time-series-scroller/lib/out/sass/hp-time-series-chart.scss';
 import { IState } from '../state';
@@ -36,7 +37,7 @@ interface IAnomaliesComponentActionCreators {
   copyRawToEdited: () => any;
   addAndPopulateChannel: (siteChannelInfo: any, startDate: string, endDate: string) => any;
   addEmptyChannel: (siteChannelInfo: any, dateRangeUnixFrom: number, dateRangeUnixTo: number) => any;
-  showAddChannelModal: () => any;
+  showAddChannelModal: (mainChartEmpty: boolean) => any;
   deleteSupportingChannel: (idx: number) => any;
 }
 
@@ -84,13 +85,9 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         endDate: this.state.endDate,
       });
     }
-
-    // if (_.isEmpty(this.props.sites)) {
-    //   this.props.getSitesForProject();
-    // }
   }
 
-  componentWillReceiveProps(nextProps: IAnomaliesComponentProps) {
+  public componentWillReceiveProps(nextProps: IAnomaliesComponentProps) {
     this.setState({
       mainChartState: _.cloneDeep(nextProps.mainChartState),
       finalChartState: _.cloneDeep(nextProps.finalChartState),
@@ -249,7 +246,9 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 
         <Row style={{ marginTop: 4 }}>
           <Col sm={12}>
-            <Button className='pull-right' bsStyle='primary' onClick={ () => { this.props.showAddChannelModal(); } }>Add Channel</Button>
+            <Button className='pull-right' bsStyle='primary' onClick={ () => {
+              this.props.showAddChannelModal( (this.state.mainChartState.series.length === 1) && _.isEmpty(_.head(this.state.mainChartState.series).points));
+              } }>Add Channel</Button>
           </Col>
         </Row>
         <Row>
@@ -273,23 +272,6 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         </Row>
         <Row>
           <AddChannelModal/>
-          {/* <AddChannelModal
-            showModal={this.state.showModal}
-            addChannel={(e) => {
-              console.log(e);
-              this.setState({ showModal: false });
-              if (this.state.mainChartState.series[0].points.length == 0) {
-                this.props.addEmptyChannel(e, this.state.mainChartState.dateRangeUnixFrom, this.state.mainChartState.dateRangeUnixTo);
-              } else {
-                console.log('addChannel - there are points');
-                this.props.addAndPopulateChannel(e,
-                  this.props.lastStartDate,
-                  this.props.lastEndDate);
-              }
-            }}
-            hideModal={() => { this.setState({ showModal: false }) }}
-            sites={this.state.sites}>
-          </AddChannelModal> */}
         </Row>
       </div>
     </div>;

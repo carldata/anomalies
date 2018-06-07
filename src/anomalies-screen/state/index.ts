@@ -15,4 +15,5 @@ export interface IAnomaliesScreenState {
   showModal: boolean;
   sites: ISite[];
   channels: IChannel[];
+  mainChartEmpty: boolean;
 }

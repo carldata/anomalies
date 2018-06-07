@@ -2,9 +2,9 @@ import * as _ from 'lodash';
 import { put, takeEvery } from 'redux-saga/effects';
 import { anomaliesScreenActionTypes } from '../action-creators';
 import { Requests } from '../../requests';
-import { IChannel, ISite, ISitesChannels } from '../../model';
+import { IChannel, ISite, ISitesChannels, IShowAddChannelPayload } from '../../model';
 
-function* showAddChannel() {
+function* showAddChannel(action) {
   try {
     yield put({type: anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_FETCHING});
     const sites: ISite[] = yield Requests.getSites('FlowMetrix');
@@ -14,7 +14,8 @@ function* showAddChannel() {
        payload: {
          sites,
          channels,
-       } as ISitesChannels,
+         mainChartEmpty: action.payload,
+       } as IShowAddChannelPayload,
       });
   } catch (error) {
     // todo notify when error occurs

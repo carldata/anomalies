@@ -87,9 +87,10 @@ export const anomaliesScreenActionCreators = {
       payload: project,
     };
   },
-  showAddChannel: () => {
+  showAddChannel: (mainChartEmpty: boolean) => {
     return {
       type: anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_START,
+      payload: mainChartEmpty,
     };
   },
   cancelShowAddChannel: () => {
