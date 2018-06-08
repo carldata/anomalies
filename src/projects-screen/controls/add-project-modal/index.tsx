@@ -153,8 +153,6 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
       supportingChannels: [],
     };
 
-    console.log(project);
-
     this.props.addProject(project);
   }
 }

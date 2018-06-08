@@ -26,14 +26,15 @@ function* getAnomaliesForChannel(action: any) {
 
   try {
     yield put(_.toPlainObject(new ShowModalAction()));
-    const rawChannelResponse = yield Requests.getChannelData(`${project.siteName}-${project.rawChannelName}`, startDate, endDate);
-    const fixedAnomaliesResponse = yield Requests.getFixedAnomalies(`${project.siteName}-${project.rawChannelName}`, startDate, endDate);
-    const editedChannelResponse = yield Requests.getChannelData(`${project.siteName}-${project.finalChannelName}`, startDate, endDate);
-    yield put(_.toPlainObject(new HideModalAction()));
+
+    const rawChannelResponse = yield Requests.getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
+    const fixedAnomaliesResponse = yield Requests.getFixedAnomalies(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
+    const editedChannelResponse = yield Requests.getChannelData(`${project.siteId}-${project.finalChannelId}`, startDate, endDate);
 
     const rawChannelParseResult = Papa.parse(rawChannelResponse.data, { header: true });
     const fixedAnomaliesParseResult = Papa.parse(fixedAnomaliesResponse.data, { header: true });
     const editedChannelParseResult = Papa.parse(editedChannelResponse.data, { header: true });
+
     const supportingChannelsParseResults: Papa.ParseResult[] = [];
 
     const fixedAnomaliesValuesMap: Map<number, number> = _.reduce(
@@ -99,6 +100,7 @@ function* getAnomaliesForChannel(action: any) {
     if (project.supportingChannels.length > 0) {
       supportingChannelsResults = yield Requests.getSupportingChannels(project.supportingChannels, startDate, endDate);
     }
+    yield put(_.toPlainObject(new HideModalAction()));
 
     const supportingChannels = _.map(project.supportingChannels, (el, idx) => {
       const supportingChannelParseResult = Papa.parse(supportingChannelsResults[idx].data, { header: true });
