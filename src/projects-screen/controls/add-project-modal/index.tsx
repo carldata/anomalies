@@ -40,11 +40,12 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
     this.approveAddProject = this.approveAddProject.bind(this);
   }
 
+  private modalIsShown = (): boolean => this.props.showModal;
   private modalWillAppear = (nextProps: IAddProjectModalComponentProps): boolean => !this.props.showModal && nextProps.showModal;
 
   public componentWillReceiveProps(nextProps: IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators) {
-    if (this.modalWillAppear(nextProps)) {
-      const channel: IChannel = _.isArray(nextProps.channels) && !_.isEmpty(nextProps.channels) ? 
+    if (this.modalWillAppear(nextProps) || this.modalIsShown()) {
+      const channel: IChannel = _.isArray(nextProps.channels) && !_.isEmpty(nextProps.channels) ?
         _.head(nextProps.channels) :
         { id: '0', name: '' } as IChannel;
       this.setState({
