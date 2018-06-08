@@ -6,7 +6,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { IState } from '../state';
 import { projectScreenActionCreators, IGetAllProjectsActionCreator, getAllProjects } from './action-creators';
 import { ProjectComponent } from './project';
-import { IProject } from './state';
+import { IProject } from './models/project';
 import { AddProjectModal } from './controls/add-project-modal';
 import { ISite, IChannel } from '../model';
 import { ModalContainer } from '../components/modal';
@@ -40,14 +40,13 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
         <Form horizontal>
           <FormGroup>
             <ListGroup>
-              {_.map(this.props.projects, (el, index) => {
-                return <ProjectComponent key={index}
-                  id={el.id}
-                  name={el.projectName}
-                  site={el.siteName}
-                  raw={el.rawChannelName}
-                  final={el.finalChannelName}
-                  goToProjectAnomalies={() => { this.props.goToAnomaliesScreen(_.find(this.props.projects, (proj) => proj.id === el.id)); }} />;
+              {_.map(this.props.projects, (project: IProject, index) => {
+                return <ProjectComponent
+                  {...project}
+                  key={index}
+                  goToProjectAnomalies={() => {
+                    this.props.goToAnomaliesScreen(_.find(this.props.projects, (proj) => proj.id === project.id)); 
+                  }} />;
               })}
             </ListGroup>
           </FormGroup>

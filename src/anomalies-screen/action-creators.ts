@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux';
 import { Dispatch } from 'redux';
 import { put } from 'redux-saga/effects';
-import { IProject } from '../projects-screen/state';
+import { IProject } from '../projects-screen/models/project';
 
 export const anomaliesScreenActionTypes = {
   GO_TO_PROJECTS: 'GO_TO_PROJECTS',

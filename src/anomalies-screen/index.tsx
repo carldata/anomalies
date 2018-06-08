@@ -11,7 +11,7 @@ import { IDomain, IHpSliderHandleValues } from 'time-series-scroller/lib/out/hp-
 import * as hpSliderScss from 'time-series-scroller/lib/out/sass/hp-slider.scss';
 import * as hpTimeSeriesChartScss from 'time-series-scroller/lib/out/sass/hp-time-series-chart.scss';
 import { IState } from '../state';
-import { IProject } from '../projects-screen/state';
+import { IProject } from '../projects-screen/models/project';
 import { anomaliesScreenActionCreators } from './action-creators';
 import { DataGrid } from './controls/data-grid';
 import { IDataGridState } from './controls/data-grid/state';

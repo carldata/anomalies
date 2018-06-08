@@ -72,8 +72,6 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
             <Col sm={10}>
               <select id='selectProjectSiteAnomalies' className='form-control' onChange={(e) => {
                 const selectElement = (e.target as HTMLSelectElement);
-                console.log(selectElement.value);
-                console.log(selectElement.options[selectElement.selectedIndex].innerText);
                 this.siteId = selectElement.value;
                 this.site = selectElement.value;
                 this.props.getChannelsForSite(selectElement.value);
@@ -92,8 +90,6 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
               {/* <FormControl type='text' onChange={(e) => this.setState({ channelId: (e.target as HTMLInputElement).value })} value={this.state.channelId}></FormControl> */}
               <select id='selectProjectSiteAnomalies' className='form-control' onChange={(e) => {
                 const selectChannelElement = (e.target as HTMLSelectElement);
-                console.log(selectChannelElement.value);
-                console.log(selectChannelElement.options[selectChannelElement.selectedIndex].innerText);
                 this.channelId = selectChannelElement.value;
                 this.channel = selectChannelElement.value;
               }} >

@@ -4,9 +4,9 @@ import { Modal, Button, Form, FormGroup, FormControl, Col, ControlLabel, ButtonG
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { projectScreenActionCreators } from '../../action-creators';
-import { IProject, IProjectSupportingChannel, IProjectsScreenState } from '../../state';
 import { ISite, IChannel } from '../../../model';
 import { IState } from '../../../state';
+import { IProject } from '../../models/project';
 
 interface IAddProjectModalComponentProps {
   showModal: boolean;
@@ -22,19 +22,17 @@ interface IAddProjectModalComponentActionCreators {
 
 interface IAddProjectModalComponentState {
   projectName: string;
+  siteId: string;
+  siteName: string;
+  rawChannelId: string;
+  rawChannelName: string;
+  finalChannelId: string;
+  finalChannelName: string;
 }
 
 class AddProjectModalComponent extends React.Component<IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators, IAddProjectModalComponentState> {
-  private siteId: string;
-  private siteName: string;
-  private rawChannelId: string;
-  private rawChannelName: string;
-  private finalChannelId: string;
-  private finalChannelName: string;
-
   constructor(props: IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators) {
     super(props);
-
     this.state = {
       projectName: '',
     } as IAddProjectModalComponentState;
@@ -44,14 +42,18 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
 
   public componentWillReceiveProps(nextProps: IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators) {
     if (!this.props.showModal && nextProps.showModal) {
-      this.siteId = _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).id;
-      this.siteName = _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).id; // todo chage it to name when UI and projects will be adjusted
+      const channel: IChannel = _.isArray(nextProps.channels) && !_.isEmpty(nextProps.channels) ? 
+        _.head(nextProps.channels) :
+        { id: '0', name: '' } as IChannel;
+      this.setState({
+        siteId: _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).id,
+        siteName: _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).name,
+        finalChannelId: channel.id,
+        finalChannelName: channel.name,
+        rawChannelId: channel.id,
+        rawChannelName: channel.name,
+      });
     }
-    const channelId = _.isEmpty(nextProps.channels) ? '' : _.head(nextProps.channels).id;
-    this.rawChannelId = channelId;
-    this.rawChannelName = channelId; // todo change it to name of channel later
-    this.finalChannelId = channelId;
-    this.finalChannelName = channelId; // todo change it to name of channel later
   }
 
   public render() {
@@ -77,9 +79,10 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
             <Col sm={6}>
               <select id='selectProjectSite' className='form-control' onChange={(e) => {
                 const selectElement = e.target as HTMLSelectElement;
-                // selectElement.options[selectElement.selectedIndex].innerText;
-                this.siteId = selectElement.value;
-                this.siteName = selectElement.value; // todo later change it to selected option name
+                this.setState({
+                  siteId: selectElement.value,
+                  siteName: _.head(selectElement.selectedOptions).label,
+                });
                 this.props.getChannels(selectElement.value);
               }} >
                 {
@@ -95,9 +98,10 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
             <Col sm={6}>
               <select id='selectChannelsRaw' className='form-control' onChange={(el) => {
                 const selectRawChannel = el.target as HTMLSelectElement;
-                // selectRawChannel.options[selectRawChannel.selectedIndex].innerText;
-                this.rawChannelId = selectRawChannel.value;
-                this.rawChannelName = selectRawChannel.value; // todo change it later to element name
+                this.setState({
+                  rawChannelId: selectRawChannel.value,
+                  rawChannelName: _.head(selectRawChannel.selectedOptions).label,
+                });
               }}>
                 {
                   this.props.channels.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
@@ -112,9 +116,10 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
             <Col sm={6}>
               <select id='selectChannelsFinal' className='form-control' onChange={(el) => {
                 const selectFinalChannel = el.target as HTMLSelectElement;
-                // selectFinalChannel.options[selectFinalChannel.selectedIndex].innerText;
-                this.finalChannelId = selectFinalChannel.value;
-                this.finalChannelName = selectFinalChannel.value; // todo change it later to element name
+                this.setState({
+                  finalChannelId: selectFinalChannel.value,
+                  finalChannelName: _.head(selectFinalChannel.selectedOptions).label,
+                });
               }}>
                 {
                   this.props.channels.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
@@ -139,14 +144,16 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
     const project: IProject = {
       id: '',
       projectName: this.state.projectName,
-      siteName: this.siteName,
-      siteId: this.siteId,
-      finalChannelName: this.finalChannelName,
-      finalChannelId: this.finalChannelId,
-      rawChannelName: this.rawChannelName,
-      rawChannelId: this.rawChannelId,
+      siteName: this.state.siteName,
+      siteId: this.state.siteId,
+      finalChannelName: this.state.finalChannelName,
+      finalChannelId: this.state.finalChannelId,
+      rawChannelName: this.state.rawChannelName,
+      rawChannelId: this.state.rawChannelId,
       supportingChannels: [],
     };
+
+    console.log(project);
 
     this.props.addProject(project);
   }

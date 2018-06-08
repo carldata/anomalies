@@ -3,12 +3,11 @@ import * as _ from 'lodash';
 import { channel } from 'redux-saga';
 import { all, call } from 'redux-saga/effects';
 import { watchSaveProject } from './anomalies-screen/sagas';
-import { IProject } from './projects-screen/state';
 import { ISite, IChannel } from './model';
+import { IProject } from './projects-screen/models/project';
 
 export class Requests {
-
-  static appName = 'anomaly-tool-next-4';
+  static appName = 'anomaly-tool';
   static apiAddress = 'http://13.77.168.238';
   static token = 'oasdob123a23hnaovnfaewd123akjwpod';
 
@@ -59,7 +58,6 @@ export class Requests {
   //TODO - remove  getEditedChannelData and use only getChannelData
   public static * getEditedChannelData(channel: string, startDate: string, endDate: string) {
     let channelData: any;
-
     try {
       channelData = yield call(axios.get, `${this.apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
     }
@@ -67,7 +65,6 @@ export class Requests {
       //TODO notify error
       channelData = {};
     }
-
     return channelData;
   }
 
@@ -95,20 +92,16 @@ export class Requests {
     } catch (error) {
       // TODO notify error
     }
-
     return projectId;
   }
 
   static * saveProject(project: IProject) {
     let projectId;
     try {
-      let response = yield call(axios.put, `${this.apiAddress}/config/${this.appName}/${project.id}`, {
-        name: project.projectName,
-        site: project.siteName,
-        final: project.finalChannelName,
-        raw: project.rawChannelName,
-        supportingChannels: _.cloneDeep(project.supportingChannels),
-      });
+      let response = yield call(axios.put,
+        `${this.apiAddress}/config/${this.appName}/${project.id}`,
+        JSON.stringify(project),
+      );
       projectId = response.data;
     } catch (error) {
       // TODO throw error

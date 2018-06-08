@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import * as actionTypes from './action-types';
-import { IProject } from './state';
+import { IProject } from './models/project';
 
 // tslint:disable:max-classes-per-file
 class AddProjectStartAction implements Action {
