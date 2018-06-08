@@ -13,7 +13,7 @@ import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig 
 import { anomaliesScreenActionTypes } from '../action-creators';
 import { IDataGridState } from '../controls/data-grid/state';
 import { Requests } from '../../requests';
-import { IProject } from '../../projects-screen/state';
+import { IProject } from '../../projects-screen/models/project';
 import { IAnomaliesCharts } from '../../anomalies-screen/store-creator';
 import { ShowModalAction, HideModalAction } from '../../components/modal';
 
@@ -26,9 +26,9 @@ function* getAnomaliesForChannel(action: any) {
 
   try {
     yield put(_.toPlainObject(new ShowModalAction()));
-    const rawChannelResponse = yield Requests.getChannelData(`${project.site}-${project.raw}`, startDate, endDate);
-    const fixedAnomaliesResponse = yield Requests.getFixedAnomalies(`${project.site}-${project.raw}`, startDate, endDate);
-    const editedChannelResponse = yield Requests.getChannelData(`${project.site}-${project.final}`, startDate, endDate);
+    const rawChannelResponse = yield Requests.getChannelData(`${project.siteName}-${project.rawChannelName}`, startDate, endDate);
+    const fixedAnomaliesResponse = yield Requests.getFixedAnomalies(`${project.siteName}-${project.rawChannelName}`, startDate, endDate);
+    const editedChannelResponse = yield Requests.getChannelData(`${project.siteName}-${project.finalChannelName}`, startDate, endDate);
     yield put(_.toPlainObject(new HideModalAction()));
 
     const rawChannelParseResult = Papa.parse(rawChannelResponse.data, { header: true });

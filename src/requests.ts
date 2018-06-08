@@ -1,46 +1,27 @@
-import axios from 'axios';
-import { all, call } from 'redux-saga/effects'
-import _ = require('lodash');
+import axios, { AxiosPromise, AxiosResponse } from 'axios';
+import * as _ from 'lodash';
 import { channel } from 'redux-saga';
+import { all, call } from 'redux-saga/effects';
 import { watchSaveProject } from './anomalies-screen/sagas';
-import { IProject } from './projects-screen/state';
 import { ISite, IChannel } from './model';
+import { IProject } from './projects-screen/models/project';
 
 export class Requests {
-
+  static appName = 'anomaly-tool';
   static apiAddress = 'http://13.77.168.238';
   static token = 'oasdob123a23hnaovnfaewd123akjwpod';
 
-  static * getConfiguration(): any {
-    let config: any;
-
+  static async getConfiguration(): Promise<IProject[]> {
     try {
-      config = yield call(axios.get, `${this.apiAddress}/config/anomaly-tool`);
+      const response: AxiosResponse<IProject[]> = await axios.get<IProject[]>(`${this.apiAddress}/config/${this.appName}`);
+      if (_.isObject(response)) {
+        return response.data;
+      }
+      return [];
     } catch (error) {
       //TODO notify error
-      config = {
-        data: [{
-          id: 'someId', data: {
-            name: 'someName',
-            site: '7880',
-            raw: '11732',
-            final: '11734',
-            supportingChannels: [
-              {
-                site: '7880',
-                channel: '11734',
-              },
-              {
-                site: '7880',
-                channel: '11734',
-              },
-            ],
-          }
-        }]
-      };
     }
-
-    return config;
+    return [];
   }
 
   static * getChannelData(channel: string, startDate: string, endDate: string) {
@@ -77,7 +58,6 @@ export class Requests {
   //TODO - remove  getEditedChannelData and use only getChannelData
   public static * getEditedChannelData(channel: string, startDate: string, endDate: string) {
     let channelData: any;
-
     try {
       channelData = yield call(axios.get, `${this.apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
     }
@@ -85,7 +65,6 @@ export class Requests {
       //TODO notify error
       channelData = {};
     }
-
     return channelData;
   }
 
@@ -103,35 +82,26 @@ export class Requests {
     return supportingChannelsResult;
   }
 
-  static * addProject(data) {
+  static * addProject(project: IProject) {
     let projectId: string = '';
-
     try {
-      let response = yield call(axios.post, `${this.apiAddress}/config/anomaly-tool`, {
-        name: data.name,
-        site: data.site,
-        final: data.final,
-        raw: data.raw,
-        supportingChannels: [],
-      });
+      let response = yield call(axios.post,
+        `${this.apiAddress}/config/${this.appName}`,
+        JSON.stringify(project));
       projectId = response.data;
     } catch (error) {
       // TODO notify error
     }
-
     return projectId;
   }
 
   static * saveProject(project: IProject) {
     let projectId;
     try {
-      let response = yield call(axios.put, `${this.apiAddress}/config/anomaly-tool/${project.id}`, {
-        name: project.name,
-        site: project.site,
-        final: project.final,
-        raw: project.raw,
-        supportingChannels: _.cloneDeep(project.supportingChannels),
-      });
+      let response = yield call(axios.put,
+        `${this.apiAddress}/config/${this.appName}/${project.id}`,
+        JSON.stringify(project),
+      );
       projectId = response.data;
     } catch (error) {
       // TODO throw error

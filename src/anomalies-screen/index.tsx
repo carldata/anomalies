@@ -11,7 +11,7 @@ import { IDomain, IHpSliderHandleValues } from 'time-series-scroller/lib/out/hp-
 import * as hpSliderScss from 'time-series-scroller/lib/out/sass/hp-slider.scss';
 import * as hpTimeSeriesChartScss from 'time-series-scroller/lib/out/sass/hp-time-series-chart.scss';
 import { IState } from '../state';
-import { IProject } from '../projects-screen/state';
+import { IProject } from '../projects-screen/models/project';
 import { anomaliesScreenActionCreators } from './action-creators';
 import { DataGrid } from './controls/data-grid';
 import { IDataGridState } from './controls/data-grid/state';
@@ -110,7 +110,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         <div style={{ marginLeft: 20, marginRight: 20, marginTop: 10, marginBottom: 10 }}>
           <Form>
             <FormGroup>
-              <ControlLabel style={{ fontWeight: 'bold' }}>{_.isEmpty(this.props.project) ? ' ' : this.props.project.name}</ControlLabel>{' '}
+              <ControlLabel style={{ fontWeight: 'bold' }}>{_.isEmpty(this.props.project) ? ' ' : this.props.project.projectName}</ControlLabel>{' '}
               <Button disabled={_.isEmpty(this.props.project)} onClick={() => this.props.saveProject(this.props.project)} >Save Project</Button>{' '}
               <Button bsStyle='primary' disabled={_.isEmpty(this.props.project)} onClick={() => this.props.getAnomaliesForProject({
                 project: this.props.project,
@@ -123,17 +123,17 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
           <Form inline>
             <FormGroup>
               <ControlLabel>Site: </ControlLabel>
-              <FormControl.Static>{_.isEmpty(this.props.project) ? 'No site' : this.props.project.site}</FormControl.Static>
+              <FormControl.Static>{_.isEmpty(this.props.project) ? 'No site' : this.props.project.siteName}</FormControl.Static>
             </FormGroup>
             {' '}
             <FormGroup>
               <ControlLabel>Source: </ControlLabel>
-              <FormControl.Static>{_.isEmpty(this.props.project) ? 'No source ' : this.props.project.raw}</FormControl.Static>
+              <FormControl.Static>{_.isEmpty(this.props.project) ? 'No source ' : this.props.project.rawChannelName}</FormControl.Static>
             </FormGroup>
             {' '}
             <FormGroup>
               <ControlLabel>Final: </ControlLabel>
-              <FormControl.Static>{_.isEmpty(this.props.project) ? 'No final' : this.props.project.final}</FormControl.Static>
+              <FormControl.Static>{_.isEmpty(this.props.project) ? 'No final' : this.props.project.finalChannelName}</FormControl.Static>
             </FormGroup>
             {' '}
             <FormGroup>

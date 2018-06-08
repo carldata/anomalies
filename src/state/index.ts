@@ -1,5 +1,5 @@
 import { IAnomaliesScreenState } from '../anomalies-screen/state';
-import { IProjectsScreenState } from '../projects-screen/state';
+import { IProjectsScreenState } from '../projects-screen/models/projects-screen-state';
 import { IModalState } from '../components/modal';
 
 export interface IState {

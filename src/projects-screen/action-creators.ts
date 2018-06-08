@@ -1,12 +1,12 @@
 import { push } from 'react-router-redux';
 import { Dispatch } from 'redux';
-import { IProject } from './state';
+import { IProject } from './models/project';
+import { GetAllProjectsAction } from './actions';
+import _ = require('lodash');
 
+// TODO: move to action-types
 export const projectsScreenActionTypes = {
   GO_TO_ANOMALIES: 'GO_TO_ANOMALIES',
-  GET_ALL_PROJECTS_ASYNC_CALL_START: 'GET_ALL_PROJECTS_ASYNC_CALL_START',
-  GET_ALL_PROJECTS_ASYNC_CALL_FULFILED: 'GET_ALL_PROJECTS_ASYNC_CALL_FULFILED',
-  GET_ALL_PROJECTS_ASYNC_CALL_REJECTED: 'GET_ALL_PROJECTS_ASYNC_CALL_REJECTED',
   SHOW_ADD_PROJECT_START: 'SHOW_ADD_PROJECT_START',
   SHOW_ADD_PROJECT_FETCHING: 'SHOW_ADD_PROJECT_FETCHING',
   SHOW_ADD_PROJECT_FULFILED: 'SHOW_ADD_PROJECT_FULFILED',
@@ -26,12 +26,16 @@ export const projectsScreenActionTypes = {
   GET_CHANNELS_FOR_SITE_REJECTED: 'GET_CHANNELS_FOR_SITE_REJECTED',
 };
 
+type IGetAllProjectsActionCreator = () => GetAllProjectsAction;
+
+const getAllProjects: IGetAllProjectsActionCreator = () =>
+  _.toPlainObject(new GetAllProjectsAction());
+
+
+// TODO: refactor this the way Auto I&I works
 export const projectScreenActionCreators = {
   goToAnomaliesScreen: (project: IProject) => {
     return { type: projectsScreenActionTypes.GO_TO_ANOMALIES, payload: project };
-  },
-  getAllProjectsAsyncCall: () => {
-    return { type: projectsScreenActionTypes.GET_ALL_PROJECTS_ASYNC_CALL_START };
   },
   showAddProject: () => {
     return { type: projectsScreenActionTypes.SHOW_ADD_PROJECT_START };
@@ -39,8 +43,8 @@ export const projectScreenActionCreators = {
   cancelShowAddProject: () => {
     return { type: projectsScreenActionTypes.CANCEL_SHOW_ADD_PROJECT };
   },
-  addProjectStart: (project: any) => {
-    return { type: projectsScreenActionTypes.ADD_PROJECT_START, payload: project};
+  addProjectStart: (project: IProject) => {
+    return { type: projectsScreenActionTypes.ADD_PROJECT_START, payload: project };
   },
   getSites: (db: string) => {
     return { type: projectsScreenActionTypes.GET_SITES_FOR_PROJECT_START, payload: db };
@@ -48,4 +52,9 @@ export const projectScreenActionCreators = {
   getChannels: (siteId: string) => {
     return { type: projectsScreenActionTypes.GET_CHANNELS_FOR_SITE_START, payload: siteId };
   },
+};
+
+export {
+  IGetAllProjectsActionCreator,
+  getAllProjects,
 };

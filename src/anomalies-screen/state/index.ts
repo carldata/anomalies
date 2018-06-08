@@ -1,8 +1,8 @@
 import { channel } from 'redux-saga';
 import { IHpTimeSeriesChartState } from 'time-series-scroller';
 import { IDataGridState } from '../controls/data-grid/state';
-import { IProject } from '../../projects-screen/state';
 import { ISite, IChannel } from '../../model';
+import { IProject } from '../../projects-screen/models/project';
 
 export interface IAnomaliesScreenState {
   mainChartState: IHpTimeSeriesChartState;

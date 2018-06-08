@@ -3,33 +3,27 @@ import { put, takeEvery } from 'redux-saga/effects';
 import { projectsScreenActionTypes } from '../action-creators';
 import { Requests } from '../../requests';
 import { IChannel } from '../../model';
-import { IProject } from '../state';
+import { IProject } from '../models/project';
 import { ShowModalAction, HideModalAction } from '../../components/modal';
+import { GetAllProjectsFullfilledAction, GetAllProjectsRejectedAction } from '../actions';
+import { GET_ALL_PROJECTS_ASYNC_CALL_START } from '../action-types';
+
+interface IConfigurationEntry {
+  id: string;
+  data: IProject;
+}
 
 function* getAllProjectsAsyncCall() {
   try {
-    const projectsArray = [];
     yield put(_.toPlainObject(new ShowModalAction()));
-    const response = yield Requests.getConfiguration();
+    const response: IConfigurationEntry[] = yield Requests.getConfiguration();
+    yield put(_.toPlainObject(new GetAllProjectsFullfilledAction(_.map(response, (el) => el.data))));
     yield put(_.toPlainObject(new HideModalAction()));
-
-    for (const element of response.data) {
-      projectsArray.push({
-        id: element.id,
-        name: element.data.name,
-        final: element.data.final,
-        raw: element.data.raw,
-        site: element.data.site,
-        supportingChannels: _.isUndefined(element.data.supportingChannels) ? [] : element.data.supportingChannels,
-      } as IProject);
-    }
-
-    yield put({ type: projectsScreenActionTypes.GET_ALL_PROJECTS_ASYNC_CALL_FULFILED, payload: projectsArray });
   } catch (error) {
-    yield put({ type: projectsScreenActionTypes.GET_ALL_PROJECTS_ASYNC_CALL_REJECTED, payload: error.message });
+    yield put(_.toPlainObject(new GetAllProjectsRejectedAction()));
   }
 }
 
 export function* watchGetAllProjectsAsyncCall() {
-  yield takeEvery(projectsScreenActionTypes.GET_ALL_PROJECTS_ASYNC_CALL_START, getAllProjectsAsyncCall);
+  yield takeEvery(GET_ALL_PROJECTS_ASYNC_CALL_START, getAllProjectsAsyncCall);
 }
