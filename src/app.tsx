@@ -1,7 +1,6 @@
 import '../styles/bootstrap.min.css';
 
 import { createHashHistory } from 'history';
-import * as _ from 'lodash';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -18,7 +17,7 @@ import Anomalies from './anomalies-screen';
 import Projects from './projects-screen';
 
 import { rootSaga } from './root-saga';
-import { ModalContainer, modalContainerReducer } from './components/modal';
+import { modalContainerReducer } from './components/modal';
 
 const reducers = combineReducers<IState>({
   anomaliesScreen: anomaliesScreenReducer,

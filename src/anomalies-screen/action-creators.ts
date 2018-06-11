@@ -1,7 +1,4 @@
-import { push } from 'react-router-redux';
-import { Dispatch } from 'redux';
-import { put } from 'redux-saga/effects';
-import { IProject } from '../projects-screen/models/project';
+import { ISiteChannelInfo, IProject } from "../models";
 
 export const anomaliesScreenActionTypes = {
   GO_TO_PROJECTS: 'GO_TO_PROJECTS',
@@ -42,17 +39,17 @@ export const anomaliesScreenActionCreators = {
   getChannelsForSite: (siteId: string) => {
     return { type: anomaliesScreenActionTypes.GET_CHANNELS_FOR_SITE_ANOMALIES_START, payload: siteId };
   },
-  addAndPopulateChannel: (siteChannelInfo: any, startDate: string, endDate: string) => {
+  addAndPopulateChannel: (siteChannelInfo: ISiteChannelInfo, startDate: string, endDate: string) => {
     return {
       type: anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_START,
       payload: {
-        siteChannelInfo: siteChannelInfo,
-        startDate: startDate,
-        endDate: endDate,
-      }
-    }
+        siteChannelInfo,
+        startDate,
+        endDate,
+      },
+    };
   },
-  addEmptyChannel: (siteChannelInfo: any) => {
+  addEmptyChannel: (siteChannelInfo: ISiteChannelInfo) => {
     return {
       type: anomaliesScreenActionTypes.ADD_EMPTY_CHANNEL_START,
       payload: {

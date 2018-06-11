@@ -1,10 +1,8 @@
 import * as _ from 'lodash';
-import { Action, combineActions, handleActions } from 'redux-actions';
+import { Action, handleActions } from 'redux-actions';
 import { projectsScreenActionTypes } from './action-creators';
-import { IProject } from './models/project';
-import { IProjectsScreenState } from './models/projects-screen-state';
-import { ISite, IChannel, ISitesChannels } from '../model';
 import { GET_ALL_PROJECTS_ASYNC_CALL_FULFILED } from './action-types';
+import { ISite, IChannel, ISitesChannels, IProject, IProjectsScreenState } from '../models';
 
 const initialState = {
   projects: [],

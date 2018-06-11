@@ -2,7 +2,6 @@ import * as _ from 'lodash';
 import { put, takeEvery } from 'redux-saga/effects';
 import { projectsScreenActionTypes } from '../action-creators';
 import { Requests } from '../../requests';
-import { IProject } from '../models/project';
 import { AddProjectStartAction, AddProjectFulfiledAction } from '../actions';
 
 function* addNewProject(action: AddProjectStartAction) {

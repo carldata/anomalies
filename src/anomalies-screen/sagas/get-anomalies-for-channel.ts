@@ -13,7 +13,7 @@ import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig 
 import { anomaliesScreenActionTypes } from '../action-creators';
 import { IDataGridState } from '../controls/data-grid/state';
 import { Requests } from '../../requests';
-import { IProject } from '../../projects-screen/models/project';
+import { IProject } from '../../models/project';
 import { IAnomaliesCharts } from '../../anomalies-screen/store-creator';
 import { ShowModalAction, HideModalAction } from '../../components/modal';
 

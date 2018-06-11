@@ -1,23 +1,22 @@
 import * as dateFns from 'date-fns';
 import * as _ from 'lodash';
 import * as React from 'react';
-import { Button, ButtonGroup, ControlLabel, Form, FormControl, FormGroup, Row, Col, Nav, NavItem, Navbar, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Button, ControlLabel, Form, FormControl, FormGroup, Row, Col, Navbar } from 'react-bootstrap';
 import { Column } from 'react-data-grid';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import { convertHpSliderScss, convertHpTimeSeriesChartScss, HpTimeSeriesScroller, IHpTimeSeriesChartState, HpSlider, EnumHandleType,
+import { convertHpSliderScss, convertHpTimeSeriesChartScss, IHpTimeSeriesChartState, HpSlider, EnumHandleType,
    IUnixFromTo, handleMovedCallback, HpTimeSeriesChart, hpTimeSeriesChartReducerAuxFunctions } from 'time-series-scroller';
 import { IDomain, IHpSliderHandleValues } from 'time-series-scroller/lib/out/hp-slider/interfaces';
 import * as hpSliderScss from 'time-series-scroller/lib/out/sass/hp-slider.scss';
 import * as hpTimeSeriesChartScss from 'time-series-scroller/lib/out/sass/hp-time-series-chart.scss';
 import { IState } from '../state';
-import { IProject } from '../projects-screen/models/project';
 import { anomaliesScreenActionCreators } from './action-creators';
 import { DataGrid } from './controls/data-grid';
 import { IDataGridState } from './controls/data-grid/state';
 import { AddChannelModal } from './controls/add-channel-control';
-import { ISite } from '../model';
 import { ModalContainer } from '../components/modal';
+import { IProject } from '../models';
 
 interface IAnomaliesComponentProps {
   mainChartState: IHpTimeSeriesChartState;

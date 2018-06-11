@@ -1,16 +1,11 @@
-import * as React from 'react';
-import * as ReactDataGrid from 'react-data-grid';
-import { IState } from '../../../state';
 import { Dispatch, bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { IHpTimeSeriesChartState } from 'time-series-scroller';
-import { IAddChannelState } from './state';
 import * as _ from 'lodash';
-import update from 'immutability-helper';
-import { Button, ButtonGroup, ControlLabel, Form, FormControl, FormGroup, Row, Col, DropdownButton, MenuItem, Modal } from 'react-bootstrap';
-import { CSVLink, CSVDownload } from 'react-csv';
-import { ISite, IChannel } from '../../../model';
+import { connect } from 'react-redux';
+import { Button, ControlLabel, Form, FormControl, FormGroup, Col, Modal } from 'react-bootstrap';
+import * as React from 'react';
+import { IState } from '../../../state';
 import { anomaliesScreenActionCreators } from '../../action-creators';
+import { ISite, IChannel, ISiteChannelInfo } from '../../../models';
 
 interface IAddChannelComponentProps {
   showModal: boolean;
@@ -22,8 +17,8 @@ interface IAddChannelComponentProps {
 }
 
 interface IAddChannelComponentActionCreators {
-  addAndPopulateChannel: (siteChannelInfo: any, startDate: string, endDate: string) => any;
-  addEmptyChannel: (siteChannelInfo: any) => any;
+  addAndPopulateChannel: (siteChannelInfo: ISiteChannelInfo, startDate: string, endDate: string) => any;
+  addEmptyChannel: (siteChannelInfo: ISiteChannelInfo) => any;
   getChannelsForSite: (siteId: string) => any;
   cancelShowModal: () => any;
 }
@@ -34,8 +29,8 @@ interface IAddChannelComponentState {
 
 export class AddChannelModalComponent extends React.Component<IAddChannelComponentProps & IAddChannelComponentActionCreators, IAddChannelComponentState> {
   private siteId: string;
-  private site: string;
   private channelId: string;
+  private site: string;
   private channel: string;
 
   constructor(props: IAddChannelComponentProps & IAddChannelComponentActionCreators, context: any) {

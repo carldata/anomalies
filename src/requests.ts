@@ -1,10 +1,7 @@
-import axios, { AxiosPromise, AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import * as _ from 'lodash';
-import { channel } from 'redux-saga';
 import { all, call } from 'redux-saga/effects';
-import { watchSaveProject } from './anomalies-screen/sagas';
-import { ISite, IChannel } from './model';
-import { IProject } from './projects-screen/models/project';
+import { IProject, ISite, IChannel } from './models';
 
 export class Requests {
   static appName = 'anomaly-tool';
@@ -68,7 +65,7 @@ export class Requests {
     return channelData;
   }
 
-  static * getSupportingChannels(supportingChannels: Array<{ site: string, channel: string }>, startDate: string, endDate: string) {
+  public static * getSupportingChannels(supportingChannels: Array<{ site: string, channel: string }>, startDate: string, endDate: string) {
     let supportingChannelsResult: any[] = [];
 
     // TODO - change this to get data for channels instead of anomalies when endpoint starts to work
@@ -82,7 +79,7 @@ export class Requests {
     return supportingChannelsResult;
   }
 
-  static * addProject(project: IProject) {
+  public static * addProject(project: IProject) {
     let projectId: string = '';
     try {
       let response = yield call(axios.post,
@@ -95,7 +92,7 @@ export class Requests {
     return projectId;
   }
 
-  static * saveProject(project: IProject) {
+  public static * saveProject(project: IProject) {
     let projectId;
     try {
       let response = yield call(axios.put,
@@ -109,7 +106,7 @@ export class Requests {
     return projectId;
   }
 
-  static * getSites(db: string) {
+  public static * getSites(db: string) {
     let sites: ISite[] = [];
     try {
       const response = yield call(axios.get, `${this.apiAddress}/data/site/${db}?token=${this.token}`);
@@ -120,7 +117,7 @@ export class Requests {
     return sites;
   }
 
-  static * getChannels(siteId: string) {
+  public static * getChannels(siteId: string) {
     let channels: IChannel[] = [];
     try {
       const response = yield call(axios.get, `${this.apiAddress}/data/channel/${siteId}?token=${this.token}`);

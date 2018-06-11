@@ -1,6 +1,4 @@
-import { push } from 'react-router-redux';
-import { Dispatch } from 'redux';
-import { IProject } from './models/project';
+import { IProject } from '../models/project';
 import { GetAllProjectsAction } from './actions';
 import _ = require('lodash');
 

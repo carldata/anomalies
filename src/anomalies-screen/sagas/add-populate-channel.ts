@@ -1,8 +1,7 @@
-import axios from 'axios';
 import * as dateFns from 'date-fns';
 import * as _ from 'lodash';
 import * as Papa from 'papaparse';
-import { takeEvery, call, all, put } from 'redux-saga/effects';
+import { takeEvery, put } from 'redux-saga/effects';
 import {
   EnumTimeSeriesType, hpTimeSeriesChartAuxiliary, hpTimeSeriesChartReducerAuxFunctions, IExternalSourceTimeSeries, IHpTimeSeriesChartState,
 } from 'time-series-scroller';
@@ -50,8 +49,7 @@ function* addAndPopulateChannel(action: any) {
         channelChartState,
       },
     });
-  }
-  catch (error) {
+  } catch (error) {
     yield put({ type: anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_REJECTED, payload: error })
   }
 }

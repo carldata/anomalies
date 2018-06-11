@@ -6,10 +6,9 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { IState } from '../state';
 import { projectScreenActionCreators, IGetAllProjectsActionCreator, getAllProjects } from './action-creators';
 import { ProjectComponent } from './project';
-import { IProject } from './models/project';
 import { AddProjectModal } from './controls/add-project-modal';
-import { ISite, IChannel } from '../model';
 import { ModalContainer } from '../components/modal';
+import { IProject } from '../models';
 
 interface IProjectComponentProps {
   projects: IProject[];
@@ -45,7 +44,7 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
                   {...project}
                   key={index}
                   goToProjectAnomalies={() => {
-                    this.props.goToAnomaliesScreen(_.find(this.props.projects, (proj) => proj.id === project.id)); 
+                    this.props.goToAnomaliesScreen(_.find(this.props.projects, (proj) => proj.id === project.id));
                   }} />;
               })}
             </ListGroup>
