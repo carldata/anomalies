@@ -4,7 +4,20 @@ import { Button, Form, FormGroup, ListGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { IState } from '../state';
-import { projectScreenActionCreators, IGetAllProjectsActionCreator, getAllProjects } from './action-creators';
+import {
+  IGetAllProjectsActionCreator,
+  getAllProjects,
+  goToAnomaliesScreen,
+  addProject,
+  getSites,
+  getChannelsForSite,
+  showAddProject,
+  IGoToAnomaliesScreenActionCreator,
+  IAddProjectActionCreator,
+  IGetSitesForProjectActionCreator,
+  IGetChannelsForSiteActionCreator,
+  IShowAddProjectActionCreator,
+} from './action-creators';
 import { ProjectComponent } from './project';
 import { IProject } from './models/project';
 import { AddProjectModal } from './controls/add-project-modal';
@@ -16,12 +29,12 @@ interface IProjectComponentProps {
 }
 
 interface IProjectComponentActionCreators {
-  goToAnomaliesScreen: (project: IProject) => any;
+  goToAnomaliesScreen: IGoToAnomaliesScreenActionCreator;
   getAllProjects: IGetAllProjectsActionCreator;
-  addProjectStart: (project: IProject) => any;
-  getSites: (db: string) => any;
-  getChannels: (siteId: string) => any;
-  showAddProject: () => any;
+  addProject: IAddProjectActionCreator;
+  getSites: IGetSitesForProjectActionCreator;
+  getChannelsForSite: IGetChannelsForSiteActionCreator;
+  showAddProject: IShowAddProjectActionCreator;
 }
 
 class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators> {
@@ -69,12 +82,11 @@ function mapStateToProps(state: IState) {
 
 function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
-    goToAnomaliesScreen: projectScreenActionCreators.goToAnomaliesScreen,
+    goToAnomaliesScreen,
     getAllProjects,
-    addProjectStart: projectScreenActionCreators.addProjectStart,
-    getSites: projectScreenActionCreators.getSites,
-    getChannels: projectScreenActionCreators.getChannels,
-    showAddProject: projectScreenActionCreators.showAddProject,
+    showAddProject,
+    getSites,
+    getChannelsForSite,
   }, dispatch);
 }
 

@@ -1,26 +1,21 @@
 import * as _ from 'lodash';
 import { put, takeEvery } from 'redux-saga/effects';
-import { projectsScreenActionTypes } from '../action-creators';
 import { Requests } from '../../requests';
 import { IChannel, ISite, ISitesChannels } from '../../model';
+import { ShowAddProjectFetchingAction, ShowAddProjectFulfilledAction } from '../actions';
+import { SHOW_ADD_PROJECT_STARTED } from '../action-types';
 
 function* showAddProject(action) {
   try {
-    yield put({type: projectsScreenActionTypes.SHOW_ADD_PROJECT_FETCHING});
+    yield put(_.toPlainObject(new ShowAddProjectFetchingAction()));
     const sites: ISite[] = yield Requests.getSites('Emerald_AECOM');
     const channels: IChannel[] = yield Requests.getChannels(_.head(sites).id);
-    yield put({
-       type: projectsScreenActionTypes.SHOW_ADD_PROJECT_FULFILED,
-       payload: {
-         sites,
-         channels,
-       } as ISitesChannels,
-      });
+    yield put(_.toPlainObject(new ShowAddProjectFulfilledAction({ sites, channels })));
   } catch (error) {
     // todo notify when error occurs
   }
 }
 
 export function* watchShowAddNewProject() {
-  yield takeEvery(projectsScreenActionTypes.SHOW_ADD_PROJECT_START, showAddProject);
+  yield takeEvery(SHOW_ADD_PROJECT_STARTED, showAddProject);
 }
