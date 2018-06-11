@@ -7,7 +7,7 @@ import {
 import { anomaliesScreenActionTypes } from './action-creators';
 import { IAnomaliesScreenState } from './state';
 import { IDataGridState } from './controls/data-grid/state';
-import { IProject, ISitesChannels, IShowAddChannelPayload, IChannel, IProjectSupportingChannel } from '../models';
+import { IProject, IShowAddChannelPayload, IChannel, IProjectSupportingChannel, ISitesChannels } from '../models';
 
 export interface IAnomaliesCharts {
   mainChartState: IHpTimeSeriesChartState;

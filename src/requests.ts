@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import * as _ from 'lodash';
 import { all, call } from 'redux-saga/effects';
-import { IProject, ISite, IChannel } from './models';
+import { IProject, IChannel, ISite } from './models';
 
 export class Requests {
   static appName = 'anomaly-tool';

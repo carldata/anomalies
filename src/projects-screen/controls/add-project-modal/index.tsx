@@ -4,7 +4,7 @@ import { Modal, Button, Form, FormGroup, FormControl, Col, ControlLabel, ButtonG
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { projectScreenActionCreators } from '../../action-creators';
-import { ISite, IChannel, IProject } from '../../../models';
+import { IChannel, IProject, ISite } from '../../../models';
 import { IState } from '../../../state';
 
 interface IAddProjectModalComponentProps {

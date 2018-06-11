@@ -1,10 +1,10 @@
 import * as _ from 'lodash';
 import { put, takeEvery } from 'redux-saga/effects';
 import { Requests } from '../../requests';
-import { IProject } from '../../models/project';
 import { ShowModalAction, HideModalAction } from '../../components/modal';
 import { GetAllProjectsFullfilledAction, GetAllProjectsRejectedAction } from '../actions';
 import { GET_ALL_PROJECTS_ASYNC_CALL_START } from '../action-types';
+import { IProject } from '../../models';
 
 interface IConfigurationEntry {
   id: string;

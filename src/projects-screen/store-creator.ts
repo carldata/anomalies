@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import { Action, handleActions } from 'redux-actions';
 import { projectsScreenActionTypes } from './action-creators';
 import { GET_ALL_PROJECTS_ASYNC_CALL_FULFILED } from './action-types';
-import { ISite, IChannel, ISitesChannels, IProject, IProjectsScreenState } from '../models';
+import { IChannel, ISitesChannels, IProject, IProjectsScreenState, ISite } from '../models';
 
 const initialState = {
   projects: [],

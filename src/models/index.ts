@@ -37,6 +37,11 @@ export interface IShowAddChannelPayload {
     mainChartEmpty: boolean;
 }
 
+export interface ISitesChannels {
+    sites: ISite[];
+    channels: IChannel[];
+}
+
 export interface ISite {
     id: string;
     name: string;
@@ -46,9 +51,4 @@ export interface ISiteChannelInfo {
     site: string;
     channel: string;
     type: string;
-}
-
-export interface ISitesChannels {
-    sites: ISite[];
-    channels: IChannel[];
 }

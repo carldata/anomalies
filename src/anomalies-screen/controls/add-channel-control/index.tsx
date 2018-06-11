@@ -5,7 +5,7 @@ import { Button, ControlLabel, Form, FormControl, FormGroup, Col, Modal } from '
 import * as React from 'react';
 import { IState } from '../../../state';
 import { anomaliesScreenActionCreators } from '../../action-creators';
-import { ISite, IChannel, ISiteChannelInfo } from '../../../models';
+import { IChannel, ISiteChannelInfo, ISite } from '../../../models';
 
 interface IAddChannelComponentProps {
   showModal: boolean;

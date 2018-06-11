@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import { put, takeEvery } from 'redux-saga/effects';
 import { projectsScreenActionTypes } from '../action-creators';
 import { Requests } from '../../requests';
-import { ISite, IChannel, ISitesChannels } from '../../models';
+import { IChannel, ISitesChannels, ISite } from '../../models';
 
 function* showAddProject(action) {
   try {

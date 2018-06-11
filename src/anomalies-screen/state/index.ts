@@ -1,8 +1,6 @@
 import { IHpTimeSeriesChartState } from 'time-series-scroller';
 import { IDataGridState } from '../controls/data-grid/state';
-import { ISite } from "../../ISite";
-import { IChannel } from "../../IChannel";
-import { IProject } from '../../models/project';
+import { IProject, IChannel, ISite } from '../../models';
 
 export interface IAnomaliesScreenState {
   mainChartState: IHpTimeSeriesChartState;

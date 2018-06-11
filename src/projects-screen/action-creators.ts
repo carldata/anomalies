@@ -1,6 +1,6 @@
-import { IProject } from '../models/project';
 import { GetAllProjectsAction } from './actions';
 import _ = require('lodash');
+import { IProject } from '../models';
 
 // TODO: move to action-types
 export const projectsScreenActionTypes = {
