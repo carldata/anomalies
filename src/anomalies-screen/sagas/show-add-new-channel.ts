@@ -7,7 +7,7 @@ import { IChannel, ISite, ISitesChannels, IShowAddChannelPayload } from '../../m
 function* showAddChannel(action) {
   try {
     yield put({type: anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_FETCHING});
-    const sites: ISite[] = yield Requests.getSites('FlowMetrix');
+    const sites: ISite[] = yield Requests.getSites('Emerald_AECOM');
     const channels: IChannel[] = yield Requests.getChannels(_.head(sites).id);
     yield put({
        type: anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_FULFILED,

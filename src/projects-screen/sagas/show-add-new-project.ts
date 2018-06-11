@@ -7,7 +7,7 @@ import { IChannel, ISite, ISitesChannels } from '../../model';
 function* showAddProject(action) {
   try {
     yield put({type: projectsScreenActionTypes.SHOW_ADD_PROJECT_FETCHING});
-    const sites: ISite[] = yield Requests.getSites('FlowMetrix');
+    const sites: ISite[] = yield Requests.getSites('Emerald_AECOM');
     const channels: IChannel[] = yield Requests.getChannels(_.head(sites).id);
     yield put({
        type: projectsScreenActionTypes.SHOW_ADD_PROJECT_FULFILED,
