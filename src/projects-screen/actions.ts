@@ -40,21 +40,13 @@ class GoToAnomaliesScreenAction implements Action {
   constructor(public payload: IProject) { }
 }
 
-class ShowAddProjectStartedAction implements Action {
-  public readonly type = actionTypes.SHOW_ADD_PROJECT_STARTED;
+class ShowProjectDefinitionModalAction implements Action {
+  public readonly type = actionTypes.SHOW_PROJECT_DEFINITION_MODAL;
 }
 
-class ShowAddProjectFetchingAction implements Action {
-  public readonly type = actionTypes.SHOW_ADD_PROJECT_FETCHING;
-}
-
-class ShowAddProjectFulfilledAction implements Action {
-  public readonly type = actionTypes.SHOW_ADD_PROJECT_FULFILLED;
-  constructor(public payload: ISitesChannels) { }
-}
-
-class CancelShowAddProjectAction implements Action {
-  public readonly type = actionTypes.CANCEL_SHOW_ADD_PROJECT;
+class HideProjectDefinitionModalAction implements Action {
+  public readonly type = actionTypes.HIDE_PROJECT_DEFINITION_MODAL;
+  constructor(public payload: { project: IProject, approved: boolean }) { }
 }
 
 class GetSitesForProjectStartedAction implements Action {
@@ -102,10 +94,8 @@ export {
   GetAllProjectsFulfilledAction,
   GetAllProjectsRejectedAction,
   GoToAnomaliesScreenAction,
-  ShowAddProjectStartedAction,
-  ShowAddProjectFetchingAction,
-  ShowAddProjectFulfilledAction,
-  CancelShowAddProjectAction,
+  ShowProjectDefinitionModalAction,
+  HideProjectDefinitionModalAction,
   GetSitesForProjectStartedAction,
   GetSitesForProjectFetchingAction,
   GetSitesForProjectFulfilledAction,

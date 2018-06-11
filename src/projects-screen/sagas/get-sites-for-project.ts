@@ -4,6 +4,7 @@ import { Requests } from '../../requests';
 import { ISite } from '../../model';
 import { GET_SITES_FOR_PROJECT_STARTED } from '../action-types';
 import { GetSitesForProjectFetchingAction, GetSitesForProjectFulfilledAction } from '../actions';
+import { ShowModalAction, HideModalAction } from '../../components/modal';
 
 function* getSitesForProject(action) {
   try {

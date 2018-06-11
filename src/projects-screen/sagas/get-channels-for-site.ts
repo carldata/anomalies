@@ -4,6 +4,7 @@ import { Requests } from '../../requests';
 import { IChannel } from '../../model';
 import { GET_CHANNELS_FOR_SITE_STARTED } from '../action-types';
 import { GetChannelsForSiteFetchingAction, GetChannelsForSiteFulfilledAction } from '../actions';
+import { ShowModalAction, HideModalAction } from '../../components/modal';
 
 function* getChannelsForSite(action) {
   try {

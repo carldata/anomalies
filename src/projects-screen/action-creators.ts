@@ -4,18 +4,18 @@ import { IProject } from './models/project';
 import {
   GetAllProjectsStartedAction,
   GoToAnomaliesScreenAction,
-  ShowAddProjectStartedAction,
-  CancelShowAddProjectAction,
   AddProjectStartedAction,
   GetSitesForProjectStartedAction,
   GetChannelsForSiteStartedAction,
+  ShowProjectDefinitionModalAction,
+  HideProjectDefinitionModalAction,
 } from './actions';
 import _ = require('lodash');
 
 type IGetAllProjectsActionCreator = () => GetAllProjectsStartedAction;
 type IGoToAnomaliesScreenActionCreator = (project: IProject) => GoToAnomaliesScreenAction;
-type IShowAddProjectActionCreator = () => ShowAddProjectStartedAction;
-type ICancelShowAddProjectActionCreator = () => CancelShowAddProjectAction;
+type IShowProjectDefintionModalActionCreator = () => ShowProjectDefinitionModalAction;
+type IHideProjectDefintionModalActionCreator = (project: IProject, approved: boolean) => HideProjectDefinitionModalAction;
 type IAddProjectActionCreator = (project: IProject) => AddProjectStartedAction;
 type IGetSitesForProjectActionCreator = (db: string) => GetSitesForProjectStartedAction;
 type IGetChannelsForSiteActionCreator = (siteId: string) => GetChannelsForSiteStartedAction;
@@ -26,11 +26,11 @@ const getAllProjects: IGetAllProjectsActionCreator = () =>
 const goToAnomaliesScreen: IGoToAnomaliesScreenActionCreator = (project: IProject) =>
   _.toPlainObject(new GoToAnomaliesScreenAction(project));
 
-const showAddProject: IShowAddProjectActionCreator = () =>
-  _.toPlainObject(new ShowAddProjectStartedAction());
+const showProjectProjectDefinitionModal: IShowProjectDefintionModalActionCreator = () =>
+  _.toPlainObject(new ShowProjectDefinitionModalAction());
 
-const cancelShowAddProject: ICancelShowAddProjectActionCreator = () =>
-  _.toPlainObject(new CancelShowAddProjectAction());
+const hideProjectProjectDefinitionModal: IHideProjectDefintionModalActionCreator = (project: IProject, approved: boolean) =>
+  _.toPlainObject(new HideProjectDefinitionModalAction({ project, approved }));
 
 const addProject: IAddProjectActionCreator = (project: IProject) =>
   _.toPlainObject(new AddProjectStartedAction(project));
@@ -46,11 +46,10 @@ export {
   getAllProjects,
   IGoToAnomaliesScreenActionCreator,
   goToAnomaliesScreen,
-  IShowAddProjectActionCreator,
-  showAddProject,
-  ShowAddProjectStartedAction,
-  ICancelShowAddProjectActionCreator,
-  cancelShowAddProject,
+  IShowProjectDefintionModalActionCreator,
+  showProjectProjectDefinitionModal,
+  IHideProjectDefintionModalActionCreator,
+  hideProjectProjectDefinitionModal,
   IAddProjectActionCreator,
   addProject,
   IGetSitesForProjectActionCreator,

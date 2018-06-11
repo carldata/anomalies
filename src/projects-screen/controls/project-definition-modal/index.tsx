@@ -7,10 +7,8 @@ import { ISite, IChannel } from '../../../model';
 import { IState } from '../../../state';
 import { IProject } from '../../models/project';
 import {
-  IAddProjectActionCreator,
-  ICancelShowAddProjectActionCreator,
-  addProject,
-  cancelShowAddProject,
+  IHideProjectDefintionModalActionCreator,
+  hideProjectProjectDefinitionModal,
   getChannelsForSite,
   IGetChannelsForSiteActionCreator,
 } from '../../action-creators';
@@ -22,9 +20,8 @@ interface IAddProjectModalComponentProps {
 }
 
 interface IAddProjectModalComponentActionCreators {
-  addProject: IAddProjectActionCreator;
-  cancelShowAddProject: ICancelShowAddProjectActionCreator;
-  getChannelsForSite: IGetChannelsForSiteActionCreator;
+  getChannels: IGetChannelsForSiteActionCreator;
+  hide: IHideProjectDefintionModalActionCreator;
 }
 
 interface IAddProjectModalComponentState {
@@ -37,7 +34,7 @@ interface IAddProjectModalComponentState {
   finalChannelName: string;
 }
 
-class AddProjectModalComponent extends React.Component<IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators, IAddProjectModalComponentState> {
+class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators, IAddProjectModalComponentState> {
   constructor(props: IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators) {
     super(props);
     this.state = {
@@ -76,7 +73,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
   }
 
   public render() {
-    return <Modal show={this.props.showModal} onHide={() => this.props.cancelShowAddProject()}>
+    return <Modal show={this.props.showModal} onHide={() => this.props.hide(null, false)}>
       <Modal.Body>
         <Form horizontal>
           <FormGroup>
@@ -102,7 +99,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
                   siteId: selectElement.value,
                   siteName: _.head(selectElement.selectedOptions).label,
                 });
-                this.props.getChannelsForSite(selectElement.value);
+                this.props.getChannels(selectElement.value);
               }} >
                 {
                   this.props.sites.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
@@ -152,7 +149,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
         <Button id='btnApproveAddProjectModal' bsStyle='primary' onClick={this.approveAddProject} >
           Add Project
         </Button>
-        <Button id='btnCancelAddProjectModal' onClick={() => this.props.cancelShowAddProject()}>
+        <Button id='btnCancelAddProjectModal' onClick={() => this.props.hide(null, false)}>
           Cancel
         </Button>
       </Modal.Footer>
@@ -172,7 +169,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
       supportingChannels: [],
     };
 
-    this.props.addProject(project);
+    this.props.hide(project, true);
   }
 }
 
@@ -186,10 +183,9 @@ function mapStateToProps(state: IState) {
 
 function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
-    addProject,
-    cancelShowAddProject,
-    getChannelsForSite,
+    getChannels: getChannelsForSite,
+    hide: hideProjectProjectDefinitionModal,
   }, dispatch);
 }
 
-export const AddProjectModal = connect(mapStateToProps, matchDispatchToProps)(AddProjectModalComponent);
+export const ProjectDefinitionModal = connect(mapStateToProps, matchDispatchToProps)(ProjectDefinitionModalComponent);

@@ -16,7 +16,8 @@ import {
   watchAddNewProject,
   watchGetSitesForProject,
   watchGetChannelsForSite,
-  watchShowAddNewProject
+  watchShowProjectDefinitionModal,
+  watchHideProjectDefinitionModal,
 } from './projects-screen/sagas';
 
 export function* rootSaga() {
@@ -33,7 +34,8 @@ export function* rootSaga() {
     fork(watchSaveProject),
     fork(watchGetSitesForProject),
     fork(watchGetChannelsForSite),
-    fork(watchShowAddNewProject),
+    fork(watchShowProjectDefinitionModal),
+    fork(watchHideProjectDefinitionModal),
     fork(watchShowAddNewChannel),
     fork(watchGetChannelsForSiteAnomalies),
   ]);

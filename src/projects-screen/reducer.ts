@@ -5,8 +5,8 @@ import {
   AddProjectFulfilledAction,
   GetSitesForProjectFulfilledAction,
   GetChannelsForSiteFulfilledAction,
-  ShowAddProjectFulfilledAction,
-  CancelShowAddProjectAction,
+  ShowProjectDefinitionModalAction,
+  HideProjectDefinitionModalAction,
 } from './actions';
 import { IProjectsScreenState } from './models/projects-screen-state';
 import { IChannel } from '../model';
@@ -22,8 +22,8 @@ export type MainScreenActionsTypes = GetAllProjectsFulfilledAction|
                                      AddProjectFulfilledAction|
                                      GetSitesForProjectFulfilledAction|
                                      GetChannelsForSiteFulfilledAction|
-                                     ShowAddProjectFulfilledAction|
-                                     CancelShowAddProjectAction;
+                                     ShowProjectDefinitionModalAction|
+                                     HideProjectDefinitionModalAction;
 
 export const projectsScreenReducer = (state: IProjectsScreenState = initialState, action: MainScreenActionsTypes): IProjectsScreenState => {
   switch (action.type) {
@@ -35,9 +35,9 @@ export const projectsScreenReducer = (state: IProjectsScreenState = initialState
       return { ...state, sites: action.payload };
     case actionTypes.GET_CHANNELS_FOR_SITE_FULFILLED:
       return { ...state, channels: action.payload };
-    case actionTypes.SHOW_ADD_PROJECT_FULFILLED:
-      return { ...state, showModal: true, sites: action.payload.sites, channels: action.payload.channels };
-    case actionTypes.CANCEL_SHOW_ADD_PROJECT:
+    case actionTypes.SHOW_PROJECT_DEFINITION_MODAL:
+      return { ...state, showModal: true };
+    case actionTypes.HIDE_PROJECT_DEFINITION_MODAL:
       return { ...state, showModal: false };
     default:
       return state;
