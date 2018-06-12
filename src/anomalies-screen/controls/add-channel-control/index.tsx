@@ -1,11 +1,11 @@
-import { Dispatch, bindActionCreators } from 'redux';
 import * as _ from 'lodash';
-import { connect } from 'react-redux';
-import { Button, ControlLabel, Form, FormControl, FormGroup, Col, Modal } from 'react-bootstrap';
 import * as React from 'react';
-import { IState } from '../../../state';
+import { Button, ControlLabel, Form, FormControl, FormGroup, Col, Modal } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Dispatch, bindActionCreators } from 'redux';
+import { IState } from '@app-state/.';
 import { anomaliesScreenActionCreators } from '../../action-creators';
-import { IChannel, ISiteChannelInfo, ISite } from '../../../models';
+import { IChannel, ISiteChannelInfo, ISite } from '@models/.';
 
 interface IAddChannelComponentProps {
   showModal: boolean;

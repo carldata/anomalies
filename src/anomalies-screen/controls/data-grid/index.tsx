@@ -1,14 +1,13 @@
-import { FormGroup, Row, Col } from 'react-bootstrap';
-import { CSVLink } from 'react-csv';
-import { Column } from 'react-data-grid';
 import * as _ from 'lodash';
 import * as React from 'react';
+import { FormGroup, Row, Col } from 'react-bootstrap';
+import { CSVLink } from 'react-csv';
 import * as ReactDataGrid from 'react-data-grid';
 import { IDataGridRow } from './state';
 import { RowRenderer } from './grid-renderer';
 
 export interface IDataGridComponentProps {
-  columns: Column[];
+  columns: ReactDataGrid.Column[];
   rows: IDataGridRow[];
 }
 
