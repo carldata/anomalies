@@ -16,7 +16,7 @@ function* getAllProjectsAsyncCall() {
   try {
     yield put(_.toPlainObject(new ShowModalAction()));
     const response: IConfigurationEntry[] = yield Requests.getConfiguration();
-    yield put(_.toPlainObject(new GetAllProjectsFulfilledAction(_.map(response, (el) => el.data))));
+    yield put(_.toPlainObject(new GetAllProjectsFulfilledAction(_.map(response, (el) => ({ ...el.data, id: el.id } as IProject)))));
     yield put(_.toPlainObject(new HideModalAction()));
   } catch (error) {
     yield put(_.toPlainObject(new GetAllProjectsRejectedAction()));
