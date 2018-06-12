@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { push } from 'react-router-redux';
 import { Dispatch } from 'redux';
 import { IProject } from '../models';
@@ -10,7 +11,6 @@ import {
   ShowProjectDefinitionModalAction,
   HideProjectDefinitionModalAction,
 } from './actions';
-import _ = require('lodash');
 
 type IGetAllProjectsActionCreator = () => GetAllProjectsStartedAction;
 type IGoToAnomaliesScreenActionCreator = (project: IProject) => GoToAnomaliesScreenAction;

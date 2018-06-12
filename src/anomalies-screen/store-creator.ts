@@ -4,15 +4,17 @@ import { Action, handleActions } from 'redux-actions';
 import {
   hpTimeSeriesChartReducerAuxFunctions, IHpTimeSeriesChartState,
 } from 'time-series-scroller';
+import { IAnomaliesScreenState } from './models/anomalies-screen-state';
 import { anomaliesScreenActionTypes } from './action-creators';
-import { IAnomaliesScreenState } from './state';
 import { IDataGridState } from './controls/data-grid/state';
-import { IProject, IShowAddChannelPayload, IChannel, IProjectSupportingChannel, ISitesChannels } from '../models';
+import { IProject, IChannel, IProjectSupportingChannel, ISitesChannels } from '../models';
+import { ISupportingChannel } from './models/supporting-channel';
+import { IShowAddChannelPayload } from './models/show-add-channel-payload';
 
 export interface IAnomaliesCharts {
   mainChartState: IHpTimeSeriesChartState;
   finalChartState: IHpTimeSeriesChartState;
-  supportingChannels: Array<{ site: string, channel: string, chartState: IHpTimeSeriesChartState }>;
+  supportingChannels: ISupportingChannel[];
   lastStartDate: string;
   lastEndDate: string;
 }

@@ -8,7 +8,15 @@ module.exports = {
     path: path.resolve(__dirname,'../dist')
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    modules: [
+      "node_modules",
+      path.resolve(__dirname, "../src")
+    ],
+    extensions: [".js", ".ts", ".json", ".jsx", ".tsx", ".css", ".scss"],
+    alias: {
+      "@app-state": path.resolve(__dirname, '../src/state'),
+      "@models": path.resolve(__dirname, '../src/models')
+    }
   },
   module: {
     rules: [

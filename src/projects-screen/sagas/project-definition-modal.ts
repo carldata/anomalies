@@ -2,16 +2,16 @@ import * as _ from 'lodash';
 import { put, takeEvery, take, select } from 'redux-saga/effects';
 import { Requests } from '../../requests';
 import { IChannel, ISite, ISitesChannels, IProject } from '../../models';
-import { 
+import {
   HIDE_PROJECT_DEFINITION_MODAL,
   GET_SITES_FOR_PROJECT_FULFILLED,
   GET_CHANNELS_FOR_SITE_FULFILLED,
   SHOW_PROJECT_DEFINITION_MODAL,
-  ADD_PROJECT_FULFILLED, 
+  ADD_PROJECT_FULFILLED,
 } from '../action-types';
 import { SHOW_MODAL } from '../../components/modal/action-types';
 import { GetSitesForProjectStartedAction, GetChannelsForSiteStartedAction, AddProjectStartedAction, GoToAnomaliesScreenAction } from '../actions';
-import { IState } from '../../state';
+import { IState } from '@app-state/.';
 
 function* showProjectDefinitionModal() {
   try {

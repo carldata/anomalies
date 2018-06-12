@@ -1,5 +1,4 @@
-export interface IAddChannelState
-{
+export interface IAddChannelState {
     siteId: number;
     channelId: number;
     channelType: string;

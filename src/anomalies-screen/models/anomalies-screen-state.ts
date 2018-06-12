@@ -1,11 +1,12 @@
 import { IHpTimeSeriesChartState } from 'time-series-scroller';
+import { IProject, ISite, IChannel } from '@models/.';
 import { IDataGridState } from '../controls/data-grid/state';
-import { IProject, IChannel, ISite } from '../../models';
+import { ISupportingChannel } from '../models/supporting-channel';
 
 export interface IAnomaliesScreenState {
   mainChartState: IHpTimeSeriesChartState;
   finalChartState: IHpTimeSeriesChartState;
-  supportingChannels: Array<{ site: string, channel: string, chartState: IHpTimeSeriesChartState }>;
+  supportingChannels: ISupportingChannel[];
   gridState: IDataGridState;
   project: IProject;
   lastStartDate: string;
