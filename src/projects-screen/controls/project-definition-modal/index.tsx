@@ -3,10 +3,15 @@ import * as React from 'react';
 import { Modal, Button, Form, FormGroup, FormControl, Col, ControlLabel, ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import { projectScreenActionCreators } from '../../action-creators';
 import { ISite, IChannel } from '../../../model';
 import { IState } from '../../../state';
 import { IProject } from '../../models/project';
+import {
+  IHideProjectDefintionModalActionCreator,
+  hideProjectProjectDefinitionModal,
+  getChannelsForSite,
+  IGetChannelsForSiteActionCreator,
+} from '../../action-creators';
 
 interface IAddProjectModalComponentProps {
   showModal: boolean;
@@ -15,9 +20,8 @@ interface IAddProjectModalComponentProps {
 }
 
 interface IAddProjectModalComponentActionCreators {
-  addProject: (p: IProject) => any;
-  cancelModal: () => any;
-  getChannels: (siteId: string) => any;
+  getChannels: IGetChannelsForSiteActionCreator;
+  hide: IHideProjectDefintionModalActionCreator;
 }
 
 interface IAddProjectModalComponentState {
@@ -30,7 +34,7 @@ interface IAddProjectModalComponentState {
   finalChannelName: string;
 }
 
-class AddProjectModalComponent extends React.Component<IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators, IAddProjectModalComponentState> {
+class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators, IAddProjectModalComponentState> {
   constructor(props: IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators) {
     super(props);
     this.state = {
@@ -69,7 +73,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
   }
 
   public render() {
-    return <Modal show={this.props.showModal} onHide={() => this.props.cancelModal()}>
+    return <Modal show={this.props.showModal} onHide={() => this.props.hide(null, false)}>
       <Modal.Body>
         <Form horizontal>
           <FormGroup>
@@ -145,7 +149,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
         <Button id='btnApproveAddProjectModal' bsStyle='primary' onClick={this.approveAddProject} >
           Add Project
         </Button>
-        <Button id='btnCancelAddProjectModal' onClick={() => this.props.cancelModal()}>
+        <Button id='btnCancelAddProjectModal' onClick={() => this.props.hide(null, false)}>
           Cancel
         </Button>
       </Modal.Footer>
@@ -165,7 +169,7 @@ class AddProjectModalComponent extends React.Component<IAddProjectModalComponent
       supportingChannels: [],
     };
 
-    this.props.addProject(project);
+    this.props.hide(project, true);
   }
 }
 
@@ -179,10 +183,9 @@ function mapStateToProps(state: IState) {
 
 function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
-    addProject: projectScreenActionCreators.addProjectStart,
-    cancelModal: projectScreenActionCreators.cancelShowAddProject,
-    getChannels: projectScreenActionCreators.getChannels,
+    getChannels: getChannelsForSite,
+    hide: hideProjectProjectDefinitionModal,
   }, dispatch);
 }
 
-export const AddProjectModal = connect(mapStateToProps, matchDispatchToProps)(AddProjectModalComponent);
+export const ProjectDefinitionModal = connect(mapStateToProps, matchDispatchToProps)(ProjectDefinitionModalComponent);

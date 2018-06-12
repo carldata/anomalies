@@ -1,4 +1,3 @@
-import '../styles/bootstrap.min.css';
 
 import { createHashHistory } from 'history';
 import * as _ from 'lodash';
@@ -7,35 +6,11 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Redirect, Route } from 'react-router';
 import { ConnectedRouter, routerMiddleware, routerReducer } from 'react-router-redux';
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import createSagaMiddleware from 'redux-saga';
 
-import anomaliesScreenReducer from './anomalies-screen/store-creator';
-import projectsScreenReducer from './projects-screen/store-creator';
-import { IState } from './state';
-
+import '../styles/bootstrap.min.css';
 import Anomalies from './anomalies-screen';
 import Projects from './projects-screen';
-
-import { rootSaga } from './root-saga';
-import { ModalContainer, modalContainerReducer } from './components/modal';
-
-const reducers = combineReducers<IState>({
-  anomaliesScreen: anomaliesScreenReducer,
-  projectsScreen: projectsScreenReducer,
-  modalState: modalContainerReducer,
-  routing: routerReducer,
-});
-
-const history = createHashHistory();
-const routingMiddleware = routerMiddleware(history);
-const asyncMiddleware = createSagaMiddleware();
-
-const composeEnchancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose;
-const enchancer = composeEnchancers(applyMiddleware(routingMiddleware, asyncMiddleware));
-const store = createStore(reducers, enchancer);
-
-asyncMiddleware.run(rootSaga);
+import { store, history } from './store-creator';
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,60 +1,59 @@
 import { push } from 'react-router-redux';
 import { Dispatch } from 'redux';
 import { IProject } from './models/project';
-import { GetAllProjectsAction } from './actions';
+import {
+  GetAllProjectsStartedAction,
+  GoToAnomaliesScreenAction,
+  AddProjectStartedAction,
+  GetSitesForProjectStartedAction,
+  GetChannelsForSiteStartedAction,
+  ShowProjectDefinitionModalAction,
+  HideProjectDefinitionModalAction,
+} from './actions';
 import _ = require('lodash');
 
-// TODO: move to action-types
-export const projectsScreenActionTypes = {
-  GO_TO_ANOMALIES: 'GO_TO_ANOMALIES',
-  SHOW_ADD_PROJECT_START: 'SHOW_ADD_PROJECT_START',
-  SHOW_ADD_PROJECT_FETCHING: 'SHOW_ADD_PROJECT_FETCHING',
-  SHOW_ADD_PROJECT_FULFILED: 'SHOW_ADD_PROJECT_FULFILED',
-  SHOW_ADD_PROJECT_REJECTED: 'SHOW_ADD_PROJECT_REJECTED',
-  CANCEL_SHOW_ADD_PROJECT: 'CANCEL_SHOW_ADD_PROJECT',
-  ADD_PROJECT_START: 'ADD_PROJECT_START',
-  ADD_PROJECT_FETCHING: 'ADD_PROJECT_FETCHING',
-  ADD_PROJECT_FULFILED: 'ADD_PROJECT_FULFILED',
-  ADD_PROJECT_REJECTED: 'ADD_PROJECT_REJECTED',
-  GET_SITES_FOR_PROJECT_START: 'GET_SITES_FOR_PROJECT_START',
-  GET_SITES_FOR_PROJECT_FETCHING: 'GET_SITES_FOR_PROJECT_FETCHING',
-  GET_SITES_FOR_PROJECT_FULFILED: 'GET_SITES_FOR_PROJECT_FULFILED',
-  GET_SITES_FOR_PROJECT_REJECTED: 'GET_SITES_FOR_PROJECT_REJECTED',
-  GET_CHANNELS_FOR_SITE_START: 'GET_CHANNELS_FOR_SITE_START',
-  GET_CHANNELS_FOR_SITE_FETCHING: 'GET_CHANNELS_FOR_SITE_FETCHING',
-  GET_CHANNELS_FOR_SITE_FULFILED: 'GET_CHANNELS_FOR_SITE_FULFILED',
-  GET_CHANNELS_FOR_SITE_REJECTED: 'GET_CHANNELS_FOR_SITE_REJECTED',
-};
-
-type IGetAllProjectsActionCreator = () => GetAllProjectsAction;
+type IGetAllProjectsActionCreator = () => GetAllProjectsStartedAction;
+type IGoToAnomaliesScreenActionCreator = (project: IProject) => GoToAnomaliesScreenAction;
+type IShowProjectDefintionModalActionCreator = () => ShowProjectDefinitionModalAction;
+type IHideProjectDefintionModalActionCreator = (project: IProject, approved: boolean) => HideProjectDefinitionModalAction;
+type IAddProjectActionCreator = (project: IProject) => AddProjectStartedAction;
+type IGetSitesForProjectActionCreator = (db: string) => GetSitesForProjectStartedAction;
+type IGetChannelsForSiteActionCreator = (siteId: string) => GetChannelsForSiteStartedAction;
 
 const getAllProjects: IGetAllProjectsActionCreator = () =>
-  _.toPlainObject(new GetAllProjectsAction());
+  _.toPlainObject(new GetAllProjectsStartedAction());
 
+const goToAnomaliesScreen: IGoToAnomaliesScreenActionCreator = (project: IProject) =>
+  _.toPlainObject(new GoToAnomaliesScreenAction(project));
 
-// TODO: refactor this the way Auto I&I works
-export const projectScreenActionCreators = {
-  goToAnomaliesScreen: (project: IProject) => {
-    return { type: projectsScreenActionTypes.GO_TO_ANOMALIES, payload: project };
-  },
-  showAddProject: () => {
-    return { type: projectsScreenActionTypes.SHOW_ADD_PROJECT_START };
-  },
-  cancelShowAddProject: () => {
-    return { type: projectsScreenActionTypes.CANCEL_SHOW_ADD_PROJECT };
-  },
-  addProjectStart: (project: IProject) => {
-    return { type: projectsScreenActionTypes.ADD_PROJECT_START, payload: project };
-  },
-  getSites: (db: string) => {
-    return { type: projectsScreenActionTypes.GET_SITES_FOR_PROJECT_START, payload: db };
-  },
-  getChannels: (siteId: string) => {
-    return { type: projectsScreenActionTypes.GET_CHANNELS_FOR_SITE_START, payload: siteId };
-  },
-};
+const showProjectProjectDefinitionModal: IShowProjectDefintionModalActionCreator = () =>
+  _.toPlainObject(new ShowProjectDefinitionModalAction());
+
+const hideProjectProjectDefinitionModal: IHideProjectDefintionModalActionCreator = (project: IProject, approved: boolean) =>
+  _.toPlainObject(new HideProjectDefinitionModalAction({ project, approved }));
+
+const addProject: IAddProjectActionCreator = (project: IProject) =>
+  _.toPlainObject(new AddProjectStartedAction(project));
+
+const getSites: IGetSitesForProjectActionCreator = (db: string) =>
+  _.toPlainObject(new GetSitesForProjectStartedAction(db));
+
+const getChannelsForSite: IGetChannelsForSiteActionCreator = (siteId: string) =>
+  _.toPlainObject(new GetChannelsForSiteStartedAction(siteId));
 
 export {
   IGetAllProjectsActionCreator,
   getAllProjects,
+  IGoToAnomaliesScreenActionCreator,
+  goToAnomaliesScreen,
+  IShowProjectDefintionModalActionCreator,
+  showProjectProjectDefinitionModal,
+  IHideProjectDefintionModalActionCreator,
+  hideProjectProjectDefinitionModal,
+  IAddProjectActionCreator,
+  addProject,
+  IGetSitesForProjectActionCreator,
+  getSites,
+  IGetChannelsForSiteActionCreator,
+  getChannelsForSite,
 };
