@@ -1,25 +1,18 @@
+import * as dateFns from 'date-fns';
 import * as _ from 'lodash';
-import { ParseResult } from 'papaparse';
 import { Action, handleActions } from 'redux-actions';
 import {
-  EnumTimeSeriesType, hpTimeSeriesChartAuxiliary, hpTimeSeriesChartReducerAuxFunctions, IExternalSourceTimeSeries,
-  IHpTimeSeriesChartState,
+  hpTimeSeriesChartReducerAuxFunctions, IHpTimeSeriesChartState,
 } from 'time-series-scroller';
-import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig } from 'time-series-scroller/lib/out/hp-time-series-chart/csv-loading/calculations';
 import { anomaliesScreenActionTypes } from './action-creators';
 import { IAnomaliesScreenState } from './state';
-import { IState } from '../state';
 import { IDataGridState } from './controls/data-grid/state';
-import { IProject } from '../projects-screen/models/project';
-import { IProjectSupportingChannel } from '../projects-screen/models/project-supporting-channel';
-import { channel } from 'redux-saga';
-import * as dateFns from 'date-fns';
-import { ISitesChannels, IShowAddChannelPayload, IChannel } from '../model';
+import { IProject, IShowAddChannelPayload, IChannel, IProjectSupportingChannel, ISitesChannels } from '../models';
 
 export interface IAnomaliesCharts {
   mainChartState: IHpTimeSeriesChartState;
   finalChartState: IHpTimeSeriesChartState;
-  supportingChannels: { site: string, channel: string, chartState: IHpTimeSeriesChartState }[];
+  supportingChannels: Array<{ site: string, channel: string, chartState: IHpTimeSeriesChartState }>;
   lastStartDate: string;
   lastEndDate: string;
 }
@@ -134,7 +127,7 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
       showModal: false,
     };
   },
-  [anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_FULFILED]: (state: IAnomaliesScreenState, action: Action<IShowAddChannelPayload>) =>{
+  [anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_FULFILED]: (state: IAnomaliesScreenState, action: Action<IShowAddChannelPayload>) => {
     return {
       ...state,
       sites:  action.payload.sites,

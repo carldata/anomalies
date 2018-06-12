@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Col, ControlLabel, FormControl, FormGroup, ListGroupItem } from 'react-bootstrap';
-import { IProject } from './models/project';
+import { Col, FormControl, FormGroup, ListGroupItem } from 'react-bootstrap';
+import { IProject } from '../models';
 
 interface IProjectComponentActionCreators {
   goToProjectAnomalies: () => any;

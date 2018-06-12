@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import { put, takeEvery } from 'redux-saga/effects';
 import { anomaliesScreenActionTypes } from '../action-creators';
 import { Requests } from '../../requests';
-import { IChannel, ISite, ISitesChannels, IShowAddChannelPayload } from '../../model';
+import { IChannel, IShowAddChannelPayload, ISite } from '../../models';
 
 function* showAddChannel(action) {
   try {

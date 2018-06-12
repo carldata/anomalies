@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux';
 import { Dispatch } from 'redux';
-import { IProject } from './models/project';
+import { IProject } from '../models';
 import {
   GetAllProjectsStartedAction,
   GoToAnomaliesScreenAction,

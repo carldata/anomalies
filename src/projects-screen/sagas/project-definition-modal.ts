@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { put, takeEvery, take, select } from 'redux-saga/effects';
 import { Requests } from '../../requests';
-import { IChannel, ISite, ISitesChannels } from '../../model';
+import { IChannel, ISite, ISitesChannels, IProject } from '../../models';
 import { 
   HIDE_PROJECT_DEFINITION_MODAL,
   GET_SITES_FOR_PROJECT_FULFILLED,
@@ -10,7 +10,6 @@ import {
   ADD_PROJECT_FULFILLED, 
 } from '../action-types';
 import { SHOW_MODAL } from '../../components/modal/action-types';
-import { IProject } from '../models/project';
 import { GetSitesForProjectStartedAction, GetChannelsForSiteStartedAction, AddProjectStartedAction, GoToAnomaliesScreenAction } from '../actions';
 import { IState } from '../../state';
 

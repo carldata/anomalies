@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { put, takeEvery } from 'redux-saga/effects';
 import { Requests } from '../../requests';
-import { ISite } from '../../model';
+import { ISite } from '../../models';
 import { GET_SITES_FOR_PROJECT_STARTED } from '../action-types';
 import { GetSitesForProjectFetchingAction, GetSitesForProjectFulfilledAction } from '../actions';
 import { ShowModalAction, HideModalAction } from '../../components/modal';

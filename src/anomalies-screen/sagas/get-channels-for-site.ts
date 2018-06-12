@@ -1,8 +1,7 @@
-import * as _ from 'lodash';
 import { put, takeEvery } from 'redux-saga/effects';
-import { anomaliesScreenActionCreators, anomaliesScreenActionTypes } from '../action-creators';
+import { anomaliesScreenActionTypes } from '../action-creators';
 import { Requests } from '../../requests';
-import { IChannel } from '../../model';
+import { IChannel } from '../../models';
 
 function* getChannelsForSite(action) {
   try {

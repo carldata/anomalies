@@ -1,8 +1,7 @@
 import * as _ from 'lodash';
 import { put, takeEvery } from 'redux-saga/effects';
 import { Requests } from '../../requests';
-import { IChannel } from '../../model';
-import { IProject } from '../models/project';
+import { IChannel, IProject } from '../../models';
 import { ShowModalAction, HideModalAction } from '../../components/modal';
 import { GetAllProjectsFulfilledAction, GetAllProjectsRejectedAction } from '../actions';
 import { GET_ALL_PROJECTS_STARTED } from '../action-types';

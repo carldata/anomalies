@@ -16,10 +16,9 @@ import {
   IShowProjectDefintionModalActionCreator,
 } from './action-creators';
 import { ProjectComponent } from './project';
-import { IProject } from './models/project';
 import { ProjectDefinitionModal } from './controls/project-definition-modal';
-import { ISite, IChannel } from '../model';
 import { ModalContainer } from '../components/modal';
+import { IProject } from '../models';
 
 interface IProjectComponentProps {
   projects: IProject[];

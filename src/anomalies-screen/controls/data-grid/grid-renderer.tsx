@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import * as React from 'react';
 import * as ReactDataGrid from 'react-data-grid';
-import { IDataGridState, IDataGridRow } from './state';
+import { IDataGridRow } from './state';
 
 interface IRowRendererProps {
   row: IDataGridRow;

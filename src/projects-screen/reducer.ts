@@ -8,8 +8,7 @@ import {
   ShowProjectDefinitionModalAction,
   HideProjectDefinitionModalAction,
 } from './actions';
-import { IProjectsScreenState } from './models/projects-screen-state';
-import { IChannel } from '../model';
+import { IProjectsScreenState } from '../models';
 
 const initialState: IProjectsScreenState = {
   channels: [],

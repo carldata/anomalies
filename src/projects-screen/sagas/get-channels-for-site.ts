@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { put, takeEvery } from 'redux-saga/effects';
 import { Requests } from '../../requests';
-import { IChannel } from '../../model';
+import { IChannel } from '../../models';
 import { GET_CHANNELS_FOR_SITE_STARTED } from '../action-types';
 import { GetChannelsForSiteFetchingAction, GetChannelsForSiteFulfilledAction } from '../actions';
 import { ShowModalAction, HideModalAction } from '../../components/modal';

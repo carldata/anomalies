@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import * as actionTypes from './action-types';
 import { ShowModalAction, HideModalAction } from './actions';
 import { IModalState } from './model';

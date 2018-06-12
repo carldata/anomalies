@@ -3,9 +3,8 @@ import * as React from 'react';
 import { Modal, Button, Form, FormGroup, FormControl, Col, ControlLabel, ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import { ISite, IChannel } from '../../../model';
+import { ISite, IChannel, IProject } from '../../../models';
 import { IState } from '../../../state';
-import { IProject } from '../../models/project';
 import {
   IHideProjectDefintionModalActionCreator,
   hideProjectProjectDefinitionModal,

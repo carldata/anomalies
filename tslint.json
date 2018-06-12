@@ -1,6 +1,7 @@
 {
   "extends": "tslint:recommended",  
   "rules": {
+    "array-type": [true, "array"],
     "max-line-length": {
       "options": [180]
     },
