@@ -4,8 +4,8 @@ import { Action, handleActions } from 'redux-actions';
 import {
   hpTimeSeriesChartReducerAuxFunctions, IHpTimeSeriesChartState,
 } from 'time-series-scroller';
+import { IAnomaliesScreenState } from './models/anomalies-screen-state';
 import { anomaliesScreenActionTypes } from './action-creators';
-import { IAnomaliesScreenState } from './state';
 import { IDataGridState } from './controls/data-grid/state';
 import { IProject, IChannel, IProjectSupportingChannel, ISitesChannels } from '../models';
 import { ISupportingChannel } from './models/supporting-channel';
