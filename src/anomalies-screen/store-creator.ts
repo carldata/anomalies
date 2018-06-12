@@ -99,13 +99,25 @@ export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGrid
           type: action.payload.siteChannelInfo.type,
         } as IProjectSupportingChannel),
       },
+      gridState: {
+        rows: (function mapRows() {
+          const newChannelIndexValuesMap: Map<number, number> = action.payload.newChannelIndexValuesMap;
+          return _.map(state.gridState.rows, (newRow) => {
+            const timeKey = dateFns.parse(newRow.date).getTime();
+            if (newChannelIndexValuesMap.has(timeKey)) {
+              newRow[`extendedValue${state.project.supportingChannels.length + 1}`] = newChannelIndexValuesMap.get(timeKey);
+            }
+            return newRow;
+          });
+        }()),
+      },
       supportingChannels: _.concat(state.supportingChannels, {
         site: action.payload.siteChannelInfo.site,
         channel: action.payload.siteChannelInfo.channel,
         chartState: action.payload.channelChartState,
       }),
       showModal: false,
-    };
+    } as IAnomaliesScreenState;
   },
   [anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL]: (state: IAnomaliesScreenState, action: Action<number>) => {
     return {

@@ -45,7 +45,7 @@ function* getAnomaliesForChannel(action: any) {
       editedChannelParseResult.data,
       (acc: Map<number, number>, el) => acc.set(dateFns.parse(el.time).getTime(), el.value),
       new Map<number, number>());
-    const supportingChannelsValuesMap: Array<Map<number, number>> = [];
+    const supportingChannelsValuesMap: Map<number, number>[] = [];
 
     const sourceTimeSeries: IExternalSourceTimeSeries[] = [];
 
