@@ -1,15 +1,15 @@
 import * as _ from 'lodash';
 import { put, takeEvery } from 'redux-saga/effects';
 import { anomaliesScreenActionTypes } from '../action-creators';
-import { Requests } from '../../requests';
+import { requests } from '../../requests';
 import { IShowAddChannelPayload } from '../models/show-add-channel-payload';
 import { ISite, IChannel } from '@models/.';
 
 function* showAddChannel(action) {
   try {
     yield put({type: anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_FETCHING});
-    const sites: ISite[] = yield Requests.getSites('Emerald_AECOM');
-    const channels: IChannel[] = yield Requests.getChannels(_.head(sites).id);
+    const sites: ISite[] = yield requests.getSites('Emerald_AECOM');
+    const channels: IChannel[] = yield requests.getChannels(_.head(sites).id);
     yield put({
        type: anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_FULFILED,
        payload: {

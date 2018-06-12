@@ -12,14 +12,13 @@ import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig 
 
 import { anomaliesScreenActionTypes } from '../action-creators';
 import { IDataGridState } from '../controls/data-grid/state';
-import { Requests } from '../../requests';
+import { requests } from '../../requests';
 import { IAnomaliesCharts } from '../../anomalies-screen/store-creator';
 import { ShowModalAction, HideModalAction } from '../../components/modal';
 import { IProject } from '../../models';
 
 
 function* getAnomaliesForChannel(action: any) {
-
   const project: IProject = action.payload.project;
   const startDate: string = action.payload.startDate;
   const endDate: string = action.payload.endDate;
@@ -27,9 +26,9 @@ function* getAnomaliesForChannel(action: any) {
   try {
     yield put(_.toPlainObject(new ShowModalAction()));
 
-    const rawChannelResponse = yield Requests.getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
-    const fixedAnomaliesResponse = yield Requests.getFixedAnomalies(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
-    const editedChannelResponse = yield Requests.getChannelData(`${project.siteId}-${project.finalChannelId}`, startDate, endDate);
+    const rawChannelResponse = yield requests.getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
+    const fixedAnomaliesResponse = yield requests.getFixedAnomalies(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
+    const editedChannelResponse = yield requests.getChannelData(`${project.siteId}-${project.finalChannelId}`, startDate, endDate);
 
     const rawChannelParseResult = Papa.parse(rawChannelResponse.data, { header: true });
     const fixedAnomaliesParseResult = Papa.parse(fixedAnomaliesResponse.data, { header: true });
@@ -98,7 +97,7 @@ function* getAnomaliesForChannel(action: any) {
 
     let supportingChannelsResults: any[] = [];
     if (project.supportingChannels.length > 0) {
-      supportingChannelsResults = yield Requests.getSupportingChannels(project.supportingChannels, startDate, endDate);
+      supportingChannelsResults = yield requests.getSupportingChannels(project.supportingChannels, startDate, endDate);
     }
     yield put(_.toPlainObject(new HideModalAction()));
 
