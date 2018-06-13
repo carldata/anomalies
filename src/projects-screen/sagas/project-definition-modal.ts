@@ -1,6 +1,5 @@
 import * as _ from 'lodash';
 import { put, takeEvery, take, select } from 'redux-saga/effects';
-import { Requests } from '../../requests';
 import { IChannel, ISite, ISitesChannels, IProject } from '../../models';
 import {
   HIDE_PROJECT_DEFINITION_MODAL,

@@ -7,8 +7,8 @@ import {
 } from 'time-series-scroller';
 import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig } from 'time-series-scroller/lib/out/hp-time-series-chart/csv-loading/calculations';
 import { anomaliesScreenActionTypes } from '../action-creators';
-import { Requests } from '../../requests';
 import { ShowModalAction, HideModalAction } from '../../components/modal';
+import { requests } from '../../requests';
 
 function* addAndPopulateChannel(action: any) {
   try {
@@ -20,7 +20,7 @@ function* addAndPopulateChannel(action: any) {
     const endDate: string = action.payload.endDate;
 
     yield put(_.toPlainObject(new ShowModalAction()));
-    const channelData = yield Requests.getChannelData(site + '-' + channel, startDate, endDate);
+    const channelData = yield requests.getChannelData(site + '-' + channel, startDate, endDate);
     yield put(_.toPlainObject(new HideModalAction()));
     const channelParseResult = Papa.parse(channelData.data, { header: true });
     const newChannelIndexValuesMap: Map<number, number> =
