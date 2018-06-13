@@ -8,12 +8,15 @@ import { ShowModalAction, HideModalAction } from '../../components/modal';
 
 function* getSitesForProject(action) {
   try {
+    yield put(_.toPlainObject(new ShowModalAction()));
     yield put(_.toPlainObject(new GetSitesForProjectFetchingAction()));
     const sites: ISite[] = yield requests.getSites(action.payload);
     yield put(_.toPlainObject(new GetSitesForProjectFulfilledAction(sites)));
   } catch (error) {
     // todo notify when error occurred
-  }
+  } finally {
+    yield put(_.toPlainObject(new HideModalAction()));
+  } 
 }
 
 export function* watchGetSitesForProject() {

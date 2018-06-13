@@ -12,6 +12,7 @@ import { requests } from '../../requests';
 
 function* addAndPopulateChannel(action: any) {
   try {
+    yield put(_.toPlainObject(new ShowModalAction()));
     yield put({ type: anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FETCHING });
 
     const site: string = action.payload.siteChannelInfo.site;
@@ -56,6 +57,8 @@ function* addAndPopulateChannel(action: any) {
     });
   } catch (error) {
     yield put({ type: anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_REJECTED, payload: error })
+  } finally {
+    yield put(_.toPlainObject(new HideModalAction()));
   }
 }
 

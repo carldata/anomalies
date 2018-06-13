@@ -8,11 +8,14 @@ import { ShowModalAction, HideModalAction } from '../../components/modal';
 
 function* getChannelsForSite(action) {
   try {
+    yield put(_.toPlainObject(new ShowModalAction()));
     yield put(_.toPlainObject(new GetChannelsForSiteFetchingAction()));
     const channels: IChannel[] = yield requests.getChannels(action.payload);
     yield put(_.toPlainObject(new GetChannelsForSiteFulfilledAction(channels)));
   } catch (error) {
     // todo notify error
+  } finally {
+    yield put(_.toPlainObject(new HideModalAction()));
   }
 }
 
