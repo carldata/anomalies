@@ -35,17 +35,6 @@ function* getAnomaliesForChannel(action: any) {
     const editedChannelParseResult = Papa.parse(editedChannelResponse.data, { header: true });
 
     const supportingChannelsParseResults: Papa.ParseResult[] = [];
-
-    const fixedAnomaliesValuesMap: Map<number, number> = _.reduce(
-      fixedAnomaliesParseResult.data,
-      (acc: Map<number, number>, el) => acc.set(dateFns.parse(el.time).getTime(), el.value),
-      new Map<number, number>());
-    const editedChannelValuesMap: Map<number, number> =  _.reduce(
-      editedChannelParseResult.data,
-      (acc: Map<number, number>, el) => acc.set(dateFns.parse(el.time).getTime(), el.value),
-      new Map<number, number>());
-    const supportingChannelsValuesMap: Map<number, number>[] = [];
-
     const sourceTimeSeries: IExternalSourceTimeSeries[] = [];
 
     sourceTimeSeries.push({
@@ -128,35 +117,13 @@ function* getAnomaliesForChannel(action: any) {
       chartState.windowUnixTo = newChartState.windowUnixTo;
 
       supportingChannelsParseResults.push(supportingChannelParseResult);
-      supportingChannelsValuesMap.push(
-        _.reduce(
-          editedChannelParseResult.data,
-          (acc: Map<number, number>, el) => acc.set(dateFns.parse(el.time).getTime(), el.value),
-          new Map<number, number>()));
-
+      
       return {
         site: el.site,
         channel: el.channel,
         chartState,
       };
     });
-
-    const newGridState: IDataGridState = { rows: [] };
-    for (let i = 0; i < rawChannelParseResult.data.length; i++) {
-      const timeKey = dateFns.parse(rawChannelParseResult.data[i].time).getTime();
-      newGridState.rows.push({
-        date: rawChannelParseResult.data[i].time,
-        rawValue: rawChannelParseResult.data[i].value,
-        fixedValue: fixedAnomaliesValuesMap.has(timeKey) ? fixedAnomaliesValuesMap.get(timeKey) : null,
-        editedValue: editedChannelValuesMap.has(timeKey) ? editedChannelValuesMap.get(timeKey) : null,
-        extendedValue1: _.size(supportingChannelsValuesMap) > 0 ?
-          supportingChannelsValuesMap[0].has(timeKey) ? supportingChannelsValuesMap[0].get(timeKey) : null
-          : null,
-        extendedValue2: _.size(supportingChannelsValuesMap) > 1 ?
-          supportingChannelsValuesMap[1].has(timeKey) ? supportingChannelsValuesMap[1].get(timeKey) : null
-          : null,
-      });
-    }
 
     if(_.isUndefined(newChartState.yMax) && _.isUndefined(newChartState.yMin)) {
       newChartState = hpTimeSeriesChartReducerAuxFunctions.buildInitialState();
@@ -167,13 +134,14 @@ function* getAnomaliesForChannel(action: any) {
     }
 
     yield put({
+      // TODO: fix the payload
       type: anomaliesScreenActionTypes.GET_ANOMALIES_FOR_CHART_FULFILED, payload: {
         mainChartState: newChartState,
         finalChartState: editedChartState,
         supportingChannels,
         lastStartDate: startDate,
         lastEndDate: endDate,
-      } as IAnomaliesCharts,
+      },
     });
     yield put({ type: anomaliesScreenActionTypes.GET_ANOMALIES_FOR_GRID_FULFILED, payload: newGridState });
 

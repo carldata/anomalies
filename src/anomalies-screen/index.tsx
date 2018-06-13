@@ -281,7 +281,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 function mapStateToProps(state: IState) {
   return {
     mainChartState: state.anomaliesScreen.mainChartState,
-    gridState: state.anomaliesScreen.gridState,
+    gridState: ,
     finalChartState: state.anomaliesScreen.finalChartState,
     supportingChannels: state.anomaliesScreen.supportingChannels,
     project: state.anomaliesScreen.project,
