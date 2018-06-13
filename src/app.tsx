@@ -8,6 +8,7 @@ import { Redirect, Route } from 'react-router';
 import { ConnectedRouter, routerMiddleware, routerReducer } from 'react-router-redux';
 
 import '../styles/bootstrap.min.css';
+import '../styles/index.css';
 import Anomalies from './anomalies-screen';
 import Projects from './projects-screen';
 import { store, history } from './store-creator';
