@@ -12,7 +12,7 @@ import { ShowModalAction, HideModalAction } from '../../components/modal';
 
 function* addAndPopulateChannel(action: any) {
   try {
-    yield put({ type: anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FETCHING })
+    yield put({ type: anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FETCHING });
 
     const site: string = action.payload.siteChannelInfo.site;
     const channel: string = action.payload.siteChannelInfo.channel;
@@ -23,6 +23,10 @@ function* addAndPopulateChannel(action: any) {
     const channelData = yield Requests.getChannelData(site + '-' + channel, startDate, endDate);
     yield put(_.toPlainObject(new HideModalAction()));
     const channelParseResult = Papa.parse(channelData.data, { header: true });
+    const newChannelIndexValuesMap: Map<number, number> =
+      _.reduce(channelParseResult.data,
+               (acc: Map<number, number>, el) => acc.set(dateFns.parse(el.time).getTime(), el.value),
+               new Map<number, number>());
 
     let channelChartState: IHpTimeSeriesChartState;
     if (channelParseResult.errors.length === 0) {
@@ -47,6 +51,7 @@ function* addAndPopulateChannel(action: any) {
       type: anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FULFILED, payload: {
         siteChannelInfo: action.payload.siteChannelInfo,
         channelChartState,
+        newChannelIndexValuesMap,
       },
     });
   } catch (error) {
