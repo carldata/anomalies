@@ -33,7 +33,8 @@ export class Rule extends Lint.Rules.AbstractRule {
  * @param name module name
  */
 export function isLocalPackageModuleImport(name: string): boolean {
-  return !_.startsWith(name, '.');
+  return !_.startsWith(name, '.') &&
+         !_.startsWith(name, '@'); // alias imports should be treated as regular imports
 }
 
 function walk(ctx: Lint.WalkContext<void>, reportErrors: boolean = true): boolean {
