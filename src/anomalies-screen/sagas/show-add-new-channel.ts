@@ -1,12 +1,21 @@
 import * as _ from 'lodash';
-import { put, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery, select } from 'redux-saga/effects';
 import { anomaliesScreenActionTypes } from '../action-creators';
 import { requests } from '../../requests';
 import { IShowAddChannelPayload } from '../models/show-add-channel-payload';
 import { ISite, IChannel } from '@models/.';
+import { IState } from '../../state';
+import { ShowModalAction } from '../../components/modal';
+import { config } from '../../config';
 
 function* showAddChannel(action) {
   try {
+    const numberOfSupportedChannels = yield select((state: IState) => state.anomaliesScreen.supportingChannels.length);
+    if (numberOfSupportedChannels >= config.anomaliesScreen.MAX_NUMBER_OF_SUPPORTED_CHANNELS) {
+      yield put(_.toPlainObject(new ShowModalAction('Error', `There are currently currently ${config.anomaliesScreen.MAX_NUMBER_OF_SUPPORTED_CHANNELS} ` +
+                                                    'additional channels added, which is the maximum', true)));
+      return;
+    }
     yield put({type: anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_FETCHING});
     const sites: ISite[] = yield requests.getSites('Emerald_AECOM');
     const channels: IChannel[] = yield requests.getChannels(_.head(sites).id);
