@@ -47,7 +47,8 @@ exports.Rule = Rule;
  * @param name module name
  */
 function isLocalPackageModuleImport(name) {
-    return !_.startsWith(name, '.');
+    return !_.startsWith(name, '.') &&
+        !_.startsWith(name, '@');
 }
 exports.isLocalPackageModuleImport = isLocalPackageModuleImport;
 function walk(ctx, reportErrors) {
