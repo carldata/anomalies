@@ -8,9 +8,9 @@ import { ShowModalAction, HideModalAction } from '../../components/modal';
 function* getChannelsForSite(action) {
   try {
     yield put(_.toPlainObject(new ShowModalAction()));
-    yield put({ type: anomaliesScreenActionTypes.GET_CHANNELS_FOR_SITE_ANOMALIES_FETCHING });
+    yield put({ type: anomaliesScreenActionTypes.GET_CHANNELS_FOR_SITE_FETCHING });
     const channels: IChannel[] = yield requests.getChannels(action.payload);
-    yield put({ type: anomaliesScreenActionTypes.GET_CHANNELS_FOR_SITE_ANOMALIES_FULFILED, payload: channels });
+    yield put({ type: anomaliesScreenActionTypes.GET_CHANNELS_FOR_SITE_FULFILLED, payload: channels });
   } catch (error) {
     // todo notify error
   } finally {
@@ -19,5 +19,5 @@ function* getChannelsForSite(action) {
 }
 
 export function* watchGetChannelsForSiteAnomalies() {
-  yield takeEvery(anomaliesScreenActionTypes.GET_CHANNELS_FOR_SITE_ANOMALIES_START, getChannelsForSite);
+  yield takeEvery(anomaliesScreenActionTypes.GET_CHANNELS_FOR_SITE_START, getChannelsForSite);
 }

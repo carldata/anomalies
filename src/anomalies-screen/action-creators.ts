@@ -2,14 +2,13 @@ import { ISiteChannelInfo, IProject } from "../models";
 
 export const anomaliesScreenActionTypes = {
   GO_TO_PROJECTS: 'GO_TO_PROJECTS',
-  GET_ANOMALIES_START: 'GET_ANOMALIES_START',
-  GET_ANOMALIES_FETCHING: 'GET_ANOMALIES_FETCHING',
-  GET_ANOMALIES_FOR_CHART_FULFILED: 'GET_ANOMALIES_FOR_CHART_FULFILED',
-  GET_ANOMALIES_FOR_GRID_FULFILED: 'GET_ANOMALIES_FOR_GRID_FULFILED',
-  GET_ANOMALIES_REJECTED: 'GET_ANOMALIES_REJECTED',
+  GET_TIME_SERIES_START: 'GET_TIME_SERIES_START',
+  GET_TIME_SERIES_FETCHING: 'GET_TIME_SERIES_FETCHING',
+  GET_TIME_SERIES_FULFILLED: 'GET_TIME_SERIES_FULFILLED',
+  GET_TIME_SERIES_REJECTED: 'GET_TIME_SERIES_REJECTED',
   ADD_AND_POPULATE_CHANNEL_START: 'ADD_AND_POPULATE_CHANNEL_START',
   ADD_AND_POPULATE_CHANNEL_FETCHING: 'ADD_AND_POPULATE_CHANNEL_FETCHING',
-  ADD_AND_POPULATE_CHANNEL_FULFILED: 'ADD_AND_POPULATE_CHANNEL_FULFILED',
+  ADD_AND_POPULATE_CHANNEL_FULFILLED: 'ADD_AND_POPULATE_CHANNEL_FULFILLED',
   ADD_AND_POPULATE_CHANNEL_REJECTED: 'ADD_AND_POPULATE_CHANNEL_REJECTED',
   ADD_EMPTY_CHANNEL_START: 'ADD_EMPTY_CHANNEL_START',
   ADD_EMPTY_CHANNEL: 'ADD_EMPTY_CHANNEL',
@@ -21,10 +20,10 @@ export const anomaliesScreenActionTypes = {
   SAVE_PROJECT_FETCHING: 'SAVE_PROJECT_FETCHING',
   SAVE_PROJECT_FULFILED: 'SAVE_PROJECT_FULFILED',
   SAVE_PROJECT_REJECTED: 'SAVE_PROJECT_REJECTED',
-  GET_CHANNELS_FOR_SITE_ANOMALIES_START: 'GET_CHANNELS_FOR_SITE_ANOMALIES_START',
-  GET_CHANNELS_FOR_SITE_ANOMALIES_FETCHING: 'GET_CHANNELS_FOR_SITE_ANOMALIES_FETCHING',
-  GET_CHANNELS_FOR_SITE_ANOMALIES_FULFILED: 'GET_CHANNELS_FOR_SITE_ANOMALIES_FULFILED',
-  GET_CHANNELS_FOR_SITE_ANOMALIES_REJECTED: 'GET_CHANNELS_FOR_SITE_ANOMALIES_REJECTED',
+  GET_CHANNELS_FOR_SITE_START: 'GET_CHANNELS_FOR_SITE_START',
+  GET_CHANNELS_FOR_SITE_FETCHING: 'GET_CHANNELS_FOR_SITE_FETCHING',
+  GET_CHANNELS_FOR_SITE_FULFILLED: 'GET_CHANNELS_FOR_SITE_FULFILLED',
+  GET_CHANNELS_FOR_SITE_REJECTED: 'GET_CHANNELS_FOR_SITE_REJECTED',
   SHOW_ADD_CHANNEL_START: 'SHOW_ADD_CHANNEL_START',
   SHOW_ADD_CHANNEL_FETCHING: 'SHOW_ADD_CHANNEL_FETCHING',
   SHOW_ADD_CHANNEL_FULFILED: 'SHOW_ADD_CHANNEL_FULFILED',
@@ -33,19 +32,19 @@ export const anomaliesScreenActionTypes = {
 };
 
 export const anomaliesScreenActionCreators = {
-  getAnomaliesForProject: (projectInfo) => {
-    return { type: anomaliesScreenActionTypes.GET_ANOMALIES_START, payload: projectInfo };
+  getTimeSeries: (projectInfo) => {
+    return { type: anomaliesScreenActionTypes.GET_TIME_SERIES_START, payload: projectInfo };
   },
   getChannelsForSite: (siteId: string) => {
-    return { type: anomaliesScreenActionTypes.GET_CHANNELS_FOR_SITE_ANOMALIES_START, payload: siteId };
+    return { type: anomaliesScreenActionTypes.GET_CHANNELS_FOR_SITE_START, payload: siteId };
   },
-  addAndPopulateChannel: (siteChannelInfo: ISiteChannelInfo, startDate: string, endDate: string) => {
+  addAndPopulateChannel: (siteChannelInfo: ISiteChannelInfo, unixFrom: number, unixTo: number) => {
     return {
       type: anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_START,
       payload: {
         siteChannelInfo,
-        startDate,
-        endDate,
+        unixFrom,
+        unixTo,
       },
     };
   },
@@ -75,7 +74,7 @@ export const anomaliesScreenActionCreators = {
       payload: project,
     };
   },
-  showAddChannel: (mainChartEmpty: boolean) => {
+  showAddChannelModal: (mainChartEmpty: boolean) => {
     return {
       type: anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_START,
       payload: mainChartEmpty,

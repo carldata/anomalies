@@ -9,6 +9,7 @@ import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig 
 import { anomaliesScreenActionTypes } from '../action-creators';
 import { ShowModalAction, HideModalAction } from '../../components/modal';
 import { requests } from '../../requests';
+import { config } from '../../config';
 
 function* addAndPopulateChannel(action: any) {
   try {
@@ -17,42 +18,23 @@ function* addAndPopulateChannel(action: any) {
 
     const site: string = action.payload.siteChannelInfo.site;
     const channel: string = action.payload.siteChannelInfo.channel;
-    const startDate: string = action.payload.startDate;
-    const endDate: string = action.payload.endDate;
+    const startDate: string = dateFns.format(action.payload.unixFrom, config.generic.endpointsDateFormat);
+    const endDate: string = dateFns.format(action.payload.unixTo, config.generic.endpointsDateFormat);
 
     yield put(_.toPlainObject(new ShowModalAction()));
-    const channelData = yield requests.getChannelData(site + '-' + channel, startDate, endDate);
-    yield put(_.toPlainObject(new HideModalAction()));
-    const channelParseResult = Papa.parse(channelData.data, { header: true });
-    const newChannelIndexValuesMap: Map<number, number> =
-      _.reduce(channelParseResult.data,
-               (acc: Map<number, number>, el) => acc.set(dateFns.parse(el.time).getTime(), el.value),
-               new Map<number, number>());
 
-    let channelChartState: IHpTimeSeriesChartState;
-    if (channelParseResult.errors.length === 0) {
-      channelChartState =
-        hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
-          color: 'steelblue',
-          name: site + ' ' + channel,
-          points: csvLoadingCalculations.extractUnixTimePoints(channelParseResult.data, {
-            rawFormat: EnumRawCsvFormat.DateTimeThenValue,
-            timeStampColumnName: 'time',
-            valueColumnName: 'value',
-          } as IExtractUnixTimePointsConfig),
-          type: EnumTimeSeriesType.Line,
-        } as IExternalSourceTimeSeries]);
-    } else {
-      channelChartState = hpTimeSeriesChartReducerAuxFunctions.buildInitialState();
-      channelChartState.dateRangeUnixFrom = dateFns.parse(startDate).getMilliseconds();
-      channelChartState.dateRangeUnixTo = dateFns.parse(endDate).getMilliseconds();
-    }
+    const channelData = yield requests.getChannelData(site + '-' + channel, startDate, endDate);
+    const channelParseResult = Papa.parse(channelData.data, { header: true });
+    const timeSeries = csvLoadingCalculations.extractUnixTimePoints(channelParseResult.data, {
+      rawFormat: EnumRawCsvFormat.DateTimeThenValue,
+      timeStampColumnName: 'time',
+      valueColumnName: 'value',
+    } as IExtractUnixTimePointsConfig);
 
     yield put({
-      type: anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FULFILED, payload: {
+      type: anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_FULFILLED, payload: {
         siteChannelInfo: action.payload.siteChannelInfo,
-        channelChartState,
-        newChannelIndexValuesMap,
+        timeSeries,
       },
     });
   } catch (error) {

@@ -4,7 +4,7 @@ import {
   watchDeleteSupportingChannel,
   watchAddEmptyChannel,
   watchAddAndPopulateChannel,
-  watchGetAnomaliesForChannel,
+  watchGetTimeSeries,
   watchGoToProjects,
   watchCopyRawToEdited,
   watchShowAddNewChannel,
@@ -24,7 +24,7 @@ export function* rootSaga() {
   return yield all([
     fork(watchGoToAnomalies),
     fork(watchGoToProjects),
-    fork(watchGetAnomaliesForChannel),
+    fork(watchGetTimeSeries),
     fork(watchGetAllProjectsAsyncCall),
     fork(watchCopyRawToEdited),
     fork(watchAddNewProject),
