@@ -28,10 +28,9 @@ function* showAddChannel(action) {
          mainChartEmpty: action.payload,
        } as IShowAddChannelPayload,
       });
+    yield put(_.toPlainObject(new HideModalAction()));
   } catch (error) {
     // todo notify when error occurs
-  } finally {
-    yield put(_.toPlainObject(new HideModalAction()));
   }
 }
 

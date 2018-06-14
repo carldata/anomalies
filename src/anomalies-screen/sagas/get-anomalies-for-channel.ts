@@ -40,7 +40,7 @@ function* getAnomaliesForChannel(action: any) {
       fixedAnomaliesParseResult.data,
       (acc: Map<number, number>, el) => acc.set(dateFns.parse(el.time).getTime(), el.value),
       new Map<number, number>());
-    const editedChannelValuesMap: Map<number, number> =  _.reduce(
+    const editedChannelValuesMap: Map<number, number> = _.reduce(
       editedChannelParseResult.data,
       (acc: Map<number, number>, el) => acc.set(dateFns.parse(el.time).getTime(), el.value),
       new Map<number, number>());
@@ -130,7 +130,7 @@ function* getAnomaliesForChannel(action: any) {
       supportingChannelsParseResults.push(supportingChannelParseResult);
       supportingChannelsValuesMap.push(
         _.reduce(
-          editedChannelParseResult.data,
+          supportingChannelParseResult.data,
           (acc: Map<number, number>, el) => acc.set(dateFns.parse(el.time).getTime(), el.value),
           new Map<number, number>()));
 
@@ -155,14 +155,23 @@ function* getAnomaliesForChannel(action: any) {
         extendedValue2: _.size(supportingChannelsValuesMap) > 1 ?
           supportingChannelsValuesMap[1].has(timeKey) ? supportingChannelsValuesMap[1].get(timeKey) : null
           : null,
+        extendedValue3: _.size(supportingChannelsValuesMap) > 2 ?
+          supportingChannelsValuesMap[2].has(timeKey) ? supportingChannelsValuesMap[2].get(timeKey) : null
+          : null,
+        extendedValue4: _.size(supportingChannelsValuesMap) > 3 ?
+          supportingChannelsValuesMap[3].has(timeKey) ? supportingChannelsValuesMap[3].get(timeKey) : null
+          : null,
+        extendedValue5: _.size(supportingChannelsValuesMap) > 4 ?
+          supportingChannelsValuesMap[4].has(timeKey) ? supportingChannelsValuesMap[4].get(timeKey) : null
+          : null,
       });
     }
 
-    if(_.isUndefined(newChartState.yMax) && _.isUndefined(newChartState.yMin)) {
+    if (_.isUndefined(newChartState.yMax) && _.isUndefined(newChartState.yMin)) {
       newChartState = hpTimeSeriesChartReducerAuxFunctions.buildInitialState();
     }
 
-    if(editedChartState.yMax === 0 && editedChartState.yMin === 0) {
+    if (editedChartState.yMax === 0 && editedChartState.yMin === 0) {
       editedChartState = hpTimeSeriesChartReducerAuxFunctions.buildInitialState();
     }
 
