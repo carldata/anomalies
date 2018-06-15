@@ -11,7 +11,7 @@ import { config } from '../../config';
 function* showAddChannel(action) {
   try {
     yield put(_.toPlainObject(new ShowModalAction()));
-    const numberOfSupportedChannels = yield select((state: IState) => state.anomaliesScreen.supportingChannels.length);
+    const numberOfSupportedChannels = yield select((state: IState) => state.anomaliesScreen.timeSeries.supportingChannels.length);
     if (numberOfSupportedChannels >= config.anomaliesScreen.MAX_NUMBER_OF_SUPPORTED_CHANNELS) {
       yield put(_.toPlainObject(new ShowModalAction('Error', `There are currently currently ${config.anomaliesScreen.MAX_NUMBER_OF_SUPPORTED_CHANNELS} ` +
                                                     'additional channels added, which is the maximum', true)));

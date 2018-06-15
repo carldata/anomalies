@@ -1,17 +1,12 @@
-import { IHpTimeSeriesChartState } from 'time-series-scroller';
+import { IHpTimeSeriesChartState, IUnixTimePoint } from 'time-series-scroller';
 import { IProject, ISite, IChannel } from '@models/.';
 import { IDataGridState } from '../controls/data-grid/state';
-import { ISupportingChannel } from '../models/supporting-channel';
+import { IAnomaliesTimeSeries } from './anomalies-time-series';
 
 export interface IAnomaliesScreenState {
-  mainChartState: IHpTimeSeriesChartState;
-  finalChartState: IHpTimeSeriesChartState;
-  supportingChannels: ISupportingChannel[];
-  gridState: IDataGridState;
   project: IProject;
-  lastStartDate: string;
-  lastEndDate: string;
-  showModal: boolean;
+  showAddSupportingChannelModal: boolean;
+  timeSeries: IAnomaliesTimeSeries;
   sites: ISite[];
   channels: IChannel[];
   mainChartEmpty: boolean;
