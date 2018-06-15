@@ -3,7 +3,7 @@ import * as dateFns from 'date-fns';
 import * as _ from 'lodash';
 import * as Papa from 'papaparse';
 import { push } from 'react-router-redux';
-import { takeEvery, call, all, put } from 'redux-saga/effects';
+import { takeEvery, call, all, put, select } from 'redux-saga/effects';
 import {
   EnumTimeSeriesType,
   hpTimeSeriesChartAuxiliary,
@@ -14,12 +14,13 @@ import {
 // TODO: verify csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig should be exported in time-series-scroller
 import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig } from 'time-series-scroller/lib/out/hp-time-series-chart/csv-loading/calculations';
 
-import { anomaliesScreenActionTypes } from '../action-creators';
 import { IDataGridState } from '../controls/data-grid/state';
 import { requests } from '../../requests';
 import { ShowModalAction, HideModalAction } from '../../components/modal';
 import { IProject } from '../../models';
 import { IAnomaliesTimeSeries } from '../models/anomalies-time-series';
+import { IState } from '../../state';
+import { GetTimeSeriesFulfilledAction } from '../actions';
 
 
 function* getTimeSeries(action: any) {
@@ -29,6 +30,8 @@ function* getTimeSeries(action: any) {
 
   try {
     yield put(_.toPlainObject(new ShowModalAction()));
+
+    yield select((state: IState) => state.anomaliesScreen.project);
 
     const rawChannelResponse = yield requests.getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
     const fixedAnomaliesResponse = yield requests.getFixedAnomalies(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
@@ -50,15 +53,13 @@ function* getTimeSeries(action: any) {
       valueColumnName: 'value',
     } as IExtractUnixTimePointsConfig;
 
-    yield put({
-      type: anomaliesScreenActionTypes.GET_TIME_SERIES_FULFILLED, payload: {
+    yield put(_.toPlainObject(new GetTimeSeriesFulfilledAction({
         rawSeries: csvLoadingCalculations.extractUnixTimePoints(rawChannelParseResult.data, toUnixTimePointsExtractConfig),
         editedChannelSeries: csvLoadingCalculations.extractUnixTimePoints(editedChannelParseResult.data, toUnixTimePointsExtractConfig),
         fixedAnomaliesSeries: csvLoadingCalculations.extractUnixTimePoints(fixedAnomaliesParseResult.data, toUnixTimePointsExtractConfig),
         supportingChannels: _.map(project.supportingChannels, (ch) =>
           csvLoadingCalculations.extractUnixTimePoints(supportingChannelsParseResults[_.indexOf(project.supportingChannels, ch)].data, toUnixTimePointsExtractConfig)),
-      } as IAnomaliesTimeSeries,
-    });
+      } as IAnomaliesTimeSeries)));
   } catch (error) {
     yield put({ type: anomaliesScreenActionTypes.GET_TIME_SERIES_REJECTED, payload: error.message });
   } finally {
