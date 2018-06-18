@@ -5,8 +5,8 @@ import {
   GET_TIME_SERIES_FULFILLED,
   DELETE_SUPPORTING_CHANNEL,
   ADD_AND_POPULATE_CHANNEL_FULFILLED,
-  SHOW_DEFINE_CHANNEL_MODAL_FULFILLED,
-  CANCEL_DEFINE_CHANNEL_MODAL,
+  SHOW_SUPPORTING_CHANNEL_MODAL_FULFILLED,
+  HIDE_SUPPORTING_CHANNEL_MODAL,
   GET_CHANNELS_FOR_SITE_FULFILLED,
 } from './action-types';
 import {
@@ -14,8 +14,8 @@ import {
   PassProjectToAnomaliesAction,
   AddAndPopulateChannelFullfilledAction,
   DeleteSupportingChannelAction,
-  CancelShowAddChannelModalAction,
-  ShowDefineChannelModalStartAction,
+  HideSupportingChannelModalAction,
+  ShowSupportingChannelModalStartAction,
   ShowDefineChannelModalFulfilledAction,
 } from './actions';
 import { GetChannelsForSiteFulfilledAction } from '../projects-screen/actions';
@@ -26,7 +26,7 @@ const initialState: IAnomaliesScreenState = {
   sites: [],
   channels: [],
   project: {},
-  showAddSupportingChannelModal: false,
+  supportingChannelModalShown: false,
   timeSeries: {
     rawSeries: [],
     editedChannelSeries: [],
@@ -42,9 +42,9 @@ type ActionsTypes = GetTimeSeriesFulfilledAction|
                     AddAndPopulateChannelFullfilledAction|
                     DeleteSupportingChannelAction|
                     ShowDefineChannelModalFulfilledAction|
-                    CancelShowAddChannelModalAction;
+                    HideSupportingChannelModalAction;
 
-export const projectsScreenReducer = (state: IAnomaliesScreenState = initialState, action: ActionsTypes): IAnomaliesScreenState => {
+export const anomaliesScreenReducer = (state: IAnomaliesScreenState = initialState, action: ActionsTypes): IAnomaliesScreenState => {
   switch (action.type) {
     case PASS_PROJECT_TO_ANOMALIES:
       return _.extend({}, state, {
@@ -88,7 +88,7 @@ export const projectsScreenReducer = (state: IAnomaliesScreenState = initialStat
           ...state.timeSeries,
           supportingChannels: _.concat(state.timeSeries.supportingChannels, [action.payload.channelTimeSeries]),
         },
-        showAddSupportingChannelModal: false,
+        supportingChannelModalShown: false,
       } as IAnomaliesScreenState;
     case DELETE_SUPPORTING_CHANNEL:
       return {
@@ -108,12 +108,17 @@ export const projectsScreenReducer = (state: IAnomaliesScreenState = initialStat
           ],
         },
       } as IAnomaliesScreenState;
-    case SHOW_DEFINE_CHANNEL_MODAL_FULFILLED:
+    case SHOW_SUPPORTING_CHANNEL_MODAL_FULFILLED:
       return {
         ...state,
         sites:  action.payload.sites,
         channels: action.payload.channels,
-        showAddSupportingChannelModal: true,
+        supportingChannelModalShown: true,
+      } as IAnomaliesScreenState;
+    case HIDE_SUPPORTING_CHANNEL_MODAL:
+      return {
+        ...state,
+        supportingChannelModalShown: false,
       } as IAnomaliesScreenState;
     default:
       return state;

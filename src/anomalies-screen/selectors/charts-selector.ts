@@ -4,7 +4,7 @@ import { createSelector } from 'reselect';
 import { IUnixTimePoint, IHpTimeSeriesChartState, IExternalSourceTimeSeries, EnumTimeSeriesType, hpTimeSeriesChartAuxiliary } from 'time-series-scroller';
 import { IState } from '../../state';
 import { IDataGridState } from '../controls/data-grid/state';
-import { ITimeSeries } from '../models/anomalies-time-series';
+import { ITimeSeries, IAnomaliesTimeSeries } from '../models/anomalies-time-series';
 
 interface IChartsState {
   mainChartState: IHpTimeSeriesChartState;
@@ -12,9 +12,9 @@ interface IChartsState {
   supportingChannels: IHpTimeSeriesChartState[];
 }
 
-export const chartsSelector = createSelector<IState, ITimeSeries, IChartsState>(
+export const chartsSelector = createSelector<IState, IAnomaliesTimeSeries, IChartsState>(
   [(state: IState) => state.anomaliesScreen.timeSeries],
-  (timeSeries: ITimeSeries) => ({
+  (timeSeries: IAnomaliesTimeSeries) => ({
     mainChartState: hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
       color: 'steelblue',
       name: 'raw',

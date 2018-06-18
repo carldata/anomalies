@@ -1,9 +1,6 @@
-export { watchAddEmptyChannel } from './add-empty-channel';
 export { watchAddAndPopulateChannel } from './add-populate-channel';
-export { watchCopyRawToEdited } from './copy-raw-to-edited';
-export { watchDeleteSupportingChannel } from './delete-supporting-channel';
 export { watchGetTimeSeries } from './get-time-series';
 export { watchGoToProjects } from './go-to-projects';
 export { watchSaveProject } from './save-project';
-export { watchShowAddNewChannel } from './show-add-new-channel';
+export { watchShowDefineChannelModal } from './show-add-new-channel';
 export { watchGetChannelsForSiteAnomalies } from './get-channels-for-site';

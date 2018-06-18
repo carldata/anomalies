@@ -17,10 +17,6 @@ export class AddProjectFulfilledAction implements Action {
   constructor(public payload: IProject) { }
 }
 
-export class AddProjectRejectedAction implements Action {
-  public readonly type = actionTypes.ADD_PROJECT_REJECTED;
-}
-
 export class GetAllProjectsStartedAction implements Action {
   public readonly type = actionTypes.GET_ALL_PROJECTS_STARTED;
 }
@@ -28,10 +24,6 @@ export class GetAllProjectsStartedAction implements Action {
 export class GetAllProjectsFulfilledAction implements Action {
   public readonly type = actionTypes.GET_ALL_PROJECTS_FULFILLED;
   constructor(public payload: IProject[]) { }
-}
-
-export class GetAllProjectsRejectedAction implements Action {
-  public readonly type = actionTypes.GET_ALL_PROJECTS_REJECTED;
 }
 
 export class GoToAnomaliesScreenAction implements Action {
@@ -62,10 +54,6 @@ export class GetSitesForProjectFulfilledAction implements Action {
   constructor(public payload: ISite[]) { }
 }
 
-export class GetSitesForProjectRejectedAction implements Action {
-  public readonly type = actionTypes.GET_SITES_FOR_PROJECT_REJECTED;
-}
-
 export class GetChannelsForSiteStartedAction implements Action {
   public readonly type = actionTypes.GET_CHANNELS_FOR_SITE_STARTED;
   constructor(public payload: string) { }
@@ -78,8 +66,4 @@ export class GetChannelsForSiteFetchingAction implements Action {
 export class GetChannelsForSiteFulfilledAction implements Action {
   public readonly type = actionTypes.GET_CHANNELS_FOR_SITE_FULFILLED;
   constructor(public payload: IChannel[]) { }
-}
-
-export class GetChannelsForSiteRejectedAction implements Action {
-  public readonly type = actionTypes.GET_CHANNELS_FOR_SITE_REJECTED;
 }

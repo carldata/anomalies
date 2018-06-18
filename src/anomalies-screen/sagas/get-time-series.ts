@@ -11,8 +11,11 @@ import {
   IExternalSourceTimeSeries,
   IHpTimeSeriesChartState,
 } from 'time-series-scroller';
-// TODO: verify csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig should be exported in time-series-scroller
-import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig } from 'time-series-scroller/lib/out/hp-time-series-chart/csv-loading/calculations';
+import {
+  csvLoadingCalculations,
+  EnumRawCsvFormat,
+  IExtractUnixTimePointsConfig,
+} from 'time-series-scroller/lib/out/hp-time-series-chart/csv-loading/calculations';
 
 import { IDataGridState } from '../controls/data-grid/state';
 import { requests } from '../../requests';
@@ -20,13 +23,14 @@ import { ShowModalAction, HideModalAction } from '../../components/modal';
 import { IProject } from '../../models';
 import { IAnomaliesTimeSeries } from '../models/anomalies-time-series';
 import { IState } from '../../state';
-import { GetTimeSeriesFulfilledAction } from '../actions';
+import { GetTimeSeriesFulfilledAction, GetTimeSeriesStartAction } from '../actions';
+import { GET_TIME_SERIES_START } from '../action-types';
+import { handleErrorInSaga } from '@common/handle-error-in-saga';
 
-
-function* getTimeSeries(action: any) {
-  const project: IProject = action.payload.project;
-  const startDate: string = action.payload.startDate;
-  const endDate: string = action.payload.endDate;
+function* getTimeSeries(action: GetTimeSeriesStartAction) {
+  const project: IProject =  yield select((state: IState) => state.anomaliesScreen.project);
+  const startDate: string = action.payload.dateFrom;
+  const endDate: string = action.payload.dateTo;
 
   try {
     yield put(_.toPlainObject(new ShowModalAction()));
@@ -61,12 +65,12 @@ function* getTimeSeries(action: any) {
           csvLoadingCalculations.extractUnixTimePoints(supportingChannelsParseResults[_.indexOf(project.supportingChannels, ch)].data, toUnixTimePointsExtractConfig)),
       } as IAnomaliesTimeSeries)));
   } catch (error) {
-    yield put({ type: anomaliesScreenActionTypes.GET_TIME_SERIES_REJECTED, payload: error.message });
+    yield handleErrorInSaga(error);
   } finally {
     yield put(_.toPlainObject(new HideModalAction()));
   }
 }
 
 export function* watchGetTimeSeries() {
-  yield takeEvery(anomaliesScreenActionTypes.GET_TIME_SERIES_START, getTimeSeries);
+  yield takeEvery(GET_TIME_SERIES_START, getTimeSeries);
 }

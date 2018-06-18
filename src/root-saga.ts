@@ -1,13 +1,10 @@
 import { all, fork } from 'redux-saga/effects';
 import {
   watchSaveProject,
-  watchDeleteSupportingChannel,
-  watchAddEmptyChannel,
   watchAddAndPopulateChannel,
   watchGetTimeSeries,
   watchGoToProjects,
-  watchCopyRawToEdited,
-  watchShowAddNewChannel,
+  watchShowDefineChannelModal,
   watchGetChannelsForSiteAnomalies,
 } from './anomalies-screen/sagas';
 import {
@@ -26,17 +23,14 @@ export function* rootSaga() {
     fork(watchGoToProjects),
     fork(watchGetTimeSeries),
     fork(watchGetAllProjectsAsyncCall),
-    fork(watchCopyRawToEdited),
     fork(watchAddNewProject),
     fork(watchAddAndPopulateChannel),
-    fork(watchAddEmptyChannel),
-    fork(watchDeleteSupportingChannel),
     fork(watchSaveProject),
     fork(watchGetSitesForProject),
     fork(watchGetChannelsForSite),
     fork(watchShowProjectDefinitionModal),
     fork(watchHideProjectDefinitionModal),
-    fork(watchShowAddNewChannel),
+    fork(watchShowDefineChannelModal),
     fork(watchGetChannelsForSiteAnomalies),
   ]);
 }

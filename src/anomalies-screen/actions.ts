@@ -35,7 +35,7 @@ export class GetChannelsForSiteAction implements Action {
 
 export class AddAndPopulateChannelStartAction implements Action {
   public readonly type = actionTypes.ADD_AND_POPULATE_CHANNEL_START;
-  constructor(public payload: ISiteChannelInfo) { }
+  constructor(public payload: { siteChannelInfo: ISiteChannelInfo, dateFrom: string, dateTo: string }) { }
 }
 
 export class AddAndPopulateChannelFullfilledAction implements Action {
@@ -52,20 +52,25 @@ export class DeleteSupportingChannelAction implements Action {
   constructor(public payload: number) { } // index
 }
 
-export class SaveProjectAction implements Action {
+export class SaveProjectStartAction implements Action {
   public readonly type = actionTypes.SAVE_PROJECT_START;
-  constructor(public payload: IProject) { } // index
+  constructor(public payload: IProject) { }
 }
 
-export class ShowDefineChannelModalStartAction implements Action {
-  public readonly type = actionTypes.SHOW_DEFINE_CHANNEL_MODAL_START;
+export class SaveProjectFulfilledAction implements Action {
+  public readonly type = actionTypes.SAVE_PROJECT_FULFILLED;
+  constructor(public payload: IProject) { }
+}
+
+export class ShowSupportingChannelModalStartAction implements Action {
+  public readonly type = actionTypes.SHOW_SUPPORTING_CHANNEL_MODAL_START;
 }
 
 export class ShowDefineChannelModalFulfilledAction implements Action {
-  public readonly type = actionTypes.SHOW_DEFINE_CHANNEL_MODAL_FULFILLED;
+  public readonly type = actionTypes.SHOW_SUPPORTING_CHANNEL_MODAL_FULFILLED;
   constructor(public payload: { channels: IChannel[], sites: ISite[] }) { }
 }
 
-export class CancelShowAddChannelModalAction implements Action {
-  public readonly type = actionTypes.CANCEL_DEFINE_CHANNEL_MODAL;
+export class HideSupportingChannelModalAction implements Action {
+  public readonly type = actionTypes.HIDE_SUPPORTING_CHANNEL_MODAL;
 }

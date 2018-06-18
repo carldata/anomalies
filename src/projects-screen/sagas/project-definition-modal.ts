@@ -9,8 +9,9 @@ import {
   ADD_PROJECT_FULFILLED,
 } from '../action-types';
 import { SHOW_MODAL } from '../../components/modal/action-types';
-import { GetSitesForProjectStartedAction, GetChannelsForSiteStartedAction, AddProjectStartedAction, GoToAnomaliesScreenAction } from '../actions';
+import { GetSitesForProjectStartedAction, GetChannelsForSiteStartedAction, AddProjectStartedAction, GoToAnomaliesScreenAction, HideProjectDefinitionModalAction } from '../actions';
 import { IState } from '@app-state/.';
+import { handleErrorInSaga } from '@common/handle-error-in-saga';
 
 function* showProjectDefinitionModal() {
   try {
@@ -23,9 +24,8 @@ function* showProjectDefinitionModal() {
   }
 }
 
-function* hideProjectDefinitionModal(action) {
+function* hideProjectDefinitionModal(action: HideProjectDefinitionModalAction) {
   try {
-    // TODO: no type safety here ... why ?
     if (action.payload.approved) {
       yield put(_.toPlainObject(new AddProjectStartedAction(action.payload.project)));
       yield take(ADD_PROJECT_FULFILLED);
@@ -33,7 +33,7 @@ function* hideProjectDefinitionModal(action) {
       yield put(_.toPlainObject(new GoToAnomaliesScreenAction(project)));
     }
   } catch (error) {
-    // todo notify when error occurs
+    yield handleErrorInSaga(error);
   }
 }
 

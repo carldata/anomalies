@@ -5,6 +5,7 @@ import { ISite } from '../../models';
 import { GET_SITES_FOR_PROJECT_STARTED } from '../action-types';
 import { GetSitesForProjectFetchingAction, GetSitesForProjectFulfilledAction } from '../actions';
 import { ShowModalAction, HideModalAction } from '../../components/modal';
+import { handleErrorInSaga } from '@common/handle-error-in-saga';
 
 function* getSitesForProject(action) {
   try {
@@ -13,7 +14,7 @@ function* getSitesForProject(action) {
     const sites: ISite[] = yield requests.getSites(action.payload);
     yield put(_.toPlainObject(new GetSitesForProjectFulfilledAction(sites)));
   } catch (error) {
-    // todo notify when error occurred
+    yield handleErrorInSaga(error);
   } finally {
     yield put(_.toPlainObject(new HideModalAction()));
   } 

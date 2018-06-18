@@ -8,7 +8,7 @@ export interface IAnomaliesScreenState {
   project: IProject;
   sites: ISite[];
   channels: IChannel[];
-  showAddSupportingChannelModal: boolean;
+  supportingChannelModalShown: boolean;
   timeSeriesLoadContext: ITimeSeriesLoadContext;
   timeSeries: IAnomaliesTimeSeries;
 }
