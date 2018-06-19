@@ -12,10 +12,9 @@ function* getChannelsForSite(action) {
     yield put(_.toPlainObject(new ShowModalAction()));
     const channels: IChannel[] = yield requests.getChannels(action.payload);
     yield put(_.toPlainObject(new GetChannelsForSiteFulfilledAction(channels)));
+    yield put(_.toPlainObject(new HideModalAction()));
   } catch (error) {
     yield handleErrorInSaga(error);
-  } finally {
-    yield put(_.toPlainObject(new HideModalAction()));
   }
 }
 

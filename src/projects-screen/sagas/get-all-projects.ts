@@ -17,10 +17,9 @@ function* getAllProjectsAsyncCall() {
     yield put(_.toPlainObject(new ShowModalAction()));
     const response: IConfigurationEntry[] = yield requests.getConfiguration();
     yield put(_.toPlainObject(new GetAllProjectsFulfilledAction(_.map(response, (el) => ({ ...el.data, id: el.id } as IProject)))));
+    yield put(_.toPlainObject(new HideModalAction()));
   } catch (error) {
     yield handleErrorInSaga(error);
-  } finally {
-    yield put(_.toPlainObject(new HideModalAction()));
   }
 }
 

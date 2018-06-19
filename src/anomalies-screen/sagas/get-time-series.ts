@@ -28,7 +28,7 @@ import { GET_TIME_SERIES_START } from '../action-types';
 import { handleErrorInSaga } from '@common/handle-error-in-saga';
 
 function* getTimeSeries(action: GetTimeSeriesStartAction) {
-  const project: IProject =  yield select((state: IState) => state.anomaliesScreen.project);
+  const project: IProject = undefined;// yield select((state: IState) => state.anomaliesScreen.project);
   const startDate: string = action.payload.dateFrom;
   const endDate: string = action.payload.dateTo;
 
@@ -64,10 +64,9 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
         supportingChannels: _.map(project.supportingChannels, (ch) =>
           csvLoadingCalculations.extractUnixTimePoints(supportingChannelsParseResults[_.indexOf(project.supportingChannels, ch)].data, toUnixTimePointsExtractConfig)),
       } as IAnomaliesTimeSeries)));
+    yield put(_.toPlainObject(new HideModalAction()));
   } catch (error) {
     yield handleErrorInSaga(error);
-  } finally {
-    yield put(_.toPlainObject(new HideModalAction()));
   }
 }
 

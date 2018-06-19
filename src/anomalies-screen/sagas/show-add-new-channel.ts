@@ -27,8 +27,6 @@ function* showDefineChannelModal(action) {
     })));
   } catch (error) {
     yield handleErrorInSaga(error);
-  } finally {
-    yield put(_.toPlainObject(new HideModalAction()));
   }
 }
 

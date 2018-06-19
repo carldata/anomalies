@@ -13,11 +13,10 @@ function* getSitesForProject(action) {
     yield put(_.toPlainObject(new GetSitesForProjectFetchingAction()));
     const sites: ISite[] = yield requests.getSites(action.payload);
     yield put(_.toPlainObject(new GetSitesForProjectFulfilledAction(sites)));
+    yield put(_.toPlainObject(new HideModalAction()));
   } catch (error) {
     yield handleErrorInSaga(error);
-  } finally {
-    yield put(_.toPlainObject(new HideModalAction()));
-  } 
+  }
 }
 
 export function* watchGetSitesForProject() {

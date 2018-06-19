@@ -11,10 +11,9 @@ function* saveProject(action: SaveProjectStartAction) {
     yield put(_.toPlainObject(new ShowModalAction()));
     yield requests.saveProject(action.payload);
     yield put(_.toPlainObject(new SaveProjectFulfilledAction(action.payload)));
-  } catch(error) {
-    yield handleErrorInSaga(error);
-  } finally {
     yield put(_.toPlainObject(new HideModalAction()));
+  } catch (error) {
+    yield handleErrorInSaga(error);
   }
 }
 

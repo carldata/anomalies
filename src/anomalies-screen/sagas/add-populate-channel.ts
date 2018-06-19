@@ -43,10 +43,9 @@ function* addAndPopulateChannel(action: AddAndPopulateChannelStartAction) {
       siteChannelInfo: action.payload.siteChannelInfo,
       channelTimeSeries: timeSeries,
     })));
+    yield put(_.toPlainObject(new HideModalAction()));
   } catch (error) {
     yield handleErrorInSaga(error);
-  } finally {
-    yield put(_.toPlainObject(new HideModalAction()));
   }
 }
 
