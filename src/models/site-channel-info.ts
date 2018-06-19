@@ -1,5 +1,7 @@
 export interface ISiteChannelInfo {
-  site: string;
-  channel: string;
+  siteId: string;
+  siteName: string;
+  channelId: string;
+  channelName: string;
   type: string;
 }
