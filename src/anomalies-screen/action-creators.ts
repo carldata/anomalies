@@ -1,88 +1,42 @@
-import { ISiteChannelInfo, IProject } from "../models";
+import * as _ from 'lodash';
+import {
+  GetTimeSeriesStartAction,
+  AddAndPopulateChannelStartAction,
+  GoToProjectsScreenAction,
+  DeleteSupportingChannelAction,
+  SaveProjectStartAction,
+  ShowSupportingChannelModalStartAction,
+  HideSupportingChannelModalAction,
+} from './actions';
+import { ITimeSeriesLoadContext } from './models/time-series-load-context';
+import { ISiteChannelInfo } from '../models';
+import { IProject } from '@models/project';
 
-export const anomaliesScreenActionTypes = {
-  GO_TO_PROJECTS: 'GO_TO_PROJECTS',
-  GET_TIME_SERIES_START: 'GET_TIME_SERIES_START',
-  GET_TIME_SERIES_FETCHING: 'GET_TIME_SERIES_FETCHING',
-  GET_TIME_SERIES_FULFILLED: 'GET_TIME_SERIES_FULFILLED',
-  GET_TIME_SERIES_REJECTED: 'GET_TIME_SERIES_REJECTED',
-  ADD_AND_POPULATE_CHANNEL_START: 'ADD_AND_POPULATE_CHANNEL_START',
-  ADD_AND_POPULATE_CHANNEL_FETCHING: 'ADD_AND_POPULATE_CHANNEL_FETCHING',
-  ADD_AND_POPULATE_CHANNEL_FULFILLED: 'ADD_AND_POPULATE_CHANNEL_FULFILLED',
-  ADD_AND_POPULATE_CHANNEL_REJECTED: 'ADD_AND_POPULATE_CHANNEL_REJECTED',
-  ADD_EMPTY_CHANNEL_START: 'ADD_EMPTY_CHANNEL_START',
-  ADD_EMPTY_CHANNEL: 'ADD_EMPTY_CHANNEL',
-  COPY_RAW_TO_EDITED: 'COPY_RAW_TO_EDITED',
-  PASS_PROJECT_TO_ANOMALIES: 'PASS_PROJECT_TO_ANOMALIES',
-  DELETE_SUPPORTING_CHANNEL_START: 'DELETE_SUPPORTING_CHANNEL_START',
-  DELETE_SUPPORTING_CHANNEL: 'DELETE_SUPPORTING_CHANNEL',
-  SAVE_PROJECT_START: 'SAVE_PROJECT_START',
-  SAVE_PROJECT_FETCHING: 'SAVE_PROJECT_FETCHING',
-  SAVE_PROJECT_FULFILED: 'SAVE_PROJECT_FULFILED',
-  SAVE_PROJECT_REJECTED: 'SAVE_PROJECT_REJECTED',
-  GET_CHANNELS_FOR_SITE_START: 'GET_CHANNELS_FOR_SITE_START',
-  GET_CHANNELS_FOR_SITE_FETCHING: 'GET_CHANNELS_FOR_SITE_FETCHING',
-  GET_CHANNELS_FOR_SITE_FULFILLED: 'GET_CHANNELS_FOR_SITE_FULFILLED',
-  GET_CHANNELS_FOR_SITE_REJECTED: 'GET_CHANNELS_FOR_SITE_REJECTED',
-  SHOW_ADD_CHANNEL_START: 'SHOW_ADD_CHANNEL_START',
-  SHOW_ADD_CHANNEL_FETCHING: 'SHOW_ADD_CHANNEL_FETCHING',
-  SHOW_ADD_CHANNEL_FULFILED: 'SHOW_ADD_CHANNEL_FULFILED',
-  SHOW_ADD_CHANNEL_REJECTED: 'SHOW_ADD_CHANNEL_REJECTED',
-  CANCEL_SHOW_ADD_CHANNEL: 'CANCEL_SHOW_ADD_CHANNEL',
-};
+export type IGetTimeSeriesActionCreator = (ctx: ITimeSeriesLoadContext) => GetTimeSeriesStartAction;
+export type IAddAndPopulateChanneActionCreator = (siteChannelInfo: ISiteChannelInfo, dateFrom: string, dateTo: string) => AddAndPopulateChannelStartAction;
+export type IGoToProjectsScreenActionCreator = () => GoToProjectsScreenAction;
+export type IDeleteSupportingChannelActionCreator = (idx: number) => DeleteSupportingChannelAction;
+export type ISaveProjectActionCreator = (project: IProject) => SaveProjectStartAction;
+export type IShowSupportingChannelModalActionCreator = () => ShowSupportingChannelModalStartAction;
+export type IHideSupportingChannelModalActionCreator = () => HideSupportingChannelModalAction;
 
-export const anomaliesScreenActionCreators = {
-  getTimeSeries: (projectInfo) => {
-    return { type: anomaliesScreenActionTypes.GET_TIME_SERIES_START, payload: projectInfo };
-  },
-  getChannelsForSite: (siteId: string) => {
-    return { type: anomaliesScreenActionTypes.GET_CHANNELS_FOR_SITE_START, payload: siteId };
-  },
-  addAndPopulateChannel: (siteChannelInfo: ISiteChannelInfo, unixFrom: number, unixTo: number) => {
-    return {
-      type: anomaliesScreenActionTypes.ADD_AND_POPULATE_CHANNEL_START,
-      payload: {
-        siteChannelInfo,
-        unixFrom,
-        unixTo,
-      },
-    };
-  },
-  addEmptyChannel: (siteChannelInfo: ISiteChannelInfo) => {
-    return {
-      type: anomaliesScreenActionTypes.ADD_EMPTY_CHANNEL_START,
-      payload: {
-        siteChannelInfo,
-      },
-    };
-  },
-  goToProjectsScreen: () => {
-    return { type: anomaliesScreenActionTypes.GO_TO_PROJECTS };
-  },
-  copyRawToEdited: () => {
-    return { type: anomaliesScreenActionTypes.COPY_RAW_TO_EDITED };
-  },
-  deleteSupportingChannel: (idx) => {
-    return {
-      type: anomaliesScreenActionTypes.DELETE_SUPPORTING_CHANNEL_START,
-      payload: idx,
-    };
-  },
-  saveProject: (project: IProject) => {
-    return {
-      type: anomaliesScreenActionTypes.SAVE_PROJECT_START,
-      payload: project,
-    };
-  },
-  showAddChannelModal: (mainChartEmpty: boolean) => {
-    return {
-      type: anomaliesScreenActionTypes.SHOW_ADD_CHANNEL_START,
-      payload: mainChartEmpty,
-    };
-  },
-  cancelShowAddChannel: () => {
-    return {
-      type: anomaliesScreenActionTypes.CANCEL_SHOW_ADD_CHANNEL,
-    };
-  },
-};
+export const getTimeSeries: IGetTimeSeriesActionCreator = (ctx: ITimeSeriesLoadContext) =>
+  _.toPlainObject(new GetTimeSeriesStartAction(ctx));
+
+export const addAndPopulateChannel: IAddAndPopulateChanneActionCreator = (siteChannelInfo: ISiteChannelInfo, dateFrom: string, dateTo: string) =>
+  _.toPlainObject(new AddAndPopulateChannelStartAction({ siteChannelInfo, dateFrom, dateTo }));
+
+export const goToProjectsScreen: IGoToProjectsScreenActionCreator = () =>
+  _.toPlainObject(new GoToProjectsScreenAction());
+
+export const deleteSupportingChannel: IDeleteSupportingChannelActionCreator = (idx: number) =>
+  _.toPlainObject(new DeleteSupportingChannelAction(idx));
+
+export const saveProject: ISaveProjectActionCreator = (project: IProject) =>
+  _.toPlainObject(new SaveProjectStartAction(project));
+
+export const showSupportingChannelModal: IShowSupportingChannelModalActionCreator = () =>
+  _.toPlainObject(new ShowSupportingChannelModalStartAction());
+
+export const hideSupportingChannelModal: IHideSupportingChannelModalActionCreator = () =>
+  _.toPlainObject(new HideSupportingChannelModalAction());

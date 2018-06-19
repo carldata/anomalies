@@ -2,12 +2,13 @@ import { IHpTimeSeriesChartState, IUnixTimePoint } from 'time-series-scroller';
 import { IProject, ISite, IChannel } from '@models/.';
 import { IDataGridState } from '../controls/data-grid/state';
 import { IAnomaliesTimeSeries } from './anomalies-time-series';
+import { ITimeSeriesLoadContext } from './time-series-load-context';
 
 export interface IAnomaliesScreenState {
   project: IProject;
-  showAddSupportingChannelModal: boolean;
-  timeSeries: IAnomaliesTimeSeries;
   sites: ISite[];
   channels: IChannel[];
-  mainChartEmpty: boolean;
+  supportingChannelModalShown: boolean;
+  timeSeriesLoadContext: ITimeSeriesLoadContext;
+  timeSeries: IAnomaliesTimeSeries;
 }

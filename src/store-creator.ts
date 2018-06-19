@@ -9,7 +9,7 @@ import { ConnectedRouter, routerMiddleware, routerReducer } from 'react-router-r
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
-import anomaliesScreenReducer from './anomalies-screen/store-creator';
+import { anomaliesScreenReducer } from './anomalies-screen/reducer';
 import { projectsScreenReducer } from './projects-screen/reducer';
 import { IState } from './state';
 

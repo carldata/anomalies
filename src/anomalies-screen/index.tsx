@@ -11,7 +11,6 @@ import { IDomain, IHpSliderHandleValues } from 'time-series-scroller/lib/out/hp-
 import * as hpSliderScss from 'time-series-scroller/lib/out/sass/hp-slider.scss';
 import * as hpTimeSeriesChartScss from 'time-series-scroller/lib/out/sass/hp-time-series-chart.scss';
 import { IState } from '../state';
-import { anomaliesScreenActionCreators } from './action-creators';
 import { DataGrid } from './controls/data-grid';
 import { IDataGridState } from './controls/data-grid/state';
 import { AddChannelModal } from './controls/add-channel-control';
@@ -21,6 +20,27 @@ import { gridSelector } from './selectors/grid-selector';
 import { chartsSelector } from './selectors/charts-selector';
 import { IAnomaliesScreenState } from './models/anomalies-screen-state';
 import { ISiteChannelInfo } from '@models/site-channel-info';
+import {
+  getTimeSeries,
+  showSupportingChannelModal,
+  hideSupportingChannelModal,
+  addAndPopulateChannel,
+  deleteSupportingChannel,
+  saveProject,
+  goToProjectsScreen,
+  IGetTimeSeriesActionCreator,
+  IShowSupportingChannelModalActionCreator,
+  IAddAndPopulateChanneActionCreator,
+  IDeleteSupportingChannelActionCreator,
+  ISaveProjectActionCreator,
+  IGoToProjectsScreenActionCreator,
+  IHideSupportingChannelModalActionCreator,
+} from './action-creators';
+import {
+  getChannelsForSite,
+  IGetChannelsForSiteActionCreator,
+} from '../projects-screen/action-creators';
+import { ITimeSeriesLoadContext } from './models/time-series-load-context';
 
 interface IAnomaliesComponentProps {
   mainChartState: IHpTimeSeriesChartState;
@@ -31,13 +51,14 @@ interface IAnomaliesComponentProps {
 }
 
 interface IAnomaliesComponentActionCreators {
-  getTimeSeries: (projectInfo: any) => any;
-  showAddChannelModal: (mainChartEmpty: boolean) => any;
-  addAndPopulateChannel: (siteChannelInfo: ISiteChannelInfo, unixFrom: number, unixTo: number) => any;
-  getChannelsForSite: (siteId: string) => any;
-  deleteSupportingChannel: (idx: number) => any;
-  saveProject: (project: IProject) => any;
-  goToProjectsScreen: () => any;
+  getTimeSeries: IGetTimeSeriesActionCreator;
+  showSupportingChannelModal: IShowSupportingChannelModalActionCreator;
+  hideSupportingChannelModal: IHideSupportingChannelModalActionCreator;
+  addAndPopulateChannel: IAddAndPopulateChanneActionCreator;
+  getChannelsForSite: IGetChannelsForSiteActionCreator;
+  deleteSupportingChannel: IDeleteSupportingChannelActionCreator;
+  saveProject: ISaveProjectActionCreator;
+  goToProjectsScreen: IGoToProjectsScreenActionCreator;
 }
 
 interface IAnomaliesComponentState {
@@ -77,10 +98,9 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
   public componentDidMount() {
     if (!_.isEmpty(this.props.screenState.project)) {
       this.props.getTimeSeries({
-        project: this.props.screenState.project,
-        startDate: this.state.startDate,
-        endDate: this.state.endDate,
-      });
+        dateFrom: this.state.startDate,
+        dateTo: this.state.endDate,
+      } as ITimeSeriesLoadContext);
     }
   }
 
@@ -110,12 +130,17 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
           <Form>
             <FormGroup>
               <ControlLabel style={{ fontWeight: 'bold' }}>{_.isEmpty(this.props.screenState.project) ? ' ' : this.props.screenState.project.projectName}</ControlLabel>{' '}
-              <Button disabled={_.isEmpty(this.props.screenState.project)} onClick={() => this.props.saveProject(this.props.screenState.project)} >Save Project</Button>{' '}
-              <Button bsStyle='primary' disabled={_.isEmpty(this.props.screenState.project)} onClick={() => this.props.getTimeSeries({
-                project: this.props.screenState.project,
-                startDate: this.state.startDate,
-                endDate: this.state.endDate,
-              })}>Load Timeseries</Button>
+              <Button
+                disabled={_.isEmpty(this.props.screenState.project)}
+                onClick={() => this.props.saveProject(this.props.screenState.project)}>
+                Save Project
+              </Button>
+              {' '}
+              <Button
+                bsStyle='primary'
+                disabled={_.isEmpty(this.props.screenState.project)}
+                onClick={() => this.props.getTimeSeries({ dateFrom: this.state.startDate, dateTo: this.state.endDate } as ITimeSeriesLoadContext)}>
+              Load Timeseries</Button>
             </FormGroup>
           </Form>
 
@@ -238,9 +263,9 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 
           <Row style={{ marginTop: 4 }}>
             <Col sm={12}>
-              <Button className='pull-right' bsStyle='primary' onClick={ () => {
-                this.props.showAddChannelModal( (this.state.mainChartState.series.length === 1) && _.isEmpty(_.head(this.state.mainChartState.series).points));
-                } }>Add Channel</Button>
+              <Button className='pull-right' bsStyle='primary' onClick={() => this.props.showSupportingChannelModal()}>
+                Add Channel
+              </Button>
             </Col>
           </Row>
           <Row>
@@ -265,22 +290,17 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
           <Row>
             <AddChannelModal
               approveClicked={(siteChannelInfo: ISiteChannelInfo) => {
-                this.props.addAndPopulateChannel(siteChannelInfo,
-                                                 this.state.mainChartState.dateRangeUnixFrom,
-                                                 this.state.mainChartState.dateRangeUnixTo);
+                this.props.addAndPopulateChannel(siteChannelInfo, this.state.startDate, this.state.endDate);
               }}
-              addEmptyChannel={(e) => null}
-              cancelClicked={() => null}
+              cancelClicked={() => this.props.hideSupportingChannelModal()}
               channels={this.props.screenState.channels}
               sites={this.props.screenState.sites}
-              showModal={this.props.screenState.showAddSupportingChannelModal}
-              getChannelsForSite={this.props.getChannelsForSite}
-              mainChartEmpty={false}
-              />
+              showModal={this.props.screenState.supportingChannelModalShown}
+              getChannelsForSite={this.props.getChannelsForSite} />
           </Row>
         </div>
       </div>;
-    </>
+    </>;
   }
 }
 
@@ -297,13 +317,14 @@ function mapStateToProps(state: IState) {
 
 function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
-    getTimeSeries: anomaliesScreenActionCreators.getTimeSeries,
-    showAddChannelModal: anomaliesScreenActionCreators.showAddChannelModal,
-    addAndPopulateChannel: anomaliesScreenActionCreators.addAndPopulateChannel,
-    getChannelsForSite: anomaliesScreenActionCreators.getChannelsForSite,
-    deleteSupportingChannel: anomaliesScreenActionCreators.deleteSupportingChannel,
-    saveProject: anomaliesScreenActionCreators.saveProject,
-    goToProjectsScreen: anomaliesScreenActionCreators.goToProjectsScreen,
+    getTimeSeries,
+    showSupportingChannelModal,
+    hideSupportingChannelModal,
+    addAndPopulateChannel,
+    getChannelsForSite,
+    deleteSupportingChannel,
+    saveProject,
+    goToProjectsScreen,
   }, dispatch);
 }
 

@@ -15,6 +15,7 @@ module.exports = {
     extensions: [".js", ".ts", ".json", ".jsx", ".tsx", ".css", ".scss"],
     alias: {
       "@app-state": path.resolve(__dirname, '../src/state'),
+      "@common": path.resolve(__dirname, '../src/common'),
       "@models": path.resolve(__dirname, '../src/models')
     }
   },

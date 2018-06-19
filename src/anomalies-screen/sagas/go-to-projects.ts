@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux';
 import { put, takeEvery } from 'redux-saga/effects';
-import { anomaliesScreenActionTypes } from '../action-creators';
+import { GO_TO_PROJECTS } from '../action-types';
 
 export function* watchGoToProjects() {
-  yield takeEvery(anomaliesScreenActionTypes.GO_TO_PROJECTS, function* () { yield put(push('/projects')); });
+  yield takeEvery(GO_TO_PROJECTS, function* () { yield put(push('/projects')); });
 }

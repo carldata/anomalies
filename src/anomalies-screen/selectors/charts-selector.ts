@@ -4,7 +4,7 @@ import { createSelector } from 'reselect';
 import { IUnixTimePoint, IHpTimeSeriesChartState, IExternalSourceTimeSeries, EnumTimeSeriesType, hpTimeSeriesChartAuxiliary } from 'time-series-scroller';
 import { IState } from '../../state';
 import { IDataGridState } from '../controls/data-grid/state';
-import { IAnomaliesTimeSeries } from '../models/anomalies-time-series';
+import { ITimeSeries, IAnomaliesTimeSeries } from '../models/anomalies-time-series';
 
 interface IChartsState {
   mainChartState: IHpTimeSeriesChartState;

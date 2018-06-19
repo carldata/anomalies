@@ -5,6 +5,7 @@ import { IChannel } from '../../models';
 import { GET_CHANNELS_FOR_SITE_STARTED } from '../action-types';
 import { GetChannelsForSiteFetchingAction, GetChannelsForSiteFulfilledAction } from '../actions';
 import { ShowModalAction, HideModalAction } from '../../components/modal';
+import { handleErrorInSaga } from '@common/handle-error-in-saga';
 
 function* getChannelsForSite(action) {
   try {
@@ -12,10 +13,9 @@ function* getChannelsForSite(action) {
     yield put(_.toPlainObject(new GetChannelsForSiteFetchingAction()));
     const channels: IChannel[] = yield requests.getChannels(action.payload);
     yield put(_.toPlainObject(new GetChannelsForSiteFulfilledAction(channels)));
-  } catch (error) {
-    // todo notify error
-  } finally {
     yield put(_.toPlainObject(new HideModalAction()));
+  } catch (error) {
+    yield handleErrorInSaga(error);
   }
 }
 

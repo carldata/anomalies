@@ -4,19 +4,16 @@ import { Button, ControlLabel, Form, FormControl, FormGroup, Col, Modal } from '
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { IState } from '@app-state/.';
-import { anomaliesScreenActionCreators } from '../../action-creators';
 import { IChannel, ISiteChannelInfo, ISite } from '@models/.';
 
 interface IAddChannelModalProps {
   showModal: boolean;
   sites: ISite[];
   channels: IChannel[];
-  mainChartEmpty: boolean;
 }
 
 interface IAddChannelModalActionCreators {
   approveClicked: (siteChannelInfo: ISiteChannelInfo) => void;
-  addEmptyChannel: (siteChannelInfo: ISiteChannelInfo) => void;
   getChannelsForSite: (siteId: string) => any;
   cancelClicked: () => any;
 }
@@ -114,41 +111,10 @@ export class AddChannelModal extends React.Component<IAddChannelModalProps & IAd
   }
 
   private addChannelClicked() {
-    if (this.props.mainChartEmpty) {
-      this.props.addEmptyChannel({
-        site: this.siteId,
-        channel: this.channelId,
-        type: this.state.channelType,
-      });
-    } else {
-      this.props.approveClicked({
-        site: this.siteId,
-        channel: this.channelId,
-        type: this.state.channelType,
-      });
-    }
+    this.props.approveClicked({
+      site: this.siteId,
+      channel: this.channelId,
+      type: this.state.channelType,
+    });
   }
 }
-
-// function mapStateToProps(state: IState) {
-//   return {
-//     showModal: state.anomaliesScreen.showModal,
-//     sites: state.anomaliesScreen.sites,
-//     channels: state.anomaliesScreen.channels,
-//     mainChartEmpty: state.anomaliesScreen.mainChartEmpty,
-//     lastStartDate: state.anomaliesScreen.lastStartDate,
-//     lastEndDate: state.anomaliesScreen.lastEndDate,
-//   };
-// }
-
-// function matchDispatchToProps(dispatch: Dispatch<{}>) {
-//   return bindActionCreators({
-//     addAndPopulateChannel: anomaliesScreenActionCreators.addAndPopulateChannel,
-//     addEmptyChannel: anomaliesScreenActionCreators.addEmptyChannel,
-//     cancelShowModal: anomaliesScreenActionCreators.cancelShowAddChannel,
-//     getChannelsForSite: anomaliesScreenActionCreators.getChannelsForSite,
-//   }, dispatch);
-// }
-
-// export const AddChannelModal = connect(mapStateToProps, matchDispatchToProps)(AddChannelModalComponent);
-
