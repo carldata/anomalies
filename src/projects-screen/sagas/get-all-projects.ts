@@ -1,16 +1,12 @@
 import * as _ from 'lodash';
-import { put, takeEvery } from 'redux-saga/effects';
-import { requests } from '../../requests';
+import { put, takeEvery, call } from 'redux-saga/effects';
+import { requests, IConfigurationEntry } from '../../requests';
 import { IChannel, IProject } from '../../models';
 import { ShowModalAction, HideModalAction } from '../../components/modal';
 import { GET_ALL_PROJECTS_STARTED } from '../action-types';
 import { GetAllProjectsFulfilledAction } from '../actions';
 import { handleErrorInSaga } from '@common/handle-error-in-saga';
-
-interface IConfigurationEntry {
-  id: string;
-  data: IProject;
-}
+import { AxiosResponse } from 'axios';
 
 function* getAllProjectsAsyncCall() {
   try {
