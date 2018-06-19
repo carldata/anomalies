@@ -25,15 +25,15 @@ interface IAddChannelModalState {
 export class AddChannelModal extends React.Component<IAddChannelModalProps & IAddChannelModalActionCreators, IAddChannelModalState> {
   private siteId: string;
   private channelId: string;
-  private siteName: string;
-  private channelName: string;
+  private site: string;
+  private channel: string;
 
   constructor(props: IAddChannelModalProps & IAddChannelModalActionCreators, context: any) {
     super(props, context);
     this.siteId = '';
-    this.siteName = '';
+    this.site = '';
     this.channelId = '';
-    this.channelName = '';
+    this.channel = '';
     this.state = {
       channelType: '',
     };
@@ -44,11 +44,11 @@ export class AddChannelModal extends React.Component<IAddChannelModalProps & IAd
   public componentWillReceiveProps(nextProps: IAddChannelModalProps & IAddChannelModalActionCreators) {
     if (!this.props.showModal && nextProps.showModal) {
       this.siteId = _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).id;
-      this.siteName = _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).name;
+      this.site = _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).id;
     }
     const firstChannel: IChannel = _.head(nextProps.channels);
     this.channelId = _.isUndefined(firstChannel) ? '' : firstChannel.id;
-    this.channelName = _.isUndefined(firstChannel) ? '' : firstChannel.name;
+    this.channel = _.isUndefined(firstChannel) ? '' : firstChannel.id;
   }
 
   public render() {
@@ -60,10 +60,10 @@ export class AddChannelModal extends React.Component<IAddChannelModalProps & IAd
               Site:
             </Col>
             <Col sm={10}>
-              <select id='selectSite' className='form-control' onChange={(e) => {
+              <select id='selectProjectSiteAnomalies' className='form-control' onChange={(e) => {
                 const selectElement = (e.target as HTMLSelectElement);
                 this.siteId = selectElement.value;
-                this.siteName = _.head(selectElement.selectedOptions).label;
+                this.site = selectElement.value;
                 this.props.getChannelsForSite(selectElement.value);
               }} >
                 {
@@ -77,10 +77,11 @@ export class AddChannelModal extends React.Component<IAddChannelModalProps & IAd
               Channel:
             </Col>
             <Col sm={10}>
-              <select id='selectChannel' className='form-control' onChange={(e) => {
-                const selectElement = (e.target as HTMLSelectElement);
-                this.channelId = selectElement.value;
-                this.channelName = _.head(selectElement.selectedOptions).label;
+              {/* <FormControl type='text' onChange={(e) => this.setState({ channelId: (e.target as HTMLInputElement).value })} value={this.state.channelId}></FormControl> */}
+              <select id='selectProjectSiteAnomalies' className='form-control' onChange={(e) => {
+                const selectChannelElement = (e.target as HTMLSelectElement);
+                this.channelId = selectChannelElement.value;
+                this.channel = selectChannelElement.value;
               }} >
                 {
                   this.props.channels.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
@@ -111,10 +112,8 @@ export class AddChannelModal extends React.Component<IAddChannelModalProps & IAd
 
   private addChannelClicked() {
     this.props.approveClicked({
-      siteId: this.siteId,
-      siteName: this.siteName,
-      channelId: this.channelId,
-      channelName: this.channelName,
+      site: this.siteId,
+      channel: this.channelId,
       type: this.state.channelType,
     });
   }

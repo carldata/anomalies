@@ -19,8 +19,8 @@ import {
   ShowDefineChannelModalFulfilledAction,
 } from './actions';
 import { GetChannelsForSiteFulfilledAction } from '../projects-screen/actions';
-import { ISupportingChannel } from '@models/.';
 import { IAnomaliesScreenState } from './models/anomalies-screen-state';
+import { IProjectSupportingChannel } from '@models/project-supporting-channel';
 
 const initialState: IAnomaliesScreenState = {
   sites: [],
@@ -77,12 +77,12 @@ export const anomaliesScreenReducer = (state: IAnomaliesScreenState = initialSta
         project: {
           ...state.project,
           supportingChannels: _.concat(state.project.supportingChannels, {
-            siteId: action.payload.siteChannelInfo.siteId,
-            siteName: action.payload.siteChannelInfo.siteName,
-            channelId: action.payload.siteChannelInfo.channelId,
-            channelName: action.payload.siteChannelInfo.channelName,
+            site: action.payload.siteChannelInfo.site,
+            siteId: '',
+            channel: action.payload.siteChannelInfo.channel,
+            channelId: '',
             type: action.payload.siteChannelInfo.type,
-          } as ISupportingChannel),
+          } as IProjectSupportingChannel),
         },
         timeSeries: {
           ...state.timeSeries,

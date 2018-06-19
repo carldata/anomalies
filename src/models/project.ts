@@ -1,4 +1,4 @@
-import { ISupportingChannel } from './supporting-channel';
+import { IProjectSupportingChannel } from './project-supporting-channel';
 
 export interface IProject {
   id: string;
@@ -9,5 +9,5 @@ export interface IProject {
   rawChannelId: string;
   finalChannelName: string;
   finalChannelId: string;
-  supportingChannels?: ISupportingChannel[];
+  supportingChannels?: IProjectSupportingChannel[];
 }

@@ -243,7 +243,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                 <Col md={12} >
                   <div style={{ height: 250 }} >
                     <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>
-                      {`${this.props.screenState.project.supportingChannels[idx].siteName}-${this.props.screenState.project.supportingChannels[idx].channelName}`}
+                      {`${this.props.screenState.project.supportingChannels[idx].site}-${this.props.screenState.project.supportingChannels[idx].channel}`}
                     </p>
                     <HpTimeSeriesChart
                       scss={this.scss.timeSeries}
@@ -281,7 +281,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                     ] as Column[],
                     _.map(this.state.supportingChannelsState, (c, idx) => ({
                       key: `extendedValue${_.indexOf(this.state.supportingChannelsState, c) + 1}`,
-                      name: `${this.props.screenState.project.supportingChannels[idx].siteName}-${this.props.screenState.project.supportingChannels[idx].channelName}`,
+                      name: `${this.props.screenState.project.supportingChannels[idx].site}-${this.props.screenState.project.supportingChannels[idx].channel}`,
                     }) as Column))}
                 rows={this.state.gridState.rows}
               />
