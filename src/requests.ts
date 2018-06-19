@@ -15,7 +15,7 @@ export interface IConfigurationEntry {
 function getConfiguration(): AxiosPromise<IConfigurationEntry[]>  {
   return new Promise((resolve, reject) =>
     axios
-      .get<AxiosResponse<IConfigurationEntry[]>>(`${apiAddress}/confisg/${appName}`)
+      .get<AxiosResponse<IConfigurationEntry[]>>(`${apiAddress}/config/${appName}`)
       .then((response) => resolve(response.data))
       .catch((error) => reject(error)));
 }
