@@ -24,14 +24,14 @@ function* addAndPopulateChannel(action: AddAndPopulateChannelStartAction) {
   try {
     yield put(_.toPlainObject(new ShowModalAction()));
 
-    const site: string = action.payload.siteChannelInfo.site;
-    const channel: string = action.payload.siteChannelInfo.channel;
+    const siteId: string = action.payload.siteChannelInfo.siteId;
+    const channelId: string = action.payload.siteChannelInfo.channelId;
     const dateFrom: string = dateFns.format(action.payload.dateFrom, config.generic.endpointsDateFormat);
     const dateTo: string = dateFns.format(action.payload.dateTo, config.generic.endpointsDateFormat);
 
     yield put(_.toPlainObject(new ShowModalAction()));
 
-    const channelData = yield requests.getChannelData(site + '-' + channel, dateFrom, dateTo);
+    const channelData = yield requests.getChannelData(siteId + '-' + channelId, dateFrom, dateTo);
     const channelParseResult = Papa.parse(channelData.data, { header: true });
     const timeSeries = csvLoadingCalculations.extractUnixTimePoints(channelParseResult.data, {
       rawFormat: EnumRawCsvFormat.DateTimeThenValue,

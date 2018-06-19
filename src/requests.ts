@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import { all, call } from 'redux-saga/effects';
 import { IProject, IChannel, ISite } from './models';
 
-const appName = 'anomaly-tool';
+const appName = 'anomaly-tool-development';
 const apiAddress = 'http://13.77.168.238';
 const token = 'oasdob123a23hnaovnfaewd123akjwpod';
 
@@ -63,13 +63,13 @@ function *getEditedChannelData(channel: string, startDate: string, endDate: stri
   return channelData;
 }
 
-function *getSupportingChannels(supportingChannels: Array<{ site: string, channel: string }>, startDate: string, endDate: string) {
+function *getSupportingChannels(supportingChannels: { siteId: string, channelId: string }[], startDate: string, endDate: string) {
   let supportingChannelsResult: any[] = [];
 
   // TODO - change this to get data for channels instead of anomalies when endpoint starts to work
   try {
     supportingChannelsResult = yield all(_.map(supportingChannels, (el) =>
-      call(axios.get, `${apiAddress}/data/channel/${el.site}-${el.channel}/data?startDate=${startDate}&endDate=${endDate}`)));
+      call(axios.get, `${apiAddress}/data/channel/${el.siteId}-${el.channelId}/data?startDate=${startDate}&endDate=${endDate}`)));
   } catch (error) {
     // TODO throw error
   }
