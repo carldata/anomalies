@@ -2,12 +2,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import ResponsiveModal from 'react-responsive-modal';
 import { bindActionCreators, Dispatch } from 'redux';
-import { hideModal, IHideModalActionCreator } from './action-creators';
+import { hideGeneralMessageModal, IHideGeneralMessageModalActionCreator } from './action-creators';
 import { IModalState } from './model';
 import { IState } from '../../state';
 
 interface IDispatchProps {
-  hideModal: IHideModalActionCreator;
+  hideGeneralMessageModal: IHideGeneralMessageModalActionCreator;
 }
 
 const Modal = (props: IModalState & IDispatchProps) =>
@@ -16,7 +16,7 @@ const Modal = (props: IModalState & IDispatchProps) =>
       center
       open={props.show}
       showCloseIcon={props.allowClose}
-      onClose={() => props.hideModal() }>
+      onClose={() => props.hideGeneralMessageModal()}>
       <h2>{props.header}</h2>
       <p>{props.title}</p>
     </ResponsiveModal>
@@ -28,12 +28,12 @@ const mapStateToProps = (state: IState): IModalState => {
 
 const mapDispatchToProps = (dispatch: Dispatch<void>) => {
   return bindActionCreators({
-    hideModal,
+    hideGeneralMessageModal,
   }, dispatch);
 };
 
 
-export const ModalContainer = connect<IModalState, {}, {}>(mapStateToProps, mapDispatchToProps)(Modal);
+export const ModalContainer = connect<IModalState, IDispatchProps, {}>(mapStateToProps, mapDispatchToProps)(Modal);
 
 export { ShowGeneralMessageModalAction, HideGeneralMessageModalAction } from './actions';
 export { IModalState } from './model';
