@@ -11,41 +11,63 @@ import { IDomain, IHpSliderHandleValues } from 'time-series-scroller/lib/out/hp-
 import * as hpSliderScss from 'time-series-scroller/lib/out/sass/hp-slider.scss';
 import * as hpTimeSeriesChartScss from 'time-series-scroller/lib/out/sass/hp-time-series-chart.scss';
 import { IState } from '../state';
-import { anomaliesScreenActionCreators } from './action-creators';
 import { DataGrid } from './controls/data-grid';
 import { IDataGridState } from './controls/data-grid/state';
 import { AddChannelModal } from './controls/add-channel-control';
 import { ModalContainer } from '../components/modal';
 import { IProject } from '../models';
+import { gridSelector } from './selectors/grid-selector';
+import { chartsSelector } from './selectors/charts-selector';
+import { IAnomaliesScreenState } from './models/anomalies-screen-state';
+import { ISiteChannelInfo } from '@models/site-channel-info';
+import {
+  getTimeSeries,
+  showSupportingChannelModal,
+  hideSupportingChannelModal,
+  addAndPopulateChannel,
+  deleteSupportingChannel,
+  saveProject,
+  goToProjectsScreen,
+  IGetTimeSeriesActionCreator,
+  IShowSupportingChannelModalActionCreator,
+  IAddAndPopulateChanneActionCreator,
+  IDeleteSupportingChannelActionCreator,
+  ISaveProjectActionCreator,
+  IGoToProjectsScreenActionCreator,
+  IHideSupportingChannelModalActionCreator,
+} from './action-creators';
+import {
+  getChannelsForSite,
+  IGetChannelsForSiteActionCreator,
+} from '../projects-screen/action-creators';
+import { ITimeSeriesLoadContext } from './models/time-series-load-context';
 
 interface IAnomaliesComponentProps {
   mainChartState: IHpTimeSeriesChartState;
   finalChartState: IHpTimeSeriesChartState;
-  supportingChannels: { site: string, channel: string, chartState: IHpTimeSeriesChartState }[];
+  supportingChannels: IHpTimeSeriesChartState[];
   gridState: IDataGridState;
-  project: IProject;
-  lastStartDate: string;
-  lastEndDate: string;
+  screenState: IAnomaliesScreenState;
 }
 
 interface IAnomaliesComponentActionCreators {
-  goToProjectsScreen: () => any;
-  saveProject: (project: IProject) => any;
-  getAnomaliesForProject: (projectAndRange: any) => any;
-  getSitesForProject: () => any;
-  copyRawToEdited: () => any;
-  showAddChannelModal: (mainChartEmpty: boolean) => any;
-  deleteSupportingChannel: (idx: number) => any;
+  getTimeSeries: IGetTimeSeriesActionCreator;
+  showSupportingChannelModal: IShowSupportingChannelModalActionCreator;
+  hideSupportingChannelModal: IHideSupportingChannelModalActionCreator;
+  addAndPopulateChannel: IAddAndPopulateChanneActionCreator;
+  getChannelsForSite: IGetChannelsForSiteActionCreator;
+  deleteSupportingChannel: IDeleteSupportingChannelActionCreator;
+  saveProject: ISaveProjectActionCreator;
+  goToProjectsScreen: IGoToProjectsScreenActionCreator;
 }
 
 interface IAnomaliesComponentState {
   mainChartState: IHpTimeSeriesChartState;
   finalChartState: IHpTimeSeriesChartState;
-  supportingChannels: { site: string, channel: string, chartState: IHpTimeSeriesChartState }[];
+  supportingChannelsState: IHpTimeSeriesChartState[];
   gridState: IDataGridState;
-  showModal: boolean;
-  startDate: string;
   endDate: string;
+  startDate: string;
   windowUnixFrom: number;
   windowUnixTo: number;
 }
@@ -59,28 +81,26 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
     this.scss = {
       slider: convertHpSliderScss(hpSliderScss),
       timeSeries: convertHpTimeSeriesChartScss(hpTimeSeriesChartScss)
-    }
+    };
 
     this.state = {
-      showModal: false,
       startDate: dateFns.format(dateFns.subMonths(dateFns.startOfDay(new Date()), 3), 'YYYY-MM-DDTHH:mm:ss'),
       endDate: dateFns.format(dateFns.startOfDay(new Date()), 'YYYY-MM-DDTHH:mm:ss'),
       windowUnixFrom: props.mainChartState.dateRangeUnixFrom,
       windowUnixTo: props.mainChartState.dateRangeUnixTo,
       mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
-      supportingChannels: _.cloneDeep(props.supportingChannels),
+      supportingChannelsState: _.cloneDeep(props.supportingChannels),
       gridState: { rows: [] },
-    }
+    };
   }
 
   public componentDidMount() {
-    if (!_.isEmpty(this.props.project)) {
-      this.props.getAnomaliesForProject({
-        project: this.props.project,
-        startDate: this.state.startDate,
-        endDate: this.state.endDate,
-      });
+    if (!_.isEmpty(this.props.screenState.project)) {
+      this.props.getTimeSeries({
+        dateFrom: this.state.startDate,
+        dateTo: this.state.endDate,
+      } as ITimeSeriesLoadContext);
     }
   }
 
@@ -88,7 +108,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
     this.setState({
       mainChartState: _.cloneDeep(nextProps.mainChartState),
       finalChartState: _.cloneDeep(nextProps.finalChartState),
-      supportingChannels: _.cloneDeep(nextProps.supportingChannels),
+      supportingChannelsState: _.cloneDeep(nextProps.supportingChannels),
       windowUnixFrom: nextProps.mainChartState.dateRangeUnixFrom,
       windowUnixTo: nextProps.mainChartState.dateRangeUnixTo,
       gridState: nextProps.gridState,
@@ -109,30 +129,35 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
         <div style={{ marginLeft: 20, marginRight: 20, marginTop: 10, marginBottom: 10 }}>
           <Form>
             <FormGroup>
-              <ControlLabel style={{ fontWeight: 'bold' }}>{_.isEmpty(this.props.project) ? ' ' : this.props.project.projectName}</ControlLabel>{' '}
-              <Button disabled={_.isEmpty(this.props.project)} onClick={() => this.props.saveProject(this.props.project)} >Save Project</Button>{' '}
-              <Button bsStyle='primary' disabled={_.isEmpty(this.props.project)} onClick={() => this.props.getAnomaliesForProject({
-                project: this.props.project,
-                startDate: this.state.startDate,
-                endDate: this.state.endDate,
-              })}>Load Timeseries</Button>
+              <ControlLabel style={{ fontWeight: 'bold' }}>{_.isEmpty(this.props.screenState.project) ? ' ' : this.props.screenState.project.projectName}</ControlLabel>{' '}
+              <Button
+                disabled={_.isEmpty(this.props.screenState.project)}
+                onClick={() => this.props.saveProject(this.props.screenState.project)}>
+                Save Project
+              </Button>
+              {' '}
+              <Button
+                bsStyle='primary'
+                disabled={_.isEmpty(this.props.screenState.project)}
+                onClick={() => this.props.getTimeSeries({ dateFrom: this.state.startDate, dateTo: this.state.endDate } as ITimeSeriesLoadContext)}>
+              Load Timeseries</Button>
             </FormGroup>
           </Form>
 
           <Form inline>
             <FormGroup>
               <ControlLabel>Site: </ControlLabel>
-              <FormControl.Static>{_.isEmpty(this.props.project) ? 'No site' : this.props.project.siteName}</FormControl.Static>
+              <FormControl.Static>{_.isEmpty(this.props.screenState.project) ? 'No site' : this.props.screenState.project.siteName}</FormControl.Static>
             </FormGroup>
             {' '}
             <FormGroup>
               <ControlLabel>Source: </ControlLabel>
-              <FormControl.Static>{_.isEmpty(this.props.project) ? 'No source ' : this.props.project.rawChannelName}</FormControl.Static>
+              <FormControl.Static>{_.isEmpty(this.props.screenState.project) ? 'No source ' : this.props.screenState.project.rawChannelName}</FormControl.Static>
             </FormGroup>
             {' '}
             <FormGroup>
               <ControlLabel>Final: </ControlLabel>
-              <FormControl.Static>{_.isEmpty(this.props.project) ? 'No final' : this.props.project.finalChannelName}</FormControl.Static>
+              <FormControl.Static>{_.isEmpty(this.props.screenState.project) ? 'No final' : this.props.screenState.project.finalChannelName}</FormControl.Static>
             </FormGroup>
             {' '}
             <FormGroup>
@@ -159,18 +184,6 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                     windowUnixTo: this.state.windowUnixTo,
                   } as IUnixFromTo);
 
-                  const newSupportingChannelsState = _.map(this.state.supportingChannels, (el) => {
-                    return {
-                      site: el.site,
-                      channel: el.channel,
-                      chartState: {
-                        ...el.chartState,
-                        windowUnixFrom,
-                        windowUnixTo,
-                      } as IHpTimeSeriesChartState,
-                    };
-                  });
-
                   this.setState({
                     windowUnixFrom,
                     windowUnixTo,
@@ -184,9 +197,12 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                       windowUnixFrom,
                       windowUnixTo,
                     } as IHpTimeSeriesChartState,
-                    supportingChannels: newSupportingChannelsState,
+                    supportingChannelsState: _.map(this.state.supportingChannelsState, (el) => ({
+                        ...el,
+                        windowUnixFrom,
+                        windowUnixTo,
+                      } as IHpTimeSeriesChartState)),
                   });
-
                 }}
                 fitToParent={{ toWidth: true }}
               ></HpSlider>
@@ -221,15 +237,17 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
             </Col>
           </Row>
 
-          {_.map(this.state.supportingChannels, (el, idx) => {
+          {_.map(this.state.supportingChannelsState, (el, idx) => {
             return <div style={{ background: '#F8F8F8' }}>
               <Row>
                 <Col md={12} >
                   <div style={{ height: 250 }} >
-                    <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>{el.site + '-' + el.channel}</p>
+                    <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>
+                      {`${this.props.screenState.project.supportingChannels[idx].siteName}-${this.props.screenState.project.supportingChannels[idx].channelName}`}
+                    </p>
                     <HpTimeSeriesChart
                       scss={this.scss.timeSeries}
-                      state={el.chartState}
+                      state={el}
                       fitToParent={{ toHeight: true, toWidth: true }}
                     ></HpTimeSeriesChart>
                   </div>
@@ -245,9 +263,9 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 
           <Row style={{ marginTop: 4 }}>
             <Col sm={12}>
-              <Button className='pull-right' bsStyle='primary' onClick={ () => {
-                this.props.showAddChannelModal( (this.state.mainChartState.series.length === 1) && _.isEmpty(_.head(this.state.mainChartState.series).points));
-                } }>Add Channel</Button>
+              <Button className='pull-right' bsStyle='primary' onClick={() => this.props.showSupportingChannelModal()}>
+                Add Channel
+              </Button>
             </Col>
           </Row>
           <Row>
@@ -261,43 +279,52 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                       { key: 'editedValue', name: 'Final' },
                       { key: 'fixedValue', name: 'Fixed' },
                     ] as Column[],
-                    _.map(this.state.supportingChannels, (c) => ({
-                      key: `extendedValue${_.indexOf(this.state.supportingChannels, c) + 1}`,
-                      name: `${c.site} ${c.channel}`,
+                    _.map(this.state.supportingChannelsState, (c, idx) => ({
+                      key: `extendedValue${_.indexOf(this.state.supportingChannelsState, c) + 1}`,
+                      name: `${this.props.screenState.project.supportingChannels[idx].siteName}-${this.props.screenState.project.supportingChannels[idx].channelName}`,
                     }) as Column))}
                 rows={this.state.gridState.rows}
               />
             </Col>
           </Row>
           <Row>
-            <AddChannelModal/>
+            <AddChannelModal
+              approveClicked={(siteChannelInfo: ISiteChannelInfo) => {
+                this.props.addAndPopulateChannel(siteChannelInfo, this.state.startDate, this.state.endDate);
+              }}
+              cancelClicked={() => this.props.hideSupportingChannelModal()}
+              channels={this.props.screenState.channels}
+              sites={this.props.screenState.sites}
+              showModal={this.props.screenState.supportingChannelModalShown}
+              getChannelsForSite={this.props.getChannelsForSite} />
           </Row>
         </div>
       </div>;
-    </>
+    </>;
   }
 }
 
 function mapStateToProps(state: IState) {
+  const chartsState = chartsSelector(state);
   return {
-    mainChartState: state.anomaliesScreen.mainChartState,
-    gridState: state.anomaliesScreen.gridState,
-    finalChartState: state.anomaliesScreen.finalChartState,
-    supportingChannels: state.anomaliesScreen.supportingChannels,
-    project: state.anomaliesScreen.project,
-    lastStartDate: state.anomaliesScreen.lastStartDate,
-    lastEndDate: state.anomaliesScreen.lastEndDate,
-  };
+    mainChartState: chartsState.mainChartState,
+    gridState: gridSelector(state),
+    finalChartState: chartsState.finalChartState,
+    supportingChannels: chartsState.supportingChannels,
+    screenState: state.anomaliesScreen,
+  } as IAnomaliesComponentProps;
 }
 
 function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
-    saveProject: anomaliesScreenActionCreators.saveProject,
-    getAnomaliesForProject: anomaliesScreenActionCreators.getAnomaliesForProject,
-    goToProjectsScreen: anomaliesScreenActionCreators.goToProjectsScreen,
-    copyRawToEdited: anomaliesScreenActionCreators.copyRawToEdited,
-    deleteSupportingChannel: anomaliesScreenActionCreators.deleteSupportingChannel,
-    showAddChannelModal: anomaliesScreenActionCreators.showAddChannel,
+    getTimeSeries,
+    showSupportingChannelModal,
+    hideSupportingChannelModal,
+    addAndPopulateChannel,
+    getChannelsForSite,
+    deleteSupportingChannel,
+    saveProject,
+    goToProjectsScreen,
   }, dispatch);
 }
 

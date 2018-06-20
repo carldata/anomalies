@@ -4,60 +4,55 @@ import { Button, ControlLabel, Form, FormControl, FormGroup, Col, Modal } from '
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { IState } from '@app-state/.';
-import { anomaliesScreenActionCreators } from '../../action-creators';
 import { IChannel, ISiteChannelInfo, ISite } from '@models/.';
 
-interface IAddChannelComponentProps {
+interface IAddChannelModalProps {
   showModal: boolean;
   sites: ISite[];
   channels: IChannel[];
-  mainChartEmpty: boolean;
-  lastStartDate: string;
-  lastEndDate: string;
 }
 
-interface IAddChannelComponentActionCreators {
-  addAndPopulateChannel: (siteChannelInfo: ISiteChannelInfo, startDate: string, endDate: string) => any;
-  addEmptyChannel: (siteChannelInfo: ISiteChannelInfo) => any;
+interface IAddChannelModalActionCreators {
+  approveClicked: (siteChannelInfo: ISiteChannelInfo) => void;
   getChannelsForSite: (siteId: string) => any;
-  cancelShowModal: () => any;
+  cancelClicked: () => any;
 }
 
-interface IAddChannelComponentState {
+interface IAddChannelModalState {
   channelType: string;
 }
 
-export class AddChannelModalComponent extends React.Component<IAddChannelComponentProps & IAddChannelComponentActionCreators, IAddChannelComponentState> {
+export class AddChannelModal extends React.Component<IAddChannelModalProps & IAddChannelModalActionCreators, IAddChannelModalState> {
   private siteId: string;
   private channelId: string;
-  private site: string;
-  private channel: string;
+  private siteName: string;
+  private channelName: string;
 
-  constructor(props: IAddChannelComponentProps & IAddChannelComponentActionCreators, context: any) {
+  constructor(props: IAddChannelModalProps & IAddChannelModalActionCreators, context: any) {
     super(props, context);
     this.siteId = '';
-    this.site = '';
+    this.siteName = '';
     this.channelId = '';
-    this.channel = '';
+    this.channelName = '';
     this.state = {
       channelType: '',
     };
 
-    this.addChannel = this.addChannel.bind(this);
+    this.addChannelClicked = this.addChannelClicked.bind(this);
   }
 
-  public componentWillReceiveProps(nextProps: IAddChannelComponentProps & IAddChannelComponentActionCreators) {
+  public componentWillReceiveProps(nextProps: IAddChannelModalProps & IAddChannelModalActionCreators) {
     if (!this.props.showModal && nextProps.showModal) {
       this.siteId = _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).id;
-      this.site = _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).id;
+      this.siteName = _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).name;
     }
     const firstChannel: IChannel = _.head(nextProps.channels);
     this.channelId = _.isUndefined(firstChannel) ? '' : firstChannel.id;
-    this.channel = _.isUndefined(firstChannel) ? '' : firstChannel.id;
+    this.channelName = _.isUndefined(firstChannel) ? '' : firstChannel.name;
   }
 
   public render() {
-    return <Modal show={this.props.showModal} onHide={() => this.props.cancelShowModal()}>
+    return <Modal show={this.props.showModal} onHide={() => this.props.cancelClicked()}>
       <Modal.Body>
         <Form horizontal>
           <FormGroup>
@@ -65,10 +60,10 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
               Site:
             </Col>
             <Col sm={10}>
-              <select id='selectProjectSiteAnomalies' className='form-control' onChange={(e) => {
+              <select id='selectSite' className='form-control' onChange={(e) => {
                 const selectElement = (e.target as HTMLSelectElement);
                 this.siteId = selectElement.value;
-                this.site = selectElement.value;
+                this.siteName = _.head(selectElement.selectedOptions).label;
                 this.props.getChannelsForSite(selectElement.value);
               }} >
                 {
@@ -82,11 +77,10 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
               Channel:
             </Col>
             <Col sm={10}>
-              {/* <FormControl type='text' onChange={(e) => this.setState({ channelId: (e.target as HTMLInputElement).value })} value={this.state.channelId}></FormControl> */}
-              <select id='selectProjectSiteAnomalies' className='form-control' onChange={(e) => {
-                const selectChannelElement = (e.target as HTMLSelectElement);
-                this.channelId = selectChannelElement.value;
-                this.channel = selectChannelElement.value;
+              <select id='selectChannel' className='form-control' onChange={(e) => {
+                const selectElement = (e.target as HTMLSelectElement);
+                this.channelId = selectElement.value;
+                this.channelName = _.head(selectElement.selectedOptions).label;
               }} >
                 {
                   this.props.channels.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
@@ -105,54 +99,23 @@ export class AddChannelModalComponent extends React.Component<IAddChannelCompone
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button id='btnCancelAddChannelModal' onClick={() => this.props.cancelShowModal()}>
+        <Button id='btnCancelAddChannelModal' onClick={() => this.props.cancelClicked()}>
           Cancel
         </Button>
-        <Button id='btnApproveAddChannelModal' bsStyle='primary' onClick={() => this.addChannel()} >
+        <Button id='btnApproveAddChannelModal' bsStyle='primary' onClick={() => this.addChannelClicked()} >
           Add
         </Button>
       </Modal.Footer>
     </Modal>;
   }
 
-  private addChannel() {
-    if (this.props.mainChartEmpty) {
-      this.props.addEmptyChannel({
-        site: this.siteId,
-        channel: this.channelId,
-        type: this.state.channelType,
-      });
-    } else {
-      this.props.addAndPopulateChannel({
-        site: this.siteId,
-        channel: this.channelId,
-        type: this.state.channelType,
-      },
-        this.props.lastStartDate,
-        this.props.lastEndDate);
-    }
+  private addChannelClicked() {
+    this.props.approveClicked({
+      siteId: this.siteId,
+      siteName: this.siteName,
+      channelId: this.channelId,
+      channelName: this.channelName,
+      type: this.state.channelType,
+    });
   }
 }
-
-function mapStateToProps(state: IState) {
-  return {
-    showModal: state.anomaliesScreen.showModal,
-    sites: state.anomaliesScreen.sites,
-    channels: state.anomaliesScreen.channels,
-    mainChartEmpty: state.anomaliesScreen.mainChartEmpty,
-    lastStartDate: state.anomaliesScreen.lastStartDate,
-    lastEndDate: state.anomaliesScreen.lastEndDate,
-  };
-}
-
-function matchDispatchToProps(dispatch: Dispatch<{}>) {
-  return bindActionCreators({
-    addAndPopulateChannel: anomaliesScreenActionCreators.addAndPopulateChannel,
-    addEmptyChannel: anomaliesScreenActionCreators.addEmptyChannel,
-    cancelShowModal: anomaliesScreenActionCreators.cancelShowAddChannel,
-    getChannelsForSite: anomaliesScreenActionCreators.getChannelsForSite,
-  }, dispatch);
-}
-
-export const AddChannelModal = connect(mapStateToProps, matchDispatchToProps)(AddChannelModalComponent);
-

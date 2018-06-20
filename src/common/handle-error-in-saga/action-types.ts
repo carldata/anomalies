@@ -1,0 +1,1 @@
+export const BACKEND_ERROR = 'BACKEND_ERROR';

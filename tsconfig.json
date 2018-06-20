@@ -15,6 +15,7 @@
         "baseUrl": "./",
         "paths": {
             "@app-state/*": ["./src/state/*"],
+            "@common/*":  ["./src/common/*"],
             "@models/*": ["./src/models/*"]
         }
     },

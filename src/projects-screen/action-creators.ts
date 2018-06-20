@@ -12,48 +12,31 @@ import {
   HideProjectDefinitionModalAction,
 } from './actions';
 
-type IGetAllProjectsActionCreator = () => GetAllProjectsStartedAction;
-type IGoToAnomaliesScreenActionCreator = (project: IProject) => GoToAnomaliesScreenAction;
-type IShowProjectDefintionModalActionCreator = () => ShowProjectDefinitionModalAction;
-type IHideProjectDefintionModalActionCreator = (project: IProject, approved: boolean) => HideProjectDefinitionModalAction;
-type IAddProjectActionCreator = (project: IProject) => AddProjectStartedAction;
-type IGetSitesForProjectActionCreator = (db: string) => GetSitesForProjectStartedAction;
-type IGetChannelsForSiteActionCreator = (siteId: string) => GetChannelsForSiteStartedAction;
+export type IGetAllProjectsActionCreator = () => GetAllProjectsStartedAction;
+export type IGoToAnomaliesScreenActionCreator = (project: IProject) => GoToAnomaliesScreenAction;
+export type IShowProjectDefintionModalActionCreator = () => ShowProjectDefinitionModalAction;
+export type IHideProjectDefintionModalActionCreator = (project: IProject, approved: boolean) => HideProjectDefinitionModalAction;
+export type IAddProjectActionCreator = (project: IProject) => AddProjectStartedAction;
+export type IGetSitesForProjectActionCreator = (db: string) => GetSitesForProjectStartedAction;
+export type IGetChannelsForSiteActionCreator = (siteId: string) => GetChannelsForSiteStartedAction;
 
-const getAllProjects: IGetAllProjectsActionCreator = () =>
+export const getAllProjects: IGetAllProjectsActionCreator = () =>
   _.toPlainObject(new GetAllProjectsStartedAction());
 
-const goToAnomaliesScreen: IGoToAnomaliesScreenActionCreator = (project: IProject) =>
+export const goToAnomaliesScreen: IGoToAnomaliesScreenActionCreator = (project: IProject) =>
   _.toPlainObject(new GoToAnomaliesScreenAction(project));
 
-const showProjectProjectDefinitionModal: IShowProjectDefintionModalActionCreator = () =>
+export const showProjectProjectDefinitionModal: IShowProjectDefintionModalActionCreator = () =>
   _.toPlainObject(new ShowProjectDefinitionModalAction());
 
-const hideProjectProjectDefinitionModal: IHideProjectDefintionModalActionCreator = (project: IProject, approved: boolean) =>
+export const hideProjectProjectDefinitionModal: IHideProjectDefintionModalActionCreator = (project: IProject, approved: boolean) =>
   _.toPlainObject(new HideProjectDefinitionModalAction({ project, approved }));
 
-const addProject: IAddProjectActionCreator = (project: IProject) =>
+export const addProject: IAddProjectActionCreator = (project: IProject) =>
   _.toPlainObject(new AddProjectStartedAction(project));
 
-const getSites: IGetSitesForProjectActionCreator = (db: string) =>
+export const getSites: IGetSitesForProjectActionCreator = (db: string) =>
   _.toPlainObject(new GetSitesForProjectStartedAction(db));
 
-const getChannelsForSite: IGetChannelsForSiteActionCreator = (siteId: string) =>
+export const getChannelsForSite: IGetChannelsForSiteActionCreator = (siteId: string) =>
   _.toPlainObject(new GetChannelsForSiteStartedAction(siteId));
-
-export {
-  IGetAllProjectsActionCreator,
-  getAllProjects,
-  IGoToAnomaliesScreenActionCreator,
-  goToAnomaliesScreen,
-  IShowProjectDefintionModalActionCreator,
-  showProjectProjectDefinitionModal,
-  IHideProjectDefintionModalActionCreator,
-  hideProjectProjectDefinitionModal,
-  IAddProjectActionCreator,
-  addProject,
-  IGetSitesForProjectActionCreator,
-  getSites,
-  IGetChannelsForSiteActionCreator,
-  getChannelsForSite,
-};
