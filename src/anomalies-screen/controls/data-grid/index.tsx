@@ -15,6 +15,11 @@ interface IDataGridComponentState {
   selectedIndexes: any[];
 }
 
+interface IDataGridHeader {
+  label: string;
+  key: string;
+}
+
 export class DataGrid extends React.Component<IDataGridComponentProps, IDataGridComponentState> {
   constructor(props: IDataGridComponentProps, context: any) {
     super(props, context);
@@ -40,6 +45,9 @@ export class DataGrid extends React.Component<IDataGridComponentProps, IDataGrid
               <div className='pull-left'>
                 <CSVLink data={this.props.rows}
                   filename={'series.csv'}
+                  headers={
+                    _.map(this.props.columns, (x, y) => ({key: x.key, label: x.name} as IDataGridHeader))
+                  }
                   className='btn btn-primary'
                   target='_blank'>
                   Export To CSV
