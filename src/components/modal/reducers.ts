@@ -1,17 +1,17 @@
 import * as actionTypes from './action-types';
-import { ShowModalAction, HideModalAction } from './actions';
-import { IModalState } from './model';
+import { ShowGeneralMessageModalAction, HideGeneralMessageModalAction } from './actions';
+import { IGeneralMessageModalState } from './model';
 
-const initialState: IModalState = { show: false } as IModalState;
+const initialState: IGeneralMessageModalState = { show: false } as IGeneralMessageModalState;
 
-export type ModalActionsTypes = ShowModalAction|HideModalAction;
+export type GeneralMessageModalActionsTypes = ShowGeneralMessageModalAction|HideGeneralMessageModalAction;
 
-export const modalContainerReducer = (state: IModalState = initialState, action: ModalActionsTypes): IModalState => {
+export const generalMessageModalContainerReducer = (state: IGeneralMessageModalState = initialState, action: GeneralMessageModalActionsTypes): IGeneralMessageModalState => {
   switch (action.type) {
-    case actionTypes.SHOW_MODAL:
-      return { title: action.title, header: action.header, show: true, allowClose: action.allowClose } as IModalState;
-    case actionTypes.HIDE_MODAL:
-      return { title: '', header: '', show: false } as IModalState;
+    case actionTypes.SHOW_GENERAL_MESSAGE_MODAL:
+      return { title: action.title, header: action.header, show: true, allowClose: action.allowClose } as IGeneralMessageModalState;
+    case actionTypes.HIDE_GENERAL_MESSAGE_MODAL:
+      return { title: '', header: '', show: false } as IGeneralMessageModalState;
     default:
       return state;
   }

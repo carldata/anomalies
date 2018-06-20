@@ -17,7 +17,7 @@ import {
 } from './action-creators';
 import { ProjectComponent } from './project';
 import { ProjectDefinitionModal } from './controls/project-definition-modal';
-import { ModalContainer } from '../components/modal';
+import { GeneralMessageModalContainer } from '../components/modal';
 import { IProject } from '../models';
 
 interface IProjectComponentProps {
@@ -41,7 +41,7 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
 
   public render() {
     return <>
-      <ModalContainer />
+      <GeneralMessageModalContainer />
       <div className='container'>
         <Form horizontal>
           <FormGroup>

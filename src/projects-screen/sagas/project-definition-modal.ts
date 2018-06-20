@@ -8,7 +8,7 @@ import {
   SHOW_PROJECT_DEFINITION_MODAL,
   ADD_PROJECT_FULFILLED,
 } from '../action-types';
-import { SHOW_MODAL } from '../../components/modal/action-types';
+import { SHOW_GENERAL_MESSAGE_MODAL } from '../../components/modal/action-types';
 import { GetSitesForProjectStartedAction, GetChannelsForSiteStartedAction, AddProjectStartedAction, GoToAnomaliesScreenAction, HideProjectDefinitionModalAction } from '../actions';
 import { IState } from '@app-state/.';
 import { handleErrorInSaga } from '@common/handle-error-in-saga';
