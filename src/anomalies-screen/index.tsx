@@ -14,7 +14,7 @@ import { IState } from '../state';
 import { DataGrid } from './controls/data-grid';
 import { IDataGridState } from './controls/data-grid/state';
 import { AddChannelModal } from './controls/add-channel-control';
-import { ModalContainer } from '../components/modal';
+import { GeneralMessageModalContainer } from '../components/modal';
 import { IProject } from '../models';
 import { gridSelector } from './selectors/grid-selector';
 import { chartsSelector } from './selectors/charts-selector';
@@ -117,7 +117,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 
   public render() {
     return <>
-      <ModalContainer />
+      <GeneralMessageModalContainer />
       <div>
         <Navbar fluid>
           <Navbar.Header>

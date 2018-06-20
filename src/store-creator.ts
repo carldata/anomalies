@@ -14,12 +14,12 @@ import { projectsScreenReducer } from './projects-screen/reducer';
 import { IState } from './state';
 
 import { rootSaga } from './root-saga';
-import { ModalContainer, modalContainerReducer } from './components/modal';
+import { GeneralMessageModalContainer, generalMessageModalContainerReducer } from './components/modal';
 
 const reducers = combineReducers<IState>({
   anomaliesScreen: anomaliesScreenReducer,
   projectsScreen: projectsScreenReducer,
-  modalState: modalContainerReducer,
+  modalState: generalMessageModalContainerReducer,
   routing: routerReducer,
 });
 

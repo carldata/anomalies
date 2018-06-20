@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import ResponsiveModal from 'react-responsive-modal';
 import { bindActionCreators, Dispatch } from 'redux';
 import { hideGeneralMessageModal, IHideGeneralMessageModalActionCreator } from './action-creators';
-import { IModalState } from './model';
+import { IGeneralMessageModalState } from './model';
 import { IState } from '../../state';
 
 interface IDispatchProps {
   hideGeneralMessageModal: IHideGeneralMessageModalActionCreator;
 }
 
-const Modal = (props: IModalState & IDispatchProps) =>
+const Modal = (props: IGeneralMessageModalState & IDispatchProps) =>
   <span id={`modal-${props.show ? 'visible' : 'hidden'}`}>
     <ResponsiveModal
       center
@@ -22,7 +22,7 @@ const Modal = (props: IModalState & IDispatchProps) =>
     </ResponsiveModal>
   </span>;
 
-const mapStateToProps = (state: IState): IModalState => {
+const mapStateToProps = (state: IState): IGeneralMessageModalState => {
   return state.modalState;
 };
 
@@ -33,9 +33,9 @@ const mapDispatchToProps = (dispatch: Dispatch<void>) => {
 };
 
 
-export const ModalContainer = connect<IModalState, IDispatchProps, {}>(mapStateToProps, mapDispatchToProps)(Modal);
+export const GeneralMessageModalContainer = connect<IGeneralMessageModalState, IDispatchProps, {}>(mapStateToProps, mapDispatchToProps)(Modal);
 
 export { ShowGeneralMessageModalAction, HideGeneralMessageModalAction } from './actions';
-export { IModalState } from './model';
-export { ModalActionsTypes, modalContainerReducer } from './reducers';
+export { IGeneralMessageModalState } from './model';
+export { GeneralMessageModalActionsTypes, generalMessageModalContainerReducer } from './reducers';
 
