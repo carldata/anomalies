@@ -37,18 +37,18 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
 
     yield select((state: IState) => state.anomaliesScreen.project);
 
-    const rawChannelResponse = yield requests.getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
-    const fixedAnomaliesResponse = yield requests.getFixedAnomalies(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
-    const editedChannelResponse = yield requests.getChannelData(`${project.siteId}-${project.finalChannelId}`, startDate, endDate);
+    const rawChannelResponse: string = yield requests.getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
+    const fixedAnomaliesResponse: string = yield requests.getFixedAnomalies(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
+    const editedChannelResponse: string = yield requests.getChannelData(`${project.siteId}-${project.finalChannelId}`, startDate, endDate);
 
-    const rawChannelParseResult = Papa.parse(rawChannelResponse.data, { header: true });
-    const fixedAnomaliesParseResult = Papa.parse(fixedAnomaliesResponse.data, { header: true });
-    const editedChannelParseResult = Papa.parse(editedChannelResponse.data, { header: true });
+    const rawChannelParseResult = Papa.parse(rawChannelResponse, { header: true });
+    const fixedAnomaliesParseResult = Papa.parse(fixedAnomaliesResponse, { header: true });
+    const editedChannelParseResult = Papa.parse(editedChannelResponse, { header: true });
 
     let supportingChannelsParseResults: Papa.ParseResult[] = [];
     if (project.supportingChannels.length > 0) {
-      const supportingChannelsResults = yield requests.getSupportingChannels(project.supportingChannels, startDate, endDate);
-      supportingChannelsParseResults = _.map(supportingChannelsResults, (result) => Papa.parse(result.data, { header: true }));
+      const supportingChannelsResults: string[] = yield requests.getSupportingChannels(project.supportingChannels, startDate, endDate);
+      supportingChannelsParseResults = _.map(supportingChannelsResults, (result) => Papa.parse(result, { header: true }));
     }
 
     const toUnixTimePointsExtractConfig = {

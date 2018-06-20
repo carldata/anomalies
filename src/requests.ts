@@ -7,62 +7,64 @@ const appName = 'anomaly-tool-development';
 const apiAddress = 'http://13.77.168.238';
 const token = 'oasdob123a23hnaovnfaewd123akjwpod';
 
+enum EnumHTTPVerb { GET, POST, PUT }
+
 export interface IConfigurationEntry {
   id: string;
   data: IProject;
 }
 
-function getConfiguration(): AxiosPromise<IConfigurationEntry[]>  {
+export enum EnumEndpointMode {
+  Mocked,
+  RealHttp,
+}
+
+const httpOp = <TReturnedDataType>(verb: EnumHTTPVerb, url: string, payload?: any): AxiosPromise<TReturnedDataType> => {
+  const enpointCall = () => {
+    switch (verb) {
+      case EnumHTTPVerb.GET:
+        return axios.get<AxiosResponse<TReturnedDataType>>(url);
+      case EnumHTTPVerb.POST:
+        return axios.post<AxiosResponse<TReturnedDataType>>(url, payload);
+      case EnumHTTPVerb.PUT:
+        return axios.put<AxiosResponse<TReturnedDataType>>(url, payload);
+    }
+  };
   return new Promise((resolve, reject) =>
-    axios
-      .get<AxiosResponse<IConfigurationEntry[]>>(`${apiAddress}/config/${appName}`)
+    enpointCall()
       .then((response) => resolve(response.data))
       .catch((error) => reject(error)));
-}
+};
 
-function *getChannelData(channel: string, startDate: string, endDate: string) {
-  return yield call(axios.get, `${apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
-}
+const getConfiguration = (): AxiosPromise<IConfigurationEntry[]> =>
+  httpOp<IConfigurationEntry[]>(EnumHTTPVerb.GET, `${apiAddress}/config/${appName}`);
 
-function *getFixedAnomalies(channel: string, startDate: string, endDate: string) {
-  return yield call(axios.get, `${apiAddress}/anomalies/find?series=${channel}&startDate=${startDate}&endDate=${endDate}`);
-}
+const getChannelData = (channel: string, startDate: string, endDate: string): AxiosPromise<string> =>
+  httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
 
-//TODO - remove  getEditedChannelData and use only getChannelData
-function *getEditedChannelData(channel: string, startDate: string, endDate: string) {
-  return yield call(axios.get, `${apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
-}
+const getFixedAnomalies = (channel: string, startDate: string, endDate: string): AxiosPromise<string> =>
+  httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/anomalies/find?series=${channel}&startDate=${startDate}&endDate=${endDate}`);
 
-function *getSupportingChannels(supportingChannels: { siteId: string, channelId: string }[], startDate: string, endDate: string) {
-  return yield all(_.map(supportingChannels, (el) =>
-      call(axios.get, `${apiAddress}/data/channel/${el.siteId}-${el.channelId}/data?startDate=${startDate}&endDate=${endDate}`)));
-}
+// TODO - remove  getEditedChannelData and use only getChannelData
+const getEditedChannelData = (channel: string, startDate: string, endDate: string): AxiosPromise<string> =>
+  httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
 
-function *addProject(project: IProject) {
-  let projectId: string = '';
-  const response = yield call(axios.post,
-    `${apiAddress}/config/${appName}`,
-    JSON.stringify(project));
-  return response.data;
-}
+const getSupportingChannels = (supportingChannels: { siteId: string, channelId: string }[], startDate: string, endDate: string): Promise<AxiosResponse<string>[]> =>
+  Promise.all(_.map(supportingChannels, (el) => {
+    return httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${el.siteId}-${el.channelId}/data?startDate=${startDate}&endDate=${endDate}`);
+  }));
 
-function *saveProject(project: IProject) {
-  const response = yield call(axios.put,
-    `${apiAddress}/config/${appName}/${project.id}`,
-    JSON.stringify(project),
-  );
-  return response.data;
-}
+const addProject = (project: IProject): AxiosPromise<string> =>
+  httpOp<string>(EnumHTTPVerb.POST, `${apiAddress}/config/${appName}`, JSON.stringify(project));
 
-function *getSites(db: string) {
-  const response = yield call(axios.get, `${apiAddress}/data/site/${db}?token=${token}`);
-  return _.map(response.data, (el) => ({ id: el.id, name: el.name } as ISite));
-}
+const saveProject = (project: IProject): AxiosPromise<string> =>
+  httpOp<string>(EnumHTTPVerb.PUT, `${apiAddress}/config/${appName}/${project.id}`, JSON.stringify(project));
 
-function *getChannels(siteId: string) {
-  const response = yield call(axios.get, `${apiAddress}/data/channel/${siteId}?token=${token}`);
-  return _.map(response.data, (el) => ({ id: el.id, name: el.name } as IChannel));
-}
+const getSites = (db: string): AxiosPromise<ISite[]> =>
+  httpOp<ISite[]>(EnumHTTPVerb.GET, `${apiAddress}/data/site/${db}?token=${token}`);
+
+const getChannels = (siteId: string): AxiosPromise<IChannel[]> =>
+  httpOp<IChannel[]>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${siteId}?token=${token}`);
 
 export const requests = {
   getConfiguration,
