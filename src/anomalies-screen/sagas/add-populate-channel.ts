@@ -10,7 +10,7 @@ import {
   IHpTimeSeriesChartState,
 } from 'time-series-scroller';
 import { csvLoadingCalculations, EnumRawCsvFormat, IExtractUnixTimePointsConfig } from 'time-series-scroller/lib/out/hp-time-series-chart/csv-loading/calculations';
-import { ShowModalAction, HideModalAction } from '../../components/modal';
+import { ShowGeneralMessageModalAction, HideGeneralMessageModalAction } from '../../components/modal';
 import { requests } from '../../requests';
 import { config } from '../../config';
 import {
@@ -22,14 +22,14 @@ import { handleErrorInSaga } from '@common/handle-error-in-saga';
 
 function* addAndPopulateChannel(action: AddAndPopulateChannelStartAction) {
   try {
-    yield put(_.toPlainObject(new ShowModalAction()));
+    yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
 
     const siteId: string = action.payload.siteChannelInfo.siteId;
     const channelId: string = action.payload.siteChannelInfo.channelId;
     const dateFrom: string = dateFns.format(action.payload.dateFrom, config.generic.endpointsDateFormat);
     const dateTo: string = dateFns.format(action.payload.dateTo, config.generic.endpointsDateFormat);
 
-    yield put(_.toPlainObject(new ShowModalAction()));
+    yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
 
     const channelData = yield requests.getChannelData(siteId + '-' + channelId, dateFrom, dateTo);
     const channelParseResult = Papa.parse(channelData.data, { header: true });
@@ -43,7 +43,7 @@ function* addAndPopulateChannel(action: AddAndPopulateChannelStartAction) {
       siteChannelInfo: action.payload.siteChannelInfo,
       channelTimeSeries: timeSeries,
     })));
-    yield put(_.toPlainObject(new HideModalAction()));
+    yield put(_.toPlainObject(new HideGeneralMessageModalAction()));
   } catch (error) {
     yield handleErrorInSaga(error);
   }

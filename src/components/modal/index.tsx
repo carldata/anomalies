@@ -35,7 +35,7 @@ const mapDispatchToProps = (dispatch: Dispatch<void>) => {
 
 export const ModalContainer = connect<IModalState, {}, {}>(mapStateToProps, mapDispatchToProps)(Modal);
 
-export { ShowModalAction, HideModalAction } from './actions';
+export { ShowGeneralMessageModalAction, HideGeneralMessageModalAction } from './actions';
 export { IModalState } from './model';
 export { ModalActionsTypes, modalContainerReducer } from './reducers';
 

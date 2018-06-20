@@ -19,7 +19,7 @@ import {
 
 import { IDataGridState } from '../controls/data-grid/state';
 import { requests } from '../../requests';
-import { ShowModalAction, HideModalAction } from '../../components/modal';
+import { ShowGeneralMessageModalAction, HideGeneralMessageModalAction } from '../../components/modal';
 import { IProject } from '../../models';
 import { IAnomaliesTimeSeries } from '../models/anomalies-time-series';
 import { IState } from '../../state';
@@ -33,7 +33,7 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
   const endDate: string = action.payload.dateTo;
 
   try {
-    yield put(_.toPlainObject(new ShowModalAction()));
+    yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
 
     yield select((state: IState) => state.anomaliesScreen.project);
 
@@ -64,7 +64,7 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
         supportingChannels: _.map(project.supportingChannels, (ch) =>
           csvLoadingCalculations.extractUnixTimePoints(supportingChannelsParseResults[_.indexOf(project.supportingChannels, ch)].data, toUnixTimePointsExtractConfig)),
       } as IAnomaliesTimeSeries)));
-    yield put(_.toPlainObject(new HideModalAction()));
+    yield put(_.toPlainObject(new HideGeneralMessageModalAction()));
   } catch (error) {
     yield handleErrorInSaga(error);
   }

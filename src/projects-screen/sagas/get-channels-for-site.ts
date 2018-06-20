@@ -4,16 +4,16 @@ import { requests } from '../../requests';
 import { IChannel } from '../../models';
 import { GET_CHANNELS_FOR_SITE_STARTED } from '../action-types';
 import { GetChannelsForSiteFetchingAction, GetChannelsForSiteFulfilledAction } from '../actions';
-import { ShowModalAction, HideModalAction } from '../../components/modal';
+import { ShowGeneralMessageModalAction, HideGeneralMessageModalAction } from '../../components/modal';
 import { handleErrorInSaga } from '@common/handle-error-in-saga';
 
 function* getChannelsForSite(action) {
   try {
-    yield put(_.toPlainObject(new ShowModalAction()));
+    yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
     yield put(_.toPlainObject(new GetChannelsForSiteFetchingAction()));
     const channels: IChannel[] = yield requests.getChannels(action.payload);
     yield put(_.toPlainObject(new GetChannelsForSiteFulfilledAction(channels)));
-    yield put(_.toPlainObject(new HideModalAction()));
+    yield put(_.toPlainObject(new HideGeneralMessageModalAction()));
   } catch (error) {
     yield handleErrorInSaga(error);
   }
