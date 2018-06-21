@@ -1,0 +1,33 @@
+[{
+  "id": "40c5f491-463b-44c6-a019-d5b785963ad6",
+  "data": {
+    "projectName": "Mocked 101-031 A",
+    "supportingChannels": [{
+      "channelName": "MP1 FLOW1",
+      "siteName": "101-031",
+      "siteId": "7769",
+      "type": "flow",
+      "channelId": "10584"
+    }],
+    "rawChannelName": "MP1 FLOW1",
+    "finalChannelId": "10584",
+    "siteName": "101-031",
+    "id": "40c5f491-463b-44c6-a019-d5b785963ad6",
+    "rawChannelId": "10584",
+    "siteId": "7769",
+    "finalChannelName": "MP1 FLOW1"
+  }
+}, {
+  "id": "785d1c41-acd9-4d07-8391-616280d9f8fa",
+  "data": {
+    "projectName": "Mocked 101-031 B",
+    "supportingChannels": [],
+    "rawChannelName": "MP1 FLOW1",
+    "finalChannelId": "10584",
+    "siteName": "101-031",
+    "id": "",
+    "rawChannelId": "10584",
+    "siteId": "7769",
+    "finalChannelName": "MP1 FLOW1"
+  }
+}]
