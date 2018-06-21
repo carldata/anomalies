@@ -6,7 +6,9 @@
     "test": "jest",
     "analyze": "webpack --config webpack/analyze.config.js --mode production",
     "build": "webpack --config webpack/prod.config.js --mode production",
-    "dev": "webpack-dev-server --config webpack/dev.config.js --mode development --open"
+    "dev": "webpack-dev-server --config webpack/dev.config.js --mode development --open",
+    "bd-server-build": "tsc -p tsconfig-server.json",
+    "bd-server-serve": "node backless-dev-server/index.js"
   },
   "repository": {
     "type": "git",
@@ -66,6 +68,7 @@
     "@types/react-router-bootstrap": "^0.24.4",
     "axios": "^0.18.0",
     "date-fns": "^1.29.0",
+    "express": "^4.16.3",
     "immutability-helper": "^2.7.0",
     "lodash": "^4.17.10",
     "papaparse": "^4.4.0",

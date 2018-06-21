@@ -1,0 +1,31 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "target": "es6",
+        "noImplicitAny": false,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "outDir": "backless-dev-server",
+        "baseUrl": "./",
+        "paths": {
+            "*": [
+                "node_modules/*"
+            ],
+            "@app-state/*": ["../../src/state/*"],
+            "@common/*":  ["../../src/common/*"],
+            "@models/*": ["../../src/models/*"]
+        },
+        "jsx": "react",
+        "lib": [
+            "dom",
+            "esnext"
+        ]
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "include": [
+        "src/server/**/*"
+    ]
+}
