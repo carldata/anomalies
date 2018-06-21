@@ -4,16 +4,16 @@ import { requests } from '../../requests';
 import { ISite } from '../../models';
 import { GET_SITES_FOR_PROJECT_STARTED } from '../action-types';
 import { GetSitesForProjectFetchingAction, GetSitesForProjectFulfilledAction } from '../actions';
-import { ShowModalAction, HideModalAction } from '../../components/modal';
+import { ShowGeneralMessageModalAction, HideGeneralMessageModalAction } from '../../components/modal';
 import { handleErrorInSaga } from '@common/handle-error-in-saga';
 
 function* getSitesForProject(action) {
   try {
-    yield put(_.toPlainObject(new ShowModalAction()));
+    yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
     yield put(_.toPlainObject(new GetSitesForProjectFetchingAction()));
     const sites: ISite[] = yield requests.getSites(action.payload);
     yield put(_.toPlainObject(new GetSitesForProjectFulfilledAction(sites)));
-    yield put(_.toPlainObject(new HideModalAction()));
+    yield put(_.toPlainObject(new HideGeneralMessageModalAction()));
   } catch (error) {
     yield handleErrorInSaga(error);
   }

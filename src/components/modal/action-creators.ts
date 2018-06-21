@@ -1,12 +1,12 @@
 import * as _ from 'lodash';
-import { HideModalAction } from './actions';
+import { HideGeneralMessageModalAction } from './actions';
 
-type IHideModalActionCreator = () => HideModalAction;
+type IHideGeneralMessageModalActionCreator = () => HideGeneralMessageModalAction;
 
-const hideModal: IHideModalActionCreator = () =>
-  _.toPlainObject(new HideModalAction());
+const hideGeneralMessageModal: IHideGeneralMessageModalActionCreator = () =>
+  _.toPlainObject(new HideGeneralMessageModalAction());
 
 export {
-  hideModal,
-  IHideModalActionCreator,
+  hideGeneralMessageModal,
+  IHideGeneralMessageModalActionCreator,
 };

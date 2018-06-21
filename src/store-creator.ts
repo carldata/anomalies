@@ -8,18 +8,18 @@ import { anomaliesScreenReducer } from './anomalies-screen/reducer';
 import { projectsScreenReducer } from './projects-screen/reducer';
 import { IState } from './state';
 import { rootSaga } from './root-saga';
-import { modalContainerReducer } from './components/modal';
 import { IConfigurationState } from '@business-logic/configuration/models/state';
 
 interface ICombinedReducers extends ReducersMapObject {
   configuration: (state: IConfigurationState, action: ConfigurationActionTypes) => IConfigurationState;
 }
+import { GeneralMessageModalContainer, generalMessageModalContainerReducer } from './components/modal';
 
 const reducers = combineReducers<IState>({
   configuration: configurationReducer,
   anomaliesScreen: anomaliesScreenReducer,
   projectsScreen: projectsScreenReducer,
-  modalState: modalContainerReducer,
+  modalState: generalMessageModalContainerReducer,
   routing: routerReducer,
 });
 

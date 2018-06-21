@@ -19,7 +19,7 @@ import {
 
 import { IDataGridState } from '../controls/data-grid/state';
 import { requests } from '../../requests';
-import { ShowModalAction, HideModalAction } from '../../components/modal';
+import { ShowGeneralMessageModalAction, HideGeneralMessageModalAction } from '../../components/modal';
 import { IProject } from '../../models';
 import { IAnomaliesTimeSeries } from '../models/anomalies-time-series';
 import { IState } from '../../state';
@@ -33,22 +33,22 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
   const endDate: string = action.payload.dateTo;
 
   try {
-    yield put(_.toPlainObject(new ShowModalAction()));
+    yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
 
     yield select((state: IState) => state.anomaliesScreen.project);
 
-    const rawChannelResponse = yield requests.getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
-    const fixedAnomaliesResponse = yield requests.getFixedAnomalies(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
-    const editedChannelResponse = yield requests.getChannelData(`${project.siteId}-${project.finalChannelId}`, startDate, endDate);
+    const rawChannelResponse: string = yield requests.getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
+    const fixedAnomaliesResponse: string = yield requests.getFixedAnomalies(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
+    const editedChannelResponse: string = yield requests.getChannelData(`${project.siteId}-${project.finalChannelId}`, startDate, endDate);
 
-    const rawChannelParseResult = Papa.parse(rawChannelResponse.data, { header: true });
-    const fixedAnomaliesParseResult = Papa.parse(fixedAnomaliesResponse.data, { header: true });
-    const editedChannelParseResult = Papa.parse(editedChannelResponse.data, { header: true });
+    const rawChannelParseResult = Papa.parse(rawChannelResponse, { header: true });
+    const fixedAnomaliesParseResult = Papa.parse(fixedAnomaliesResponse, { header: true });
+    const editedChannelParseResult = Papa.parse(editedChannelResponse, { header: true });
 
     let supportingChannelsParseResults: Papa.ParseResult[] = [];
     if (project.supportingChannels.length > 0) {
-      const supportingChannelsResults = yield requests.getSupportingChannels(project.supportingChannels, startDate, endDate);
-      supportingChannelsParseResults = _.map(supportingChannelsResults, (result) => Papa.parse(result.data, { header: true }));
+      const supportingChannelsResults: string[] = yield requests.getSupportingChannels(project.supportingChannels, startDate, endDate);
+      supportingChannelsParseResults = _.map(supportingChannelsResults, (result) => Papa.parse(result, { header: true }));
     }
 
     const toUnixTimePointsExtractConfig = {
@@ -64,7 +64,7 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
         supportingChannels: _.map(project.supportingChannels, (ch) =>
           csvLoadingCalculations.extractUnixTimePoints(supportingChannelsParseResults[_.indexOf(project.supportingChannels, ch)].data, toUnixTimePointsExtractConfig)),
       } as IAnomaliesTimeSeries)));
-    yield put(_.toPlainObject(new HideModalAction()));
+    yield put(_.toPlainObject(new HideGeneralMessageModalAction()));
   } catch (error) {
     yield handleErrorInSaga(error);
   }
