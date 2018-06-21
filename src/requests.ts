@@ -1,7 +1,9 @@
 import axios, { AxiosResponse, AxiosPromise } from 'axios';
 import * as _ from 'lodash';
-import { all, call } from 'redux-saga/effects';
+import { all, call, select } from 'redux-saga/effects';
 import { IProject, IChannel, ISite } from './models';
+import { IState } from './state';
+import { IConfigurationState } from '@business-logic/configuration/models/state';
 
 const appName = 'anomaly-tool-development';
 const apiAddress = 'http://13.77.168.238';
@@ -25,6 +27,9 @@ function *getChannelData(channel: string, startDate: string, endDate: string) {
 }
 
 function *getFixedAnomalies(channel: string, startDate: string, endDate: string) {
+
+  const configuration: IConfigurationState = yield select((state: IState) => state.configuration.);
+  
   return yield call(axios.get, `${apiAddress}/anomalies/find?series=${channel}&startDate=${startDate}&endDate=${endDate}`);
 }
 

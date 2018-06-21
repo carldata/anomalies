@@ -34,6 +34,9 @@ const initialState = {
   sites: [],
   channels: [],
   mainChartEmpty: true,
+  supportingChannelModalShown: false,
+  timeSeries: null,
+  timeSeriesLoadContext: null,
 } as IAnomaliesScreenState;
 
 export default handleActions<IAnomaliesScreenState, IAnomaliesCharts | IDataGridState | IProject | number | any |

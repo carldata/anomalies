@@ -1,22 +1,22 @@
 
 import { createHashHistory } from 'history';
-import * as _ from 'lodash';
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { Redirect, Route } from 'react-router';
-import { ConnectedRouter, routerMiddleware, routerReducer } from 'react-router-redux';
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import { routerMiddleware, routerReducer } from 'react-router-redux';
+import { applyMiddleware, combineReducers, compose, createStore, ReducersMapObject } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-
+import { configurationReducer, ConfigurationActionTypes } from '@business-logic/configuration/reducers';
 import { anomaliesScreenReducer } from './anomalies-screen/reducer';
 import { projectsScreenReducer } from './projects-screen/reducer';
 import { IState } from './state';
-
 import { rootSaga } from './root-saga';
-import { ModalContainer, modalContainerReducer } from './components/modal';
+import { modalContainerReducer } from './components/modal';
+import { IConfigurationState } from '@business-logic/configuration/models/state';
+
+interface ICombinedReducers extends ReducersMapObject {
+  configuration: (state: IConfigurationState, action: ConfigurationActionTypes) => IConfigurationState;
+}
 
 const reducers = combineReducers<IState>({
+  configuration: configurationReducer,
   anomaliesScreen: anomaliesScreenReducer,
   projectsScreen: projectsScreenReducer,
   modalState: modalContainerReducer,

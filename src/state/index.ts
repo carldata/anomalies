@@ -6,4 +6,5 @@ export interface IState {
   projectsScreen: IProjectsScreenState;
   anomaliesScreen: IAnomaliesScreenState;
   modalState: IModalState;
+  configuration: any;
 }

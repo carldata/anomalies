@@ -70,6 +70,7 @@ interface IAnomaliesComponentState {
   startDate: string;
   windowUnixFrom: number;
   windowUnixTo: number;
+  uiSettings: any;
 }
 
 class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAnomaliesComponentActionCreators, IAnomaliesComponentState> {
@@ -92,6 +93,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       supportingChannelsState: _.cloneDeep(props.supportingChannels),
       gridState: { rows: [] },
+      uiSettings: {  },
     };
   }
 
@@ -312,6 +314,7 @@ function mapStateToProps(state: IState) {
     finalChartState: chartsState.finalChartState,
     supportingChannels: chartsState.supportingChannels,
     screenState: state.anomaliesScreen,
+    configuration: state.configuration,
   } as IAnomaliesComponentProps;
 }
 
