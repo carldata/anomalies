@@ -6,7 +6,6 @@ import { ShowGeneralMessageModalAction, HideGeneralMessageModalAction } from '..
 import { GET_ALL_PROJECTS_STARTED } from '../action-types';
 import { GetAllProjectsFulfilledAction } from '../actions';
 import { handleErrorInSaga } from '@common/handle-error-in-saga';
-import { AxiosResponse } from 'axios';
 
 function* getAllProjectsAsyncCall() {
   try {
