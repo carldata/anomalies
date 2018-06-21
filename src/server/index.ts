@@ -1,7 +1,7 @@
 // tslint:disable-next-line:no-var-requires
 import express from 'express';
-import fs from 'fs';
 import { returnMockedJSON, returnMockedCsv } from './auxiliary';
+import { httpHandlers } from './http-handlers';
 
 const app = express();
 
@@ -12,7 +12,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/config/:appId', (req, res) => {
-  returnMockedJSON(res, 'assets/config.json');
+  httpHandlers.handleConfigGet(req, res);
 });
 
 app.get('/data/channel/:channelId/data', (req, res) => {

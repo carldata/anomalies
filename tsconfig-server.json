@@ -6,7 +6,7 @@
         "noImplicitAny": false,
         "moduleResolution": "node",
         "sourceMap": true,
-        "outDir": "backless-dev-server",
+        "outDir": "backless-development",
         "baseUrl": "./",
         "paths": {
             "*": [

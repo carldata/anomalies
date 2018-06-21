@@ -1,3 +1,3 @@
 import * as shell from 'shelljs';
 
-shell.cp('-R', 'src/server/assets', 'backless-dev-server');
+shell.cp('-R', 'src/server/assets', 'backless-development/server');
