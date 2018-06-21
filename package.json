@@ -7,7 +7,6 @@
     "analyze": "webpack --config webpack/analyze.config.js --mode production",
     "build": "webpack --config webpack/prod.config.js --mode production",
     "dev": "webpack-dev-server --config webpack/dev.config.js --mode development --open",
-    "bd-server-build-fast": "tsc -p tsconfig-server.json",
     "bd-server-build": "tsc -p tsconfig-server.json && npm run bd-server-copy-static-assets",
     "bd-server-serve": "cd backless-dev-server && node index.js",
     "bd-server-copy-static-assets": "ts-node ./src/server/copy-static-assets.ts"
