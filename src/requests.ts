@@ -1,7 +1,8 @@
 import axios, { AxiosResponse, AxiosPromise } from 'axios';
 import * as _ from 'lodash';
-import { all, call } from 'redux-saga/effects';
+import { all, call, select } from 'redux-saga/effects';
 import { IProject, IChannel, ISite } from './models';
+import { IConfigurationState } from '@business-logic/configuration/models/state';
 
 const appName = 'anomaly-tool-development';
 const apiAddress = 'http://13.77.168.238';
@@ -36,8 +37,10 @@ const httpOp = <TReturnedDataType>(verb: EnumHTTPVerb, url: string, payload?: an
       .catch((error) => reject(error)));
 };
 
-const getConfiguration = (): AxiosPromise<IConfigurationEntry[]> =>
-  httpOp<IConfigurationEntry[]>(EnumHTTPVerb.GET, `${apiAddress}/config/${appName}`);
+const getConfiguration = (): AxiosPromise<IConfigurationEntry[]> => {
+  const configuration =  select((state) => state);
+  return httpOp<IConfigurationEntry[]>(EnumHTTPVerb.GET, `${apiAddress}/config/${appName}`);
+}
 
 const getChannelData = (channel: string, startDate: string, endDate: string): AxiosPromise<string> =>
   httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);

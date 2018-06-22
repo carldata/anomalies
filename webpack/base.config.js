@@ -16,7 +16,8 @@ module.exports = {
     alias: {
       "@app-state": path.resolve(__dirname, '../src/state'),
       "@common": path.resolve(__dirname, '../src/common'),
-      "@models": path.resolve(__dirname, '../src/models')
+      "@models": path.resolve(__dirname, '../src/models'),
+      "@business-logic": path.resolve(__dirname, '../src/business-logic'),
     }
   },
   module: {
