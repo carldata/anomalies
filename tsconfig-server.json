@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "target": "es6",
+        "noImplicitAny": false,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "outDir": "backless-development",
+        "baseUrl": "./",
+        "paths": {
+            "*": [
+                "node_modules/*"
+            ],
+            "@app-state/*": ["../../src/state/*"],
+            "@common/*":  ["../../src/common/*"],
+            "@models/*": ["../../src/models/*"]
+        },
+        "jsx": "react",
+        "lib": [
+            "dom",
+            "esnext"
+        ]
+    },
+    "include": [
+        "src/server/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "src/server/copy-static-assets.ts"
+    ]
+}

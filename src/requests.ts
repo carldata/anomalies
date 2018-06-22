@@ -14,11 +14,6 @@ export interface IConfigurationEntry {
   data: IProject;
 }
 
-export enum EnumEndpointMode {
-  Mocked,
-  RealHttp,
-}
-
 const httpOp = <TReturnedDataType>(verb: EnumHTTPVerb, url: string, payload?: any): AxiosPromise<TReturnedDataType> => {
   const enpointCall = () => {
     switch (verb) {

@@ -1,0 +1,240 @@
+[
+    {
+        "name": "MP1 FLOW1",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "10584",
+        "unit": "l/s"
+    },
+    {
+        "name": "MP1 PDEPTH_1",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "10585",
+        "unit": "mm"
+    },
+    {
+        "name": "MP1 PEAKVEL_1",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "10586",
+        "unit": "m/s"
+    },
+    {
+        "name": "MP1 RAWVEL",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "10587",
+        "unit": "m/s"
+    },
+    {
+        "name": "MP1 UNIDEPTH",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "10588",
+        "unit": "mm"
+    },
+    {
+        "name": "MP1 UpDEPTH_1",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "10589",
+        "unit": "mm"
+    },
+    {
+        "name": "MP1 BTYVOLT",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "10590",
+        "unit": "V"
+    },
+    {
+        "name": "MP2 FLOW2",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "10591",
+        "unit": "l/s"
+    },
+    {
+        "name": "MP2 PDEPTH_1",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "10592",
+        "unit": "mm"
+    },
+    {
+        "name": "MP2 PEAKVEL_1",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "10593",
+        "unit": "m/s"
+    },
+    {
+        "name": "MP2 UNIDEPTH2",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "10594",
+        "unit": "mm"
+    },
+    {
+        "name": "MP2 UPDEPTH_1",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "10595",
+        "unit": "mm"
+    },
+    {
+        "name": "MP1 DFINAL",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "10596",
+        "unit": "mm"
+    },
+    {
+        "name": "MP1 VFINAL",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "10597",
+        "unit": "m/s"
+    },
+    {
+        "name": "MP1 QFINAL",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "10598",
+        "unit": "l/s"
+    },
+    {
+        "name": "Delta Time",
+        "is_calculated": true,
+        "site_id": "7769",
+        "id": "12634",
+        "unit": "sec"
+    },
+    {
+        "name": "MP2 DFINAL",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "13250",
+        "unit": "mm"
+    },
+    {
+        "name": "MP2 VFINAL",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "13262",
+        "unit": "m/s"
+    },
+    {
+        "name": "MP2 QFINAL",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "13274",
+        "unit": "l/s"
+    },
+    {
+        "name": "MP1 SILT1",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "13357",
+        "unit": "mm"
+    },
+    {
+        "name": "MP2 SILT2",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "13512",
+        "unit": "mm"
+    },
+    {
+        "name": "Data Notes",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "13731",
+        "unit": "none"
+    },
+    {
+        "name": "Raw Average Velocity",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "13934",
+        "unit": "m/s"
+    },
+    {
+        "name": "Rainfall",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "14134",
+        "unit": "mm"
+    },
+    {
+        "name": "D Raw",
+        "is_calculated": true,
+        "site_id": "7769",
+        "id": "14358",
+        "unit": "mm"
+    },
+    {
+        "name": "V Raw Average",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "14557",
+        "unit": "m/s"
+    },
+    {
+        "name": "Q Raw",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "14754",
+        "unit": "l/s"
+    },
+    {
+        "name": "MP1 DInterim",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "19195",
+        "unit": "mm"
+    },
+    {
+        "name": "MP1 QInterim",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "19396",
+        "unit": "l/s"
+    },
+    {
+        "name": "MP1 VInterim",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "19597",
+        "unit": "m/s"
+    },
+    {
+        "name": "MP2 DInterim",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "19795",
+        "unit": "mm"
+    },
+    {
+        "name": "MP2 QInterim",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "19825",
+        "unit": "l/s"
+    },
+    {
+        "name": "MP2 VInterim",
+        "is_calculated": false,
+        "site_id": "7769",
+        "id": "19851",
+        "unit": "m/s"
+    },
+    {
+        "name": "Daily Cumulative Rainfall",
+        "is_calculated": true,
+        "site_id": "7769",
+        "id": "22226",
+        "unit": "mm"
+    }
+]

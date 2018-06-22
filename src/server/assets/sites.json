@@ -1,0 +1,7481 @@
+[
+    {
+        "name": "Archived R-ET-AU01",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "1009",
+        "fullname": "Archived R-ET-AU01",
+        "rainfall": true
+    },
+    {
+        "name": "Archived R-ET-HL01",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "1010",
+        "fullname": "Archived R-ET-HL01",
+        "rainfall": true
+    },
+    {
+        "name": "Archived R-ET-KC01",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "1011",
+        "fullname": "Archived R-ET-KC01",
+        "rainfall": true
+    },
+    {
+        "name": "Archived R-ET-MA01",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "1012",
+        "fullname": "Archived R-ET-MA01",
+        "rainfall": true
+    },
+    {
+        "name": "Archived R-ET-MA02",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "1013",
+        "fullname": "Archived R-ET-MA02",
+        "rainfall": true
+    },
+    {
+        "name": "Archived R-ET-SC01",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "1014",
+        "fullname": "Archived R-ET-SC01",
+        "rainfall": true
+    },
+    {
+        "name": "Archived R-ET-ST01",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "1015",
+        "fullname": "Archived R-ET-ST01",
+        "rainfall": true
+    },
+    {
+        "name": "Archived R-ET-VA01",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "1016",
+        "fullname": "Archived R-ET-VA01",
+        "rainfall": true
+    },
+    {
+        "name": "Archived R-ET-VA02",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "1017",
+        "fullname": "Archived R-ET-VA02",
+        "rainfall": true
+    },
+    {
+        "name": "Archived R-YR-KE01",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "1018",
+        "fullname": "Archived R-YR-KE01",
+        "rainfall": true
+    },
+    {
+        "name": "Archived R-YR-MO01",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "1019",
+        "fullname": "Archived R-YR-MO01",
+        "rainfall": true
+    },
+    {
+        "name": "Archived R-YR-NE01",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "1020",
+        "fullname": "Archived R-YR-NE01",
+        "rainfall": true
+    },
+    {
+        "name": "Archived R-YR-SU01",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "1021",
+        "fullname": "Archived R-YR-SU01",
+        "rainfall": true
+    },
+    {
+        "name": "Archived R-YR-VA03",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "1022",
+        "fullname": "Archived R-YR-VA03",
+        "rainfall": true
+    },
+    {
+        "name": "Archived R-YR-VA04",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "1023",
+        "fullname": "Archived R-YR-VA04",
+        "rainfall": true
+    },
+    {
+        "name": "Archived R-YR-WB01",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "1024",
+        "fullname": "Archived R-YR-WB01",
+        "rainfall": true
+    },
+    {
+        "name": "Archived R-ET-ST02",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "1025",
+        "fullname": "Archived R-ET-ST02",
+        "rainfall": true
+    },
+    {
+        "name": "Archived SU02",
+        "latitude": "44.30471",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.36014",
+        "id": "3326",
+        "fullname": "Archived SU02",
+        "rainfall": false
+    },
+    {
+        "name": "RH10",
+        "latitude": "43.86978",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.41582",
+        "id": "3329",
+        "fullname": "RH10",
+        "rainfall": false
+    },
+    {
+        "name": "RH20",
+        "latitude": "43.8347",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.44645",
+        "id": "3331",
+        "fullname": "RH20",
+        "rainfall": false
+    },
+    {
+        "name": "RH28",
+        "latitude": "43.84338",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.38789",
+        "id": "3332",
+        "fullname": "RH28",
+        "rainfall": false
+    },
+    {
+        "name": "VA47",
+        "latitude": "43.76733",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.58242",
+        "id": "3333",
+        "fullname": "VA47",
+        "rainfall": false
+    },
+    {
+        "name": "Archived ST02",
+        "latitude": "43.975105",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.239843",
+        "id": "3335",
+        "fullname": "Archived ST02",
+        "rainfall": false
+    },
+    {
+        "name": "R-ET-HL01",
+        "latitude": "44.09882202",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.47124375",
+        "id": "3354",
+        "fullname": "R_ET_HL01",
+        "rainfall": true
+    },
+    {
+        "name": "R-ET-MA02",
+        "latitude": "43.89185605",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.26387948",
+        "id": "3355",
+        "fullname": "R_ET_MA02",
+        "rainfall": true
+    },
+    {
+        "name": "R-ET-MA03",
+        "latitude": "43.84084651",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.27933715",
+        "id": "3356",
+        "fullname": "R_ET_MA03",
+        "rainfall": true
+    },
+    {
+        "name": "R-ET-ST02",
+        "latitude": "43.96490668",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.26198509",
+        "id": "3357",
+        "fullname": "R_ET_ST02",
+        "rainfall": true
+    },
+    {
+        "name": "R-ET-VA01",
+        "latitude": "43.80438543",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.5814674",
+        "id": "3358",
+        "fullname": "R_ET_VA01",
+        "rainfall": true
+    },
+    {
+        "name": "R-ET-VA02",
+        "latitude": "43.84044216",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.62430842",
+        "id": "3359",
+        "fullname": "R_ET_VA02",
+        "rainfall": true
+    },
+    {
+        "name": "R_YR_AU02",
+        "latitude": "44.0206832",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.46360051",
+        "id": "3360",
+        "fullname": "R_YR_AU02",
+        "rainfall": true
+    },
+    {
+        "name": "R_YR_KE01",
+        "latitude": "44.25507528",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4870624",
+        "id": "3361",
+        "fullname": "R_YR_KE01",
+        "rainfall": true
+    },
+    {
+        "name": "R_YR_MA03",
+        "latitude": "43.81303941",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.3733425",
+        "id": "3362",
+        "fullname": "R_YR_MA03",
+        "rainfall": true
+    },
+    {
+        "name": "R_YR_MO01",
+        "latitude": "44.15572467",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.30468046",
+        "id": "3363",
+        "fullname": "R_YR_MO01",
+        "rainfall": true
+    },
+    {
+        "name": "R_YR_NE01",
+        "latitude": "44.07374062",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4527229",
+        "id": "3364",
+        "fullname": "R_YR_NE01",
+        "rainfall": true
+    },
+    {
+        "name": "R_YR_RH01",
+        "latitude": "43.87031727",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.43909702",
+        "id": "3365",
+        "fullname": "R_YR_RH01",
+        "rainfall": true
+    },
+    {
+        "name": "R_YR_SU01",
+        "latitude": "44.31049061",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.34916977",
+        "id": "3366",
+        "fullname": "R_YR_SU01",
+        "rainfall": true
+    },
+    {
+        "name": "R_YR_VA03",
+        "latitude": "43.76380096",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.57985316",
+        "id": "3367",
+        "fullname": "R_YR_VA03",
+        "rainfall": true
+    },
+    {
+        "name": "R_YR_VA04",
+        "latitude": "43.83383882",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.52779644",
+        "id": "3368",
+        "fullname": "R_YR_VA04",
+        "rainfall": true
+    },
+    {
+        "name": "R_YR_WB01",
+        "latitude": "44.31402508",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.41534934",
+        "id": "3369",
+        "fullname": "R_YR_WB01",
+        "rainfall": true
+    },
+    {
+        "name": "AU01",
+        "latitude": "43.99742",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.46828",
+        "id": "3406",
+        "fullname": "AU01",
+        "rainfall": false
+    },
+    {
+        "name": "HL01",
+        "latitude": "44.10006",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4832",
+        "id": "3411",
+        "fullname": "HL01",
+        "rainfall": false
+    },
+    {
+        "name": "KE04",
+        "latitude": "44.20599",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.47653",
+        "id": "3412",
+        "fullname": "KE04",
+        "rainfall": false
+    },
+    {
+        "name": "NE06",
+        "latitude": "44.07058",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4522",
+        "id": "3414",
+        "fullname": "NE06",
+        "rainfall": false
+    },
+    {
+        "name": "NE13",
+        "latitude": "44.07205",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.45205",
+        "id": "3415",
+        "fullname": "NE13",
+        "rainfall": false
+    },
+    {
+        "name": "RH30",
+        "latitude": "43.87186",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.45447",
+        "id": "3417",
+        "fullname": "RH30",
+        "rainfall": false
+    },
+    {
+        "name": "VA48",
+        "latitude": "43.8287",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.44104",
+        "id": "3421",
+        "fullname": "VA48",
+        "rainfall": false
+    },
+    {
+        "name": "R_ET_NO01",
+        "latitude": "43.90051728",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.64700072",
+        "id": "4286",
+        "fullname": "R_ET_NO01",
+        "rainfall": true
+    },
+    {
+        "name": "Janet Ave SPS",
+        "latitude": "43.90064",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.64677",
+        "id": "4287",
+        "fullname": "Janet Ave SPS",
+        "rainfall": false
+    },
+    {
+        "name": "KI001a_10",
+        "latitude": "43.927334",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.532544",
+        "id": "5194",
+        "fullname": "KI001a_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH069a_10",
+        "latitude": "43.852922",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.369913",
+        "id": "5195",
+        "fullname": "RH069a_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA005c",
+        "latitude": "43.853142",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.34633",
+        "id": "5196",
+        "fullname": "MA005c",
+        "rainfall": false
+    },
+    {
+        "name": "RH039_10",
+        "latitude": "43.846941",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.409123",
+        "id": "5197",
+        "fullname": "RH039_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA071a_10",
+        "latitude": "43.803389",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.397456",
+        "id": "5198",
+        "fullname": "MA071a_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA041b",
+        "latitude": "43.851694",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.254756",
+        "id": "5199",
+        "fullname": "MA041b",
+        "rainfall": false
+    },
+    {
+        "name": "RH016_10",
+        "latitude": "43.868971",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.452475",
+        "id": "5200",
+        "fullname": "RH016_10",
+        "rainfall": false
+    },
+    {
+        "name": "WS002_10",
+        "latitude": "43.962304",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.272747",
+        "id": "5202",
+        "fullname": "WS002_10",
+        "rainfall": false
+    },
+    {
+        "name": "WS006",
+        "latitude": "43.955371",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.266864",
+        "id": "5203",
+        "fullname": "WS006",
+        "rainfall": false
+    },
+    {
+        "name": "AU001_10",
+        "latitude": "44.017645",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.473324",
+        "id": "5209",
+        "fullname": "AU001_10",
+        "rainfall": false
+    },
+    {
+        "name": "AU027_10",
+        "latitude": "44.007871",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.432257",
+        "id": "5210",
+        "fullname": "AU027_10",
+        "rainfall": false
+    },
+    {
+        "name": "EG001",
+        "latitude": "44.072383",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.485109",
+        "id": "5211",
+        "fullname": "EG001",
+        "rainfall": false
+    },
+    {
+        "name": "EG008_10",
+        "latitude": "44.137111",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.316852",
+        "id": "5212",
+        "fullname": "EG008_10",
+        "rainfall": false
+    },
+    {
+        "name": "EG008_20",
+        "latitude": "44.136359",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.316444",
+        "id": "5213",
+        "fullname": "EG008_20",
+        "rainfall": false
+    },
+    {
+        "name": "GE001_10",
+        "latitude": "44.314701",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.359129",
+        "id": "5214",
+        "fullname": "GE001_10",
+        "rainfall": false
+    },
+    {
+        "name": "GE003a_10",
+        "latitude": "44.302073",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.464949",
+        "id": "5215",
+        "fullname": "GE003a_10",
+        "rainfall": false
+    },
+    {
+        "name": "GE004a_10",
+        "latitude": "44.229959",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.465497",
+        "id": "5216",
+        "fullname": "GE004a_10",
+        "rainfall": false
+    },
+    {
+        "name": "GE004d_10",
+        "latitude": "44.229959",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.465497",
+        "id": "5217",
+        "fullname": "GE004d_10",
+        "rainfall": false
+    },
+    {
+        "name": "KI002_10",
+        "latitude": "44.005107",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.683032",
+        "id": "5219",
+        "fullname": "KI002_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA005a_10",
+        "latitude": "43.849182",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.332144",
+        "id": "5220",
+        "fullname": "MA005a_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA042a_10",
+        "latitude": "43.838407",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.334011",
+        "id": "5221",
+        "fullname": "MA042a_10",
+        "rainfall": false
+    },
+    {
+        "name": "NE005a_10",
+        "latitude": "44.061779",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.460751",
+        "id": "5222",
+        "fullname": "NE005a_10",
+        "rainfall": false
+    },
+    {
+        "name": "NE005b_10",
+        "latitude": "44.061779",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.460751",
+        "id": "5223",
+        "fullname": "NE005b_10",
+        "rainfall": false
+    },
+    {
+        "name": "NE013b_10",
+        "latitude": "44.044658",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.443121",
+        "id": "5224",
+        "fullname": "NE013b_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH008_10",
+        "latitude": "43.939778",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.454275",
+        "id": "5225",
+        "fullname": "RH008_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA018b",
+        "latitude": "43.835711",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.513931",
+        "id": "5226",
+        "fullname": "VA018b",
+        "rainfall": false
+    },
+    {
+        "name": "VA028a_10",
+        "latitude": "43.790446",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.466319",
+        "id": "5227",
+        "fullname": "VA028a_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA055_10",
+        "latitude": "43.846114",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.512192",
+        "id": "5228",
+        "fullname": "VA055_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA008_10",
+        "latitude": "43.779457",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.583437",
+        "id": "5262",
+        "fullname": "VA008_10",
+        "rainfall": false
+    },
+    {
+        "name": "KI004b",
+        "latitude": "43.903849",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.646304",
+        "id": "5265",
+        "fullname": "KI004b",
+        "rainfall": false
+    },
+    {
+        "name": "R-LR-GE-05",
+        "latitude": "44.25919257",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.34342336",
+        "id": "5308",
+        "fullname": "R-LR-GE-05",
+        "rainfall": true
+    },
+    {
+        "name": "R-LR-GE-08",
+        "latitude": "44.25540257",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.48629413",
+        "id": "5309",
+        "fullname": "R-LR-GE-08",
+        "rainfall": true
+    },
+    {
+        "name": "R-LR-NE-02",
+        "latitude": "44.06425699",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.45768559",
+        "id": "5310",
+        "fullname": "R-LR-NE-02",
+        "rainfall": true
+    },
+    {
+        "name": "R-LR-KI-06",
+        "latitude": "44.00703727",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.68725133",
+        "id": "5311",
+        "fullname": "R-LR-KI-06",
+        "rainfall": true
+    },
+    {
+        "name": "6997",
+        "latitude": "43.82983568",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.41070271",
+        "id": "5313",
+        "fullname": "R-MUN-MA-07",
+        "rainfall": true
+    },
+    {
+        "name": "6999",
+        "latitude": "43.82007138",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.40010174",
+        "id": "5314",
+        "fullname": "R-MUN-MA-05",
+        "rainfall": true
+    },
+    {
+        "name": "7001",
+        "latitude": "43.81494151",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.36656086",
+        "id": "5315",
+        "fullname": "R-MUN-MA-08",
+        "rainfall": true
+    },
+    {
+        "name": "7003",
+        "latitude": "43.87704648",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.36813345",
+        "id": "5316",
+        "fullname": "R-MUN-MA-09",
+        "rainfall": true
+    },
+    {
+        "name": "7005",
+        "latitude": "43.84690563",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.33327477",
+        "id": "5317",
+        "fullname": "R-MUN-MA-14",
+        "rainfall": true
+    },
+    {
+        "name": "6950",
+        "latitude": "43.84020495",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.3052789",
+        "id": "5318",
+        "fullname": "R-MUN-MA-11",
+        "rainfall": true
+    },
+    {
+        "name": "7007",
+        "latitude": "43.8760081",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.31393972",
+        "id": "5319",
+        "fullname": "R-MUN-MA-16",
+        "rainfall": true
+    },
+    {
+        "name": "3857",
+        "latitude": "43.86636372",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.27568988",
+        "id": "5320",
+        "fullname": "R-MUN-MA-13",
+        "rainfall": true
+    },
+    {
+        "name": "7011",
+        "latitude": "43.89412201",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.26832366",
+        "id": "5321",
+        "fullname": "R-MUN-MA-12",
+        "rainfall": true
+    },
+    {
+        "name": "6952",
+        "latitude": "43.86084635",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.2408645",
+        "id": "5322",
+        "fullname": "R-MUN-MA-15",
+        "rainfall": true
+    },
+    {
+        "name": "9070",
+        "latitude": "43.89653824",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.33729988",
+        "id": "5323",
+        "fullname": "R-MUN-MA-18",
+        "rainfall": true
+    },
+    {
+        "name": "11525",
+        "latitude": "43.83968022",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.25930041",
+        "id": "5390",
+        "fullname": "R-MUN-MA-21",
+        "rainfall": true
+    },
+    {
+        "name": "KE05",
+        "latitude": "44.24021344",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.47552483",
+        "id": "5401",
+        "fullname": "KE05",
+        "rainfall": false
+    },
+    {
+        "name": "AU1AU",
+        "latitude": "43.99714592",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.46957374",
+        "id": "5402",
+        "fullname": "AU1AU",
+        "rainfall": false
+    },
+    {
+        "name": "AU2AU",
+        "latitude": "43.98835195",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.47162071",
+        "id": "5403",
+        "fullname": "AU2AU",
+        "rainfall": false
+    },
+    {
+        "name": "AU17",
+        "latitude": "44.00386076",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.47111324",
+        "id": "5404",
+        "fullname": "AU17",
+        "rainfall": false
+    },
+    {
+        "name": "MA008CAL",
+        "latitude": "43.84652667",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.33442414",
+        "id": "5405",
+        "fullname": "MA008CAL",
+        "rainfall": false
+    },
+    {
+        "name": "SR1",
+        "latitude": "43.825353",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.382374",
+        "id": "5430",
+        "fullname": "SR1",
+        "rainfall": false
+    },
+    {
+        "name": "SR2",
+        "latitude": "43.799062",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.477332",
+        "id": "5431",
+        "fullname": "SR2",
+        "rainfall": false
+    },
+    {
+        "name": "TH5",
+        "latitude": "43.875631",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.283307",
+        "id": "5432",
+        "fullname": "TH5",
+        "rainfall": false
+    },
+    {
+        "name": "Bell",
+        "latitude": "44.047576",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.478842",
+        "id": "5433",
+        "fullname": "Bell",
+        "rainfall": false
+    },
+    {
+        "name": "Rogers",
+        "latitude": "44.047576",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.478842",
+        "id": "5434",
+        "fullname": "Rogers",
+        "rainfall": false
+    },
+    {
+        "name": "Telus",
+        "latitude": "44.047576",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.478842",
+        "id": "5435",
+        "fullname": "Telus",
+        "rainfall": false
+    },
+    {
+        "name": "HY011",
+        "latitude": "43.94748027",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.34185782",
+        "id": "5436",
+        "fullname": "R-TR-WS-03",
+        "rainfall": true
+    },
+    {
+        "name": "HY021",
+        "latitude": "43.83194881",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.47920027",
+        "id": "5437",
+        "fullname": "R-TR-VA-05",
+        "rainfall": true
+    },
+    {
+        "name": "HY037",
+        "latitude": "43.88794041",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.71758684",
+        "id": "5438",
+        "fullname": "R-TR-KI-04",
+        "rainfall": true
+    },
+    {
+        "name": "HY038",
+        "latitude": "43.90302685",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.61174088",
+        "id": "5439",
+        "fullname": "R-TR-KI-05",
+        "rainfall": true
+    },
+    {
+        "name": "HY043",
+        "latitude": "43.90795324",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.21623007",
+        "id": "5440",
+        "fullname": "R-TR-MA-17",
+        "rainfall": true
+    },
+    {
+        "name": "HY044",
+        "latitude": "43.86855305",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.26173557",
+        "id": "5441",
+        "fullname": "R-TR-MA-06",
+        "rainfall": true
+    },
+    {
+        "name": "HY055",
+        "latitude": "43.825716",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.60313739",
+        "id": "5442",
+        "fullname": "R-TR-VA-07",
+        "rainfall": true
+    },
+    {
+        "name": "HY060",
+        "latitude": "43.97756111",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.25014184",
+        "id": "5443",
+        "fullname": "R-TR-WS-04",
+        "rainfall": true
+    },
+    {
+        "name": "HY069",
+        "latitude": "43.91665671",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.47464017",
+        "id": "5444",
+        "fullname": "R-TR-RH-07",
+        "rainfall": true
+    },
+    {
+        "name": "HY070",
+        "latitude": "43.88428235",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.38251376",
+        "id": "5445",
+        "fullname": "R-TR-RH-10",
+        "rainfall": true
+    },
+    {
+        "name": "HY039",
+        "latitude": "43.83515111",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.59280494",
+        "id": "5446",
+        "fullname": "R-TR-VA-17",
+        "rainfall": true
+    },
+    {
+        "name": "HY083",
+        "latitude": "43.94361261",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4558328",
+        "id": "5447",
+        "fullname": "R-TR-RH-13",
+        "rainfall": true
+    },
+    {
+        "name": "HY067",
+        "latitude": "43.75828851",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.67896825",
+        "id": "5448",
+        "fullname": "R-TR-TO-03",
+        "rainfall": true
+    },
+    {
+        "name": "HY064",
+        "latitude": "43.77109626",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.51366967",
+        "id": "5449",
+        "fullname": "R-TR-TO-01",
+        "rainfall": true
+    },
+    {
+        "name": "HY027",
+        "latitude": "43.77210209",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.46176955",
+        "id": "5450",
+        "fullname": "R-TR-TO-02",
+        "rainfall": true
+    },
+    {
+        "name": "HY036",
+        "latitude": "43.81856375",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.30599987",
+        "id": "5451",
+        "fullname": "R-TR-TO-04",
+        "rainfall": true
+    },
+    {
+        "name": "MA085a",
+        "latitude": "43.868833",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.359176",
+        "id": "5486",
+        "fullname": "MA085a",
+        "rainfall": false
+    },
+    {
+        "name": "HY002",
+        "latitude": "43.92646047",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.83164034",
+        "id": "5530",
+        "fullname": "R-TR-CA-01",
+        "rainfall": true
+    },
+    {
+        "name": "MA008",
+        "latitude": "43.882359",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.302181",
+        "id": "5721",
+        "fullname": "MA008",
+        "rainfall": false
+    },
+    {
+        "name": "MA009a_10",
+        "latitude": "43.880197",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.317439",
+        "id": "5722",
+        "fullname": "MA009a_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA029_10",
+        "latitude": "43.898781",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.240172",
+        "id": "5723",
+        "fullname": "MA029_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA030",
+        "latitude": "43.909016",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.24279",
+        "id": "5724",
+        "fullname": "MA030",
+        "rainfall": false
+    },
+    {
+        "name": "MA031",
+        "latitude": "43.888894",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.275681",
+        "id": "5725",
+        "fullname": "MA031",
+        "rainfall": false
+    },
+    {
+        "name": "MA032a_10",
+        "latitude": "43.889079",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.275094",
+        "id": "5726",
+        "fullname": "MA032a_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA033",
+        "latitude": "43.902293",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.240326",
+        "id": "5727",
+        "fullname": "MA033",
+        "rainfall": false
+    },
+    {
+        "name": "MA034_10",
+        "latitude": "43.884956",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.236124",
+        "id": "5728",
+        "fullname": "MA034_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA038_10",
+        "latitude": "43.875891",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.232306",
+        "id": "5729",
+        "fullname": "MA038_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA075_10",
+        "latitude": "43.893623",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.258026",
+        "id": "5730",
+        "fullname": "MA075_10",
+        "rainfall": false
+    },
+    {
+        "name": "MAT9948_20",
+        "latitude": "43.870816",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.360608",
+        "id": "5731",
+        "fullname": "MAT9948_20",
+        "rainfall": false
+    },
+    {
+        "name": "MAT9944_01",
+        "latitude": "43.846527",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.334424",
+        "id": "5732",
+        "fullname": "MAT9944_01",
+        "rainfall": false
+    },
+    {
+        "name": "MA9801_908",
+        "latitude": "43.9113",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.242881",
+        "id": "5733",
+        "fullname": "MA9801_908",
+        "rainfall": false
+    },
+    {
+        "name": "MA038_20",
+        "latitude": "43.87639",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.23411",
+        "id": "5887",
+        "fullname": "MA038_20",
+        "rainfall": false
+    },
+    {
+        "name": "MA083_10",
+        "latitude": "43.881941",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.304379",
+        "id": "5888",
+        "fullname": "MA083_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA085b",
+        "latitude": "43.874862",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.36187",
+        "id": "5945",
+        "fullname": "MA085b",
+        "rainfall": false
+    },
+    {
+        "name": "MA085c",
+        "latitude": "43.886366",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.366892",
+        "id": "5946",
+        "fullname": "MA085c",
+        "rainfall": false
+    },
+    {
+        "name": "MA005b_10",
+        "latitude": "43.859931",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.33749",
+        "id": "5947",
+        "fullname": "MA005b_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA006a",
+        "latitude": "43.865686",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.305373",
+        "id": "5948",
+        "fullname": "MA006a",
+        "rainfall": false
+    },
+    {
+        "name": "MA006b_10",
+        "latitude": "43.865705",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.312244",
+        "id": "5949",
+        "fullname": "MA006b_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA006c",
+        "latitude": "43.869106",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.312889",
+        "id": "5950",
+        "fullname": "MA006c",
+        "rainfall": false
+    },
+    {
+        "name": "MA007",
+        "latitude": "43.865085",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.294591",
+        "id": "5951",
+        "fullname": "MA007",
+        "rainfall": false
+    },
+    {
+        "name": "MA009b",
+        "latitude": "43.887791",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.320824",
+        "id": "5952",
+        "fullname": "MA009b",
+        "rainfall": false
+    },
+    {
+        "name": "MA010_10",
+        "latitude": "43.850792",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.32273",
+        "id": "5953",
+        "fullname": "MA010_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA012_10",
+        "latitude": "43.854649",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.307836",
+        "id": "5954",
+        "fullname": "MA012_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA016_10",
+        "latitude": "43.86364",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.288793",
+        "id": "5955",
+        "fullname": "MA016_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA017_10",
+        "latitude": "43.864634",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.294121",
+        "id": "5956",
+        "fullname": "MA017_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA019",
+        "latitude": "43.867963",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.271857",
+        "id": "5957",
+        "fullname": "MA019",
+        "rainfall": false
+    },
+    {
+        "name": "MA021_10",
+        "latitude": "43.868374",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.271855",
+        "id": "5958",
+        "fullname": "MA021_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA023_10",
+        "latitude": "43.867875",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.268135",
+        "id": "5959",
+        "fullname": "MA023_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA025_10",
+        "latitude": "43.871221",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.259463",
+        "id": "5960",
+        "fullname": "MA025_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA027_10",
+        "latitude": "43.874727",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.256303",
+        "id": "5961",
+        "fullname": "MA027_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA028a_10",
+        "latitude": "43.876781",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.25525",
+        "id": "5962",
+        "fullname": "MA028a_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA028b",
+        "latitude": "43.885718",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.256685",
+        "id": "5963",
+        "fullname": "MA028b",
+        "rainfall": false
+    },
+    {
+        "name": "MA032b",
+        "latitude": "43.893185",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.278132",
+        "id": "5964",
+        "fullname": "MA032b",
+        "rainfall": false
+    },
+    {
+        "name": "MA037_10",
+        "latitude": "43.872794",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.247017",
+        "id": "5965",
+        "fullname": "MA037_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA037_20",
+        "latitude": "43.871243",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.246758",
+        "id": "5966",
+        "fullname": "MA037_20",
+        "rainfall": false
+    },
+    {
+        "name": "MA039a_10",
+        "latitude": "43.859242",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.231593",
+        "id": "5967",
+        "fullname": "MA039a_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA039a_20",
+        "latitude": "43.859347",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.231582",
+        "id": "5968",
+        "fullname": "MA039a_20",
+        "rainfall": false
+    },
+    {
+        "name": "MA040",
+        "latitude": "43.856063",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.220917",
+        "id": "5969",
+        "fullname": "MA040",
+        "rainfall": false
+    },
+    {
+        "name": "MA041d",
+        "latitude": "43.841306",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.265539",
+        "id": "5970",
+        "fullname": "MA041d",
+        "rainfall": false
+    },
+    {
+        "name": "MA042b_10",
+        "latitude": "43.837309",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.330173",
+        "id": "5971",
+        "fullname": "MA042b_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA042c",
+        "latitude": "43.824142",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.3245",
+        "id": "5972",
+        "fullname": "MA042c",
+        "rainfall": false
+    },
+    {
+        "name": "MA042d_10",
+        "latitude": "43.827001",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.29581",
+        "id": "5973",
+        "fullname": "MA042d_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA047a_10",
+        "latitude": "43.82159",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.373316",
+        "id": "5974",
+        "fullname": "MA047a_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA048_10",
+        "latitude": "43.838743",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.386526",
+        "id": "5975",
+        "fullname": "MA048_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA050_10",
+        "latitude": "43.825109",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.375012",
+        "id": "5976",
+        "fullname": "MA050_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA051",
+        "latitude": "43.825317",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.382345",
+        "id": "5977",
+        "fullname": "MA051",
+        "rainfall": false
+    },
+    {
+        "name": "MA052_10",
+        "latitude": "43.825033",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.383699",
+        "id": "5978",
+        "fullname": "MA052_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA058",
+        "latitude": "43.824485",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.413674",
+        "id": "5979",
+        "fullname": "MA058",
+        "rainfall": false
+    },
+    {
+        "name": "MA064_10",
+        "latitude": "43.810373",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.399",
+        "id": "5980",
+        "fullname": "MA064_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA071b",
+        "latitude": "43.807925",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.407347",
+        "id": "5981",
+        "fullname": "MA071b",
+        "rainfall": false
+    },
+    {
+        "name": "MA077_10",
+        "latitude": "43.803572",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.395018",
+        "id": "5982",
+        "fullname": "MA077_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA039b_10",
+        "latitude": "43.861377",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.224557",
+        "id": "5983",
+        "fullname": "MA039b_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA080",
+        "latitude": "43.838073",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.35525",
+        "id": "5984",
+        "fullname": "MA080",
+        "rainfall": false
+    },
+    {
+        "name": "RH017_10",
+        "latitude": "43.870491",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.449669",
+        "id": "5985",
+        "fullname": "RH017_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH021",
+        "latitude": "43.854629",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.448398",
+        "id": "5986",
+        "fullname": "RH021",
+        "rainfall": false
+    },
+    {
+        "name": "RH022_10",
+        "latitude": "43.850511",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.451712",
+        "id": "5987",
+        "fullname": "RH022_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH042_10",
+        "latitude": "43.838516",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.433102",
+        "id": "5988",
+        "fullname": "RH042_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH044_20",
+        "latitude": "43.833745",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.446708",
+        "id": "5990",
+        "fullname": "RH044_20",
+        "rainfall": false
+    },
+    {
+        "name": "RH049_10",
+        "latitude": "43.840568",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.449323",
+        "id": "5991",
+        "fullname": "RH049_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH050_10",
+        "latitude": "43.84518",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.450166",
+        "id": "5992",
+        "fullname": "RH050_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH052",
+        "latitude": "43.852002",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.449562",
+        "id": "5993",
+        "fullname": "RH052",
+        "rainfall": false
+    },
+    {
+        "name": "RH055_10",
+        "latitude": "43.86438",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.442747",
+        "id": "5994",
+        "fullname": "RH055_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH055_20",
+        "latitude": "43.864409",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.444867",
+        "id": "5995",
+        "fullname": "RH055_20",
+        "rainfall": false
+    },
+    {
+        "name": "VA001a_10",
+        "latitude": "43.765165",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.622154",
+        "id": "5996",
+        "fullname": "VA001a_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA002b_10",
+        "latitude": "43.778675",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.602019",
+        "id": "5997",
+        "fullname": "VA002b_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA002c",
+        "latitude": "43.781201",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.601982",
+        "id": "5998",
+        "fullname": "VA002c",
+        "rainfall": false
+    },
+    {
+        "name": "VA004_20",
+        "latitude": "43.785563",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.591264",
+        "id": "6000",
+        "fullname": "VA004_20",
+        "rainfall": false
+    },
+    {
+        "name": "VA005a_10",
+        "latitude": "43.787878",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.589295",
+        "id": "6001",
+        "fullname": "VA005a_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA005a_20",
+        "latitude": "43.789292",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.585913",
+        "id": "6002",
+        "fullname": "VA005a_20",
+        "rainfall": false
+    },
+    {
+        "name": "VA005b",
+        "latitude": "43.789717",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.586406",
+        "id": "6003",
+        "fullname": "VA005b",
+        "rainfall": false
+    },
+    {
+        "name": "VA005c_20",
+        "latitude": "43.800528",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.610951",
+        "id": "6005",
+        "fullname": "VA005c_20",
+        "rainfall": false
+    },
+    {
+        "name": "VA005d",
+        "latitude": "43.812367",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.612647",
+        "id": "6006",
+        "fullname": "VA005d",
+        "rainfall": false
+    },
+    {
+        "name": "VA009a_10",
+        "latitude": "43.775478",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.581231",
+        "id": "6007",
+        "fullname": "VA009a_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA009c_10",
+        "latitude": "43.789878",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.547316",
+        "id": "6008",
+        "fullname": "VA009c_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA009b_10",
+        "latitude": "43.782319",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.572287",
+        "id": "6009",
+        "fullname": "VA009b_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA009d_10",
+        "latitude": "43.791379",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.574835",
+        "id": "6010",
+        "fullname": "VA009d_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA009e_10",
+        "latitude": "43.796857",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.571778",
+        "id": "6011",
+        "fullname": "VA009e_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA009f",
+        "latitude": "43.809172",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.563187",
+        "id": "6012",
+        "fullname": "VA009f",
+        "rainfall": false
+    },
+    {
+        "name": "VA009g_10",
+        "latitude": "43.823364",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.567558",
+        "id": "6013",
+        "fullname": "VA009g_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA010a",
+        "latitude": "43.835237",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.54801",
+        "id": "6014",
+        "fullname": "VA010a",
+        "rainfall": false
+    },
+    {
+        "name": "VA010b",
+        "latitude": "43.83968",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.559665",
+        "id": "6015",
+        "fullname": "VA010b",
+        "rainfall": false
+    },
+    {
+        "name": "VA010c",
+        "latitude": "43.84538",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.55397",
+        "id": "6016",
+        "fullname": "VA010c",
+        "rainfall": false
+    },
+    {
+        "name": "VA011_10",
+        "latitude": "43.809681",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.579433",
+        "id": "6017",
+        "fullname": "VA011_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA012",
+        "latitude": "43.82833",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.532398",
+        "id": "6018",
+        "fullname": "VA012",
+        "rainfall": false
+    },
+    {
+        "name": "VA013_10",
+        "latitude": "43.834763",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.541814",
+        "id": "6019",
+        "fullname": "VA013_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA017a_20",
+        "latitude": "43.787426",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.524463",
+        "id": "6020",
+        "fullname": "VA017a_20",
+        "rainfall": false
+    },
+    {
+        "name": "VA031a_10",
+        "latitude": "43.809384",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.427509",
+        "id": "6021",
+        "fullname": "VA031a_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA017c_10",
+        "latitude": "43.804983",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.529592",
+        "id": "6022",
+        "fullname": "VA017c_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA018a_10",
+        "latitude": "43.833529",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.510025",
+        "id": "6023",
+        "fullname": "VA018a_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA018c_10",
+        "latitude": "43.853238",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.527875",
+        "id": "6024",
+        "fullname": "VA018c_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA018d",
+        "latitude": "43.853967",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.525762",
+        "id": "6025",
+        "fullname": "VA018d",
+        "rainfall": false
+    },
+    {
+        "name": "VA022_10",
+        "latitude": "43.830408",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.498912",
+        "id": "6026",
+        "fullname": "VA022_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA023_10",
+        "latitude": "43.827456",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.499491",
+        "id": "6027",
+        "fullname": "VA023_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA026_10",
+        "latitude": "43.808173",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.486958",
+        "id": "6028",
+        "fullname": "VA026_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA027_10",
+        "latitude": "43.83701",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.456945",
+        "id": "6029",
+        "fullname": "VA027_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA028b",
+        "latitude": "43.798162",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.465844",
+        "id": "6030",
+        "fullname": "VA028b",
+        "rainfall": false
+    },
+    {
+        "name": "VA028c_10",
+        "latitude": "43.806155",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.468694",
+        "id": "6031",
+        "fullname": "VA028c_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA029_20",
+        "latitude": "43.792646",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.446184",
+        "id": "6033",
+        "fullname": "VA029_20",
+        "rainfall": false
+    },
+    {
+        "name": "VA030_10",
+        "latitude": "43.797163",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.429469",
+        "id": "6034",
+        "fullname": "VA030_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA031b",
+        "latitude": "43.815329",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.429057",
+        "id": "6035",
+        "fullname": "VA031b",
+        "rainfall": false
+    },
+    {
+        "name": "VA034",
+        "latitude": "43.823992",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.435739",
+        "id": "6036",
+        "fullname": "VA034",
+        "rainfall": false
+    },
+    {
+        "name": "VA035",
+        "latitude": "43.826025",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.438613",
+        "id": "6037",
+        "fullname": "VA035",
+        "rainfall": false
+    },
+    {
+        "name": "VA040_10",
+        "latitude": "43.792328",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.472033",
+        "id": "6038",
+        "fullname": "VA040_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA046_10",
+        "latitude": "43.764036",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.576684",
+        "id": "6039",
+        "fullname": "VA046_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA049",
+        "latitude": "43.838432",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.504418",
+        "id": "6040",
+        "fullname": "VA049",
+        "rainfall": false
+    },
+    {
+        "name": "VA052_10",
+        "latitude": "43.845537",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.507668",
+        "id": "6041",
+        "fullname": "VA052_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA054a",
+        "latitude": "43.84586",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.510323",
+        "id": "6042",
+        "fullname": "VA054a",
+        "rainfall": false
+    },
+    {
+        "name": "VA054b",
+        "latitude": "43.874391",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.516615",
+        "id": "6043",
+        "fullname": "VA054b",
+        "rainfall": false
+    },
+    {
+        "name": "VA056_10",
+        "latitude": "43.835767",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.627283",
+        "id": "6044",
+        "fullname": "VA056_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH044_10",
+        "latitude": "43.833745",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.446708",
+        "id": "6050",
+        "fullname": "RH044_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA004_10",
+        "latitude": "43.785563",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.591264",
+        "id": "6051",
+        "fullname": "VA004_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA005c_10",
+        "latitude": "43.798462",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.609783",
+        "id": "6052",
+        "fullname": "VA005c_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA029_10",
+        "latitude": "43.792646",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.446184",
+        "id": "6053",
+        "fullname": "VA029_10",
+        "rainfall": false
+    },
+    {
+        "name": "AU006b_10",
+        "latitude": "44.004034",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.456616",
+        "id": "6095",
+        "fullname": "AU006b_10",
+        "rainfall": false
+    },
+    {
+        "name": "AU006c",
+        "latitude": "44.017411",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.459232",
+        "id": "6096",
+        "fullname": "AU006c",
+        "rainfall": false
+    },
+    {
+        "name": "AU006d_10",
+        "latitude": "44.003683",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.448906",
+        "id": "6097",
+        "fullname": "AU006d_10",
+        "rainfall": false
+    },
+    {
+        "name": "AU007_20",
+        "latitude": "44.007583",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.469347",
+        "id": "6098",
+        "fullname": "AU007_20",
+        "rainfall": false
+    },
+    {
+        "name": "AU010",
+        "latitude": "44.008328",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4727",
+        "id": "6099",
+        "fullname": "AU010",
+        "rainfall": false
+    },
+    {
+        "name": "AU012",
+        "latitude": "44.005185",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.471144",
+        "id": "6100",
+        "fullname": "AU012",
+        "rainfall": false
+    },
+    {
+        "name": "AU013_10",
+        "latitude": "44.002769",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.473835",
+        "id": "6101",
+        "fullname": "AU013_10",
+        "rainfall": false
+    },
+    {
+        "name": "AU014a_10",
+        "latitude": "44.003045",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.471402",
+        "id": "6102",
+        "fullname": "AU014a_10",
+        "rainfall": false
+    },
+    {
+        "name": "AU014b_10",
+        "latitude": "43.99738",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.468812",
+        "id": "6103",
+        "fullname": "AU014b_10",
+        "rainfall": false
+    },
+    {
+        "name": "AU014c",
+        "latitude": "43.998898",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.471367",
+        "id": "6104",
+        "fullname": "AU014c",
+        "rainfall": false
+    },
+    {
+        "name": "AU014d_10",
+        "latitude": "43.997492",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.474398",
+        "id": "6105",
+        "fullname": "AU014d_10",
+        "rainfall": false
+    },
+    {
+        "name": "AU014e_10",
+        "latitude": "43.992216",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.479478",
+        "id": "6106",
+        "fullname": "AU014e_10",
+        "rainfall": false
+    },
+    {
+        "name": "AU014f",
+        "latitude": "43.978313",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.476212",
+        "id": "6107",
+        "fullname": "AU014f",
+        "rainfall": false
+    },
+    {
+        "name": "RH003_10",
+        "latitude": "43.947515",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.450852",
+        "id": "6108",
+        "fullname": "RH003_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH004a_10",
+        "latitude": "43.945476",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.459879",
+        "id": "6109",
+        "fullname": "RH004a_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH004b_10",
+        "latitude": "43.949693",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.478758",
+        "id": "6110",
+        "fullname": "RH004b_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH004b_20",
+        "latitude": "43.949624",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.478091",
+        "id": "6111",
+        "fullname": "RH004b_20",
+        "rainfall": false
+    },
+    {
+        "name": "RH004b_30",
+        "latitude": "43.947317",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.478115",
+        "id": "6112",
+        "fullname": "RH004b_30",
+        "rainfall": false
+    },
+    {
+        "name": "RH005_10",
+        "latitude": "43.941811",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.455615",
+        "id": "6113",
+        "fullname": "RH005_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH006",
+        "latitude": "43.943498",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.453553",
+        "id": "6114",
+        "fullname": "RH006",
+        "rainfall": false
+    },
+    {
+        "name": "RH009",
+        "latitude": "43.939878",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.453212",
+        "id": "6115",
+        "fullname": "RH009",
+        "rainfall": false
+    },
+    {
+        "name": "RH010_10",
+        "latitude": "43.922235",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.451168",
+        "id": "6116",
+        "fullname": "RH010_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH011_10",
+        "latitude": "43.914055",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.446974",
+        "id": "6117",
+        "fullname": "RH011_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH012",
+        "latitude": "43.907081",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.445789",
+        "id": "6118",
+        "fullname": "RH012",
+        "rainfall": false
+    },
+    {
+        "name": "RH013_10",
+        "latitude": "43.904033",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.448827",
+        "id": "6119",
+        "fullname": "RH013_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH014_10",
+        "latitude": "43.895755",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.443951",
+        "id": "6120",
+        "fullname": "RH014_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH015_10",
+        "latitude": "43.889425",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.441952",
+        "id": "6121",
+        "fullname": "RH015_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH029_10",
+        "latitude": "43.872938",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.43039",
+        "id": "6122",
+        "fullname": "RH029_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH030_10",
+        "latitude": "43.873346",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.42828",
+        "id": "6123",
+        "fullname": "RH030_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH033_10",
+        "latitude": "43.86814",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.429323",
+        "id": "6124",
+        "fullname": "RH033_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH034",
+        "latitude": "43.859157",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.43095",
+        "id": "6125",
+        "fullname": "RH034",
+        "rainfall": false
+    },
+    {
+        "name": "RH035_10",
+        "latitude": "43.85211",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.427322",
+        "id": "6126",
+        "fullname": "RH035_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH037_10",
+        "latitude": "43.849663",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.413249",
+        "id": "6127",
+        "fullname": "RH037_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH040",
+        "latitude": "43.837053",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.428929",
+        "id": "6128",
+        "fullname": "RH040",
+        "rainfall": false
+    },
+    {
+        "name": "RH041",
+        "latitude": "43.835621",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.430954",
+        "id": "6129",
+        "fullname": "RH041",
+        "rainfall": false
+    },
+    {
+        "name": "RH048a_10",
+        "latitude": "43.849321",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.409089",
+        "id": "6130",
+        "fullname": "RH048a_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH048a_20",
+        "latitude": "43.849321",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.409089",
+        "id": "6131",
+        "fullname": "RH048a_20",
+        "rainfall": false
+    },
+    {
+        "name": "RH048a_30",
+        "latitude": "43.848133",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.408122",
+        "id": "6132",
+        "fullname": "RH048a_30",
+        "rainfall": false
+    },
+    {
+        "name": "RH048b",
+        "latitude": "43.860764",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.397925",
+        "id": "6133",
+        "fullname": "RH048b",
+        "rainfall": false
+    },
+    {
+        "name": "RH048c_10",
+        "latitude": "43.858195",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.412058",
+        "id": "6134",
+        "fullname": "RH048c_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH048c_20",
+        "latitude": "43.858195",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.412058",
+        "id": "6135",
+        "fullname": "RH048c_20",
+        "rainfall": false
+    },
+    {
+        "name": "RH056",
+        "latitude": "43.883211",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.426671",
+        "id": "6136",
+        "fullname": "RH056",
+        "rainfall": false
+    },
+    {
+        "name": "RH057_10",
+        "latitude": "43.891323",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.419825",
+        "id": "6137",
+        "fullname": "RH057_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH058",
+        "latitude": "43.891722",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.432691",
+        "id": "6138",
+        "fullname": "RH058",
+        "rainfall": false
+    },
+    {
+        "name": "RH065a_10",
+        "latitude": "43.887258",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.394464",
+        "id": "6139",
+        "fullname": "RH065a_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH065b_10",
+        "latitude": "43.884121",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.397083",
+        "id": "6140",
+        "fullname": "RH065b_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH069b",
+        "latitude": "43.857365",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.38817",
+        "id": "6141",
+        "fullname": "RH069b",
+        "rainfall": false
+    },
+    {
+        "name": "WS001_10",
+        "latitude": "43.962723",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.253378",
+        "id": "6142",
+        "fullname": "WS001_10",
+        "rainfall": false
+    },
+    {
+        "name": "WS003_10",
+        "latitude": "43.967453",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.243676",
+        "id": "6143",
+        "fullname": "WS003_10",
+        "rainfall": false
+    },
+    {
+        "name": "AU006a_10",
+        "latitude": "44.019719",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.462211",
+        "id": "6197",
+        "fullname": "AU006a_10",
+        "rainfall": false
+    },
+    {
+        "name": "EG005_10",
+        "latitude": "44.10084",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.494572",
+        "id": "6198",
+        "fullname": "EG005_10",
+        "rainfall": false
+    },
+    {
+        "name": "EG005_20",
+        "latitude": "44.10235",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.494816",
+        "id": "6199",
+        "fullname": "EG005_20",
+        "rainfall": false
+    },
+    {
+        "name": "GE002_10",
+        "latitude": "44.304682",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.360125",
+        "id": "6200",
+        "fullname": "GE002_10",
+        "rainfall": false
+    },
+    {
+        "name": "GE002_20",
+        "latitude": "44.304984",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.361258",
+        "id": "6201",
+        "fullname": "GE002_20",
+        "rainfall": false
+    },
+    {
+        "name": "GE003a_20",
+        "latitude": "44.301154",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.466916",
+        "id": "6202",
+        "fullname": "GE003a_20",
+        "rainfall": false
+    },
+    {
+        "name": "GE003b_10",
+        "latitude": "44.311467",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.424629",
+        "id": "6203",
+        "fullname": "GE003b_10",
+        "rainfall": false
+    },
+    {
+        "name": "GE004b_10",
+        "latitude": "44.218131",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.464818",
+        "id": "6204",
+        "fullname": "GE004b_10",
+        "rainfall": false
+    },
+    {
+        "name": "GE004b_20",
+        "latitude": "44.216733",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.471304",
+        "id": "6205",
+        "fullname": "GE004b_20",
+        "rainfall": false
+    },
+    {
+        "name": "GE004c_10",
+        "latitude": "44.206528",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.467587",
+        "id": "6206",
+        "fullname": "GE004c_10",
+        "rainfall": false
+    },
+    {
+        "name": "GE004e",
+        "latitude": "44.243178",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.477103",
+        "id": "6207",
+        "fullname": "GE004e",
+        "rainfall": false
+    },
+    {
+        "name": "GE004f",
+        "latitude": "44.240457",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4502",
+        "id": "6208",
+        "fullname": "GE004f",
+        "rainfall": false
+    },
+    {
+        "name": "KI001c_11",
+        "latitude": "43.93518",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.532621",
+        "id": "6209",
+        "fullname": "KI001c_11",
+        "rainfall": false
+    },
+    {
+        "name": "KI004a_10",
+        "latitude": "43.901383",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.647657",
+        "id": "6210",
+        "fullname": "KI004a_10",
+        "rainfall": false
+    },
+    {
+        "name": "NE001_10",
+        "latitude": "44.066998",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.483716",
+        "id": "6211",
+        "fullname": "NE001_10",
+        "rainfall": false
+    },
+    {
+        "name": "NE002_10",
+        "latitude": "44.069543",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.458115",
+        "id": "6212",
+        "fullname": "NE002_10",
+        "rainfall": false
+    },
+    {
+        "name": "NE006a_10",
+        "latitude": "44.061163",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.461131",
+        "id": "6213",
+        "fullname": "NE006a_10",
+        "rainfall": false
+    },
+    {
+        "name": "NE006b",
+        "latitude": "44.048007",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.473672",
+        "id": "6214",
+        "fullname": "NE006b",
+        "rainfall": false
+    },
+    {
+        "name": "NE008",
+        "latitude": "44.072913",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.452431",
+        "id": "6215",
+        "fullname": "NE008",
+        "rainfall": false
+    },
+    {
+        "name": "NE010_10",
+        "latitude": "44.027162",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.463327",
+        "id": "6216",
+        "fullname": "NE010_10",
+        "rainfall": false
+    },
+    {
+        "name": "NE011_10",
+        "latitude": "44.023156",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.471693",
+        "id": "6217",
+        "fullname": "NE011_10",
+        "rainfall": false
+    },
+    {
+        "name": "NE012_10",
+        "latitude": "44.031607",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.450003",
+        "id": "6218",
+        "fullname": "NE012_10",
+        "rainfall": false
+    },
+    {
+        "name": "NE013a_10",
+        "latitude": "44.049991",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.447072",
+        "id": "6219",
+        "fullname": "NE013a_10",
+        "rainfall": false
+    },
+    {
+        "name": "NE015",
+        "latitude": "44.068848",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.456355",
+        "id": "6220",
+        "fullname": "NE015",
+        "rainfall": false
+    },
+    {
+        "name": "NE016_10",
+        "latitude": "44.070567",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.452191",
+        "id": "6221",
+        "fullname": "NE016_10",
+        "rainfall": false
+    },
+    {
+        "name": "NE017_10",
+        "latitude": "44.072064",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.45202",
+        "id": "6222",
+        "fullname": "NE017_10",
+        "rainfall": false
+    },
+    {
+        "name": "R-YR-KI-03",
+        "latitude": "43.90051728",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.64700072",
+        "id": "6289",
+        "fullname": "R-YR-KI-03",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-AU-01",
+        "latitude": "44.0202043",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.46407511",
+        "id": "6320",
+        "fullname": "R-YR-AU-01",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-EG-01",
+        "latitude": "44.15629762",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.30472764",
+        "id": "6321",
+        "fullname": "R-YR-EG-01",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-EG-02",
+        "latitude": "44.09882202",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.47124375",
+        "id": "6322",
+        "fullname": "R-YR-EG-02",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-GE-02",
+        "latitude": "44.31402508",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.41534934",
+        "id": "6323",
+        "fullname": "R-YR-GE-02",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-GE-03",
+        "latitude": "44.31049061",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.34916977",
+        "id": "6324",
+        "fullname": "R-YR-GE-03",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-KI-01",
+        "latitude": "43.93359578",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.53923378",
+        "id": "6325",
+        "fullname": "R-YR-KI-01",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-MA-01",
+        "latitude": "43.81261681",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.37360415",
+        "id": "6326",
+        "fullname": "R-YR-MA-01",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-MA-03",
+        "latitude": "43.84082958",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.280079",
+        "id": "6327",
+        "fullname": "R-YR-MA-03",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-VA-01",
+        "latitude": "43.76372927",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.57933959",
+        "id": "6328",
+        "fullname": "R-YR-VA-01",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-VA-02",
+        "latitude": "43.83383882",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.52779644",
+        "id": "6329",
+        "fullname": "R-YR-VA-02",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-VA-03",
+        "latitude": "43.80438543",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.5814674",
+        "id": "6330",
+        "fullname": "R-YR-VA-03",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-VA-04",
+        "latitude": "43.83546137",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.63039593",
+        "id": "6331",
+        "fullname": "R-YR-VA-04",
+        "rainfall": true
+    },
+    {
+        "name": "VA024_10",
+        "latitude": "43.814378",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.487887",
+        "id": "6332",
+        "fullname": "VA024_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA003_10",
+        "latitude": "43.779045",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.59064",
+        "id": "6333",
+        "fullname": "VA003_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA017a_30",
+        "latitude": "43.787987",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.522614",
+        "id": "6334",
+        "fullname": "VA017a_30",
+        "rainfall": false
+    },
+    {
+        "name": "NE012_20",
+        "latitude": "44.032141",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.449664",
+        "id": "6335",
+        "fullname": "NE012_20",
+        "rainfall": false
+    },
+    {
+        "name": "NE012_30",
+        "latitude": "44.032676",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.450192",
+        "id": "6336",
+        "fullname": "NE012_30",
+        "rainfall": false
+    },
+    {
+        "name": "GE003b_20",
+        "latitude": "44.31084",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.423268",
+        "id": "6337",
+        "fullname": "GE003b_20",
+        "rainfall": false
+    },
+    {
+        "name": "KI001c_20",
+        "latitude": "43.935764",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.530032",
+        "id": "6338",
+        "fullname": "KI001c_20",
+        "rainfall": false
+    },
+    {
+        "name": "MA041c_10",
+        "latitude": "43.840812",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.264835",
+        "id": "6368",
+        "fullname": "MA041c_10",
+        "rainfall": false
+    },
+    {
+        "name": "WS004_10",
+        "latitude": "43.95512",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.253101",
+        "id": "6369",
+        "fullname": "WS004_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA056_10",
+        "latitude": "43.829484",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.420534",
+        "id": "6370",
+        "fullname": "MA056_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA024_10",
+        "latitude": "43.869365",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.263539",
+        "id": "6371",
+        "fullname": "MA024_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA035",
+        "latitude": "43.874714",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.250532",
+        "id": "6386",
+        "fullname": "MA035",
+        "rainfall": false
+    },
+    {
+        "name": "AU007_10",
+        "latitude": "44.009017",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.469603",
+        "id": "6387",
+        "fullname": "AU007_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH002_10",
+        "latitude": "43.955039",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.455714",
+        "id": "6388",
+        "fullname": "RH002_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH018_10",
+        "latitude": "43.86377",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.445518",
+        "id": "6389",
+        "fullname": "RH018_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA046_10",
+        "latitude": "43.811094",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.372625",
+        "id": "6390",
+        "fullname": "MA046_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA047b_10",
+        "latitude": "43.819661",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.349144",
+        "id": "6415",
+        "fullname": "MA047b_10",
+        "rainfall": false
+    },
+    {
+        "name": "13299",
+        "latitude": "43.91893997",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.34753987",
+        "id": "6455",
+        "fullname": "R-MUN-MA-22",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-VA-10",
+        "latitude": "43.79810985",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.51235179",
+        "id": "6462",
+        "fullname": "R-YR-VA-10",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-GE-04",
+        "latitude": "44.29959074",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.46507151",
+        "id": "6473",
+        "fullname": "R-YR-GE-04",
+        "rainfall": true
+    },
+    {
+        "name": "NE009_10",
+        "latitude": "44.058273",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.456525",
+        "id": "6522",
+        "fullname": "NE009_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH003_20",
+        "latitude": "43.94766",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.452442",
+        "id": "6523",
+        "fullname": "RH003_20",
+        "rainfall": false
+    },
+    {
+        "name": "MA044_10",
+        "latitude": "43.813475",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.368949",
+        "id": "6524",
+        "fullname": "MA044_10",
+        "rainfall": false
+    },
+    {
+        "name": "MA041a_10",
+        "latitude": "43.855827",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.255779",
+        "id": "6525",
+        "fullname": "MA041a_10",
+        "rainfall": false
+    },
+    {
+        "name": "R-YR-VA-11",
+        "latitude": "43.88555371",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.51732334",
+        "id": "6528",
+        "fullname": "R-YR-VA-11",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-VA-16",
+        "latitude": "43.88398523",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.47238324",
+        "id": "6529",
+        "fullname": "R-YR-VA-16",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-AU-07",
+        "latitude": "43.99241244",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.43198731",
+        "id": "6530",
+        "fullname": "R-YR-AU-07",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-GE-10",
+        "latitude": "44.23194666",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.46073472",
+        "id": "6531",
+        "fullname": "R-YR-GE-10",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-VA-09",
+        "latitude": "43.77721506",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.545526",
+        "id": "6532",
+        "fullname": "R-YR-VA-09",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-EG-04",
+        "latitude": "44.12222754",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4469197",
+        "id": "6533",
+        "fullname": "R-YR-EG-04",
+        "rainfall": true
+    },
+    {
+        "name": "RH027_10",
+        "latitude": "43.877972",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.42493",
+        "id": "6536",
+        "fullname": "RH027_10",
+        "rainfall": false
+    },
+    {
+        "name": "RH027_20",
+        "latitude": "43.87864",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.426171",
+        "id": "6537",
+        "fullname": "RH027_20",
+        "rainfall": false
+    },
+    {
+        "name": "VA002a_20",
+        "latitude": "43.775498",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.59972",
+        "id": "6538",
+        "fullname": "VA002a_20",
+        "rainfall": false
+    },
+    {
+        "name": "VA017a_10",
+        "latitude": "43.792052",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.522667",
+        "id": "6539",
+        "fullname": "VA017a_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA031a_20",
+        "latitude": "43.810758",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.427736",
+        "id": "6540",
+        "fullname": "VA031a_20",
+        "rainfall": false
+    },
+    {
+        "name": "VA031a_30",
+        "latitude": "43.812608",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.427823",
+        "id": "6541",
+        "fullname": "VA031a_30",
+        "rainfall": false
+    },
+    {
+        "name": "KI001b_10",
+        "latitude": "43.92128",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.527959",
+        "id": "6542",
+        "fullname": "KI001b_10",
+        "rainfall": false
+    },
+    {
+        "name": "R-YR-AU-02",
+        "latitude": "43.96452246",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.48617609",
+        "id": "6543",
+        "fullname": "R-YR-AU-02",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-NE-10",
+        "latitude": "44.04924586",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.47784337",
+        "id": "6544",
+        "fullname": "R-YR-NE-10",
+        "rainfall": true
+    },
+    {
+        "name": "VA002a_10",
+        "latitude": "43.775574",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.604863",
+        "id": "6572",
+        "fullname": "VA002a_10",
+        "rainfall": false
+    },
+    {
+        "name": "VA002a_30",
+        "latitude": "43.776406",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.606523",
+        "id": "6573",
+        "fullname": "VA002a_30",
+        "rainfall": false
+    },
+    {
+        "name": "R-MUN-RH-02",
+        "latitude": "43.84531306",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.42701874",
+        "id": "6648",
+        "fullname": "R-MUN-RH-02",
+        "rainfall": true
+    },
+    {
+        "name": "R-MUN-RH-03",
+        "latitude": "43.89625453",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.40510676",
+        "id": "6649",
+        "fullname": "R-MUN-RH-03",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-VA-13",
+        "latitude": "43.85885749",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.51444108",
+        "id": "6731",
+        "fullname": "R-YR-VA-13",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-MA-19",
+        "latitude": "43.83151828",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.35094312",
+        "id": "6732",
+        "fullname": "R-YR-MA-19",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-AU-09",
+        "latitude": "44.01108069",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.42294514",
+        "id": "6746",
+        "fullname": "R-YR-AU-09",
+        "rainfall": true
+    },
+    {
+        "name": "VA008_11",
+        "latitude": "43.779457",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.583437",
+        "id": "6755",
+        "fullname": "VA008_11",
+        "rainfall": false
+    },
+    {
+        "name": "AREA37",
+        "latitude": "43.821273",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.528716",
+        "id": "6756",
+        "fullname": "AREA37",
+        "rainfall": false
+    },
+    {
+        "name": "R-YR-VA-23",
+        "latitude": "43.78037346",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.59478712",
+        "id": "6839",
+        "fullname": "R-YR-VA-23",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-VA-27",
+        "latitude": "43.83813604",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.55526631",
+        "id": "6840",
+        "fullname": "R-YR-VA-27",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-VA-26",
+        "latitude": "43.85470011",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.47207418",
+        "id": "6848",
+        "fullname": "R-YR-VA-26",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-RH-01",
+        "latitude": "43.87555071",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.42181529",
+        "id": "6849",
+        "fullname": "R-YR-RH-01",
+        "rainfall": true
+    },
+    {
+        "name": "NE012_11",
+        "latitude": "44.03052",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.449067",
+        "id": "6918",
+        "fullname": "NE012_11",
+        "rainfall": false
+    },
+    {
+        "name": "R-YR-RH-10",
+        "latitude": "43.85354251",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.39747508",
+        "id": "6972",
+        "fullname": "R-YR-RH-10",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-VA-22",
+        "latitude": "43.8171533",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.44862098",
+        "id": "6973",
+        "fullname": "R-YR-VA-22",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-NE-07",
+        "latitude": "44.03628399",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.43933547",
+        "id": "6974",
+        "fullname": "R-YR-NE-07",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-EG-06",
+        "latitude": "44.09090125",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.43927746",
+        "id": "6975",
+        "fullname": "R-YR-EG-06",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-MA-20",
+        "latitude": "43.89427257",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.22205185",
+        "id": "6976",
+        "fullname": "R-YR-MA-20",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-VA-24",
+        "latitude": "43.79610797",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.46429806",
+        "id": "6977",
+        "fullname": "R-YR-VA-24",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-NE-03",
+        "latitude": "44.06916143",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.44042475",
+        "id": "6978",
+        "fullname": "R-YR-NE-03",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-GE-07",
+        "latitude": "44.19775397",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4575813",
+        "id": "6979",
+        "fullname": "R-YR-GE-07",
+        "rainfall": true
+    },
+    {
+        "name": "10725",
+        "latitude": "43.900946",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.648396",
+        "id": "7123",
+        "fullname": "KI-012 (Arena)",
+        "rainfall": false
+    },
+    {
+        "name": "VA031a_20b",
+        "latitude": "43.810758",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.427736",
+        "id": "7199",
+        "fullname": "VA031a_20b",
+        "rainfall": false
+    },
+    {
+        "name": "VA031a_30b",
+        "latitude": "43.812608",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.427823",
+        "id": "7200",
+        "fullname": "VA031a_30b",
+        "rainfall": false
+    },
+    {
+        "name": "R-YR-RH-15",
+        "latitude": "43.90309091",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.43830988",
+        "id": "7230",
+        "fullname": "R-YR-RH-15",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-VA-28",
+        "latitude": "43.86003112",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.55726337",
+        "id": "7231",
+        "fullname": "R-YR-VA-28",
+        "rainfall": true
+    },
+    {
+        "name": "R-YR-AU-06",
+        "latitude": "43.99669921",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.47653914",
+        "id": "7361",
+        "fullname": "R-YR-AU-06",
+        "rainfall": true
+    },
+    {
+        "name": "MA025_11",
+        "latitude": "43.872717",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.26112",
+        "id": "7385",
+        "fullname": "MA025_11",
+        "rainfall": false
+    },
+    {
+        "name": "MA047b_11",
+        "latitude": "43.820917",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.355999",
+        "id": "7389",
+        "fullname": "MA047b_11",
+        "rainfall": false
+    },
+    {
+        "name": "GE006",
+        "latitude": "44.201359",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4663",
+        "id": "7448",
+        "fullname": "GE006",
+        "rainfall": false
+    },
+    {
+        "name": "VA009a_11",
+        "latitude": "43.775972",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.577677",
+        "id": "7626",
+        "fullname": "VA009a_11",
+        "rainfall": false
+    },
+    {
+        "name": "RG_TEST",
+        "latitude": "43.839317",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.38348",
+        "id": "7634",
+        "fullname": "Toronto RG_TEST",
+        "rainfall": false
+    },
+    {
+        "name": "FM_CSOALM_1",
+        "latitude": "43.839317",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.38348",
+        "id": "7635",
+        "fullname": "Toronto FM_CSOALM_1",
+        "rainfall": false
+    },
+    {
+        "name": "FM_CSO_INLET1",
+        "latitude": "43.839317",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.38348",
+        "id": "7636",
+        "fullname": "Toronto FM_CSO_INLET1",
+        "rainfall": false
+    },
+    {
+        "name": "132-111",
+        "latitude": "43.7722204546",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4602841576",
+        "id": "7673",
+        "fullname": "132-111",
+        "rainfall": false
+    },
+    {
+        "name": "RG_017",
+        "latitude": "43.6973503498912",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4660280206677",
+        "id": "7674",
+        "fullname": "RG_017",
+        "rainfall": true
+    },
+    {
+        "name": "RG_018",
+        "latitude": "43.7031334752",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.3432839059",
+        "id": "7675",
+        "fullname": "RG_018",
+        "rainfall": true
+    },
+    {
+        "name": "RG_019",
+        "latitude": "43.7652268939",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.5188375746",
+        "id": "7676",
+        "fullname": "RG_019",
+        "rainfall": true
+    },
+    {
+        "name": "RG_001",
+        "latitude": "43.6476803",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4781121",
+        "id": "7677",
+        "fullname": "RG_001",
+        "rainfall": true
+    },
+    {
+        "name": "RG_002",
+        "latitude": "43.6511961",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4436159",
+        "id": "7678",
+        "fullname": "RG_002",
+        "rainfall": true
+    },
+    {
+        "name": "RG_003",
+        "latitude": "43.6566155",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4050941",
+        "id": "7679",
+        "fullname": "RG_003",
+        "rainfall": true
+    },
+    {
+        "name": "RG_004",
+        "latitude": "43.678343",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4028332",
+        "id": "7680",
+        "fullname": "RG_004",
+        "rainfall": true
+    },
+    {
+        "name": "RG_006",
+        "latitude": "43.6612653",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.375101",
+        "id": "7681",
+        "fullname": "RG_006",
+        "rainfall": true
+    },
+    {
+        "name": "RG_007",
+        "latitude": "43.67672013",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.33114479",
+        "id": "7682",
+        "fullname": "RG_007",
+        "rainfall": true
+    },
+    {
+        "name": "RG_012",
+        "latitude": "43.7392166",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.58163682",
+        "id": "7683",
+        "fullname": "RG_012",
+        "rainfall": true
+    },
+    {
+        "name": "RG_013",
+        "latitude": "43.69491707",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.5719377",
+        "id": "7684",
+        "fullname": "RG_013",
+        "rainfall": true
+    },
+    {
+        "name": "RG_014",
+        "latitude": "43.68343046",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.54147435",
+        "id": "7685",
+        "fullname": "RG_014",
+        "rainfall": true
+    },
+    {
+        "name": "RG_015",
+        "latitude": "43.63806492",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.52827501",
+        "id": "7686",
+        "fullname": "RG_015",
+        "rainfall": true
+    },
+    {
+        "name": "RG_016",
+        "latitude": "43.6081253",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.52036622",
+        "id": "7687",
+        "fullname": "RG_016",
+        "rainfall": true
+    },
+    {
+        "name": "RG_020",
+        "latitude": "43.76984809",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.47160572",
+        "id": "7688",
+        "fullname": "RG_020",
+        "rainfall": true
+    },
+    {
+        "name": "RG_053",
+        "latitude": "43.69012702",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.47860642",
+        "id": "7689",
+        "fullname": "RG_053",
+        "rainfall": true
+    },
+    {
+        "name": "RG_021",
+        "latitude": "43.75465603",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.54886015",
+        "id": "7690",
+        "fullname": "RG_021",
+        "rainfall": true
+    },
+    {
+        "name": "RG_022",
+        "latitude": "43.76906559",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.36517569",
+        "id": "7691",
+        "fullname": "RG_022",
+        "rainfall": true
+    },
+    {
+        "name": "RG_023",
+        "latitude": "43.7239323",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.31384791",
+        "id": "7692",
+        "fullname": "RG_023",
+        "rainfall": true
+    },
+    {
+        "name": "RG_024",
+        "latitude": "43.72039422",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.51380861",
+        "id": "7693",
+        "fullname": "RG_024",
+        "rainfall": true
+    },
+    {
+        "name": "RG_025",
+        "latitude": "43.73250641",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.46571593",
+        "id": "7694",
+        "fullname": "RG_025",
+        "rainfall": true
+    },
+    {
+        "name": "RG_027",
+        "latitude": "43.77443991",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.40840918",
+        "id": "7695",
+        "fullname": "RG_027",
+        "rainfall": true
+    },
+    {
+        "name": "RG_028",
+        "latitude": "43.80009358",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.37135707",
+        "id": "7696",
+        "fullname": "RG_028",
+        "rainfall": true
+    },
+    {
+        "name": "RG_030",
+        "latitude": "43.7595662",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.3261282",
+        "id": "7697",
+        "fullname": "RG_030",
+        "rainfall": true
+    },
+    {
+        "name": "RG_031",
+        "latitude": "43.81233291",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.30554427",
+        "id": "7698",
+        "fullname": "RG_031",
+        "rainfall": true
+    },
+    {
+        "name": "RG_033",
+        "latitude": "43.81844633",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.25725151",
+        "id": "7699",
+        "fullname": "RG_033",
+        "rainfall": true
+    },
+    {
+        "name": "RG_034",
+        "latitude": "43.76973811",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.27244556",
+        "id": "7700",
+        "fullname": "RG_034",
+        "rainfall": true
+    },
+    {
+        "name": "RG_035",
+        "latitude": "43.79378081",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.19432584",
+        "id": "7701",
+        "fullname": "RG_035",
+        "rainfall": true
+    },
+    {
+        "name": "RG_036",
+        "latitude": "43.65866723",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.3201323",
+        "id": "7702",
+        "fullname": "RG_036",
+        "rainfall": true
+    },
+    {
+        "name": "RG_037",
+        "latitude": "43.7340786",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.35836438",
+        "id": "7703",
+        "fullname": "RG_037",
+        "rainfall": true
+    },
+    {
+        "name": "RG_038",
+        "latitude": "43.77751424",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.14840514",
+        "id": "7704",
+        "fullname": "RG_038",
+        "rainfall": true
+    },
+    {
+        "name": "RG_039",
+        "latitude": "43.7061244",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4047349",
+        "id": "7705",
+        "fullname": "RG_039",
+        "rainfall": true
+    },
+    {
+        "name": "RG_040",
+        "latitude": "43.69489657",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.28445514",
+        "id": "7706",
+        "fullname": "RG_040",
+        "rainfall": true
+    },
+    {
+        "name": "RG_041",
+        "latitude": "43.7690071",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.1772287",
+        "id": "7707",
+        "fullname": "RG_041",
+        "rainfall": true
+    },
+    {
+        "name": "RG_042",
+        "latitude": "43.7329702",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.2614587",
+        "id": "7708",
+        "fullname": "RG_042",
+        "rainfall": true
+    },
+    {
+        "name": "RG_044",
+        "latitude": "43.74840611",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.40692306",
+        "id": "7709",
+        "fullname": "RG_044",
+        "rainfall": true
+    },
+    {
+        "name": "RG_045",
+        "latitude": "43.6914494",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.448202",
+        "id": "7710",
+        "fullname": "RG_045",
+        "rainfall": true
+    },
+    {
+        "name": "RG_046",
+        "latitude": "43.71777139",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.57057758",
+        "id": "7711",
+        "fullname": "RG_046",
+        "rainfall": true
+    },
+    {
+        "name": "RG_047",
+        "latitude": "43.7087093",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4563102",
+        "id": "7712",
+        "fullname": "RG_047",
+        "rainfall": true
+    },
+    {
+        "name": "RG_048",
+        "latitude": "43.6428503",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.5647009",
+        "id": "7713",
+        "fullname": "RG_048",
+        "rainfall": true
+    },
+    {
+        "name": "RG_049",
+        "latitude": "43.66414511",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.49112331",
+        "id": "7714",
+        "fullname": "RG_049",
+        "rainfall": true
+    },
+    {
+        "name": "RG_051",
+        "latitude": "43.7905864",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4222852",
+        "id": "7715",
+        "fullname": "RG_051",
+        "rainfall": true
+    },
+    {
+        "name": "RG_052",
+        "latitude": "43.6503898",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.58503373",
+        "id": "7716",
+        "fullname": "RG_052",
+        "rainfall": true
+    },
+    {
+        "name": "KI004a_20",
+        "latitude": "43.900934",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.648545",
+        "id": "7722",
+        "fullname": "KI004a_20",
+        "rainfall": false
+    },
+    {
+        "name": "MH8inchBarn",
+        "latitude": "43.777166",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.459082",
+        "id": "7745",
+        "fullname": "MH8inchBarn",
+        "rainfall": false
+    },
+    {
+        "name": "520-008_D",
+        "latitude": "43.59044",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.54497",
+        "id": "7758",
+        "fullname": "520-008_D",
+        "rainfall": false
+    },
+    {
+        "name": "Peel-702249_D",
+        "latitude": "43.70156",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.61092",
+        "id": "7759",
+        "fullname": "Peel-702249_D",
+        "rainfall": false
+    },
+    {
+        "name": "520-008_P",
+        "latitude": "43.59044",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.54497",
+        "id": "7760",
+        "fullname": "520-008_P",
+        "rainfall": false
+    },
+    {
+        "name": "Peel-702249_P",
+        "latitude": "43.70156",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.61092",
+        "id": "7761",
+        "fullname": "Peel-702249_P",
+        "rainfall": false
+    },
+    {
+        "name": "132-068",
+        "latitude": "43.7433",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.40588",
+        "id": "7762",
+        "fullname": "132-068",
+        "rainfall": false
+    },
+    {
+        "name": "223-008",
+        "latitude": "43.77815",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.2078",
+        "id": "7763",
+        "fullname": "223-008",
+        "rainfall": false
+    },
+    {
+        "name": "362-004B",
+        "latitude": "43.69848",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.51337",
+        "id": "7764",
+        "fullname": "362-004B",
+        "rainfall": false
+    },
+    {
+        "name": "102-021",
+        "latitude": "43.65783",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.34156",
+        "id": "7765",
+        "fullname": "102-021",
+        "rainfall": false
+    },
+    {
+        "name": "327-020",
+        "latitude": "43.68096",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.48321",
+        "id": "7766",
+        "fullname": "327-020",
+        "rainfall": false
+    },
+    {
+        "name": "100-005",
+        "latitude": "43.662966",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.31412",
+        "id": "7767",
+        "fullname": "100-005",
+        "rainfall": false
+    },
+    {
+        "name": "100-005_OV",
+        "latitude": "43.662966",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.31412",
+        "id": "7768",
+        "fullname": "100-005_OV",
+        "rainfall": false
+    },
+    {
+        "name": "101-031",
+        "latitude": "43.66087471",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.35631065",
+        "id": "7769",
+        "fullname": "101-031",
+        "rainfall": false
+    },
+    {
+        "name": "101-031_OV",
+        "latitude": "43.66087471",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.35631065",
+        "id": "7770",
+        "fullname": "101-031_OV",
+        "rainfall": false
+    },
+    {
+        "name": "117-001",
+        "latitude": "43.69777035",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.28517213",
+        "id": "7771",
+        "fullname": "117-001",
+        "rainfall": false
+    },
+    {
+        "name": "117-001_OV",
+        "latitude": "43.69777035",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.28517213",
+        "id": "7772",
+        "fullname": "117-001_OV",
+        "rainfall": false
+    },
+    {
+        "name": "123-12D",
+        "latitude": "43.700416",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.314447",
+        "id": "7773",
+        "fullname": "123-12D",
+        "rainfall": false
+    },
+    {
+        "name": "123-12D_OV",
+        "latitude": "43.700416",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.314447",
+        "id": "7774",
+        "fullname": "123-12D_OV",
+        "rainfall": false
+    },
+    {
+        "name": "136-003",
+        "latitude": "43.67311484",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.37795971",
+        "id": "7775",
+        "fullname": "136-003",
+        "rainfall": false
+    },
+    {
+        "name": "136-003_OV",
+        "latitude": "43.67311484",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.37795971",
+        "id": "7776",
+        "fullname": "136-003_OV",
+        "rainfall": false
+    },
+    {
+        "name": "160-002_1",
+        "latitude": "43.697321",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.342205",
+        "id": "7777",
+        "fullname": "160-002_1",
+        "rainfall": false
+    },
+    {
+        "name": "160-002_1_OV",
+        "latitude": "43.697321",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.342205",
+        "id": "7778",
+        "fullname": "160-002_1_OV",
+        "rainfall": false
+    },
+    {
+        "name": "161-001",
+        "latitude": "43.699219",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.28974",
+        "id": "7779",
+        "fullname": "161-001",
+        "rainfall": false
+    },
+    {
+        "name": "Archived NE-18",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "778",
+        "fullname": "Archived NE-18",
+        "rainfall": false
+    },
+    {
+        "name": "161-001_OV",
+        "latitude": "43.699219",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.28974",
+        "id": "7780",
+        "fullname": "161-001_OV",
+        "rainfall": false
+    },
+    {
+        "name": "161-005",
+        "latitude": "43.70035911",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.29256323",
+        "id": "7781",
+        "fullname": "161-005",
+        "rainfall": false
+    },
+    {
+        "name": "161-005_OV",
+        "latitude": "43.70035911",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.29256323",
+        "id": "7782",
+        "fullname": "161-005_OV",
+        "rainfall": false
+    },
+    {
+        "name": "320-003",
+        "latitude": "43.638176",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.487637",
+        "id": "7783",
+        "fullname": "320-003",
+        "rainfall": false
+    },
+    {
+        "name": "320-003_OV",
+        "latitude": "43.638176",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.487637",
+        "id": "7784",
+        "fullname": "320-003_OV",
+        "rainfall": false
+    },
+    {
+        "name": "324-022",
+        "latitude": "43.60352241",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.49335719",
+        "id": "7785",
+        "fullname": "324-022",
+        "rainfall": false
+    },
+    {
+        "name": "324-022_OV",
+        "latitude": "43.60352241",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.49335719",
+        "id": "7786",
+        "fullname": "324-022_OV",
+        "rainfall": false
+    },
+    {
+        "name": "361-002",
+        "latitude": "43.67555994",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4890377",
+        "id": "7787",
+        "fullname": "361-002",
+        "rainfall": false
+    },
+    {
+        "name": "361-002_OV",
+        "latitude": "43.67555994",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4890377",
+        "id": "7788",
+        "fullname": "361-002_OV",
+        "rainfall": false
+    },
+    {
+        "name": "3985021520_1",
+        "latitude": "43.69888259",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.28637304",
+        "id": "7789",
+        "fullname": "3985021520_1",
+        "rainfall": false
+    },
+    {
+        "name": "Archived NE-19",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "779",
+        "fullname": "Archived NE-19",
+        "rainfall": false
+    },
+    {
+        "name": "3985021520_1_OV",
+        "latitude": "43.69888259",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.28637304",
+        "id": "7790",
+        "fullname": "3985021520_1_OV",
+        "rainfall": false
+    },
+    {
+        "name": "102-001",
+        "latitude": "43.66388329",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.3190376",
+        "id": "7791",
+        "fullname": "102-001",
+        "rainfall": false
+    },
+    {
+        "name": "120-007",
+        "latitude": "43.67487311",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.32146662",
+        "id": "7792",
+        "fullname": "120-007",
+        "rainfall": false
+    },
+    {
+        "name": "123-003",
+        "latitude": "43.70159858",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.32863756",
+        "id": "7793",
+        "fullname": "123-003",
+        "rainfall": false
+    },
+    {
+        "name": "123-016",
+        "latitude": "43.69911455",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.30866572",
+        "id": "7794",
+        "fullname": "123-016",
+        "rainfall": false
+    },
+    {
+        "name": "126-019",
+        "latitude": "43.71973637",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.32254725",
+        "id": "7795",
+        "fullname": "126-019",
+        "rainfall": false
+    },
+    {
+        "name": "126-034",
+        "latitude": "43.73671708",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.33193334",
+        "id": "7796",
+        "fullname": "126-034",
+        "rainfall": false
+    },
+    {
+        "name": "126-086",
+        "latitude": "43.788074",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.376014",
+        "id": "7797",
+        "fullname": "126-086",
+        "rainfall": false
+    },
+    {
+        "name": "132-009",
+        "latitude": "43.71018482",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.33864324",
+        "id": "7798",
+        "fullname": "132-009",
+        "rainfall": false
+    },
+    {
+        "name": "220-002",
+        "latitude": "43.7664667",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.15726263",
+        "id": "7799",
+        "fullname": "220-002",
+        "rainfall": false
+    },
+    {
+        "name": "Archived RH-33",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "780",
+        "fullname": "Archived RH-33",
+        "rainfall": false
+    },
+    {
+        "name": "220-007",
+        "latitude": "43.77255907",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.16915472",
+        "id": "7800",
+        "fullname": "220-007",
+        "rainfall": false
+    },
+    {
+        "name": "220-022",
+        "latitude": "43.77248279",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.1990806",
+        "id": "7801",
+        "fullname": "220-022",
+        "rainfall": false
+    },
+    {
+        "name": "220-043",
+        "latitude": "43.76165339",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.20332937",
+        "id": "7802",
+        "fullname": "220-043",
+        "rainfall": false
+    },
+    {
+        "name": "220-093",
+        "latitude": "43.75403737",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.23778413",
+        "id": "7803",
+        "fullname": "220-093",
+        "rainfall": false
+    },
+    {
+        "name": "223-028",
+        "latitude": "43.782064",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.231975",
+        "id": "7804",
+        "fullname": "223-028",
+        "rainfall": false
+    },
+    {
+        "name": "320-020",
+        "latitude": "43.688419",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.512056",
+        "id": "7805",
+        "fullname": "320-020",
+        "rainfall": false
+    },
+    {
+        "name": "327-002",
+        "latitude": "43.67162297",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.50717773",
+        "id": "7806",
+        "fullname": "327-002",
+        "rainfall": false
+    },
+    {
+        "name": "327-010",
+        "latitude": "43.67528963",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4931177",
+        "id": "7807",
+        "fullname": "327-010",
+        "rainfall": false
+    },
+    {
+        "name": "327-031",
+        "latitude": "43.692783",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.485499",
+        "id": "7808",
+        "fullname": "327-031",
+        "rainfall": false
+    },
+    {
+        "name": "520-008_S",
+        "latitude": "43.590438",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.544968",
+        "id": "7809",
+        "fullname": "520-008_S",
+        "rainfall": false
+    },
+    {
+        "name": "Archived R-YR-AU02",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "781",
+        "fullname": "Archived R-YR-AU02",
+        "rainfall": true
+    },
+    {
+        "name": "LC509",
+        "latitude": "43.635124",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.442538",
+        "id": "7810",
+        "fullname": "LC509",
+        "rainfall": false
+    },
+    {
+        "name": "LC533",
+        "latitude": "43.631449",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.433754",
+        "id": "7811",
+        "fullname": "LC533",
+        "rainfall": false
+    },
+    {
+        "name": "Peel-702249_S",
+        "latitude": "43.701561",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.610918",
+        "id": "7812",
+        "fullname": "Peel-702249_S",
+        "rainfall": false
+    },
+    {
+        "name": "100-011",
+        "latitude": "43.66441655",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.30595921",
+        "id": "7813",
+        "fullname": "100-011",
+        "rainfall": false
+    },
+    {
+        "name": "101-005",
+        "latitude": "43.66669357",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.32209824",
+        "id": "7814",
+        "fullname": "101-005",
+        "rainfall": false
+    },
+    {
+        "name": "101-022",
+        "latitude": "43.66386221",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.3452181",
+        "id": "7815",
+        "fullname": "101-022",
+        "rainfall": false
+    },
+    {
+        "name": "101-059",
+        "latitude": "43.64939292",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.38313753",
+        "id": "7816",
+        "fullname": "101-059",
+        "rainfall": false
+    },
+    {
+        "name": "101-090",
+        "latitude": "43.64012215",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.42102304",
+        "id": "7817",
+        "fullname": "101-090",
+        "rainfall": false
+    },
+    {
+        "name": "101-105",
+        "latitude": "43.6335717",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.43261401",
+        "id": "7818",
+        "fullname": "101-105",
+        "rainfall": false
+    },
+    {
+        "name": "102-036",
+        "latitude": "43.65432424",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.35711591",
+        "id": "7819",
+        "fullname": "102-036",
+        "rainfall": false
+    },
+    {
+        "name": "Archived R-YR-RH01",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "782",
+        "fullname": "Archived R-YR-RH01",
+        "rainfall": true
+    },
+    {
+        "name": "102-056",
+        "latitude": "43.64790273",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.3747877",
+        "id": "7820",
+        "fullname": "102-056",
+        "rainfall": false
+    },
+    {
+        "name": "102-059",
+        "latitude": "43.64616997",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.37808554",
+        "id": "7821",
+        "fullname": "102-059",
+        "rainfall": false
+    },
+    {
+        "name": "102-068",
+        "latitude": "43.64450262",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.38625075",
+        "id": "7822",
+        "fullname": "102-068",
+        "rainfall": false
+    },
+    {
+        "name": "102-080",
+        "latitude": "43.641285",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.399364",
+        "id": "7823",
+        "fullname": "102-080",
+        "rainfall": false
+    },
+    {
+        "name": "103-007",
+        "latitude": "43.66768774",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.34195974",
+        "id": "7824",
+        "fullname": "103-007",
+        "rainfall": false
+    },
+    {
+        "name": "103-019",
+        "latitude": "43.65926883",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.3808696",
+        "id": "7825",
+        "fullname": "103-019",
+        "rainfall": false
+    },
+    {
+        "name": "103-027",
+        "latitude": "43.64994266",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.41694419",
+        "id": "7826",
+        "fullname": "103-027",
+        "rainfall": false
+    },
+    {
+        "name": "104-023D",
+        "latitude": "43.64475",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.384967",
+        "id": "7827",
+        "fullname": "104-023D",
+        "rainfall": false
+    },
+    {
+        "name": "107-020C",
+        "latitude": "43.647427",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.375956",
+        "id": "7828",
+        "fullname": "107-020C",
+        "rainfall": false
+    },
+    {
+        "name": "123-011",
+        "latitude": "43.70102284",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.31662292",
+        "id": "7829",
+        "fullname": "123-011",
+        "rainfall": false
+    },
+    {
+        "name": "123-026",
+        "latitude": "43.69797907",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.29233002",
+        "id": "7830",
+        "fullname": "123-026",
+        "rainfall": false
+    },
+    {
+        "name": "124-003",
+        "latitude": "43.69896026",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.28367212",
+        "id": "7831",
+        "fullname": "124-003",
+        "rainfall": false
+    },
+    {
+        "name": "124-012",
+        "latitude": "43.7061544",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.28146387",
+        "id": "7832",
+        "fullname": "124-012",
+        "rainfall": false
+    },
+    {
+        "name": "124-021",
+        "latitude": "43.713114",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.278387",
+        "id": "7833",
+        "fullname": "124-021",
+        "rainfall": false
+    },
+    {
+        "name": "124-053",
+        "latitude": "43.72963005",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.27216114",
+        "id": "7834",
+        "fullname": "124-053",
+        "rainfall": false
+    },
+    {
+        "name": "124-078",
+        "latitude": "43.7451813",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.28986808",
+        "id": "7835",
+        "fullname": "124-078",
+        "rainfall": false
+    },
+    {
+        "name": "124-098",
+        "latitude": "43.754697",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.297607",
+        "id": "7836",
+        "fullname": "124-098",
+        "rainfall": false
+    },
+    {
+        "name": "124-115",
+        "latitude": "43.761858",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.306893",
+        "id": "7837",
+        "fullname": "124-115",
+        "rainfall": false
+    },
+    {
+        "name": "125-003",
+        "latitude": "43.6993767",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.33965054",
+        "id": "7838",
+        "fullname": "125-003",
+        "rainfall": false
+    },
+    {
+        "name": "125-009",
+        "latitude": "43.69773694",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.35236346",
+        "id": "7839",
+        "fullname": "125-009",
+        "rainfall": false
+    },
+    {
+        "name": "126-001",
+        "latitude": "43.70236827",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.33238991",
+        "id": "7840",
+        "fullname": "126-001",
+        "rainfall": false
+    },
+    {
+        "name": "126-053",
+        "latitude": "43.75555957",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.34559268",
+        "id": "7841",
+        "fullname": "126-053",
+        "rainfall": false
+    },
+    {
+        "name": "126-064",
+        "latitude": "43.765098",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.356823",
+        "id": "7842",
+        "fullname": "126-064",
+        "rainfall": false
+    },
+    {
+        "name": "126-076",
+        "latitude": "43.77594889",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.36933636",
+        "id": "7843",
+        "fullname": "126-076",
+        "rainfall": false
+    },
+    {
+        "name": "127-012",
+        "latitude": "43.72482819",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.31243026",
+        "id": "7844",
+        "fullname": "127-012",
+        "rainfall": false
+    },
+    {
+        "name": "129-001",
+        "latitude": "43.763196",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.350054",
+        "id": "7845",
+        "fullname": "129-001",
+        "rainfall": false
+    },
+    {
+        "name": "130-008",
+        "latitude": "43.77857562",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.37997709",
+        "id": "7846",
+        "fullname": "130-008",
+        "rainfall": false
+    },
+    {
+        "name": "131-002",
+        "latitude": "43.79874608",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.38126159",
+        "id": "7847",
+        "fullname": "131-002",
+        "rainfall": false
+    },
+    {
+        "name": "132-027",
+        "latitude": "43.72034067",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.35842539",
+        "id": "7848",
+        "fullname": "132-027",
+        "rainfall": false
+    },
+    {
+        "name": "132-056",
+        "latitude": "43.73832113",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.38959323",
+        "id": "7849",
+        "fullname": "132-056",
+        "rainfall": false
+    },
+    {
+        "name": "132-072",
+        "latitude": "43.74521696",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.412185",
+        "id": "7850",
+        "fullname": "132-072",
+        "rainfall": false
+    },
+    {
+        "name": "132-090",
+        "latitude": "43.75798866",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.43230953",
+        "id": "7851",
+        "fullname": "132-090",
+        "rainfall": false
+    },
+    {
+        "name": "133-007",
+        "latitude": "43.726014",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.351374",
+        "id": "7852",
+        "fullname": "133-007",
+        "rainfall": false
+    },
+    {
+        "name": "133-052",
+        "latitude": "43.75252203",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.38875489",
+        "id": "7853",
+        "fullname": "133-052",
+        "rainfall": false
+    },
+    {
+        "name": "133-075",
+        "latitude": "43.76155713",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.39879265",
+        "id": "7854",
+        "fullname": "133-075",
+        "rainfall": false
+    },
+    {
+        "name": "133-081",
+        "latitude": "43.76207662",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.40250256",
+        "id": "7855",
+        "fullname": "133-081",
+        "rainfall": false
+    },
+    {
+        "name": "135-005",
+        "latitude": "43.7672276",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.46517697",
+        "id": "7856",
+        "fullname": "135-005",
+        "rainfall": false
+    },
+    {
+        "name": "136-002",
+        "latitude": "43.672878",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.374722",
+        "id": "7857",
+        "fullname": "136-002",
+        "rainfall": false
+    },
+    {
+        "name": "1455532",
+        "latitude": "43.6399719",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4555274",
+        "id": "7858",
+        "fullname": "1455532",
+        "rainfall": false
+    },
+    {
+        "name": "160-002_2",
+        "latitude": "43.697321",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.342205",
+        "id": "7859",
+        "fullname": "160-002_2",
+        "rainfall": false
+    },
+    {
+        "name": "161-006",
+        "latitude": "43.70152646",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.29306821",
+        "id": "7860",
+        "fullname": "161-006",
+        "rainfall": false
+    },
+    {
+        "name": "162-014",
+        "latitude": "43.69012681",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.27737974",
+        "id": "7861",
+        "fullname": "162-014",
+        "rainfall": false
+    },
+    {
+        "name": "188-006",
+        "latitude": "43.74560765",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.45870707",
+        "id": "7862",
+        "fullname": "188-006",
+        "rainfall": false
+    },
+    {
+        "name": "220-148",
+        "latitude": "43.77152365",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.27716982",
+        "id": "7863",
+        "fullname": "220-148",
+        "rainfall": false
+    },
+    {
+        "name": "221-006",
+        "latitude": "43.76389461",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.15572562",
+        "id": "7864",
+        "fullname": "221-006",
+        "rainfall": false
+    },
+    {
+        "name": "221-028",
+        "latitude": "43.75943445",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.17949044",
+        "id": "7865",
+        "fullname": "221-028",
+        "rainfall": false
+    },
+    {
+        "name": "222-001",
+        "latitude": "43.77365924",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.15850615",
+        "id": "7866",
+        "fullname": "222-001",
+        "rainfall": false
+    },
+    {
+        "name": "222-005",
+        "latitude": "43.77722069",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.15752104",
+        "id": "7867",
+        "fullname": "222-005",
+        "rainfall": false
+    },
+    {
+        "name": "222-035",
+        "latitude": "43.80784554",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.17376493",
+        "id": "7868",
+        "fullname": "222-035",
+        "rainfall": false
+    },
+    {
+        "name": "222-066",
+        "latitude": "43.81587451",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.21097627",
+        "id": "7869",
+        "fullname": "222-066",
+        "rainfall": false
+    },
+    {
+        "name": "224-006",
+        "latitude": "43.74883238",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.23909587",
+        "id": "7870",
+        "fullname": "224-006",
+        "rainfall": false
+    },
+    {
+        "name": "224-031",
+        "latitude": "43.74284723",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.25587016",
+        "id": "7871",
+        "fullname": "224-031",
+        "rainfall": false
+    },
+    {
+        "name": "225-007",
+        "latitude": "43.79173785",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.22515937",
+        "id": "7872",
+        "fullname": "225-007",
+        "rainfall": false
+    },
+    {
+        "name": "226-008",
+        "latitude": "43.7972261",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.25937687",
+        "id": "7873",
+        "fullname": "226-008",
+        "rainfall": false
+    },
+    {
+        "name": "2908505335",
+        "latitude": "43.603644",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.493365",
+        "id": "7874",
+        "fullname": "2908505335",
+        "rainfall": false
+    },
+    {
+        "name": "320-010",
+        "latitude": "43.6665857",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.51165438",
+        "id": "7875",
+        "fullname": "320-010",
+        "rainfall": false
+    },
+    {
+        "name": "320-012",
+        "latitude": "43.67003835",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.51130479",
+        "id": "7876",
+        "fullname": "320-012",
+        "rainfall": false
+    },
+    {
+        "name": "320-040",
+        "latitude": "43.71524199",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.54143194",
+        "id": "7877",
+        "fullname": "320-040",
+        "rainfall": false
+    },
+    {
+        "name": "320-057",
+        "latitude": "43.73867245",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.55050337",
+        "id": "7878",
+        "fullname": "320-057",
+        "rainfall": false
+    },
+    {
+        "name": "321-002",
+        "latitude": "43.63006324",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4850583",
+        "id": "7879",
+        "fullname": "321-002",
+        "rainfall": false
+    },
+    {
+        "name": "321-009",
+        "latitude": "43.62491937",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.49006106",
+        "id": "7880",
+        "fullname": "321-009",
+        "rainfall": false
+    },
+    {
+        "name": "322-004",
+        "latitude": "43.62938942",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.49238971",
+        "id": "7881",
+        "fullname": "322-004",
+        "rainfall": false
+    },
+    {
+        "name": "322-024",
+        "latitude": "43.63718719",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.50602936",
+        "id": "7882",
+        "fullname": "322-024",
+        "rainfall": false
+    },
+    {
+        "name": "322-037",
+        "latitude": "43.6415714",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.50999907",
+        "id": "7883",
+        "fullname": "322-037",
+        "rainfall": false
+    },
+    {
+        "name": "322-068",
+        "latitude": "43.652641",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.535826",
+        "id": "7884",
+        "fullname": "322-068",
+        "rainfall": false
+    },
+    {
+        "name": "323-003",
+        "latitude": "43.62548333",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.49125683",
+        "id": "7885",
+        "fullname": "323-003",
+        "rainfall": false
+    },
+    {
+        "name": "323-011",
+        "latitude": "43.62325837",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.50109712",
+        "id": "7886",
+        "fullname": "323-011",
+        "rainfall": false
+    },
+    {
+        "name": "323-054",
+        "latitude": "43.61758872",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.54672186",
+        "id": "7887",
+        "fullname": "323-054",
+        "rainfall": false
+    },
+    {
+        "name": "324-009",
+        "latitude": "43.611401",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.490084",
+        "id": "7888",
+        "fullname": "324-009",
+        "rainfall": false
+    },
+    {
+        "name": "325-002",
+        "latitude": "43.64906809",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.5034085",
+        "id": "7889",
+        "fullname": "325-002",
+        "rainfall": false
+    },
+    {
+        "name": "325-012",
+        "latitude": "43.65118289",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.52961021",
+        "id": "7890",
+        "fullname": "325-012",
+        "rainfall": false
+    },
+    {
+        "name": "325-018",
+        "latitude": "43.6530404",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.5385171",
+        "id": "7891",
+        "fullname": "325-018",
+        "rainfall": false
+    },
+    {
+        "name": "326-018",
+        "latitude": "43.67487179",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.48987712",
+        "id": "7892",
+        "fullname": "326-018",
+        "rainfall": false
+    },
+    {
+        "name": "326-025",
+        "latitude": "43.67269157",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.48746116",
+        "id": "7893",
+        "fullname": "326-025",
+        "rainfall": false
+    },
+    {
+        "name": "327-016",
+        "latitude": "43.67699468",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.48476141",
+        "id": "7894",
+        "fullname": "327-016",
+        "rainfall": false
+    },
+    {
+        "name": "327-054",
+        "latitude": "43.7144871",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.50861026",
+        "id": "7895",
+        "fullname": "327-054",
+        "rainfall": false
+    },
+    {
+        "name": "327-062",
+        "latitude": "43.72226821",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.50988624",
+        "id": "7896",
+        "fullname": "327-062",
+        "rainfall": false
+    },
+    {
+        "name": "327-093",
+        "latitude": "43.73981115",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.49512013",
+        "id": "7897",
+        "fullname": "327-093",
+        "rainfall": false
+    },
+    {
+        "name": "328-004",
+        "latitude": "43.67457138",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.48402189",
+        "id": "7898",
+        "fullname": "328-004",
+        "rainfall": false
+    },
+    {
+        "name": "328-015",
+        "latitude": "43.67575478",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4707928",
+        "id": "7899",
+        "fullname": "328-015",
+        "rainfall": false
+    },
+    {
+        "name": "330-008",
+        "latitude": "43.67828761",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.51661302",
+        "id": "7900",
+        "fullname": "330-008",
+        "rainfall": false
+    },
+    {
+        "name": "333-010",
+        "latitude": "43.71958086",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.55458402",
+        "id": "7901",
+        "fullname": "333-010",
+        "rainfall": false
+    },
+    {
+        "name": "334-002",
+        "latitude": "43.73043243",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.54808517",
+        "id": "7902",
+        "fullname": "334-002",
+        "rainfall": false
+    },
+    {
+        "name": "335-003",
+        "latitude": "43.74278805",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.54470419",
+        "id": "7903",
+        "fullname": "335-003",
+        "rainfall": false
+    },
+    {
+        "name": "3595419548",
+        "latitude": "43.665333",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.317125",
+        "id": "7904",
+        "fullname": "3595419548",
+        "rainfall": false
+    },
+    {
+        "name": "360-003",
+        "latitude": "43.674125",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.486485",
+        "id": "7905",
+        "fullname": "360-003",
+        "rainfall": false
+    },
+    {
+        "name": "360-005B",
+        "latitude": "43.674073",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.486267",
+        "id": "7906",
+        "fullname": "360-005B",
+        "rainfall": false
+    },
+    {
+        "name": "360-005OV",
+        "latitude": "43.674811",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.486768",
+        "id": "7907",
+        "fullname": "360-005OV",
+        "rainfall": false
+    },
+    {
+        "name": "360-006",
+        "latitude": "43.6732",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.485269",
+        "id": "7908",
+        "fullname": "360-006",
+        "rainfall": false
+    },
+    {
+        "name": "360-013",
+        "latitude": "43.67437075",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.48042532",
+        "id": "7909",
+        "fullname": "360-013",
+        "rainfall": false
+    },
+    {
+        "name": "360-036",
+        "latitude": "43.68893597",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.45522336",
+        "id": "7910",
+        "fullname": "360-036",
+        "rainfall": false
+    },
+    {
+        "name": "361-005",
+        "latitude": "43.6782767",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.49016469",
+        "id": "7911",
+        "fullname": "361-005",
+        "rainfall": false
+    },
+    {
+        "name": "362-002",
+        "latitude": "43.69835953",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.51332106",
+        "id": "7912",
+        "fullname": "362-002",
+        "rainfall": false
+    },
+    {
+        "name": "362-004B_OV",
+        "latitude": "43.69803",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.513533",
+        "id": "7913",
+        "fullname": "362-004B_OV",
+        "rainfall": false
+    },
+    {
+        "name": "362-006",
+        "latitude": "43.69897524",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.51301176",
+        "id": "7914",
+        "fullname": "362-006",
+        "rainfall": false
+    },
+    {
+        "name": "3985021520_2",
+        "latitude": "43.69888259",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.28637304",
+        "id": "7915",
+        "fullname": "3985021520_2",
+        "rainfall": false
+    },
+    {
+        "name": "421-006",
+        "latitude": "43.71866819",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.41559315",
+        "id": "7916",
+        "fullname": "421-006",
+        "rainfall": false
+    },
+    {
+        "name": "422-003",
+        "latitude": "43.72601047",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.41396197",
+        "id": "7917",
+        "fullname": "422-003",
+        "rainfall": false
+    },
+    {
+        "name": "460-002",
+        "latitude": "43.69959191",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.35854048",
+        "id": "7918",
+        "fullname": "460-002",
+        "rainfall": false
+    },
+    {
+        "name": "460-009",
+        "latitude": "43.70220834",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.38135147",
+        "id": "7919",
+        "fullname": "460-009",
+        "rainfall": false
+    },
+    {
+        "name": "460-020",
+        "latitude": "43.719496",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.394793",
+        "id": "7920",
+        "fullname": "460-020",
+        "rainfall": false
+    },
+    {
+        "name": "461-002",
+        "latitude": "43.70047767",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.35948621",
+        "id": "7921",
+        "fullname": "461-002",
+        "rainfall": false
+    },
+    {
+        "name": "462-002",
+        "latitude": "43.70008819",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.38327903",
+        "id": "7922",
+        "fullname": "462-002",
+        "rainfall": false
+    },
+    {
+        "name": "462-007",
+        "latitude": "43.69789141",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.39373032",
+        "id": "7923",
+        "fullname": "462-007",
+        "rainfall": false
+    },
+    {
+        "name": "463-011",
+        "latitude": "43.70613943",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4039369",
+        "id": "7924",
+        "fullname": "463-011",
+        "rainfall": false
+    },
+    {
+        "name": "464-002",
+        "latitude": "43.70519886",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4056479",
+        "id": "7925",
+        "fullname": "464-002",
+        "rainfall": false
+    },
+    {
+        "name": "465-004",
+        "latitude": "43.711885",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.382115",
+        "id": "7926",
+        "fullname": "465-004",
+        "rainfall": false
+    },
+    {
+        "name": "465-006",
+        "latitude": "43.710506",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.379912",
+        "id": "7927",
+        "fullname": "465-006",
+        "rainfall": false
+    },
+    {
+        "name": "466-001",
+        "latitude": "43.718648",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.390701",
+        "id": "7928",
+        "fullname": "466-001",
+        "rainfall": false
+    },
+    {
+        "name": "467-001",
+        "latitude": "43.72709618",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.40428608",
+        "id": "7929",
+        "fullname": "467-001",
+        "rainfall": false
+    },
+    {
+        "name": "4670512614",
+        "latitude": "43.762213",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.402945",
+        "id": "7930",
+        "fullname": "4670512614",
+        "rainfall": false
+    },
+    {
+        "name": "4759911812",
+        "latitude": "43.77026215",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.41290154000001",
+        "id": "7931",
+        "fullname": "4759911812",
+        "rainfall": false
+    },
+    {
+        "name": "4772115492",
+        "latitude": "43.77131932",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.36718699",
+        "id": "7932",
+        "fullname": "4772115492",
+        "rainfall": false
+    },
+    {
+        "name": "520-013",
+        "latitude": "43.59424838",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.53428017",
+        "id": "7933",
+        "fullname": "520-013",
+        "rainfall": false
+    },
+    {
+        "name": "520-024",
+        "latitude": "43.599335",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.517615",
+        "id": "7934",
+        "fullname": "520-024",
+        "rainfall": false
+    },
+    {
+        "name": "521-001",
+        "latitude": "43.59371196",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.54662998",
+        "id": "7935",
+        "fullname": "521-001",
+        "rainfall": false
+    },
+    {
+        "name": "521-008",
+        "latitude": "43.60383609",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.55759787",
+        "id": "7936",
+        "fullname": "521-008",
+        "rainfall": false
+    },
+    {
+        "name": "522-002",
+        "latitude": "43.63032486",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.56808936",
+        "id": "7937",
+        "fullname": "522-002",
+        "rainfall": false
+    },
+    {
+        "name": "523-002",
+        "latitude": "43.58650272",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.54100095",
+        "id": "7938",
+        "fullname": "523-002",
+        "rainfall": false
+    },
+    {
+        "name": "523-008",
+        "latitude": "43.58928402",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.54046319",
+        "id": "7939",
+        "fullname": "523-008",
+        "rainfall": false
+    },
+    {
+        "name": "523-014",
+        "latitude": "43.59352706",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.54205398",
+        "id": "7940",
+        "fullname": "523-014",
+        "rainfall": false
+    },
+    {
+        "name": "5512530533",
+        "latitude": "43.639894",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.395165",
+        "id": "7941",
+        "fullname": "5512530533",
+        "rainfall": false
+    },
+    {
+        "name": "Copeland_Alt",
+        "latitude": "43.708858",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.361253",
+        "id": "7942",
+        "fullname": "Copeland_Alt",
+        "rainfall": false
+    },
+    {
+        "name": "LC1451-N",
+        "latitude": "43.632981",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.409014",
+        "id": "7943",
+        "fullname": "LC1451-N",
+        "rainfall": false
+    },
+    {
+        "name": "LC1451-S",
+        "latitude": "43.63298",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.409002",
+        "id": "7944",
+        "fullname": "LC1451-S",
+        "rainfall": false
+    },
+    {
+        "name": "LC507",
+        "latitude": "43.63712516",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.45223025",
+        "id": "7945",
+        "fullname": "LC507",
+        "rainfall": false
+    },
+    {
+        "name": "LC508",
+        "latitude": "43.63633606",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.44675091",
+        "id": "7946",
+        "fullname": "LC508",
+        "rainfall": false
+    },
+    {
+        "name": "LC534",
+        "latitude": "43.63090974",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.42982534",
+        "id": "7947",
+        "fullname": "LC534",
+        "rainfall": false
+    },
+    {
+        "name": "LC535-N",
+        "latitude": "43.63028362",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.42414767",
+        "id": "7948",
+        "fullname": "LC535-N",
+        "rainfall": false
+    },
+    {
+        "name": "LC535-S",
+        "latitude": "43.63028362",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.42414767",
+        "id": "7949",
+        "fullname": "LC535-S",
+        "rainfall": false
+    },
+    {
+        "name": "LC536-N",
+        "latitude": "43.630865",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.418178",
+        "id": "7950",
+        "fullname": "LC536-N",
+        "rainfall": false
+    },
+    {
+        "name": "LC536-S",
+        "latitude": "43.630865",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.418178",
+        "id": "7951",
+        "fullname": "LC536-S",
+        "rainfall": false
+    },
+    {
+        "name": "LC537-N",
+        "latitude": "43.63176278",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.41397082",
+        "id": "7952",
+        "fullname": "LC537-N",
+        "rainfall": false
+    },
+    {
+        "name": "LC537-S",
+        "latitude": "43.63176278",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.41397082",
+        "id": "7953",
+        "fullname": "LC537-S",
+        "rainfall": false
+    },
+    {
+        "name": "NYD-014",
+        "latitude": "43.755677",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.408996",
+        "id": "7954",
+        "fullname": "NYD-014",
+        "rainfall": false
+    },
+    {
+        "name": "Rakely-3388496380",
+        "latitude": "43.646796",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.604364",
+        "id": "7955",
+        "fullname": "Rakely-3388496380",
+        "rainfall": false
+    },
+    {
+        "name": "U-8691-001",
+        "latitude": "43.70454572",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.28895772",
+        "id": "7956",
+        "fullname": "U-8691-001",
+        "rainfall": false
+    },
+    {
+        "name": "AU014c_01",
+        "latitude": "43.997933",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.476061",
+        "id": "7962",
+        "fullname": "AU014c_01",
+        "rainfall": false
+    },
+    {
+        "name": "MA006c_01",
+        "latitude": "43.872134",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.318616",
+        "id": "7963",
+        "fullname": "MA006c_01",
+        "rainfall": false
+    },
+    {
+        "name": "MA048_11",
+        "latitude": "43.838112",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.388889",
+        "id": "7964",
+        "fullname": "MA048_11",
+        "rainfall": false
+    },
+    {
+        "name": "RH011_11",
+        "latitude": "43.913925",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.44798",
+        "id": "7965",
+        "fullname": "RH011_11",
+        "rainfall": false
+    },
+    {
+        "name": "GE004b_11",
+        "latitude": "44.216711",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.464366",
+        "id": "8016",
+        "fullname": "GE004b_11",
+        "rainfall": false
+    },
+    {
+        "name": "RG_054",
+        "latitude": "43.70058814",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.51260905",
+        "id": "8017",
+        "fullname": "RG_054",
+        "rainfall": true
+    },
+    {
+        "name": "RG_056",
+        "latitude": "43.74597194",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.51458047",
+        "id": "8018",
+        "fullname": "RG_056",
+        "rainfall": true
+    },
+    {
+        "name": "APOTEX1",
+        "latitude": "43.892235",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.430156",
+        "id": "8027",
+        "fullname": "APOTEX1",
+        "rainfall": false
+    },
+    {
+        "name": "320-027",
+        "latitude": "43.698007",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.519907",
+        "id": "8028",
+        "fullname": "320-027",
+        "rainfall": false
+    },
+    {
+        "name": "APOTEX2",
+        "latitude": "43.89172",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.43269",
+        "id": "8029",
+        "fullname": "APOTEX2",
+        "rainfall": false
+    },
+    {
+        "name": "35SAN2",
+        "latitude": "43.685945",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.537853",
+        "id": "8036",
+        "fullname": "35SAN2",
+        "rainfall": false
+    },
+    {
+        "name": "35SAN6ALT",
+        "latitude": "43.684791",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.565112",
+        "id": "8037",
+        "fullname": "35SAN6-ALT",
+        "rainfall": false
+    },
+    {
+        "name": "35STM6",
+        "latitude": "43.683007",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.532807",
+        "id": "8038",
+        "fullname": "35STM6",
+        "rainfall": false
+    },
+    {
+        "name": "35STM8",
+        "latitude": "43.672924",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.568796",
+        "id": "8039",
+        "fullname": "35STM8",
+        "rainfall": false
+    },
+    {
+        "name": "35STM7",
+        "latitude": "43.676277",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.574106",
+        "id": "8040",
+        "fullname": "35STM7",
+        "rainfall": false
+    },
+    {
+        "name": "TEVA-Ma",
+        "latitude": "43.834606",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.329801",
+        "id": "8041",
+        "fullname": "TEVA-Ma",
+        "rainfall": false
+    },
+    {
+        "name": "37 COM 10",
+        "latitude": "43.687122",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.438649",
+        "id": "8042",
+        "fullname": "37COM10",
+        "rainfall": false
+    },
+    {
+        "name": "37-SCSO-2",
+        "latitude": "43.69094",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.42606",
+        "id": "8043",
+        "fullname": "37SCSO2",
+        "rainfall": false
+    },
+    {
+        "name": "37-SCSO3",
+        "latitude": "43.691509",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.430965",
+        "id": "8044",
+        "fullname": "37SCSO3",
+        "rainfall": false
+    },
+    {
+        "name": "AU014a_10_m11",
+        "latitude": "43.998703",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.465527",
+        "id": "8046",
+        "fullname": "AU014a_10_m11",
+        "rainfall": false
+    },
+    {
+        "name": "R-YR-KI-07",
+        "latitude": "44.00780786",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.66807398",
+        "id": "8048",
+        "fullname": "R-YR-KI-07",
+        "rainfall": true
+    },
+    {
+        "name": "RG_055",
+        "latitude": "43.728869",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.44334",
+        "id": "8049",
+        "fullname": "RG_055",
+        "rainfall": true
+    },
+    {
+        "name": "TEVA-St",
+        "latitude": "43.965917",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.266717",
+        "id": "8064",
+        "fullname": "TEVA-St",
+        "rainfall": false
+    },
+    {
+        "name": "WS003_10_m06",
+        "latitude": "43.97829",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.241227",
+        "id": "8065",
+        "fullname": "WS003_10_m06",
+        "rainfall": false
+    },
+    {
+        "name": "37 com 9_alt3",
+        "latitude": "43.688406",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.435136",
+        "id": "8066",
+        "fullname": "37COM9-ALT3",
+        "rainfall": false
+    },
+    {
+        "name": "19604936.1",
+        "latitude": "43.6583715457865",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4982623312871",
+        "id": "8077",
+        "fullname": "19604936.1(N)",
+        "rainfall": false
+    },
+    {
+        "name": "23205184.1",
+        "latitude": "43.6583561514782",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4981453333545",
+        "id": "8078",
+        "fullname": "23205184.1",
+        "rainfall": false
+    },
+    {
+        "name": "47505329.1",
+        "latitude": "43.6609836786973",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4942652921541",
+        "id": "8079",
+        "fullname": "47505329.1",
+        "rainfall": false
+    },
+    {
+        "name": "82404620.1",
+        "latitude": "43.6641447535405",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.5022858846112",
+        "id": "8080",
+        "fullname": "82404620.1",
+        "rainfall": false
+    },
+    {
+        "name": "WS003_10_m02",
+        "latitude": "43.972379",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.242432",
+        "id": "8081",
+        "fullname": "WS003_10_m02",
+        "rainfall": false
+    },
+    {
+        "name": "WS003_10_m07",
+        "latitude": "43.972893",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.244136",
+        "id": "8082",
+        "fullname": "WS003_10_m07",
+        "rainfall": false
+    },
+    {
+        "name": "9SAN7",
+        "latitude": "43.640368",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.573875",
+        "id": "8085",
+        "fullname": "9-SAN-7",
+        "rainfall": false
+    },
+    {
+        "name": "6SAN1",
+        "latitude": "43.707475",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.519558",
+        "id": "8086",
+        "fullname": "6-SAN-1",
+        "rainfall": false
+    },
+    {
+        "name": "6SAN2ALT",
+        "latitude": "43.714223",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.521633",
+        "id": "8087",
+        "fullname": "6-SAN-2ALT",
+        "rainfall": false
+    },
+    {
+        "name": "28STM14",
+        "latitude": "43.791389",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.433954",
+        "id": "8088",
+        "fullname": "28-STM-14",
+        "rainfall": false
+    },
+    {
+        "name": "28STM15",
+        "latitude": "43.791269",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.434839",
+        "id": "8089",
+        "fullname": "28-STM-15",
+        "rainfall": false
+    },
+    {
+        "name": "45YSTM1",
+        "latitude": "43.769297",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.50747",
+        "id": "8090",
+        "fullname": "45Y-STM-1",
+        "rainfall": false
+    },
+    {
+        "name": "45YSTM2",
+        "latitude": "43.778994",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.504848",
+        "id": "8091",
+        "fullname": "45Y-STM-2",
+        "rainfall": false
+    },
+    {
+        "name": "45YSAN1",
+        "latitude": "43.769392",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.506597",
+        "id": "8092",
+        "fullname": "45Y-SAN-1",
+        "rainfall": false
+    },
+    {
+        "name": "45YSTM3",
+        "latitude": "43.76409",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.505157",
+        "id": "8093",
+        "fullname": "45Y-STM-3",
+        "rainfall": false
+    },
+    {
+        "name": "45YSAN2",
+        "latitude": "43.764588",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.505176",
+        "id": "8094",
+        "fullname": "45Y-SAN-2",
+        "rainfall": false
+    },
+    {
+        "name": "13SAN1",
+        "latitude": "43.742133",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.518221",
+        "id": "8095",
+        "fullname": "13-SAN-1",
+        "rainfall": false
+    },
+    {
+        "name": "13SAN2",
+        "latitude": "43.742057",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.524016",
+        "id": "8096",
+        "fullname": "13-SAN-2",
+        "rainfall": false
+    },
+    {
+        "name": "45YSTM4",
+        "latitude": "43.775646",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.520076",
+        "id": "8097",
+        "fullname": "45Y-STM-4",
+        "rainfall": false
+    },
+    {
+        "name": "RG_TEST2",
+        "latitude": "43.839364",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.383469",
+        "id": "8098",
+        "fullname": "RG_TEST2",
+        "rainfall": true
+    },
+    {
+        "name": "RG_TEST3",
+        "latitude": "43.839364",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.383469",
+        "id": "8099",
+        "fullname": "RG_TEST3",
+        "rainfall": true
+    },
+    {
+        "name": "WS003_10_m01",
+        "latitude": "43.970479",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.242078",
+        "id": "8120",
+        "fullname": "WS003_10_m01",
+        "rainfall": false
+    },
+    {
+        "name": "WS003_10_m03",
+        "latitude": "43.968411",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.244704",
+        "id": "8121",
+        "fullname": "WS003_10_m03",
+        "rainfall": false
+    },
+    {
+        "name": "WS003_10_m04",
+        "latitude": "43.975104",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.239864",
+        "id": "8122",
+        "fullname": "WS003_10_m04",
+        "rainfall": false
+    },
+    {
+        "name": "300305",
+        "latitude": "43.4224",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.4594",
+        "id": "8143",
+        "fullname": "300305",
+        "rainfall": false
+    },
+    {
+        "name": "300990",
+        "latitude": "43.4442",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.4581",
+        "id": "8144",
+        "fullname": "300990",
+        "rainfall": false
+    },
+    {
+        "name": "301115",
+        "latitude": "43.4394",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.4772",
+        "id": "8145",
+        "fullname": "301115",
+        "rainfall": false
+    },
+    {
+        "name": "303001",
+        "latitude": "43.4082",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.4475",
+        "id": "8146",
+        "fullname": "303001",
+        "rainfall": false
+    },
+    {
+        "name": "303004",
+        "latitude": "43.4086",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.4446",
+        "id": "8147",
+        "fullname": "303004",
+        "rainfall": false
+    },
+    {
+        "name": "303092",
+        "latitude": "43.4937",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.4346",
+        "id": "8148",
+        "fullname": "303092",
+        "rainfall": false
+    },
+    {
+        "name": "303147",
+        "latitude": "43.3897",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.4233",
+        "id": "8149",
+        "fullname": "303147",
+        "rainfall": false
+    },
+    {
+        "name": "303564",
+        "latitude": "43.3931",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.4546",
+        "id": "8150",
+        "fullname": "303564",
+        "rainfall": false
+    },
+    {
+        "name": "303746",
+        "latitude": "43.4467",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.4947",
+        "id": "8151",
+        "fullname": "303746",
+        "rainfall": false
+    },
+    {
+        "name": "306570",
+        "latitude": "43.4324",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.4751",
+        "id": "8152",
+        "fullname": "306570",
+        "rainfall": false
+    },
+    {
+        "name": "300994",
+        "latitude": "43.4448",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.4564",
+        "id": "8154",
+        "fullname": "300994",
+        "rainfall": false
+    },
+    {
+        "name": "308300",
+        "latitude": "43.4304",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.5277",
+        "id": "8155",
+        "fullname": "308300",
+        "rainfall": false
+    },
+    {
+        "name": "311154",
+        "latitude": "43.4473",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.4986",
+        "id": "8156",
+        "fullname": "311154",
+        "rainfall": false
+    },
+    {
+        "name": "311163",
+        "latitude": "43.44795",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.499561",
+        "id": "8157",
+        "fullname": "311163",
+        "rainfall": false
+    },
+    {
+        "name": "RH056_m01",
+        "latitude": "43.884453",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.421125",
+        "id": "8158",
+        "fullname": "RH056_m01",
+        "rainfall": false
+    },
+    {
+        "name": "RH056_m02",
+        "latitude": "43.886116",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.424099",
+        "id": "8159",
+        "fullname": "RH056_m02",
+        "rainfall": false
+    },
+    {
+        "name": "RH056_m03",
+        "latitude": "43.888436",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.427749",
+        "id": "8160",
+        "fullname": "RH056_m03",
+        "rainfall": false
+    },
+    {
+        "name": "MA021_10_m03",
+        "latitude": "43.868374",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.271855",
+        "id": "8161",
+        "fullname": "MA021_10_m03",
+        "rainfall": false
+    },
+    {
+        "name": "WS003_10_m05",
+        "latitude": "43.978998",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.241532",
+        "id": "8162",
+        "fullname": "WS003_10_m05",
+        "rainfall": false
+    },
+    {
+        "name": "WS003_10_m08",
+        "latitude": "43.968791",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.234507",
+        "id": "8163",
+        "fullname": "WS003_10_m08",
+        "rainfall": false
+    },
+    {
+        "name": "MA021_10_m01",
+        "latitude": "43.870866",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.272564",
+        "id": "8164",
+        "fullname": "MA021_10_m01",
+        "rainfall": false
+    },
+    {
+        "name": "MA021_10_m01b",
+        "latitude": "43.870866",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.272564",
+        "id": "8165",
+        "fullname": "MA021_10_m01b",
+        "rainfall": false
+    },
+    {
+        "name": "37COM11",
+        "latitude": "43.696171",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.438268",
+        "id": "8166",
+        "fullname": "37-COM-11ALT",
+        "rainfall": false
+    },
+    {
+        "name": "42COM13",
+        "latitude": "43.638814",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.427574",
+        "id": "8167",
+        "fullname": "42-COM-13",
+        "rainfall": false
+    },
+    {
+        "name": "44COM3",
+        "latitude": "43.662864",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.421745",
+        "id": "8168",
+        "fullname": "44-COM-3",
+        "rainfall": false
+    },
+    {
+        "name": "44COM4",
+        "latitude": "43.663026",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.420815",
+        "id": "8169",
+        "fullname": "44-COM-4",
+        "rainfall": false
+    },
+    {
+        "name": "44COM5",
+        "latitude": "43.679256",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.441366",
+        "id": "8170",
+        "fullname": "44-COM-5",
+        "rainfall": false
+    },
+    {
+        "name": "06241601",
+        "latitude": "43.372996",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.424729",
+        "id": "8176",
+        "fullname": "R7",
+        "rainfall": true
+    },
+    {
+        "name": "06241602",
+        "latitude": "43.428798",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.429838",
+        "id": "8177",
+        "fullname": "R5",
+        "rainfall": true
+    },
+    {
+        "name": "06241603",
+        "latitude": "43.458211",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.454493",
+        "id": "8178",
+        "fullname": "R4",
+        "rainfall": true
+    },
+    {
+        "name": "06241604",
+        "latitude": "43.444007",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.523094",
+        "id": "8179",
+        "fullname": "R3",
+        "rainfall": true
+    },
+    {
+        "name": "06301601",
+        "latitude": "43.4004",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.5028",
+        "id": "8180",
+        "fullname": "R6",
+        "rainfall": true
+    },
+    {
+        "name": "9SAN1",
+        "latitude": "43.647017",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.577471",
+        "id": "8181",
+        "fullname": "9-SAN-1",
+        "rainfall": false
+    },
+    {
+        "name": "9SAN2",
+        "latitude": "43.643677",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.574875",
+        "id": "8182",
+        "fullname": "9-SAN-2",
+        "rainfall": false
+    },
+    {
+        "name": "9SAN3",
+        "latitude": "43.643677",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.574875",
+        "id": "8183",
+        "fullname": "9-SAN-3",
+        "rainfall": false
+    },
+    {
+        "name": "44STM1",
+        "latitude": "43.668804",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.43264",
+        "id": "8184",
+        "fullname": "44-STM-1",
+        "rainfall": false
+    },
+    {
+        "name": "42COM7",
+        "latitude": "43.645673",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4287",
+        "id": "8185",
+        "fullname": "42-COM-7",
+        "rainfall": false
+    },
+    {
+        "name": "42COM6",
+        "latitude": "43.645678",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.428573",
+        "id": "8186",
+        "fullname": "42-COM-6",
+        "rainfall": false
+    },
+    {
+        "name": "42COM12",
+        "latitude": "43.64374",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.422322",
+        "id": "8187",
+        "fullname": "42-COM-12",
+        "rainfall": false
+    },
+    {
+        "name": "44COM7",
+        "latitude": "43.66326",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.419743",
+        "id": "8188",
+        "fullname": "44-COM-7",
+        "rainfall": false
+    },
+    {
+        "name": "42COM18",
+        "latitude": "43.64674",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.395881",
+        "id": "8189",
+        "fullname": "42-COM-18",
+        "rainfall": false
+    },
+    {
+        "name": "42COM17ALT",
+        "latitude": "43.650838",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.397303",
+        "id": "8229",
+        "fullname": "42-COM-17ALT",
+        "rainfall": false
+    },
+    {
+        "name": "R1",
+        "latitude": "43.4539",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.4981",
+        "id": "8247",
+        "fullname": "R1",
+        "rainfall": false
+    },
+    {
+        "name": "R2",
+        "latitude": "43.4153",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-80.4439",
+        "id": "8248",
+        "fullname": "R2",
+        "rainfall": false
+    },
+    {
+        "name": "19604937.1_ALT",
+        "latitude": "43.658652",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.498311",
+        "id": "8277",
+        "fullname": "19604937.1_ALT",
+        "rainfall": false
+    },
+    {
+        "name": "19205018.1_ALT",
+        "latitude": "43.658617",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.497296",
+        "id": "8278",
+        "fullname": "19205018.1_ALT",
+        "rainfall": false
+    },
+    {
+        "name": "SL52859",
+        "latitude": "43.6587303605917",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4949176988103",
+        "id": "8279",
+        "fullname": "SL52859",
+        "rainfall": false
+    },
+    {
+        "name": "06704912.1_ALT",
+        "latitude": "43.657496",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.498599",
+        "id": "8280",
+        "fullname": "06704912.1_ALT",
+        "rainfall": false
+    },
+    {
+        "name": "16404941.1",
+        "latitude": "43.658167",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.499253",
+        "id": "8281",
+        "fullname": "16404941.1",
+        "rainfall": false
+    },
+    {
+        "name": "42SCSO7",
+        "latitude": "43.634047",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.430546",
+        "id": "8282",
+        "fullname": "42-SCSO-7",
+        "rainfall": false
+    },
+    {
+        "name": "42COM45",
+        "latitude": "43.651181",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.447311",
+        "id": "8284",
+        "fullname": "42-COM-45",
+        "rainfall": false
+    },
+    {
+        "name": "44COM9",
+        "latitude": "43.673851",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.380718",
+        "id": "8299",
+        "fullname": "44-COM-9",
+        "rainfall": false
+    },
+    {
+        "name": "42STM4",
+        "latitude": "43.660234",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.363251",
+        "id": "8300",
+        "fullname": "42-STM-4",
+        "rainfall": false
+    },
+    {
+        "name": "42SCSO1",
+        "latitude": "43.659958",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.36333",
+        "id": "8301",
+        "fullname": "42-SCSO-1",
+        "rainfall": false
+    },
+    {
+        "name": "42COM43",
+        "latitude": "43.645368",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.427205",
+        "id": "8302",
+        "fullname": "42-COM-43",
+        "rainfall": false
+    },
+    {
+        "name": "42STM1",
+        "latitude": "43.646498",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.421909",
+        "id": "8303",
+        "fullname": "42-STM-1",
+        "rainfall": false
+    },
+    {
+        "name": "42SAN5",
+        "latitude": "43.652494",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.459233",
+        "id": "8304",
+        "fullname": "42-SAN-5",
+        "rainfall": false
+    },
+    {
+        "name": "42SAN1",
+        "latitude": "43.640318",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.454604",
+        "id": "8305",
+        "fullname": "42-SAN-1",
+        "rainfall": false
+    },
+    {
+        "name": "42COM56",
+        "latitude": "43.654002",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.384841",
+        "id": "8307",
+        "fullname": "42-COM-56",
+        "rainfall": false
+    },
+    {
+        "name": "42COM35",
+        "latitude": "43.654945",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.368186",
+        "id": "8308",
+        "fullname": "42-COM-35",
+        "rainfall": false
+    },
+    {
+        "name": "18SAN1ALT",
+        "latitude": "43.724706",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.431678",
+        "id": "8309",
+        "fullname": "18-SAN-1ALT",
+        "rainfall": false
+    },
+    {
+        "name": "42COM55",
+        "latitude": "43.655466",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.385441",
+        "id": "8310",
+        "fullname": "42-COM-55",
+        "rainfall": false
+    },
+    {
+        "name": "Flow Balance Calculations",
+        "latitude": "43.677003",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.48941",
+        "id": "8326",
+        "fullname": "Flow Balance Calculations",
+        "rainfall": false
+    },
+    {
+        "name": "42SCSO5",
+        "latitude": "43.645451",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.40077",
+        "id": "8328",
+        "fullname": "42-SCSO-5",
+        "rainfall": false
+    },
+    {
+        "name": "42COM11",
+        "latitude": "43.64388",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.421454",
+        "id": "8329",
+        "fullname": "42-COM-11",
+        "rainfall": false
+    },
+    {
+        "name": "44COM13",
+        "latitude": "43.651034",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.421208",
+        "id": "8331",
+        "fullname": "44-COM-13",
+        "rainfall": false
+    },
+    {
+        "name": "42COM2",
+        "latitude": "43.640268",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.449202",
+        "id": "8332",
+        "fullname": "42-COM-2",
+        "rainfall": false
+    },
+    {
+        "name": "VA001b",
+        "latitude": "43.787738",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.65131",
+        "id": "8334",
+        "fullname": "VA001b",
+        "rainfall": false
+    },
+    {
+        "name": "VA009b_11",
+        "latitude": "43.779385",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.562238",
+        "id": "8335",
+        "fullname": "VA009b_11",
+        "rainfall": false
+    },
+    {
+        "name": "SL51824_ALT",
+        "latitude": "43.6580864410111",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4981341092668",
+        "id": "8395",
+        "fullname": "SL51824_ALT",
+        "rainfall": false
+    },
+    {
+        "name": "13104950.1_ALT",
+        "latitude": "43.6583561514782",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4981453333545",
+        "id": "8396",
+        "fullname": "13104950.1_ALT",
+        "rainfall": false
+    },
+    {
+        "name": "17004943.2_ALT",
+        "latitude": "43.658072",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.498374",
+        "id": "8397",
+        "fullname": "17004943.2_ALT",
+        "rainfall": false
+    },
+    {
+        "name": "17004943.1",
+        "latitude": "43.6583715457865",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4982623312871",
+        "id": "8398",
+        "fullname": "17004943.1",
+        "rainfall": false
+    },
+    {
+        "name": "23205184.1_ALT",
+        "latitude": "43.658",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.499249",
+        "id": "8399",
+        "fullname": "23205184.1_ALT",
+        "rainfall": false
+    },
+    {
+        "name": "R-YR-WS-05",
+        "latitude": "43.9659599",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.26011703",
+        "id": "8400",
+        "fullname": "R-YR-WS-05",
+        "rainfall": true
+    },
+    {
+        "name": "42SAN4",
+        "latitude": "43.635171",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.428065",
+        "id": "8443",
+        "fullname": "42-SAN-4",
+        "rainfall": false
+    },
+    {
+        "name": "42COM14",
+        "latitude": "43.633745",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.433603",
+        "id": "8444",
+        "fullname": "42-COM-14",
+        "rainfall": false
+    },
+    {
+        "name": "42COM46",
+        "latitude": "43.638961",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.445147",
+        "id": "8445",
+        "fullname": "42-COM-46",
+        "rainfall": false
+    },
+    {
+        "name": "42SCSO2",
+        "latitude": "43.639076",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.446546",
+        "id": "8446",
+        "fullname": "42-SCSO-2",
+        "rainfall": false
+    },
+    {
+        "name": "42COM20",
+        "latitude": "43.6509",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.387792",
+        "id": "8447",
+        "fullname": "42-COM-20",
+        "rainfall": false
+    },
+    {
+        "name": "42STM3",
+        "latitude": "43.655551",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.364885",
+        "id": "8448",
+        "fullname": "42-STM-3",
+        "rainfall": false
+    },
+    {
+        "name": "42COM60",
+        "latitude": "43.66051",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.372151",
+        "id": "8449",
+        "fullname": "42-COM-60",
+        "rainfall": false
+    },
+    {
+        "name": "42COM48",
+        "latitude": "43.645899",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.411019",
+        "id": "8450",
+        "fullname": "42-COM-48",
+        "rainfall": false
+    },
+    {
+        "name": "42COM10",
+        "latitude": "43.648817",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.420793",
+        "id": "8505",
+        "fullname": "42-COM-10",
+        "rainfall": false
+    },
+    {
+        "name": "42COM58",
+        "latitude": "43.656289",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.379751",
+        "id": "8508",
+        "fullname": "42-COM-58",
+        "rainfall": false
+    },
+    {
+        "name": "44SCSO1ALT",
+        "latitude": "43.655521",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.460318",
+        "id": "8509",
+        "fullname": "44-SCSO-1ALT",
+        "rainfall": false
+    },
+    {
+        "name": "44STM2",
+        "latitude": "43.661923",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.3675",
+        "id": "8510",
+        "fullname": "44-STM-2",
+        "rainfall": false
+    },
+    {
+        "name": "44COM2ALT",
+        "latitude": "43.678925",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.431953",
+        "id": "8511",
+        "fullname": "44-COM-2ALT",
+        "rainfall": false
+    },
+    {
+        "name": "42COM23",
+        "latitude": "43.654473",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.389281",
+        "id": "8512",
+        "fullname": "42-COM-23",
+        "rainfall": false
+    },
+    {
+        "name": "42COM40",
+        "latitude": "43.662309",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.364121",
+        "id": "8513",
+        "fullname": "42-COM-40",
+        "rainfall": false
+    },
+    {
+        "name": "44COM19",
+        "latitude": "43.659129",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.380942",
+        "id": "8514",
+        "fullname": "44-COM-19",
+        "rainfall": false
+    },
+    {
+        "name": "42COM31",
+        "latitude": "43.654003",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.373571",
+        "id": "8515",
+        "fullname": "42-COM-31",
+        "rainfall": false
+    },
+    {
+        "name": "42COM64",
+        "latitude": "43.65353",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.459695",
+        "id": "8516",
+        "fullname": "42-COM-64",
+        "rainfall": false
+    },
+    {
+        "name": "42SCSO4",
+        "latitude": "43.660986",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.358825",
+        "id": "8517",
+        "fullname": "42-SCSO-4",
+        "rainfall": false
+    },
+    {
+        "name": "44STM3",
+        "latitude": "43.652699",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.398299",
+        "id": "8518",
+        "fullname": "44-STM-3",
+        "rainfall": false
+    },
+    {
+        "name": "44COM17",
+        "latitude": "43.652699",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.398299",
+        "id": "8519",
+        "fullname": "44-COM-17",
+        "rainfall": false
+    },
+    {
+        "name": "42COM15ALT",
+        "latitude": "43.64578",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.411164",
+        "id": "8520",
+        "fullname": "42-COM-15ALT",
+        "rainfall": false
+    },
+    {
+        "name": "42COM26",
+        "latitude": "43.65038",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.381212",
+        "id": "8521",
+        "fullname": "42-COM-26",
+        "rainfall": false
+    },
+    {
+        "name": "42COM57",
+        "latitude": "43.656289",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.379751",
+        "id": "8522",
+        "fullname": "42-COM-57",
+        "rainfall": false
+    },
+    {
+        "name": "42STM2",
+        "latitude": "43.644619",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.385502",
+        "id": "8523",
+        "fullname": "42-STM-2",
+        "rainfall": false
+    },
+    {
+        "name": "42COM1",
+        "latitude": "43.641811",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.455155",
+        "id": "8528",
+        "fullname": "42-COM-1",
+        "rainfall": false
+    },
+    {
+        "name": "42-COM-54",
+        "latitude": "43.654473",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.389281",
+        "id": "8557",
+        "fullname": "42-COM-54",
+        "rainfall": false
+    },
+    {
+        "name": "21005100.1",
+        "latitude": "43.6583715457865",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4982623312871",
+        "id": "8565",
+        "fullname": "21005100.1",
+        "rainfall": false
+    },
+    {
+        "name": "SAN2ALT2",
+        "latitude": "43.778916",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.254692",
+        "id": "8601",
+        "fullname": "SAN-2",
+        "rainfall": false
+    },
+    {
+        "name": "SAN3",
+        "latitude": "43.776813",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.249776",
+        "id": "8602",
+        "fullname": "SAN-3",
+        "rainfall": false
+    },
+    {
+        "name": "SAN4",
+        "latitude": "43.775398",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.252759",
+        "id": "8603",
+        "fullname": "SAN-4",
+        "rainfall": false
+    },
+    {
+        "name": "SAN7",
+        "latitude": "43.775398",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.252759",
+        "id": "8604",
+        "fullname": "SAN-7",
+        "rainfall": false
+    },
+    {
+        "name": "SAN5",
+        "latitude": "43.776134",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.253565",
+        "id": "8605",
+        "fullname": "SAN-5",
+        "rainfall": false
+    },
+    {
+        "name": "SAN6",
+        "latitude": "43.778645",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.255986",
+        "id": "8606",
+        "fullname": "SAN-6",
+        "rainfall": false
+    },
+    {
+        "name": "SAN8",
+        "latitude": "43.773927",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.253586",
+        "id": "8607",
+        "fullname": "SAN-8",
+        "rainfall": false
+    },
+    {
+        "name": "STM1",
+        "latitude": "43.779015",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.254558",
+        "id": "8608",
+        "fullname": "STM-1A",
+        "rainfall": false
+    },
+    {
+        "name": "STM1B",
+        "latitude": "43.779015",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.254558",
+        "id": "8609",
+        "fullname": "STM-1B",
+        "rainfall": false
+    },
+    {
+        "name": "STM2",
+        "latitude": "43.78006",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.249356",
+        "id": "8610",
+        "fullname": "STM-2",
+        "rainfall": false
+    },
+    {
+        "name": "STM3",
+        "latitude": "43.776909",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.253526",
+        "id": "8611",
+        "fullname": "STM-3",
+        "rainfall": false
+    },
+    {
+        "name": "STM4",
+        "latitude": "43.776675",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.250204",
+        "id": "8612",
+        "fullname": "STM-4",
+        "rainfall": false
+    },
+    {
+        "name": "STM5",
+        "latitude": "43.775483",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.25282",
+        "id": "8613",
+        "fullname": "STM-5A",
+        "rainfall": false
+    },
+    {
+        "name": "STM5B",
+        "latitude": "43.775483",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.25282",
+        "id": "8614",
+        "fullname": "STM-5B",
+        "rainfall": false
+    },
+    {
+        "name": "STM6I",
+        "latitude": "43.774893",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.255293",
+        "id": "8615",
+        "fullname": "STM-6I",
+        "rainfall": false
+    },
+    {
+        "name": "STM7",
+        "latitude": "43.776285",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.254721",
+        "id": "8616",
+        "fullname": "STM-7",
+        "rainfall": false
+    },
+    {
+        "name": "STM8",
+        "latitude": "43.776285",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.254721",
+        "id": "8617",
+        "fullname": "STM-8",
+        "rainfall": false
+    },
+    {
+        "name": "STM9",
+        "latitude": "43.776026",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.253195",
+        "id": "8618",
+        "fullname": "STM-9",
+        "rainfall": false
+    },
+    {
+        "name": "STM10",
+        "latitude": "43.77723",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.254934",
+        "id": "8619",
+        "fullname": "STM-10",
+        "rainfall": false
+    },
+    {
+        "name": "STM11",
+        "latitude": "43.77723",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.254934",
+        "id": "8620",
+        "fullname": "STM-11",
+        "rainfall": false
+    },
+    {
+        "name": "STM12",
+        "latitude": "43.774924",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.253799",
+        "id": "8621",
+        "fullname": "STM-12",
+        "rainfall": false
+    },
+    {
+        "name": "STM6O",
+        "latitude": "43.774395",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.253819",
+        "id": "8622",
+        "fullname": "STM-6O",
+        "rainfall": false
+    },
+    {
+        "name": "STM13",
+        "latitude": "43.772675",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.25914",
+        "id": "8623",
+        "fullname": "STM-13",
+        "rainfall": false
+    },
+    {
+        "name": "GE004d_11",
+        "latitude": "44.232218",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.465739",
+        "id": "8736",
+        "fullname": "GE004d_11",
+        "rainfall": false
+    },
+    {
+        "name": "chamber-4",
+        "latitude": "43.774905",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.463417",
+        "id": "8737",
+        "fullname": "chamber-4",
+        "rainfall": false
+    },
+    {
+        "name": "DUFF-SAN1",
+        "latitude": "43.769024",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.466126",
+        "id": "8797",
+        "fullname": "FM-DUFF-SAN1",
+        "rainfall": false
+    },
+    {
+        "name": "220-106",
+        "latitude": "43.758111",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.247312",
+        "id": "8802",
+        "fullname": "220-106",
+        "rainfall": false
+    },
+    {
+        "name": "Archived R-YR-MA03",
+        "latitude": "",
+        "dbname": "Emerald_AECOM",
+        "longitude": "",
+        "id": "889",
+        "fullname": "Archived R-YR-MA03",
+        "rainfall": true
+    },
+    {
+        "name": "EG003",
+        "latitude": "44.080147",
+        "dbname": "Emerald_AECOM",
+        "longitude": "-79.4333724",
+        "id": "8966",
+        "fullname": "EG003",
+        "rainfall": false
+    }
+]
