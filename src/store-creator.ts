@@ -15,11 +15,13 @@ import { IState } from './state';
 
 import { rootSaga } from './root-saga';
 import { GeneralMessageModalContainer, generalMessageModalContainerReducer } from './components/modal';
+import { configurationReducer } from '@business-logic/configuration/reducers';
 
 const reducers = combineReducers<IState>({
   anomaliesScreen: anomaliesScreenReducer,
   projectsScreen: projectsScreenReducer,
   modalState: generalMessageModalContainerReducer,
+  configuration: configurationReducer,
   routing: routerReducer,
 });
 
