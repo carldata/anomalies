@@ -3,6 +3,7 @@ build/
 node_modules/
 typings/
 tmp/
+backless-development/
 npm-debug.log
 .sw[a-z]
 bundle.js
