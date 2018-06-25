@@ -5,8 +5,10 @@ import { Button, ControlLabel, Form, FormControl, FormGroup, Row, Col, Navbar } 
 import { Column } from 'react-data-grid';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import { convertHpSliderScss, convertHpTimeSeriesChartScss, IHpTimeSeriesChartState, HpSlider, EnumHandleType,
-   IUnixFromTo, handleMovedCallback, HpTimeSeriesChart, hpTimeSeriesChartReducerAuxFunctions } from 'time-series-scroller';
+import {
+  convertHpSliderScss, convertHpTimeSeriesChartScss, IHpTimeSeriesChartState, HpSlider, EnumHandleType,
+  IUnixFromTo, handleMovedCallback, HpTimeSeriesChart, hpTimeSeriesChartReducerAuxFunctions
+} from 'time-series-scroller';
 import { IDomain, IHpSliderHandleValues } from 'time-series-scroller/lib/out/hp-slider/interfaces';
 import * as hpSliderScss from 'time-series-scroller/lib/out/sass/hp-slider.scss';
 import * as hpTimeSeriesChartScss from 'time-series-scroller/lib/out/sass/hp-time-series-chart.scss';
@@ -41,6 +43,7 @@ import {
   IGetChannelsForSiteActionCreator,
 } from '../projects-screen/action-creators';
 import { ITimeSeriesLoadContext } from './models/time-series-load-context';
+import { DatePickerWrapper } from '../components/datepicker/datepickerwrapper';
 
 interface IAnomaliesComponentProps {
   mainChartState: IHpTimeSeriesChartState;
@@ -140,7 +143,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                 bsStyle='primary'
                 disabled={_.isEmpty(this.props.screenState.project)}
                 onClick={() => this.props.getTimeSeries({ dateFrom: this.state.startDate, dateTo: this.state.endDate } as ITimeSeriesLoadContext)}>
-              Load Timeseries</Button>
+                Load Timeseries</Button>
             </FormGroup>
           </Form>
 
@@ -160,14 +163,16 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
               <FormControl.Static>{_.isEmpty(this.props.screenState.project) ? 'No final' : this.props.screenState.project.finalChannelName}</FormControl.Static>
             </FormGroup>
             {' '}
-            <FormGroup>
-              <ControlLabel>Start Date:</ControlLabel>
+            <FormGroup >
+              <DatePickerWrapper />
+              {/* <ControlLabel>Start Date:</ControlLabel>
               {' '}
               <FormControl type='text' value={this.state.startDate} onChange={(e) => this.setState({ startDate: (e.target as HTMLInputElement).value })}></FormControl>
+              <DatePickerWrapper />
               {' '}
               <ControlLabel>End Date:</ControlLabel>
               {' '}
-              <FormControl type='text' value={this.state.endDate} onChange={(e) => this.setState({ endDate: (e.target as HTMLInputElement).value })}></FormControl>
+              <FormControl type='text' value={this.state.endDate} onChange={(e) => this.setState({ endDate: (e.target as HTMLInputElement).value })}></FormControl> */}
             </FormGroup>
           </Form>
 
@@ -198,10 +203,10 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                       windowUnixTo,
                     } as IHpTimeSeriesChartState,
                     supportingChannelsState: _.map(this.state.supportingChannelsState, (el) => ({
-                        ...el,
-                        windowUnixFrom,
-                        windowUnixTo,
-                      } as IHpTimeSeriesChartState)),
+                      ...el,
+                      windowUnixFrom,
+                      windowUnixTo,
+                    } as IHpTimeSeriesChartState)),
                   });
                 }}
                 fitToParent={{ toWidth: true }}
