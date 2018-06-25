@@ -13,7 +13,7 @@ interface IDatePickerWrapperComponentProps {
 }
 
 interface IDatePickerWrapperComponentActionCreators {
-
+    dateSelected: (startDate: string, endDate: string) => void;
 }
 
 interface IDatePickerWrapperComponentState {
@@ -22,6 +22,7 @@ interface IDatePickerWrapperComponentState {
 }
 
 export class DatePickerWrapper extends React.Component<IDatePickerWrapperComponentProps & IDatePickerWrapperComponentActionCreators, IDatePickerWrapperComponentState> {
+    private dateFormat: string = 'YYYY-MM-DDTHH:mm';
     constructor(props: IDatePickerWrapperComponentProps & IDatePickerWrapperComponentActionCreators, context: any) {
         super(props, context);
         this.state = {
@@ -36,12 +37,14 @@ export class DatePickerWrapper extends React.Component<IDatePickerWrapperCompone
         this.setState({
             startDate: date,
         });
+        this.props.dateSelected(date.format(this.dateFormat), this.state.endDate.format(this.dateFormat));
     }
 
     private handleChangeEnd(date) {
         this.setState({
             endDate: date,
         });
+        this.props.dateSelected(this.state.startDate.format(this.dateFormat), date.format(this.dateFormat));
     }
 
     public render() {

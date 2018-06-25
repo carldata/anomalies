@@ -164,15 +164,9 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
             </FormGroup>
             {' '}
             <FormGroup >
-              <DatePickerWrapper />
-              {/* <ControlLabel>Start Date:</ControlLabel>
-              {' '}
-              <FormControl type='text' value={this.state.startDate} onChange={(e) => this.setState({ startDate: (e.target as HTMLInputElement).value })}></FormControl>
-              <DatePickerWrapper />
-              {' '}
-              <ControlLabel>End Date:</ControlLabel>
-              {' '}
-              <FormControl type='text' value={this.state.endDate} onChange={(e) => this.setState({ endDate: (e.target as HTMLInputElement).value })}></FormControl> */}
+              <DatePickerWrapper dateSelected={(startDate, endDate) => {
+                this.setState({ startDate, endDate });
+              }} />
             </FormGroup>
           </Form>
 

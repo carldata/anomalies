@@ -116,6 +116,6 @@ export class AddChannelModal extends React.Component<IAddChannelModalProps & IAd
       channelId: this.channelId,
       channelName: this.channelName,
       type: this.state.channelType,
-    });
+    } as ISiteChannelInfo);
   }
 }
