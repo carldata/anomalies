@@ -2,10 +2,8 @@ import * as moment from 'moment';
 import * as React from 'react';
 import { ControlLabel, Form, FormGroup } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import 'react-datepicker/dist/react-datepicker.css';
-import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
-import { IState } from '../../state';
 
 interface IDatePickerWrapperComponentProps {
 
@@ -20,7 +18,7 @@ interface IDatePickerWrapperComponentState {
     endDate: moment.Moment;
 }
 
-export class DatePickerWrapper extends React.Component<IDatePickerWrapperComponentProps & IDatePickerWrapperComponentActionCreators, IDatePickerWrapperComponentState> {
+export default class DatePickerWrapper extends React.Component<IDatePickerWrapperComponentProps & IDatePickerWrapperComponentActionCreators, IDatePickerWrapperComponentState> {
     private dateFormat: string = 'YYYY-MM-DDTHH:mm';
     constructor(props: IDatePickerWrapperComponentProps & IDatePickerWrapperComponentActionCreators, context: any) {
         super(props, context);
@@ -75,18 +73,4 @@ export class DatePickerWrapper extends React.Component<IDatePickerWrapperCompone
         </Form>;
     }
 }
-
-function mapStateToProps(state: IState) {
-    return {
-
-    } as IDatePickerWrapperComponentProps;
-}
-
-function matchDispatchToProps(dispatch: Dispatch<{}>) {
-    return bindActionCreators({
-
-    }, dispatch);
-}
-
-export default connect(mapStateToProps, matchDispatchToProps)(DatePickerWrapper);
 

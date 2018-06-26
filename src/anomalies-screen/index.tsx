@@ -43,7 +43,7 @@ import {
   IGetChannelsForSiteActionCreator,
 } from '../projects-screen/action-creators';
 import { ITimeSeriesLoadContext } from './models/time-series-load-context';
-import { DatePickerWrapper } from '../components/datepicker/datepickerwrapper';
+import DatePickerWrapper from '../components/datepicker/date-picker';
 
 interface IAnomaliesComponentProps {
   mainChartState: IHpTimeSeriesChartState;
