@@ -1,12 +1,11 @@
-import * as React from 'react';
 import * as moment from 'moment';
-import { connect } from 'react-redux';
-import DatePicker from 'react-datepicker';
-import { IState } from '../../state';
-import { bindActionCreators, Dispatch } from 'redux';
+import * as React from 'react';
 import { ControlLabel, Form, FormGroup } from 'react-bootstrap';
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
+import { IState } from '../../state';
 
 interface IDatePickerWrapperComponentProps {
 

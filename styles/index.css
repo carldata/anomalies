@@ -5,3 +5,37 @@
 .modal-backdrop {
   z-index: 800;
 }
+
+/* Start Custom ReactDatePicker CSS */
+.react-datepicker {
+  font-size: 1.3rem !important;
+}
+
+.react-datepicker__current-month {
+  font-size: 1.5rem !important;
+}
+
+.react-datepicker__header {
+  padding-top: 6px !important;
+}
+
+.react-datepicker__navigation {
+  top: 13px !important;
+}
+
+.react-datepicker__day-name, .react-datepicker__day {
+  margin: 0.5rem !important;
+}
+
+.react-datepicker-time__header {
+  font-size: 0.944em;
+}
+
+.react-datepicker__navigation--next--with-time {
+  right: 80px;
+}
+
+.react-datepicker__time-list-item {
+  width: 50px;
+}
+/* End Custom ReactDatePicker CSS */
