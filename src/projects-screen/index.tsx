@@ -9,17 +9,15 @@ import {
   getAllProjects,
   goToAnomaliesScreen,
   IGoToAnomaliesScreenActionCreator,
-  IAddProjectActionCreator,
-  IGetSitesForProjectActionCreator,
-  IGetChannelsForSiteActionCreator,
   showProjectProjectDefinitionModal,
   IShowProjectDefintionModalActionCreator,
+  IDeleteProjectActionCreator,
+  deleteProject,
 } from './action-creators';
 import { ProjectComponent } from './project';
 import { ProjectDefinitionModal } from './controls/project-definition-modal';
 import { GeneralMessageModalContainer } from '../components/modal';
 import { IProject } from '../models';
-import { requests } from '../requests';
 
 interface IProjectComponentProps {
   projects: IProject[];
@@ -29,6 +27,7 @@ interface IProjectComponentActionCreators {
   goToAnomaliesScreen: IGoToAnomaliesScreenActionCreator;
   getAllProjects: IGetAllProjectsActionCreator;
   showProjectProjectDefinitionModal: IShowProjectDefintionModalActionCreator;
+  deleteProject: IDeleteProjectActionCreator;
 }
 
 class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators> {
@@ -55,9 +54,7 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
                     this.props.goToAnomaliesScreen(_.find(this.props.projects, (proj) => proj.id === project.id));
                   }}
                   deleteProject={(projectId: string) => {
-                    let ret = requests.deleteProject(projectId);
-                    _.remove(this.props.projects, (proj) => proj.id === projectId);
-                    this.setState({ });
+                    this.props.deleteProject(projectId);
                   }} />;
               })}
             </ListGroup>
@@ -84,6 +81,7 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
     goToAnomaliesScreen,
     getAllProjects,
     showProjectProjectDefinitionModal,
+    deleteProject,
   }, dispatch);
 }
 

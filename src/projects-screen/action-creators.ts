@@ -1,6 +1,4 @@
 import * as _ from 'lodash';
-import { push } from 'react-router-redux';
-import { Dispatch } from 'redux';
 import { IProject } from '../models';
 import {
   GetAllProjectsStartedAction,
@@ -10,6 +8,7 @@ import {
   GetChannelsForSiteStartedAction,
   ShowProjectDefinitionModalAction,
   HideProjectDefinitionModalAction,
+  DeleteProjectStartedAction,
 } from './actions';
 
 export type IGetAllProjectsActionCreator = () => GetAllProjectsStartedAction;
@@ -19,6 +18,7 @@ export type IHideProjectDefintionModalActionCreator = (project: IProject, approv
 export type IAddProjectActionCreator = (project: IProject) => AddProjectStartedAction;
 export type IGetSitesForProjectActionCreator = (db: string) => GetSitesForProjectStartedAction;
 export type IGetChannelsForSiteActionCreator = (siteId: string) => GetChannelsForSiteStartedAction;
+export type IDeleteProjectActionCreator = (projectId: string) => DeleteProjectStartedAction;
 
 export const getAllProjects: IGetAllProjectsActionCreator = () =>
   _.toPlainObject(new GetAllProjectsStartedAction());
@@ -40,3 +40,6 @@ export const getSites: IGetSitesForProjectActionCreator = (db: string) =>
 
 export const getChannelsForSite: IGetChannelsForSiteActionCreator = (siteId: string) =>
   _.toPlainObject(new GetChannelsForSiteStartedAction(siteId));
+
+export const deleteProject: IDeleteProjectActionCreator = (projectId: string) =>
+  _.toPlainObject(new DeleteProjectStartedAction(projectId));

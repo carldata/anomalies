@@ -7,6 +7,7 @@ import {
   GetChannelsForSiteFulfilledAction,
   ShowProjectDefinitionModalAction,
   HideProjectDefinitionModalAction,
+  DeleteProjectFulfilledAction,
 } from './actions';
 import { IProjectsScreenState } from './models/projects-screen-state';
 
@@ -17,12 +18,13 @@ const initialState: IProjectsScreenState = {
   sites: [],
 } as IProjectsScreenState;
 
-export type MainScreenActionsTypes = GetAllProjectsFulfilledAction|
-                                     AddProjectFulfilledAction|
-                                     GetSitesForProjectFulfilledAction|
-                                     GetChannelsForSiteFulfilledAction|
-                                     ShowProjectDefinitionModalAction|
-                                     HideProjectDefinitionModalAction;
+export type MainScreenActionsTypes = GetAllProjectsFulfilledAction |
+  AddProjectFulfilledAction |
+  GetSitesForProjectFulfilledAction |
+  GetChannelsForSiteFulfilledAction |
+  ShowProjectDefinitionModalAction |
+  HideProjectDefinitionModalAction |
+  DeleteProjectFulfilledAction;
 
 export const projectsScreenReducer = (state: IProjectsScreenState = initialState, action: MainScreenActionsTypes): IProjectsScreenState => {
   switch (action.type) {
@@ -38,6 +40,8 @@ export const projectsScreenReducer = (state: IProjectsScreenState = initialState
       return { ...state, showModal: true };
     case actionTypes.HIDE_PROJECT_DEFINITION_MODAL:
       return { ...state, showModal: false };
+    case actionTypes.DELETE_PROJECT_FULFILLED:
+      return { ...state, projects: _.filter(state.projects, (proj) => proj.id !== action.payload) };
     default:
       return state;
   }

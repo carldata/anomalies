@@ -15,6 +15,7 @@ import {
   watchGetChannelsForSite,
   watchShowProjectDefinitionModal,
   watchHideProjectDefinitionModal,
+  watchDeleteProject,
 } from './projects-screen/sagas';
 import { initializationSaga } from '@business-logic/configuration/initialization';
 
@@ -22,6 +23,7 @@ export function* rootSaga() {
   return yield all([
     fork(initializationSaga),
     fork(watchGoToAnomalies),
+    fork(watchDeleteProject),
     fork(watchGoToProjects),
     fork(watchGetTimeSeries),
     fork(watchGetAllProjectsAsyncCall),

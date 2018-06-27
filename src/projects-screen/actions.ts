@@ -67,3 +67,18 @@ export class GetChannelsForSiteFulfilledAction implements Action {
   public readonly type = actionTypes.GET_CHANNELS_FOR_SITE_FULFILLED;
   constructor(public payload: IChannel[]) { }
 }
+
+export class DeleteProjectStartedAction implements Action {
+  public readonly type = actionTypes.DELETE_PROJECT_STARTED;
+  constructor(public payload: string) { }
+}
+
+export class DeleteProjectDeletingAction implements Action {
+  public readonly type = actionTypes.DELETE_PROJECT_DELETING;
+  constructor(public payload: string) { }
+}
+
+export class DeleteProjectFulfilledAction implements Action {
+  public readonly type = actionTypes.DELETE_PROJECT_FULFILLED;
+  constructor(public payload: string) { }
+}
