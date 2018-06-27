@@ -5,10 +5,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import 'react-datepicker/dist/react-datepicker.css';
 
-interface IDatePickerWrapperComponentProps {
-
-}
-
 interface IDatePickerWrapperComponentActionCreators {
     dateSelected: (startDate: string, endDate: string) => void;
 }
@@ -18,16 +14,21 @@ interface IDatePickerWrapperComponentState {
     endDate: moment.Moment;
 }
 
-export default class DatePickerWrapper extends React.Component<IDatePickerWrapperComponentProps & IDatePickerWrapperComponentActionCreators, IDatePickerWrapperComponentState> {
+export default class DatePickerWrapper extends React.Component< IDatePickerWrapperComponentActionCreators, IDatePickerWrapperComponentState> {
     private dateFormat: string = 'YYYY-MM-DDTHH:mm';
-    constructor(props: IDatePickerWrapperComponentProps & IDatePickerWrapperComponentActionCreators, context: any) {
+    private startDateInputEnterHit: boolean;
+    private endDateInputEnterHit: boolean;
+    constructor(props: IDatePickerWrapperComponentActionCreators, context: any) {
         super(props, context);
+        const startOfDay = moment().startOf('day');
         this.state = {
-            startDate: moment().hours(0).minutes(0),
-            endDate: moment().hours(0).minutes(0),
+            startDate: startOfDay.clone().subtract(3, 'months'),
+            endDate: startOfDay,
         };
         this.handleChangeStart = this.handleChangeStart.bind(this);
         this.handleChangeEnd = this.handleChangeEnd.bind(this);
+        this.startDateInputEnterHit = false;
+        this.endDateInputEnterHit = false;
     }
 
     private handleChangeStart(date) {
@@ -50,11 +51,24 @@ export default class DatePickerWrapper extends React.Component<IDatePickerWrappe
                 <ControlLabel>Start Date:</ControlLabel>
             </ FormGroup>
             <FormGroup>
-                <DatePicker
-                    selectsStart
+                <DatePicker 
+                    disabledKeyboardNavigation
                     selected={this.state.startDate}
-                    dateFormat='YYYY-MM-DD HH:mm'
-                    onChange={this.handleChangeStart}
+                    dateFormat={'YYYY-MM-DD HH:mm'}
+                    onChange={() => { }}
+                    onSelect={(e) => {
+                        if (!this.startDateInputEnterHit) {
+                            this.handleChangeStart(e);
+                        } else {
+                            this.startDateInputEnterHit = false;
+                        }
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key == 'Enter') {
+                            e.preventDefault();
+                            this.startDateInputEnterHit = true;
+                        }
+                    }}
                     startDate={this.state.startDate}
                     endDate={this.state.endDate} />
             </ FormGroup>
@@ -63,10 +77,23 @@ export default class DatePickerWrapper extends React.Component<IDatePickerWrappe
             </ FormGroup>
             <FormGroup>
                 <DatePicker
-                    selectsEnd
+                    disabledKeyboardNavigation
                     selected={this.state.endDate}
-                    dateFormat='YYYY-MM-DD HH:mm'
-                    onChange={this.handleChangeEnd}
+                    dateFormat={'YYYY-MM-DD HH:mm'}
+                    onChange={()=> {}}
+                    onSelect={(e) => {
+                        if (!this.endDateInputEnterHit) {
+                            this.handleChangeEnd(e);
+                        } else {
+                            this.endDateInputEnterHit = false;
+                        }
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key == 'Enter') {
+                            e.preventDefault();
+                            this.endDateInputEnterHit = true;
+                        }
+                    }}
                     startDate={this.state.startDate}
                     endDate={this.state.endDate} />
             </ FormGroup>
