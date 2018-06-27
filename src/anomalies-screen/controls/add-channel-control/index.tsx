@@ -54,7 +54,7 @@ export class AddChannelModal extends React.Component<IAddChannelModalProps & IAd
   public render() {
     return <Modal show={this.props.showModal} onHide={() => this.props.cancelClicked()}>
       <Modal.Body>
-        <Form horizontal>
+        <Form inline>
           <FormGroup>
             <Col sm={2} componentClass={ControlLabel}>
               Site:
@@ -116,6 +116,6 @@ export class AddChannelModal extends React.Component<IAddChannelModalProps & IAd
       channelId: this.channelId,
       channelName: this.channelName,
       type: this.state.channelType,
-    });
+    } as ISiteChannelInfo);
   }
 }
