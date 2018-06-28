@@ -65,7 +65,7 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
     })
 
     yield put(_.toPlainObject(new GetTimeSeriesFulfilledAction({
-      rawSeries: rawSeries,
+      rawSeries,
       editedChannelSeries: csvLoadingCalculations.extractUnixTimePoints(editedChannelParseResult.data, toUnixTimePointsExtractConfig),
       fixedAnomaliesSeries: mergedAnomaliesSeries,
       supportingChannels: _.map(project.supportingChannels, (ch) =>
