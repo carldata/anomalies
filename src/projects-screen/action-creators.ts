@@ -9,6 +9,7 @@ import {
   ShowProjectDefinitionModalAction,
   HideProjectDefinitionModalAction,
   DeleteProjectStartedAction,
+  EditProjectStartedAction,
 } from './actions';
 
 export type IGetAllProjectsActionCreator = () => GetAllProjectsStartedAction;
@@ -19,6 +20,7 @@ export type IAddProjectActionCreator = (project: IProject) => AddProjectStartedA
 export type IGetSitesForProjectActionCreator = (db: string) => GetSitesForProjectStartedAction;
 export type IGetChannelsForSiteActionCreator = (siteId: string) => GetChannelsForSiteStartedAction;
 export type IDeleteProjectActionCreator = (projectId: string) => DeleteProjectStartedAction;
+export type IEditProjectActionCreator = () => EditProjectStartedAction;
 
 export const getAllProjects: IGetAllProjectsActionCreator = () =>
   _.toPlainObject(new GetAllProjectsStartedAction());
@@ -43,3 +45,7 @@ export const getChannelsForSite: IGetChannelsForSiteActionCreator = (siteId: str
 
 export const deleteProject: IDeleteProjectActionCreator = (projectId: string) =>
   _.toPlainObject(new DeleteProjectStartedAction(projectId));
+
+export const editProject: IEditProjectActionCreator = () =>
+  _.toPlainObject(new EditProjectStartedAction());
+

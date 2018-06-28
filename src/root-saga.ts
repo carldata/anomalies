@@ -18,11 +18,13 @@ import {
   watchDeleteProject,
 } from './projects-screen/sagas';
 import { initializationSaga } from '@business-logic/configuration/initialization';
+import { watchEditProject } from './projects-screen/sagas/edit-project';
 
 export function* rootSaga() {
   return yield all([
     fork(initializationSaga),
     fork(watchGoToAnomalies),
+    fork(watchEditProject),
     fork(watchDeleteProject),
     fork(watchGoToProjects),
     fork(watchGetTimeSeries),

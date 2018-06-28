@@ -82,3 +82,17 @@ export class DeleteProjectFulfilledAction implements Action {
   public readonly type = actionTypes.DELETE_PROJECT_FULFILLED;
   constructor(public payload: string) { }
 }
+
+export class EditProjectStartedAction implements Action {
+  public readonly type = actionTypes.EDIT_PROJECT_STARTED;
+  constructor() {
+    //
+   }
+}
+
+export class EditProjectFulfilledAction implements Action {
+  public readonly type = actionTypes.EDIT_PROJECT_FULFILLED;
+  constructor() {
+    //
+   }
+}

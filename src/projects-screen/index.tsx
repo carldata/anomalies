@@ -13,6 +13,7 @@ import {
   IShowProjectDefintionModalActionCreator,
   IDeleteProjectActionCreator,
   deleteProject,
+  IEditProjectActionCreator,
 } from './action-creators';
 import { ProjectComponent } from './project';
 import { ProjectDefinitionModal } from './controls/project-definition-modal';
@@ -28,6 +29,7 @@ interface IProjectComponentActionCreators {
   getAllProjects: IGetAllProjectsActionCreator;
   showProjectProjectDefinitionModal: IShowProjectDefintionModalActionCreator;
   deleteProject: IDeleteProjectActionCreator;
+  editProject: IEditProjectActionCreator;
 }
 
 class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators> {
@@ -55,6 +57,9 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
                   }}
                   deleteProject={(projectId: string) => {
                     this.props.deleteProject(projectId);
+                  }}
+                  editProject={() => {
+                    this.props.editProject();
                   }} />;
               })}
             </ListGroup>
