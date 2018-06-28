@@ -50,16 +50,16 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
             <ListGroup>
               {_.map(this.props.projects, (project: IProject, index) => {
                 return <ProjectComponent
-                  {...project}
                   key={index}
+                  project={project}
                   goToProjectAnomalies={() => {
                     this.props.goToAnomaliesScreen(_.find(this.props.projects, (proj) => proj.id === project.id));
                   }}
                   deleteProject={(projectId: string) => {
                     this.props.deleteProject(projectId);
                   }}
-                  editProject={() => {
-                    this.props.editProject();
+                  editProject={(projectArg: IProject) => {
+                    this.props.showProjectProjectDefinitionModal(projectArg);
                   }} />;
               })}
             </ListGroup>

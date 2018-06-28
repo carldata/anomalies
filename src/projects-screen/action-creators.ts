@@ -14,13 +14,13 @@ import {
 
 export type IGetAllProjectsActionCreator = () => GetAllProjectsStartedAction;
 export type IGoToAnomaliesScreenActionCreator = (project: IProject) => GoToAnomaliesScreenAction;
-export type IShowProjectDefintionModalActionCreator = () => ShowProjectDefinitionModalAction;
+export type IShowProjectDefintionModalActionCreator = (project?: IProject) => ShowProjectDefinitionModalAction;
 export type IHideProjectDefintionModalActionCreator = (project: IProject, approved: boolean) => HideProjectDefinitionModalAction;
 export type IAddProjectActionCreator = (project: IProject) => AddProjectStartedAction;
 export type IGetSitesForProjectActionCreator = (db: string) => GetSitesForProjectStartedAction;
 export type IGetChannelsForSiteActionCreator = (siteId: string) => GetChannelsForSiteStartedAction;
 export type IDeleteProjectActionCreator = (projectId: string) => DeleteProjectStartedAction;
-export type IEditProjectActionCreator = () => EditProjectStartedAction;
+export type IEditProjectActionCreator = (project: IProject) => EditProjectStartedAction;
 
 export const getAllProjects: IGetAllProjectsActionCreator = () =>
   _.toPlainObject(new GetAllProjectsStartedAction());
@@ -28,8 +28,8 @@ export const getAllProjects: IGetAllProjectsActionCreator = () =>
 export const goToAnomaliesScreen: IGoToAnomaliesScreenActionCreator = (project: IProject) =>
   _.toPlainObject(new GoToAnomaliesScreenAction(project));
 
-export const showProjectProjectDefinitionModal: IShowProjectDefintionModalActionCreator = () =>
-  _.toPlainObject(new ShowProjectDefinitionModalAction());
+export const showProjectProjectDefinitionModal: IShowProjectDefintionModalActionCreator = (project?: IProject) =>
+  _.toPlainObject(new ShowProjectDefinitionModalAction(project));
 
 export const hideProjectProjectDefinitionModal: IHideProjectDefintionModalActionCreator = (project: IProject, approved: boolean) =>
   _.toPlainObject(new HideProjectDefinitionModalAction({ project, approved }));

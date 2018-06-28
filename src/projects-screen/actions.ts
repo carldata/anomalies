@@ -33,6 +33,7 @@ export class GoToAnomaliesScreenAction implements Action {
 
 export class ShowProjectDefinitionModalAction implements Action {
   public readonly type = actionTypes.SHOW_PROJECT_DEFINITION_MODAL;
+  constructor(public payload?: IProject) { }
 }
 
 export class HideProjectDefinitionModalAction implements Action {
