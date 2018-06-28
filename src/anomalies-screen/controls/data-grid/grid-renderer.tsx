@@ -14,5 +14,5 @@ export class RowRenderer extends React.Component<IRowRendererProps> {
     </div>);
   }
   public getRowStyle = () => ({ color: this.getRowBackground() });
-  public getRowBackground = () => _.isNull(this.props.row.fixedValue) ? 'green' : 'red';
+  public getRowBackground = () => this.props.row.fixedValue == this.props.row.rawValue ? 'green' : 'red';
 }
