@@ -16,16 +16,18 @@ export const chartsSelector = createSelector<IState, IAnomaliesTimeSeries, IChar
   [(state: IState) => state.anomaliesScreen.timeSeries],
   (timeSeries: IAnomaliesTimeSeries) => ({
     mainChartState: hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
+      color: 'red',
+      name: 'anomalies',
+      points: timeSeries.fixedAnomaliesSeries,
+      type: EnumTimeSeriesType.Line,
+    } as IExternalSourceTimeSeries,
+     {
       color: 'steelblue',
       name: 'raw',
       points: timeSeries.rawSeries,
       type: EnumTimeSeriesType.Line,
-    } as IExternalSourceTimeSeries, {
-      color: 'red',
-      name: 'anomalies',
-      points: timeSeries.fixedAnomaliesSeries,
-      type: EnumTimeSeriesType.Dots,
-    } as IExternalSourceTimeSeries]),
+    } as IExternalSourceTimeSeries
+  ]),
     finalChartState: hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
       color: 'steelblue',
       name: 'final',
@@ -33,10 +35,10 @@ export const chartsSelector = createSelector<IState, IAnomaliesTimeSeries, IChar
       type: EnumTimeSeriesType.Line,
     } as IExternalSourceTimeSeries]),
     supportingChannels: _.map(timeSeries.supportingChannels, (el, idx) =>
-    hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
-      color: 'steelblue',
-      points: el,
-      type: EnumTimeSeriesType.Line,
-    } as IExternalSourceTimeSeries])),
+      hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
+        color: 'steelblue',
+        points: el,
+        type: EnumTimeSeriesType.Line,
+      } as IExternalSourceTimeSeries])),
   } as IChartsState),
 );

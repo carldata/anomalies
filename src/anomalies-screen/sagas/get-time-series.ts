@@ -21,7 +21,7 @@ import { IDataGridState } from '../controls/data-grid/state';
 import { requests } from '../../requests';
 import { ShowGeneralMessageModalAction, HideGeneralMessageModalAction } from '../../components/modal';
 import { IProject } from '../../models';
-import { IAnomaliesTimeSeries } from '../models/anomalies-time-series';
+import { IAnomaliesTimeSeries, ITimeSeries } from '../models/anomalies-time-series';
 import { IState } from '../../state';
 import { GetTimeSeriesFulfilledAction, GetTimeSeriesStartAction } from '../actions';
 import { GET_TIME_SERIES_START } from '../action-types';
@@ -57,13 +57,20 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
       valueColumnName: 'value',
     } as IExtractUnixTimePointsConfig;
 
+    const rawSeries: ITimeSeries = csvLoadingCalculations.extractUnixTimePoints(rawChannelParseResult.data, toUnixTimePointsExtractConfig);
+    const anomaliesSeries: ITimeSeries = csvLoadingCalculations.extractUnixTimePoints(fixedAnomaliesParseResult.data, toUnixTimePointsExtractConfig);
+    const mergedAnomaliesSeries = _.map(rawSeries, (raw) => {
+      const res = _.find(anomaliesSeries, (anomaly) => raw.unix == anomaly.unix);
+      return _.isUndefined(res) ? raw : res;
+    })
+
     yield put(_.toPlainObject(new GetTimeSeriesFulfilledAction({
-        rawSeries: csvLoadingCalculations.extractUnixTimePoints(rawChannelParseResult.data, toUnixTimePointsExtractConfig),
-        editedChannelSeries: csvLoadingCalculations.extractUnixTimePoints(editedChannelParseResult.data, toUnixTimePointsExtractConfig),
-        fixedAnomaliesSeries: csvLoadingCalculations.extractUnixTimePoints(fixedAnomaliesParseResult.data, toUnixTimePointsExtractConfig),
-        supportingChannels: _.map(project.supportingChannels, (ch) =>
-          csvLoadingCalculations.extractUnixTimePoints(supportingChannelsParseResults[_.indexOf(project.supportingChannels, ch)].data, toUnixTimePointsExtractConfig)),
-      } as IAnomaliesTimeSeries)));
+      rawSeries: rawSeries,
+      editedChannelSeries: csvLoadingCalculations.extractUnixTimePoints(editedChannelParseResult.data, toUnixTimePointsExtractConfig),
+      fixedAnomaliesSeries: mergedAnomaliesSeries,
+      supportingChannels: _.map(project.supportingChannels, (ch) =>
+        csvLoadingCalculations.extractUnixTimePoints(supportingChannelsParseResults[_.indexOf(project.supportingChannels, ch)].data, toUnixTimePointsExtractConfig)),
+    } as IAnomaliesTimeSeries)));
     yield put(_.toPlainObject(new HideGeneralMessageModalAction()));
   } catch (error) {
     yield handleErrorInSaga(error);
