@@ -9,12 +9,10 @@
         "outDir": "backless-development",
         "baseUrl": "./",
         "paths": {
-            "*": [
-                "node_modules/*"
-            ],
             "@app-state/*": ["../../src/state/*"],
             "@common/*":  ["../../src/common/*"],
-            "@models/*": ["../../src/models/*"]
+            "@models/*": ["../../src/models/*"],
+            "@business-logic/*": ["../../src/business-logic/*"]
         },
         "jsx": "react",
         "lib": [
