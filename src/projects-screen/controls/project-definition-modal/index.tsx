@@ -11,9 +11,10 @@ import {
   getChannelsForSite,
   IGetChannelsForSiteActionCreator,
 } from '../../action-creators';
+import { EnumProjectModalMode } from '../../models/projects-screen-state';
 
 interface IAddProjectModalComponentProps {
-  showModal: boolean;
+  mode: EnumProjectModalMode;
   sites: ISite[];
   channels: IChannel[];
 }
@@ -43,8 +44,10 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
     this.approveAddProject = this.approveAddProject.bind(this);
   }
 
-  private modalIsShown = (nextProps: IAddProjectModalComponentProps): boolean => this.props.showModal && nextProps.showModal;
-  private modalWillAppear = (nextProps: IAddProjectModalComponentProps): boolean => !this.props.showModal && nextProps.showModal;
+  private modalIsShown = (nextProps: IAddProjectModalComponentProps): boolean =>
+    (this.props.mode !== EnumProjectModalMode.Hidden) && (nextProps.mode !== EnumProjectModalMode.Hidden)
+  private modalWillAppear = (nextProps: IAddProjectModalComponentProps): boolean =>
+    (this.props.mode === EnumProjectModalMode.Hidden) && (nextProps.mode !== EnumProjectModalMode.Hidden)
 
   public componentWillReceiveProps(nextProps: IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators) {
     if (this.modalWillAppear(nextProps)) {
@@ -72,7 +75,7 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
   }
 
   public render() {
-    return <Modal show={this.props.showModal} onHide={() => this.props.hide(null, false)}>
+    return <Modal show={this.props.mode !== EnumProjectModalMode.Hidden} onHide={() => this.props.hide(null, false)}>
       <Modal.Body>
         <Form horizontal>
           <FormGroup>
@@ -174,7 +177,7 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
 
 function mapStateToProps(state: IState) {
   return {
-    showModal: state.projectsScreen.showModal,
+    mode: state.projectsScreen.mode,
     sites: state.projectsScreen.sites,
     channels: state.projectsScreen.channels,
   };

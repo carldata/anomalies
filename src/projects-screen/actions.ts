@@ -31,8 +31,8 @@ export class GoToAnomaliesScreenAction implements Action {
   constructor(public payload: IProject) { }
 }
 
-export class ShowProjectDefinitionModalAction implements Action {
-  public readonly type = actionTypes.SHOW_PROJECT_DEFINITION_MODAL;
+export class ShowProjectDefinitionModalActionToAdd implements Action {
+  public readonly type = actionTypes.SHOW_PROJECT_DEFINITION_MODAL_TO_ADD;
   constructor(public payload?: IProject) { }
 }
 

@@ -4,18 +4,18 @@ import { ISite, IProject } from '../../models';
 import {
   HIDE_PROJECT_DEFINITION_MODAL,
   GET_SITES_FOR_PROJECT_FULFILLED,
-  SHOW_PROJECT_DEFINITION_MODAL,
+  SHOW_PROJECT_DEFINITION_MODAL_TO_ADD,
   ADD_PROJECT_FULFILLED,
 } from '../action-types';
 import {
   GetSitesForProjectStartedAction, GetChannelsForSiteStartedAction, AddProjectStartedAction, GoToAnomaliesScreenAction,
   HideProjectDefinitionModalAction,
-  ShowProjectDefinitionModalAction,
+  ShowProjectDefinitionModalActionToAdd,
 } from '../actions';
 import { IState } from '@app-state/.';
 import { handleErrorInSaga } from '@common/handle-error-in-saga';
 
-function* showProjectDefinitionModal(action: ShowProjectDefinitionModalAction) {
+function* showProjectDefinitionModalToAdd(action: ShowProjectDefinitionModalActionToAdd) {
   try {
     const asdf = action.payload;
     yield put(_.toPlainObject(new GetSitesForProjectStartedAction('Emerald_AECOM')));
@@ -41,7 +41,7 @@ function* hideProjectDefinitionModal(action: HideProjectDefinitionModalAction) {
 }
 
 export function* watchShowProjectDefinitionModal() {
-  yield takeEvery(SHOW_PROJECT_DEFINITION_MODAL, showProjectDefinitionModal);
+  yield takeEvery(SHOW_PROJECT_DEFINITION_MODAL_TO_ADD, showProjectDefinitionModalToAdd);
 }
 
 export function* watchHideProjectDefinitionModal() {

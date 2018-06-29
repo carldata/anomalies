@@ -9,8 +9,8 @@ import {
   getAllProjects,
   goToAnomaliesScreen,
   IGoToAnomaliesScreenActionCreator,
-  showProjectProjectDefinitionModal,
-  IShowProjectDefintionModalActionCreator,
+  showProjectProjectDefinitionModalToAdd,
+  IShowProjectDefintionModalToAddActionCreator,
   IDeleteProjectActionCreator,
   deleteProject,
   IEditProjectActionCreator,
@@ -27,7 +27,7 @@ interface IProjectComponentProps {
 interface IProjectComponentActionCreators {
   goToAnomaliesScreen: IGoToAnomaliesScreenActionCreator;
   getAllProjects: IGetAllProjectsActionCreator;
-  showProjectProjectDefinitionModal: IShowProjectDefintionModalActionCreator;
+  showProjectProjectDefinitionModalToAdd: IShowProjectDefintionModalToAddActionCreator;
   deleteProject: IDeleteProjectActionCreator;
   editProject: IEditProjectActionCreator;
 }
@@ -59,13 +59,13 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
                     this.props.deleteProject(projectId);
                   }}
                   editProject={(projectArg: IProject) => {
-                    this.props.showProjectProjectDefinitionModal(projectArg);
+                    // TODO: call a different action here !
                   }} />;
               })}
             </ListGroup>
           </FormGroup>
           <FormGroup>
-            <Button id='btnAddProject' bsStyle='primary' onClick={() => this.props.showProjectProjectDefinitionModal()}>Add Project</Button>
+            <Button id='btnAddProject' bsStyle='primary' onClick={() => this.props.showProjectProjectDefinitionModalToAdd()}>Add Project</Button>
           </FormGroup>
         </Form>
         <ProjectDefinitionModal></ProjectDefinitionModal>
@@ -85,7 +85,7 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     goToAnomaliesScreen,
     getAllProjects,
-    showProjectProjectDefinitionModal,
+    showProjectProjectDefinitionModalToAdd,
     deleteProject,
   }, dispatch);
 }
