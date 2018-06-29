@@ -12,6 +12,7 @@ import {
   GetSitesForProjectStartedAction, GetChannelsForSiteStartedAction, AddProjectStartedAction, GoToAnomaliesScreenAction,
   HideProjectDefinitionModalAction,
   ShowProjectDefinitionModalActionToAdd,
+  ShowProjectDefinitionModalActionToEdit,
 } from '../actions';
 import { IState } from '@app-state/.';
 import { handleErrorInSaga } from '@common/handle-error-in-saga';
@@ -27,7 +28,7 @@ function* showProjectDefinitionModalToAdd(action: ShowProjectDefinitionModalActi
   }
 }
 
-function* showProjectDefinitionModalToEdit(action: ShowProjectDefinitionModalActionToAdd) {
+function* showProjectDefinitionModalToEdit(action: ShowProjectDefinitionModalActionToEdit) {
   try {
     yield put(_.toPlainObject(new GetSitesForProjectStartedAction('Emerald_AECOM')));
     yield take(GET_SITES_FOR_PROJECT_FULFILLED);
