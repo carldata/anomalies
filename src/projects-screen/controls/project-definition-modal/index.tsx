@@ -130,10 +130,6 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
     }
   }
 
-  public getDerivedStateFromProps(props, state) {
-    const a = 1;
-  }
-
   public render() {
     let okButton;
     if (this.props.mode === EnumProjectModalMode.AddNew) {

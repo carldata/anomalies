@@ -29,11 +29,9 @@ function* showProjectDefinitionModalToAdd(action: ShowProjectDefinitionModalActi
 
 function* showProjectDefinitionModalToEdit(action: ShowProjectDefinitionModalActionToAdd) {
   try {
-    const asdf = action.payload;
     yield put(_.toPlainObject(new GetSitesForProjectStartedAction('Emerald_AECOM')));
     yield take(GET_SITES_FOR_PROJECT_FULFILLED);
-    const sites: ISite[] = yield select((state: IState) => state.projectsScreen.sites);
-    yield put(_.toPlainObject(new GetChannelsForSiteStartedAction(_.head(sites).id)));
+    yield put(_.toPlainObject(new GetChannelsForSiteStartedAction(action.payload.siteId)));
   } catch (error) {
     // todo notify when error occurs
   }

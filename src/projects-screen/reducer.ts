@@ -41,7 +41,7 @@ export const projectsScreenReducer = (state: IProjectsScreenState = initialState
     case actionTypes.GET_CHANNELS_FOR_SITE_FULFILLED:
       return { ...state, channels: action.payload };
     case actionTypes.SHOW_PROJECT_DEFINITION_MODAL_TO_ADD:
-      return { ...state, mode: EnumProjectModalMode.AddNew, editedProject: { } as IProject };
+      return { ...state, mode: EnumProjectModalMode.AddNew, editedProject: {} as IProject };
     case actionTypes.SHOW_PROJECT_DEFINITION_MODAL_TO_EDIT:
       return { ...state, mode: EnumProjectModalMode.Edit, editedProject: action.payload };
     case actionTypes.HIDE_PROJECT_DEFINITION_MODAL:
