@@ -11,4 +11,5 @@ export interface IProjectsScreenState {
   sites: ISite[];
   channels: IChannel[];
   mode: EnumProjectModalMode;
+  editedProject: IProject;
 }

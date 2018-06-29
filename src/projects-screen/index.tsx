@@ -9,11 +9,12 @@ import {
   getAllProjects,
   goToAnomaliesScreen,
   IGoToAnomaliesScreenActionCreator,
-  showProjectProjectDefinitionModalToAdd,
-  IShowProjectDefintionModalToAddActionCreator,
+  showProjectDefinitionModalToAdd,
+  showProjectDefinitionModalToEdit,
   IDeleteProjectActionCreator,
   deleteProject,
-  IEditProjectActionCreator,
+  IShowProjectDefinitionModalToAddActionCreator,
+  IShowProjectDefinitionModalToEditActionCreator,
 } from './action-creators';
 import { ProjectComponent } from './project';
 import { ProjectDefinitionModal } from './controls/project-definition-modal';
@@ -27,9 +28,9 @@ interface IProjectComponentProps {
 interface IProjectComponentActionCreators {
   goToAnomaliesScreen: IGoToAnomaliesScreenActionCreator;
   getAllProjects: IGetAllProjectsActionCreator;
-  showProjectProjectDefinitionModalToAdd: IShowProjectDefintionModalToAddActionCreator;
+  showProjectDefinitionModalToAdd: IShowProjectDefinitionModalToAddActionCreator;
+  showProjectDefinitionModalToEdit: IShowProjectDefinitionModalToEditActionCreator;
   deleteProject: IDeleteProjectActionCreator;
-  editProject: IEditProjectActionCreator;
 }
 
 class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators> {
@@ -59,13 +60,13 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
                     this.props.deleteProject(projectId);
                   }}
                   editProject={(projectArg: IProject) => {
-                    // TODO: call a different action here !
+                    this.props.showProjectDefinitionModalToEdit(projectArg);
                   }} />;
               })}
             </ListGroup>
           </FormGroup>
           <FormGroup>
-            <Button id='btnAddProject' bsStyle='primary' onClick={() => this.props.showProjectProjectDefinitionModalToAdd()}>Add Project</Button>
+            <Button id='btnAddProject' bsStyle='primary' onClick={() => this.props.showProjectDefinitionModalToAdd()}>Add Project</Button>
           </FormGroup>
         </Form>
         <ProjectDefinitionModal></ProjectDefinitionModal>
@@ -85,7 +86,8 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     goToAnomaliesScreen,
     getAllProjects,
-    showProjectProjectDefinitionModalToAdd,
+    showProjectDefinitionModalToAdd,
+    showProjectDefinitionModalToEdit,
     deleteProject,
   }, dispatch);
 }

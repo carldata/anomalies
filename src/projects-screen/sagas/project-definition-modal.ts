@@ -6,6 +6,7 @@ import {
   GET_SITES_FOR_PROJECT_FULFILLED,
   SHOW_PROJECT_DEFINITION_MODAL_TO_ADD,
   ADD_PROJECT_FULFILLED,
+  SHOW_PROJECT_DEFINITION_MODAL_TO_EDIT,
 } from '../action-types';
 import {
   GetSitesForProjectStartedAction, GetChannelsForSiteStartedAction, AddProjectStartedAction, GoToAnomaliesScreenAction,
@@ -16,6 +17,17 @@ import { IState } from '@app-state/.';
 import { handleErrorInSaga } from '@common/handle-error-in-saga';
 
 function* showProjectDefinitionModalToAdd(action: ShowProjectDefinitionModalActionToAdd) {
+  try {
+    yield put(_.toPlainObject(new GetSitesForProjectStartedAction('Emerald_AECOM')));
+    yield take(GET_SITES_FOR_PROJECT_FULFILLED);
+    const sites: ISite[] = yield select((state: IState) => state.projectsScreen.sites);
+    yield put(_.toPlainObject(new GetChannelsForSiteStartedAction(_.head(sites).id)));
+  } catch (error) {
+    // todo notify when error occurs
+  }
+}
+
+function* showProjectDefinitionModalToEdit(action: ShowProjectDefinitionModalActionToAdd) {
   try {
     const asdf = action.payload;
     yield put(_.toPlainObject(new GetSitesForProjectStartedAction('Emerald_AECOM')));
@@ -40,8 +52,12 @@ function* hideProjectDefinitionModal(action: HideProjectDefinitionModalAction) {
   }
 }
 
-export function* watchShowProjectDefinitionModal() {
+export function* watchShowProjectDefinitionModalToAdd() {
   yield takeEvery(SHOW_PROJECT_DEFINITION_MODAL_TO_ADD, showProjectDefinitionModalToAdd);
+}
+
+export function* watchShowProjectDefinitionModalToEdit() {
+  yield takeEvery(SHOW_PROJECT_DEFINITION_MODAL_TO_EDIT, showProjectDefinitionModalToEdit);
 }
 
 export function* watchHideProjectDefinitionModal() {

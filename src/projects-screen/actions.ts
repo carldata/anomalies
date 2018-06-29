@@ -36,6 +36,11 @@ export class ShowProjectDefinitionModalActionToAdd implements Action {
   constructor(public payload?: IProject) { }
 }
 
+export class ShowProjectDefinitionModalActionToEdit implements Action {
+  public readonly type = actionTypes.SHOW_PROJECT_DEFINITION_MODAL_TO_EDIT;
+  constructor(public payload: IProject) { }
+}
+
 export class HideProjectDefinitionModalAction implements Action {
   public readonly type = actionTypes.HIDE_PROJECT_DEFINITION_MODAL;
   constructor(public payload: { project: IProject, approved: boolean }) { }
@@ -82,18 +87,4 @@ export class DeleteProjectDeletingAction implements Action {
 export class DeleteProjectFulfilledAction implements Action {
   public readonly type = actionTypes.DELETE_PROJECT_FULFILLED;
   constructor(public payload: string) { }
-}
-
-export class EditProjectStartedAction implements Action {
-  public readonly type = actionTypes.EDIT_PROJECT_STARTED;
-  constructor() {
-    //
-   }
-}
-
-export class EditProjectFulfilledAction implements Action {
-  public readonly type = actionTypes.EDIT_PROJECT_FULFILLED;
-  constructor() {
-    //
-   }
 }

@@ -4,4 +4,4 @@ export { watchGetChannelsForSite } from './get-channels-for-site';
 export { watchGetSitesForProject } from './get-sites-for-project';
 export { watchGoToAnomalies } from './go-to-anomalies';
 export { watchDeleteProject } from './delete-project';
-export { watchShowProjectDefinitionModal, watchHideProjectDefinitionModal } from './project-definition-modal';
+export { watchShowProjectDefinitionModalToAdd, watchShowProjectDefinitionModalToEdit, watchHideProjectDefinitionModal } from './project-definition-modal';

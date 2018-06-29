@@ -8,14 +8,16 @@ import {
   ShowProjectDefinitionModalActionToAdd,
   HideProjectDefinitionModalAction,
   DeleteProjectFulfilledAction,
-  EditProjectFulfilledAction,
+  ShowProjectDefinitionModalActionToEdit,
 } from './actions';
 import { IProjectsScreenState, EnumProjectModalMode } from './models/projects-screen-state';
+import { IProject } from '../models';
 
 const initialState: IProjectsScreenState = {
   channels: [],
   projects: [],
   mode: EnumProjectModalMode.Hidden,
+  editedProject: {} as IProject,
   sites: [],
 } as IProjectsScreenState;
 
@@ -24,9 +26,9 @@ export type MainScreenActionsTypes = GetAllProjectsFulfilledAction |
   GetSitesForProjectFulfilledAction |
   GetChannelsForSiteFulfilledAction |
   ShowProjectDefinitionModalActionToAdd |
+  ShowProjectDefinitionModalActionToEdit |
   HideProjectDefinitionModalAction |
-  DeleteProjectFulfilledAction |
-  EditProjectFulfilledAction;
+  DeleteProjectFulfilledAction;
 
 export const projectsScreenReducer = (state: IProjectsScreenState = initialState, action: MainScreenActionsTypes): IProjectsScreenState => {
   switch (action.type) {
@@ -40,12 +42,12 @@ export const projectsScreenReducer = (state: IProjectsScreenState = initialState
       return { ...state, channels: action.payload };
     case actionTypes.SHOW_PROJECT_DEFINITION_MODAL_TO_ADD:
       return { ...state, mode: EnumProjectModalMode.AddNew };
+    case actionTypes.SHOW_PROJECT_DEFINITION_MODAL_TO_EDIT:
+      return { ...state, mode: EnumProjectModalMode.Edit, editedProject: action.payload };
     case actionTypes.HIDE_PROJECT_DEFINITION_MODAL:
       return { ...state, mode: EnumProjectModalMode.Hidden };
     case actionTypes.DELETE_PROJECT_FULFILLED:
       return { ...state, projects: _.filter(state.projects, (proj) => proj.id !== action.payload) };
-    case actionTypes.EDIT_PROJECT_FULFILLED:
-      return { ...state };
     default:
       return state;
   }
