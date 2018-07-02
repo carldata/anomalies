@@ -7,6 +7,7 @@ import { IDataGridState } from '../controls/data-grid/state';
 import { ITimeSeries, IAnomaliesTimeSeries } from '../models/anomalies-time-series';
 
 interface IChartsState {
+  rawChartState: IHpTimeSeriesChartState;
   mainChartState: IHpTimeSeriesChartState;
   finalChartState: IHpTimeSeriesChartState;
   supportingChannels: IHpTimeSeriesChartState[];
@@ -15,6 +16,13 @@ interface IChartsState {
 export const chartsSelector = createSelector<IState, IAnomaliesTimeSeries, IChartsState>(
   [(state: IState) => state.anomaliesScreen.timeSeries],
   (timeSeries: IAnomaliesTimeSeries) => ({
+    rawChartState: hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
+      color: 'steelblue',
+      name: 'raw',
+      points: timeSeries.rawSeries,
+      type: EnumTimeSeriesType.Line,
+    } as IExternalSourceTimeSeries,
+  ]),
     mainChartState: hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
       color: 'red',
       name: 'anomalies',
@@ -26,7 +34,7 @@ export const chartsSelector = createSelector<IState, IAnomaliesTimeSeries, IChar
       name: 'raw',
       points: timeSeries.rawSeries,
       type: EnumTimeSeriesType.Line,
-    } as IExternalSourceTimeSeries
+    } as IExternalSourceTimeSeries,
   ]),
     finalChartState: hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
       color: 'steelblue',
