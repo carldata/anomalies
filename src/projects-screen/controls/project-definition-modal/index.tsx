@@ -34,6 +34,7 @@ interface IAddProjectModalComponentState {
   rawChannelName: string;
   finalChannelId: string;
   finalChannelName: string;
+  siteChanged: boolean;
 }
 
 class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators, IAddProjectModalComponentState> {
@@ -71,6 +72,7 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
         finalChannelName,
         rawChannelId,
         rawChannelName,
+        siteChanged: false,
       });
     } else if (this.modalIsShown(nextProps)) {
       let finalChannelId;
@@ -88,12 +90,12 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
         rawChannelName = this.state.rawChannelName;
       }
 
-      if (_.isEmpty(finalChannelId)) {
+      if (_.isEmpty(finalChannelId) || this.state.siteChanged === true) {
         finalChannelId = channel.id;
         finalChannelName = channel.name;
       }
 
-      if (_.isEmpty(rawChannelId)) {
+      if (_.isEmpty(rawChannelId) || this.state.siteChanged === true) {
         rawChannelId = channel.id;
         rawChannelName = channel.name;
       }
@@ -103,6 +105,7 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
         finalChannelName,
         rawChannelId,
         rawChannelName,
+        siteChanged: false,
       });
     }
   }
@@ -126,7 +129,7 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
               <FormControl id='txtProjectName'
                 type='text'
                 placeholder='Enter Name'
-                onChange={(e) => this.setState({ projectName: (e.target as HTMLInputElement).value })}
+                onChange={(e) => this.setState({ projectName: (e.target as HTMLInputElement).value, siteChanged: false })}
                 value={this.state.projectName}>
               </FormControl>
             </Col>
@@ -141,6 +144,7 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
                 this.setState({
                   siteId: selectElement.value,
                   siteName: _.head(selectElement.selectedOptions).label,
+                  siteChanged: true,
                 });
                 this.props.getChannels(selectElement.value);
               }} >
@@ -160,6 +164,7 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
                 this.setState({
                   rawChannelId: selectRawChannel.value,
                   rawChannelName: _.head(selectRawChannel.selectedOptions).label,
+                  siteChanged: false,
                 });
               }}>
                 {
@@ -178,6 +183,7 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
                 this.setState({
                   finalChannelId: selectFinalChannel.value,
                   finalChannelName: _.head(selectFinalChannel.selectedOptions).label,
+                  siteChanged: false,
                 });
               }}>
                 {
