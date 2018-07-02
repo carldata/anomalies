@@ -51,9 +51,6 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
     (this.props.mode === EnumProjectModalMode.Hidden) && (nextProps.mode !== EnumProjectModalMode.Hidden)
 
   public componentWillReceiveProps(nextProps: IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators) {
-    const channel: IChannel = _.isArray(nextProps.channels) && !_.isEmpty(nextProps.channels) ?
-      _.head(nextProps.channels) : { id: '0', name: '' } as IChannel;
-
     if (this.modalWillAppear(nextProps)) {
       const projectName = _.isEmpty(nextProps.editedProject.projectName) ? '' : nextProps.editedProject.projectName;
       const siteId = _.isEmpty(nextProps.editedProject.siteId) ? '' : nextProps.editedProject.siteId;
@@ -77,6 +74,10 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
       let finalChannelName;
       let rawChannelId;
       let rawChannelName;
+
+      const channel: IChannel = _.isArray(nextProps.channels) && !_.isEmpty(nextProps.channels) ?
+        _.head(nextProps.channels) : { id: '0', name: '' } as IChannel;
+
       if (this.props.mode === EnumProjectModalMode.Edit) {
         finalChannelId = this.state.finalChannelId;
         finalChannelName = this.state.finalChannelName;
