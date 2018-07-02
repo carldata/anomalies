@@ -7,7 +7,7 @@ const appName = 'anomaly-tool-development';
 const apiAddress = 'http://13.77.168.238';
 const token = 'oasdob123a23hnaovnfaewd123akjwpod';
 
-enum EnumHTTPVerb { GET, POST, PUT }
+enum EnumHTTPVerb { GET, POST, PUT, DELETE }
 
 export interface IConfigurationEntry {
   id: string;
@@ -23,6 +23,8 @@ const httpOp = <TReturnedDataType>(verb: EnumHTTPVerb, url: string, payload?: an
         return axios.post<AxiosResponse<TReturnedDataType>>(url, payload);
       case EnumHTTPVerb.PUT:
         return axios.put<AxiosResponse<TReturnedDataType>>(url, payload);
+      case EnumHTTPVerb.DELETE:
+        return axios.delete(url);
     }
   };
   return new Promise((resolve, reject) =>
@@ -32,7 +34,7 @@ const httpOp = <TReturnedDataType>(verb: EnumHTTPVerb, url: string, payload?: an
 };
 
 const getConfiguration = (): AxiosPromise<IConfigurationEntry[]> => {
-  const configuration =  select((state) => state);
+  const configuration = select((state) => state);
   return httpOp<IConfigurationEntry[]>(EnumHTTPVerb.GET, `${apiAddress}/config/${appName}`);
 }
 
@@ -40,7 +42,7 @@ const getChannelData = (channel: string, startDate: string, endDate: string): Ax
   httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
 
 const getFixedAnomalies = (channel: string, startDate: string, endDate: string): AxiosPromise<string> =>
-  httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/anomalies/find?series=${channel}&startDate=${startDate}&endDate=${endDate}`);
+  httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/anomalies/find?flowChannelId=${channel}&startDate=${startDate}&endDate=${endDate}`);
 
 // TODO - remove  getEditedChannelData and use only getChannelData
 const getEditedChannelData = (channel: string, startDate: string, endDate: string): AxiosPromise<string> =>
@@ -53,6 +55,9 @@ const getSupportingChannels = (supportingChannels: { siteId: string, channelId: 
 
 const addProject = (project: IProject): AxiosPromise<string> =>
   httpOp<string>(EnumHTTPVerb.POST, `${apiAddress}/config/${appName}`, JSON.stringify(project));
+
+const deleteProject = (projectId: string): AxiosPromise<string> =>
+  httpOp<string>(EnumHTTPVerb.DELETE, `${apiAddress}/config/${appName}/${projectId}`);
 
 const saveProject = (project: IProject): AxiosPromise<string> =>
   httpOp<string>(EnumHTTPVerb.PUT, `${apiAddress}/config/${appName}/${project.id}`, JSON.stringify(project));
@@ -70,6 +75,7 @@ export const requests = {
   getEditedChannelData,
   getSupportingChannels,
   addProject,
+  deleteProject,
   saveProject,
   getSites,
   getChannels,

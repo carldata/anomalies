@@ -11,9 +11,11 @@ import {
   getChannelsForSite,
   IGetChannelsForSiteActionCreator,
 } from '../../action-creators';
+import { EnumProjectModalMode } from '../../models/projects-screen-state';
 
 interface IAddProjectModalComponentProps {
-  showModal: boolean;
+  mode: EnumProjectModalMode;
+  editedProject: IProject;
   sites: ISite[];
   channels: IChannel[];
 }
@@ -24,6 +26,7 @@ interface IAddProjectModalComponentActionCreators {
 }
 
 interface IAddProjectModalComponentState {
+  id: string;
   projectName: string;
   siteId: string;
   siteName: string;
@@ -31,6 +34,7 @@ interface IAddProjectModalComponentState {
   rawChannelName: string;
   finalChannelId: string;
   finalChannelName: string;
+  siteChanged: boolean;
 }
 
 class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators, IAddProjectModalComponentState> {
@@ -43,36 +47,78 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
     this.approveAddProject = this.approveAddProject.bind(this);
   }
 
-  private modalIsShown = (nextProps: IAddProjectModalComponentProps): boolean => this.props.showModal && nextProps.showModal;
-  private modalWillAppear = (nextProps: IAddProjectModalComponentProps): boolean => !this.props.showModal && nextProps.showModal;
+  private modalIsShown = (nextProps: IAddProjectModalComponentProps): boolean =>
+    (this.props.mode !== EnumProjectModalMode.Hidden) && (nextProps.mode !== EnumProjectModalMode.Hidden)
+  private modalWillAppear = (nextProps: IAddProjectModalComponentProps): boolean =>
+    (this.props.mode === EnumProjectModalMode.Hidden) && (nextProps.mode !== EnumProjectModalMode.Hidden)
 
   public componentWillReceiveProps(nextProps: IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators) {
     if (this.modalWillAppear(nextProps)) {
-      const channel: IChannel = _.isArray(nextProps.channels) && !_.isEmpty(nextProps.channels) ?
-        _.head(nextProps.channels) : { id: '0', name: '' } as IChannel;
+      const id = _.isEmpty(nextProps.editedProject.id) ? '' : nextProps.editedProject.id;
+      const projectName = _.isEmpty(nextProps.editedProject.projectName) ? '' : nextProps.editedProject.projectName;
+      const siteId = _.isEmpty(nextProps.editedProject.siteId) ? '' : nextProps.editedProject.siteId;
+      const siteName = _.isEmpty(nextProps.editedProject.siteName) ? '' : nextProps.editedProject.siteName;
+      const finalChannelId = _.isEmpty(nextProps.editedProject.finalChannelId) ? '' : nextProps.editedProject.finalChannelId;
+      const finalChannelName = _.isEmpty(nextProps.editedProject.finalChannelName) ? '' : nextProps.editedProject.finalChannelName;
+      const rawChannelId = _.isEmpty(nextProps.editedProject.rawChannelId) ? '' : nextProps.editedProject.rawChannelId;
+      const rawChannelName = _.isEmpty(nextProps.editedProject.rawChannelName) ? '' : nextProps.editedProject.rawChannelName;
+
       this.setState({
-        projectName: '',
-        siteId: _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).id,
-        siteName: _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).name,
-        finalChannelId: channel.id,
-        finalChannelName: channel.name,
-        rawChannelId: channel.id,
-        rawChannelName: channel.name,
+        id,
+        projectName,
+        siteId,
+        siteName,
+        finalChannelId,
+        finalChannelName,
+        rawChannelId,
+        rawChannelName,
+        siteChanged: false,
       });
     } else if (this.modalIsShown(nextProps)) {
+      let finalChannelId;
+      let finalChannelName;
+      let rawChannelId;
+      let rawChannelName;
+
       const channel: IChannel = _.isArray(nextProps.channels) && !_.isEmpty(nextProps.channels) ?
         _.head(nextProps.channels) : { id: '0', name: '' } as IChannel;
+
+      if (nextProps.mode === EnumProjectModalMode.Edit) {
+        finalChannelId = this.state.finalChannelId;
+        finalChannelName = this.state.finalChannelName;
+        rawChannelId = this.state.rawChannelId;
+        rawChannelName = this.state.rawChannelName;
+      }
+
+      if (_.isEmpty(finalChannelId) || this.state.siteChanged === true) {
+        finalChannelId = channel.id;
+        finalChannelName = channel.name;
+      }
+
+      if (_.isEmpty(rawChannelId) || this.state.siteChanged === true) {
+        rawChannelId = channel.id;
+        rawChannelName = channel.name;
+      }
+
       this.setState({
-        finalChannelId: channel.id,
-        finalChannelName: channel.name,
-        rawChannelId: channel.id,
-        rawChannelName: channel.name,
+        finalChannelId,
+        finalChannelName,
+        rawChannelId,
+        rawChannelName,
+        siteChanged: false,
       });
     }
   }
 
   public render() {
-    return <Modal show={this.props.showModal} onHide={() => this.props.hide(null, false)}>
+    let okButton;
+    if (this.props.mode === EnumProjectModalMode.AddNew) {
+      okButton = <Button id='btnApproveAddProjectModal' bsStyle='primary' onClick={this.approveAddProject}>Add Project</Button>;
+    } else if (this.props.mode === EnumProjectModalMode.Edit) {
+      okButton = <Button id='btnApproveAddProjectModal' bsStyle='primary' onClick={this.approveAddProject}>Approve Edit</Button>;
+    }
+
+    return <Modal show={this.props.mode !== EnumProjectModalMode.Hidden} onHide={() => this.props.hide(null, false)}>
       <Modal.Body>
         <Form horizontal>
           <FormGroup>
@@ -83,8 +129,9 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
               <FormControl id='txtProjectName'
                 type='text'
                 placeholder='Enter Name'
-                onChange={(e) => this.setState({ projectName: (e.target as HTMLInputElement).value })}
-                value={this.state.projectName}></FormControl>
+                onChange={(e) => this.setState({ projectName: (e.target as HTMLInputElement).value, siteChanged: false })}
+                value={this.state.projectName}>
+              </FormControl>
             </Col>
           </FormGroup>
           <FormGroup>
@@ -92,11 +139,12 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
               Site:
             </Col>
             <Col sm={6}>
-              <select id='selectProjectSite' className='form-control' onChange={(e) => {
+              <select id='selectProjectSite' className='form-control' value={this.state.siteId} onChange={(e) => {
                 const selectElement = e.target as HTMLSelectElement;
                 this.setState({
                   siteId: selectElement.value,
                   siteName: _.head(selectElement.selectedOptions).label,
+                  siteChanged: true,
                 });
                 this.props.getChannels(selectElement.value);
               }} >
@@ -111,11 +159,12 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
               Source Channel:
             </Col>
             <Col sm={6}>
-              <select id='selectChannelsRaw' className='form-control' onChange={(el) => {
+              <select id='selectChannelsRaw' className='form-control' value={this.state.rawChannelId} onChange={(el) => {
                 const selectRawChannel = el.target as HTMLSelectElement;
                 this.setState({
                   rawChannelId: selectRawChannel.value,
                   rawChannelName: _.head(selectRawChannel.selectedOptions).label,
+                  siteChanged: false,
                 });
               }}>
                 {
@@ -129,11 +178,12 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
               Final Channel:
             </Col>
             <Col sm={6}>
-              <select id='selectChannelsFinal' className='form-control' onChange={(el) => {
+              <select id='selectChannelsFinal' className='form-control' value={this.state.finalChannelId} onChange={(el) => {
                 const selectFinalChannel = el.target as HTMLSelectElement;
                 this.setState({
                   finalChannelId: selectFinalChannel.value,
                   finalChannelName: _.head(selectFinalChannel.selectedOptions).label,
+                  siteChanged: false,
                 });
               }}>
                 {
@@ -145,9 +195,9 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button id='btnApproveAddProjectModal' bsStyle='primary' onClick={this.approveAddProject} >
-          Add Project
-        </Button>
+
+        {okButton}
+
         <Button id='btnCancelAddProjectModal' onClick={() => this.props.hide(null, false)}>
           Cancel
         </Button>
@@ -157,7 +207,7 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
 
   private approveAddProject() {
     const project: IProject = {
-      id: '',
+      id: _.isEmpty(this.state.id) ? '' : this.state.id,
       projectName: this.state.projectName,
       siteName: this.state.siteName,
       siteId: this.state.siteId,
@@ -174,9 +224,10 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
 
 function mapStateToProps(state: IState) {
   return {
-    showModal: state.projectsScreen.showModal,
+    mode: state.projectsScreen.mode,
     sites: state.projectsScreen.sites,
     channels: state.projectsScreen.channels,
+    editedProject: state.projectsScreen.editedProject,
   };
 }
 

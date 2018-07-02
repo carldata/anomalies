@@ -7,7 +7,13 @@ import { handleErrorInSaga } from '@common/handle-error-in-saga';
 
 function* addNewProject(action: AddProjectStartedAction) {
   try {
-    const id: string = yield requests.addProject(action.payload);
+    let id: string;
+    if (_.isEmpty(action.payload.id)) {
+      id = yield requests.addProject(action.payload);
+    } else {
+      id = yield requests.saveProject(action.payload);
+    }
+
     yield put(_.toPlainObject(new AddProjectFulfilledAction({ ...action.payload, id })));
   } catch (error) {
     yield handleErrorInSaga(error);

@@ -9,11 +9,12 @@ import {
   getAllProjects,
   goToAnomaliesScreen,
   IGoToAnomaliesScreenActionCreator,
-  IAddProjectActionCreator,
-  IGetSitesForProjectActionCreator,
-  IGetChannelsForSiteActionCreator,
-  showProjectProjectDefinitionModal,
-  IShowProjectDefintionModalActionCreator,
+  showProjectDefinitionModalToAdd,
+  showProjectDefinitionModalToEdit,
+  IDeleteProjectActionCreator,
+  deleteProject,
+  IShowProjectDefinitionModalToAddActionCreator,
+  IShowProjectDefinitionModalToEditActionCreator,
 } from './action-creators';
 import { ProjectComponent } from './project';
 import { ProjectDefinitionModal } from './controls/project-definition-modal';
@@ -27,7 +28,9 @@ interface IProjectComponentProps {
 interface IProjectComponentActionCreators {
   goToAnomaliesScreen: IGoToAnomaliesScreenActionCreator;
   getAllProjects: IGetAllProjectsActionCreator;
-  showProjectProjectDefinitionModal: IShowProjectDefintionModalActionCreator;
+  showProjectDefinitionModalToAdd: IShowProjectDefinitionModalToAddActionCreator;
+  showProjectDefinitionModalToEdit: IShowProjectDefinitionModalToEditActionCreator;
+  deleteProject: IDeleteProjectActionCreator;
 }
 
 class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators> {
@@ -48,16 +51,22 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
             <ListGroup>
               {_.map(this.props.projects, (project: IProject, index) => {
                 return <ProjectComponent
-                  {...project}
                   key={index}
+                  project={project}
                   goToProjectAnomalies={() => {
                     this.props.goToAnomaliesScreen(_.find(this.props.projects, (proj) => proj.id === project.id));
+                  }}
+                  deleteProject={(projectId: string) => {
+                    this.props.deleteProject(projectId);
+                  }}
+                  editProject={(projectArg: IProject) => {
+                    this.props.showProjectDefinitionModalToEdit(projectArg);
                   }} />;
               })}
             </ListGroup>
           </FormGroup>
           <FormGroup>
-            <Button id='btnAddProject' bsStyle='primary' onClick={() => this.props.showProjectProjectDefinitionModal()}>Add Project</Button>
+            <Button id='btnAddProject' bsStyle='primary' onClick={() => this.props.showProjectDefinitionModalToAdd()}>Add Project</Button>
           </FormGroup>
         </Form>
         <ProjectDefinitionModal></ProjectDefinitionModal>
@@ -77,7 +86,9 @@ function matchDispatchToProps(dispatch: Dispatch<{}>) {
   return bindActionCreators({
     goToAnomaliesScreen,
     getAllProjects,
-    showProjectProjectDefinitionModal,
+    showProjectDefinitionModalToAdd,
+    showProjectDefinitionModalToEdit,
+    deleteProject,
   }, dispatch);
 }
 

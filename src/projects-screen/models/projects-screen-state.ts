@@ -1,8 +1,15 @@
 import { IChannel, IProject, ISite } from '@models/.';
 
+export enum EnumProjectModalMode {
+  Hidden,
+  AddNew,
+  Edit,
+}
+
 export interface IProjectsScreenState {
   projects: IProject[];
   sites: ISite[];
   channels: IChannel[];
-  showModal: boolean;
+  mode: EnumProjectModalMode;
+  editedProject: IProject;
 }

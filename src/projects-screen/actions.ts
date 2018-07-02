@@ -31,8 +31,14 @@ export class GoToAnomaliesScreenAction implements Action {
   constructor(public payload: IProject) { }
 }
 
-export class ShowProjectDefinitionModalAction implements Action {
-  public readonly type = actionTypes.SHOW_PROJECT_DEFINITION_MODAL;
+export class ShowProjectDefinitionModalActionToAdd implements Action {
+  public readonly type = actionTypes.SHOW_PROJECT_DEFINITION_MODAL_TO_ADD;
+  constructor(public payload?: IProject) { }
+}
+
+export class ShowProjectDefinitionModalActionToEdit implements Action {
+  public readonly type = actionTypes.SHOW_PROJECT_DEFINITION_MODAL_TO_EDIT;
+  constructor(public payload: IProject) { }
 }
 
 export class HideProjectDefinitionModalAction implements Action {
@@ -66,4 +72,19 @@ export class GetChannelsForSiteFetchingAction implements Action {
 export class GetChannelsForSiteFulfilledAction implements Action {
   public readonly type = actionTypes.GET_CHANNELS_FOR_SITE_FULFILLED;
   constructor(public payload: IChannel[]) { }
+}
+
+export class DeleteProjectStartedAction implements Action {
+  public readonly type = actionTypes.DELETE_PROJECT_STARTED;
+  constructor(public payload: string) { }
+}
+
+export class DeleteProjectDeletingAction implements Action {
+  public readonly type = actionTypes.DELETE_PROJECT_DELETING;
+  constructor(public payload: string) { }
+}
+
+export class DeleteProjectFulfilledAction implements Action {
+  public readonly type = actionTypes.DELETE_PROJECT_FULFILLED;
+  constructor(public payload: string) { }
 }

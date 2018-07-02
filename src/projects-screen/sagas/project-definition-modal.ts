@@ -1,24 +1,38 @@
 import * as _ from 'lodash';
 import { put, takeEvery, take, select } from 'redux-saga/effects';
-import { IChannel, ISite, ISitesChannels, IProject } from '../../models';
+import { ISite, IProject } from '../../models';
 import {
   HIDE_PROJECT_DEFINITION_MODAL,
   GET_SITES_FOR_PROJECT_FULFILLED,
-  GET_CHANNELS_FOR_SITE_FULFILLED,
-  SHOW_PROJECT_DEFINITION_MODAL,
+  SHOW_PROJECT_DEFINITION_MODAL_TO_ADD,
   ADD_PROJECT_FULFILLED,
+  SHOW_PROJECT_DEFINITION_MODAL_TO_EDIT,
 } from '../action-types';
-import { SHOW_GENERAL_MESSAGE_MODAL } from '../../components/modal/action-types';
-import { GetSitesForProjectStartedAction, GetChannelsForSiteStartedAction, AddProjectStartedAction, GoToAnomaliesScreenAction, HideProjectDefinitionModalAction } from '../actions';
+import {
+  GetSitesForProjectStartedAction, GetChannelsForSiteStartedAction, AddProjectStartedAction, GoToAnomaliesScreenAction,
+  HideProjectDefinitionModalAction,
+  ShowProjectDefinitionModalActionToAdd,
+  ShowProjectDefinitionModalActionToEdit,
+} from '../actions';
 import { IState } from '@app-state/.';
 import { handleErrorInSaga } from '@common/handle-error-in-saga';
 
-function* showProjectDefinitionModal() {
+function* showProjectDefinitionModalToAdd(action: ShowProjectDefinitionModalActionToAdd) {
   try {
     yield put(_.toPlainObject(new GetSitesForProjectStartedAction('Emerald_AECOM')));
     yield take(GET_SITES_FOR_PROJECT_FULFILLED);
     const sites: ISite[] = yield select((state: IState) => state.projectsScreen.sites);
     yield put(_.toPlainObject(new GetChannelsForSiteStartedAction(_.head(sites).id)));
+  } catch (error) {
+    // todo notify when error occurs
+  }
+}
+
+function* showProjectDefinitionModalToEdit(action: ShowProjectDefinitionModalActionToEdit) {
+  try {
+    yield put(_.toPlainObject(new GetSitesForProjectStartedAction('Emerald_AECOM')));
+    yield take(GET_SITES_FOR_PROJECT_FULFILLED);
+    yield put(_.toPlainObject(new GetChannelsForSiteStartedAction(action.payload.siteId)));
   } catch (error) {
     // todo notify when error occurs
   }
@@ -37,8 +51,12 @@ function* hideProjectDefinitionModal(action: HideProjectDefinitionModalAction) {
   }
 }
 
-export function* watchShowProjectDefinitionModal() {
-  yield takeEvery(SHOW_PROJECT_DEFINITION_MODAL, showProjectDefinitionModal);
+export function* watchShowProjectDefinitionModalToAdd() {
+  yield takeEvery(SHOW_PROJECT_DEFINITION_MODAL_TO_ADD, showProjectDefinitionModalToAdd);
+}
+
+export function* watchShowProjectDefinitionModalToEdit() {
+  yield takeEvery(SHOW_PROJECT_DEFINITION_MODAL_TO_EDIT, showProjectDefinitionModalToEdit);
 }
 
 export function* watchHideProjectDefinitionModal() {
