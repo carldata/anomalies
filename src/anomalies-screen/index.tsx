@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import {
   convertHpSliderScss, convertHpTimeSeriesChartScss, IHpTimeSeriesChartState, HpSlider, EnumHandleType,
-  IUnixFromTo, handleMovedCallback, HpTimeSeriesChart, hpTimeSeriesChartReducerAuxFunctions
+  IUnixFromTo, handleMovedCallback, HpTimeSeriesChart, hpTimeSeriesChartReducerAuxFunctions,
 } from 'time-series-scroller';
 import { IDomain, IHpSliderHandleValues } from 'time-series-scroller/lib/out/hp-slider/interfaces';
 import * as hpSliderScss from 'time-series-scroller/lib/out/sass/hp-slider.scss';
@@ -46,6 +46,7 @@ import { ITimeSeriesLoadContext } from './models/time-series-load-context';
 import DatePickerWrapper from '../components/datepicker/date-picker';
 
 interface IAnomaliesComponentProps {
+  rawChartState: IHpTimeSeriesChartState;
   mainChartState: IHpTimeSeriesChartState;
   finalChartState: IHpTimeSeriesChartState;
   supportingChannels: IHpTimeSeriesChartState[];
@@ -65,6 +66,7 @@ interface IAnomaliesComponentActionCreators {
 }
 
 interface IAnomaliesComponentState {
+  rawChartState: IHpTimeSeriesChartState;
   mainChartState: IHpTimeSeriesChartState;
   finalChartState: IHpTimeSeriesChartState;
   supportingChannelsState: IHpTimeSeriesChartState[];
@@ -83,7 +85,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 
     this.scss = {
       slider: convertHpSliderScss(hpSliderScss),
-      timeSeries: convertHpTimeSeriesChartScss(hpTimeSeriesChartScss)
+      timeSeries: convertHpTimeSeriesChartScss(hpTimeSeriesChartScss),
     };
 
     this.state = {
@@ -91,6 +93,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       endDate: dateFns.format(dateFns.startOfDay(new Date()), 'YYYY-MM-DDTHH:mm:ss'),
       windowUnixFrom: props.mainChartState.dateRangeUnixFrom,
       windowUnixTo: props.mainChartState.dateRangeUnixTo,
+      rawChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       supportingChannelsState: _.cloneDeep(props.supportingChannels),
@@ -109,6 +112,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 
   public componentWillReceiveProps(nextProps: IAnomaliesComponentProps) {
     this.setState({
+      rawChartState: _.cloneDeep(nextProps.rawChartState),
       mainChartState: _.cloneDeep(nextProps.mainChartState),
       finalChartState: _.cloneDeep(nextProps.finalChartState),
       supportingChannelsState: _.cloneDeep(nextProps.supportingChannels),
@@ -186,6 +190,11 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                   this.setState({
                     windowUnixFrom,
                     windowUnixTo,
+                    rawChartState: {
+                      ...this.state.rawChartState,
+                      windowUnixFrom,
+                      windowUnixTo,
+                    },
                     mainChartState: {
                       ...this.state.mainChartState,
                       windowUnixFrom,
@@ -212,6 +221,25 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
             <Col lg={12}>
               <div>
                 <div style={{ height: 250 }} >
+                  <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>
+                    {
+                      `${this.props.screenState.project.siteName}-${this.props.screenState.project.rawChannelName}`
+                    }
+                  </p>
+                  <HpTimeSeriesChart
+                    scss={this.scss.timeSeries}
+                    state={this.state.rawChartState}
+                    fitToParent={{ toHeight: true, toWidth: true }}
+                  ></HpTimeSeriesChart>
+                </div>
+              </div>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col lg={12}>
+              <div>
+                <div style={{ height: 250 }} >
                   <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>ML Corrections</p>
                   <HpTimeSeriesChart
                     scss={this.scss.timeSeries}
@@ -226,7 +254,11 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
           <Row>
             <Col md={12} >
               <div style={{ height: 250 }} >
-                <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>Final</p>
+                <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>
+                  {
+                    `${this.props.screenState.project.siteName}-${this.props.screenState.project.finalChannelName}`
+                  }
+                </p>
                 <HpTimeSeriesChart
                   scss={this.scss.timeSeries}
                   state={this.state.finalChartState}
@@ -257,7 +289,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                   <Button className='pull-right' bsStyle='primary' onClick={() => this.props.deleteSupportingChannel(idx)}>Delete</Button>
                 </Col>
               </Row>
-            </div>
+            </div>;
           })}
 
           <Row style={{ marginTop: 4 }}>
@@ -274,9 +306,9 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                   _.concat(
                     [
                       { key: 'date', name: 'Timestamp' },
-                      { key: 'rawValue', name: 'Raw' },
-                      { key: 'editedValue', name: 'Final' },
-                      { key: 'fixedValue', name: 'Fixed' },
+                      { key: 'rawValue', name: `${this.props.screenState.project.siteName}-${this.props.screenState.project.rawChannelName}` },
+                      { key: 'editedValue', name: `${this.props.screenState.project.siteName}-${this.props.screenState.project.finalChannelName}` },
+                      { key: 'fixedValue', name: 'ML Corrections' },
                     ] as Column[],
                     _.map(this.state.supportingChannelsState, (c, idx) => ({
                       key: `extendedValue${_.indexOf(this.state.supportingChannelsState, c) + 1}`,
@@ -306,6 +338,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 function mapStateToProps(state: IState) {
   const chartsState = chartsSelector(state);
   return {
+    rawChartState: chartsState.rawChartState,
     mainChartState: chartsState.mainChartState,
     gridState: gridSelector(state),
     finalChartState: chartsState.finalChartState,
