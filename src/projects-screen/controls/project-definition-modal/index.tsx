@@ -55,40 +55,13 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
       _.head(nextProps.channels) : { id: '0', name: '' } as IChannel;
 
     if (this.modalWillAppear(nextProps)) {
-      let projectName;
-      let siteId;
-      let siteName;
-      let finalChannelId;
-      let finalChannelName;
-      let rawChannelId;
-      let rawChannelName;
-
-      projectName = nextProps.editedProject.projectName;
-      siteId = nextProps.editedProject.siteId;
-      siteName = nextProps.editedProject.siteName;
-      finalChannelId = nextProps.editedProject.finalChannelId;
-      finalChannelName = nextProps.editedProject.finalChannelName;
-      rawChannelId = nextProps.editedProject.rawChannelId;
-      rawChannelName = nextProps.editedProject.rawChannelName;
-
-      if (_.isEmpty(projectName)) {
-        projectName = '';
-      }
-
-      if (_.isEmpty(siteId)) {
-        siteId = _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).id;
-        siteName = _.isEmpty(nextProps.sites) ? '' : _.head(nextProps.sites).name;
-      }
-
-      if (_.isEmpty(finalChannelId)) {
-        finalChannelId = channel.id;
-        finalChannelName = channel.name;
-      }
-
-      if (_.isEmpty(rawChannelId)) {
-        rawChannelId = channel.id;
-        rawChannelName = channel.name;
-      }
+      const projectName = _.isEmpty(nextProps.editedProject.projectName) ? '' : nextProps.editedProject.projectName;
+      const siteId = _.isEmpty(nextProps.editedProject.siteId) ? '' : nextProps.editedProject.siteId;
+      const siteName = _.isEmpty(nextProps.editedProject.siteName) ? '' : nextProps.editedProject.siteName;
+      const finalChannelId = _.isEmpty(nextProps.editedProject.finalChannelId) ? '' : nextProps.editedProject.finalChannelId;
+      const finalChannelName = _.isEmpty(nextProps.editedProject.finalChannelName) ? '' : nextProps.editedProject.finalChannelName;
+      const rawChannelId = _.isEmpty(nextProps.editedProject.rawChannelId) ? '' : nextProps.editedProject.rawChannelId;
+      const rawChannelName = _.isEmpty(nextProps.editedProject.rawChannelName) ? '' : nextProps.editedProject.rawChannelName;
 
       this.setState({
         projectName,
