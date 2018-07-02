@@ -35,7 +35,7 @@ const httpOp = <TReturnedDataType>(verb: EnumHTTPVerb, url: string, payload?: an
 };
 
 const getConfiguration = (): AxiosPromise<IConfigurationEntry[]> => {
-  const configuration =  select((state) => state);
+  const configuration = select((state) => state);
   return httpOp<IConfigurationEntry[]>(EnumHTTPVerb.GET, `${apiAddress}/config/${appName}`);
 }
 
@@ -43,7 +43,7 @@ const getChannelData = (channel: string, startDate: string, endDate: string): Ax
   httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
 
 const getFixedAnomalies = (channel: string, startDate: string, endDate: string): AxiosPromise<string> =>
-  httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/anomalies/find?series=${channel}&startDate=${startDate}&endDate=${endDate}`);
+  httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/anomalies/find?flowChannelId=${channel}&startDate=${startDate}&endDate=${endDate}`);
 
 // TODO - remove  getEditedChannelData and use only getChannelData
 const getEditedChannelData = (channel: string, startDate: string, endDate: string): AxiosPromise<string> =>

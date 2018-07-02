@@ -26,6 +26,7 @@ interface IAddProjectModalComponentActionCreators {
 }
 
 interface IAddProjectModalComponentState {
+  id: string;
   projectName: string;
   siteId: string;
   siteName: string;
@@ -52,6 +53,7 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
 
   public componentWillReceiveProps(nextProps: IAddProjectModalComponentProps & IAddProjectModalComponentActionCreators) {
     if (this.modalWillAppear(nextProps)) {
+      const id = _.isEmpty(nextProps.editedProject.id) ? '' : nextProps.editedProject.id;
       const projectName = _.isEmpty(nextProps.editedProject.projectName) ? '' : nextProps.editedProject.projectName;
       const siteId = _.isEmpty(nextProps.editedProject.siteId) ? '' : nextProps.editedProject.siteId;
       const siteName = _.isEmpty(nextProps.editedProject.siteName) ? '' : nextProps.editedProject.siteName;
@@ -61,6 +63,7 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
       const rawChannelName = _.isEmpty(nextProps.editedProject.rawChannelName) ? '' : nextProps.editedProject.rawChannelName;
 
       this.setState({
+        id,
         projectName,
         siteId,
         siteName,
@@ -78,7 +81,7 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
       const channel: IChannel = _.isArray(nextProps.channels) && !_.isEmpty(nextProps.channels) ?
         _.head(nextProps.channels) : { id: '0', name: '' } as IChannel;
 
-      if (this.props.mode === EnumProjectModalMode.Edit) {
+      if (nextProps.mode === EnumProjectModalMode.Edit) {
         finalChannelId = this.state.finalChannelId;
         finalChannelName = this.state.finalChannelName;
         rawChannelId = this.state.rawChannelId;
@@ -198,7 +201,7 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
 
   private approveAddProject() {
     const project: IProject = {
-      id: '',
+      id: _.isEmpty(this.state.id) ? '' : this.state.id,
       projectName: this.state.projectName,
       siteName: this.state.siteName,
       siteId: this.state.siteId,
