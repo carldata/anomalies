@@ -2,7 +2,6 @@ import axios, { AxiosResponse, AxiosPromise } from 'axios';
 import * as _ from 'lodash';
 import { all, call, select } from 'redux-saga/effects';
 import { IProject, IChannel, ISite } from './models';
-import { IConfigurationState } from '@business-logic/configuration/models/state';
 
 const appName = 'anomaly-tool-development';
 const apiAddress = 'http://13.77.168.238';
