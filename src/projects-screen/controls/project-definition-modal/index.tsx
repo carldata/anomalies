@@ -100,6 +100,14 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
         rawChannelName = channel.name;
       }
 
+      if(_.isEmpty(this.state.siteId)) {
+        const site = _.head(nextProps.sites);
+        this.setState({
+          siteId: site.id,
+          siteName: site.name,
+        });
+      }
+
       this.setState({
         finalChannelId,
         finalChannelName,
