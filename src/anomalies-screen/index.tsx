@@ -229,7 +229,6 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                   }))(convertHpSliderScss(hpSliderScss))}
                   state={this.state.scrollbarChartState}
                   mode={EnumHpTimeSeriesChartMode.SliderEmbedded}
-                  scaleLinearDomain={(x, y) => ({ yMin: 0, yMax: 15 })}
                   fitToParent={{ toWidth: true, offsetWidth: 35 }}
                 />
               </HpSlider>

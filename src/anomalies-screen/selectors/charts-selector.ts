@@ -23,6 +23,12 @@ export const chartsSelector = createSelector<IState, IAnomaliesTimeSeries, IChar
         name: 'anomalies',
         points: createAnomaliesTimeSeriesForScrollbar(timeSeries.rawSeries, timeSeries.fixedAnomaliesSeries),
         type: EnumTimeSeriesType.Bars,
+      } as IExternalSourceTimeSeries,
+      {
+        color: 'steelblue',
+        name: 'raw',
+        points: timeSeries.rawSeries,
+        type: EnumTimeSeriesType.Line,
       } as IExternalSourceTimeSeries]),
       rawChartState: hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
         color: 'steelblue',
