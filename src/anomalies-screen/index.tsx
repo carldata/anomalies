@@ -44,8 +44,10 @@ import {
 } from '../projects-screen/action-creators';
 import { ITimeSeriesLoadContext } from './models/time-series-load-context';
 import DatePickerWrapper from '../components/datepicker/date-picker';
+import { EnumHpTimeSeriesChartMode } from '../../node_modules/time-series-scroller/lib/out/hp-time-series-chart';
 
 interface IAnomaliesComponentProps {
+  scrollbarChartState: IHpTimeSeriesChartState;
   rawChartState: IHpTimeSeriesChartState;
   mainChartState: IHpTimeSeriesChartState;
   finalChartState: IHpTimeSeriesChartState;
@@ -66,6 +68,7 @@ interface IAnomaliesComponentActionCreators {
 }
 
 interface IAnomaliesComponentState {
+  scrollbarChartState: IHpTimeSeriesChartState;
   rawChartState: IHpTimeSeriesChartState;
   mainChartState: IHpTimeSeriesChartState;
   finalChartState: IHpTimeSeriesChartState;
@@ -93,6 +96,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       endDate: dateFns.format(dateFns.startOfDay(new Date()), 'YYYY-MM-DDTHH:mm:ss'),
       windowUnixFrom: props.mainChartState.dateRangeUnixFrom,
       windowUnixTo: props.mainChartState.dateRangeUnixTo,
+      scrollbarChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       rawChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       mainChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
       finalChartState: hpTimeSeriesChartReducerAuxFunctions.buildInitialState(),
@@ -112,6 +116,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 
   public componentWillReceiveProps(nextProps: IAnomaliesComponentProps) {
     this.setState({
+      scrollbarChartState: _.cloneDeep(nextProps.scrollbarChartState),
       rawChartState: _.cloneDeep(nextProps.rawChartState),
       mainChartState: _.cloneDeep(nextProps.mainChartState),
       finalChartState: _.cloneDeep(nextProps.finalChartState),
@@ -212,8 +217,21 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                     } as IHpTimeSeriesChartState)),
                   });
                 }}
-                fitToParent={{ toWidth: true }}
-              ></HpSlider>
+                fitToParent={{ toWidth: true }}>
+                <HpTimeSeriesChart
+                  scss={((scss) => ({
+                    heightPx: scss.heightPx,
+                    widthPx: scss.widthPx,
+                    paddingBottomPx: 5,
+                    paddingLeftPx: 0,
+                    paddingRightPx: 0,
+                    paddingTopPx: 5,
+                  }))(convertHpSliderScss(hpSliderScss))}
+                  state={this.state.scrollbarChartState}
+                  mode={EnumHpTimeSeriesChartMode.SliderEmbedded}
+                  fitToParent={{ toWidth: true, offsetWidth: 35 }}
+                />
+              </HpSlider>
             </Col>
           </Row>
 
@@ -244,8 +262,8 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                   <HpTimeSeriesChart
                     scss={this.scss.timeSeries}
                     state={this.state.mainChartState}
-                    fitToParent={{ toHeight: true, toWidth: true }}
-                  ></HpTimeSeriesChart>
+                    fitToParent={{ toHeight: true, toWidth: true }}>
+                  </HpTimeSeriesChart>
                 </div>
               </div>
             </Col>
@@ -338,6 +356,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 function mapStateToProps(state: IState) {
   const chartsState = chartsSelector(state);
   return {
+    scrollbarChartState: chartsState.scrollbarChartState,
     rawChartState: chartsState.rawChartState,
     mainChartState: chartsState.mainChartState,
     gridState: gridSelector(state),

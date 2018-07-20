@@ -65,7 +65,7 @@
     "ts-loader": "^4.2.0",
     "ts-node": "^6.1.2",
     "tslint": "^5.9.1",
-    "typescript": "^2.8.3",
+    "typescript": "^2.9.2",
     "webpack": "^4.6.0",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.1.2",
@@ -96,7 +96,7 @@
     "redux-actions": "^2.3.0",
     "redux-saga": "^0.16.0",
     "reselect": "^3.0.1",
-    "time-series-scroller": "^0.5.33",
+    "time-series-scroller": "^0.5.37",
     "yup": "^0.25.1"
   }
 }
