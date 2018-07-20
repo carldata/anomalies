@@ -5,8 +5,10 @@ import { IUnixTimePoint, IHpTimeSeriesChartState, IExternalSourceTimeSeries, Enu
 import { IState } from '../../state';
 import { IDataGridState } from '../controls/data-grid/state';
 import { ITimeSeries, IAnomaliesTimeSeries } from '../models/anomalies-time-series';
+import { createAnomaliesTimeSeriesForScrollbar } from './auxilary';
 
 interface IChartsState {
+  scrollbarChartState: IHpTimeSeriesChartState;
   rawChartState: IHpTimeSeriesChartState;
   mainChartState: IHpTimeSeriesChartState;
   finalChartState: IHpTimeSeriesChartState;
@@ -15,38 +17,41 @@ interface IChartsState {
 
 export const chartsSelector = createSelector<IState, IAnomaliesTimeSeries, IChartsState>(
   [(state: IState) => state.anomaliesScreen.timeSeries],
-  (timeSeries: IAnomaliesTimeSeries) => ({
-    rawChartState: hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
-      color: 'steelblue',
-      name: 'raw',
-      points: timeSeries.rawSeries,
-      type: EnumTimeSeriesType.Line,
-    } as IExternalSourceTimeSeries,
-  ]),
-    mainChartState: hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
-      color: 'red',
-      name: 'anomalies',
-      points: timeSeries.fixedAnomaliesSeries,
-      type: EnumTimeSeriesType.Line,
-    } as IExternalSourceTimeSeries,
-     {
-      color: 'steelblue',
-      name: 'raw',
-      points: timeSeries.rawSeries,
-      type: EnumTimeSeriesType.Line,
-    } as IExternalSourceTimeSeries,
-  ]),
-    finalChartState: hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
-      color: 'steelblue',
-      name: 'final',
-      points: timeSeries.editedChannelSeries,
-      type: EnumTimeSeriesType.Line,
-    } as IExternalSourceTimeSeries]),
-    supportingChannels: _.map(timeSeries.supportingChannels, (el, idx) =>
-      hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
+    (timeSeries: IAnomaliesTimeSeries) => ({
+      scrollbarChartState: hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
+        color: 'red',
+        name: 'anomalies',
+        points: createAnomaliesTimeSeriesForScrollbar(timeSeries.rawSeries, timeSeries.fixedAnomaliesSeries),
+        type: EnumTimeSeriesType.Bars,
+      } as IExternalSourceTimeSeries]),
+      rawChartState: hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
         color: 'steelblue',
-        points: el,
+        name: 'raw',
+        points: timeSeries.rawSeries,
         type: EnumTimeSeriesType.Line,
-      } as IExternalSourceTimeSeries])),
+      } as IExternalSourceTimeSeries]),
+      mainChartState: hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
+        color: 'red',
+        name: 'anomalies',
+        points: timeSeries.fixedAnomaliesSeries,
+        type: EnumTimeSeriesType.Line,
+      } as IExternalSourceTimeSeries, {
+        color: 'steelblue',
+        name: 'raw',
+        points: timeSeries.rawSeries,
+        type: EnumTimeSeriesType.Line,
+      } as IExternalSourceTimeSeries]),
+      finalChartState: hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
+        color: 'steelblue',
+        name: 'final',
+        points: timeSeries.editedChannelSeries,
+        type: EnumTimeSeriesType.Line,
+      } as IExternalSourceTimeSeries]),
+      supportingChannels: _.map(timeSeries.supportingChannels, (el, idx) =>
+        hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
+          color: 'steelblue',
+          points: el,
+          type: EnumTimeSeriesType.Line,
+        } as IExternalSourceTimeSeries])),
   } as IChartsState),
 );
