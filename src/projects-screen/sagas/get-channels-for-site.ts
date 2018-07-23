@@ -12,7 +12,10 @@ function* getChannelsForSite(action) {
     yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
     yield put(_.toPlainObject(new GetChannelsForSiteFetchingAction()));
     const channels: IChannel[] = yield requests.getChannels(action.payload);
-    yield put(_.toPlainObject(new GetChannelsForSiteFulfilledAction(channels)));
+    yield put(_.toPlainObject(
+      new GetChannelsForSiteFulfilledAction(_.sortBy(
+        channels,
+        (el: IChannel) => _.toUpper(el.name)))));
     yield put(_.toPlainObject(new HideGeneralMessageModalAction()));
   } catch (error) {
     yield handleErrorInSaga(error);
