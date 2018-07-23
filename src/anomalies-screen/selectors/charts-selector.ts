@@ -1,10 +1,8 @@
-import * as dateFns from 'date-fns';
 import * as _ from 'lodash';
 import { createSelector } from 'reselect';
-import { IUnixTimePoint, IHpTimeSeriesChartState, IExternalSourceTimeSeries, EnumTimeSeriesType, hpTimeSeriesChartAuxiliary } from 'time-series-scroller';
+import { IHpTimeSeriesChartState, IExternalSourceTimeSeries, EnumTimeSeriesType, hpTimeSeriesChartAuxiliary } from 'time-series-scroller';
 import { IState } from '../../state';
-import { IDataGridState } from '../controls/data-grid/state';
-import { ITimeSeries, IAnomaliesTimeSeries } from '../models/anomalies-time-series';
+import { IAnomaliesTimeSeries } from '../models/anomalies-time-series';
 import { createAnomaliesTimeSeriesForScrollbar } from './auxilary';
 
 interface IChartsState {
@@ -19,16 +17,16 @@ export const chartsSelector = createSelector<IState, IAnomaliesTimeSeries, IChar
   [(state: IState) => state.anomaliesScreen.timeSeries],
     (timeSeries: IAnomaliesTimeSeries) => ({
       scrollbarChartState: hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
-        color: 'red',
-        name: 'anomalies',
-        points: createAnomaliesTimeSeriesForScrollbar(timeSeries.rawSeries, timeSeries.fixedAnomaliesSeries),
-        type: EnumTimeSeriesType.Bars,
-      } as IExternalSourceTimeSeries,
-      {
         color: 'steelblue',
         name: 'raw',
         points: timeSeries.rawSeries,
         type: EnumTimeSeriesType.Line,
+      } as IExternalSourceTimeSeries,
+      {
+        color: 'red',
+        name: 'anomalies',
+        points: createAnomaliesTimeSeriesForScrollbar(timeSeries.rawSeries, timeSeries.fixedAnomaliesSeries),
+        type: EnumTimeSeriesType.Bars,
       } as IExternalSourceTimeSeries]),
       rawChartState: hpTimeSeriesChartAuxiliary.buildStateFromExternalSource([{
         color: 'steelblue',

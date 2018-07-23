@@ -1,6 +1,4 @@
 
-import { createHashHistory } from 'history';
-import * as _ from 'lodash';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -9,6 +7,7 @@ import { ConnectedRouter, routerMiddleware, routerReducer } from 'react-router-r
 
 import '../styles/bootstrap.min.css';
 import '../styles/index.css';
+
 import Anomalies from './anomalies-screen';
 import Projects from './projects-screen';
 import { store, history } from './store-creator';
