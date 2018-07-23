@@ -12,7 +12,10 @@ function* getSitesForProject(action) {
     yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
     yield put(_.toPlainObject(new GetSitesForProjectFetchingAction()));
     const sites: ISite[] = yield requests.getSites(action.payload);
-    yield put(_.toPlainObject(new GetSitesForProjectFulfilledAction(sites)));
+    yield put(_.toPlainObject(new
+      GetSitesForProjectFulfilledAction(_.sortBy(
+        sites,
+        (el: ISite) => _.toUpper(el.name)))));
     yield put(_.toPlainObject(new HideGeneralMessageModalAction()));
   } catch (error) {
     yield handleErrorInSaga(error);
