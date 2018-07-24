@@ -38,7 +38,8 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
     yield select((state: IState) => state.anomaliesScreen.project);
 
     const rawChannelResponse: string = yield requests.getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
-    const fixedAnomaliesResponse: string = yield requests.getFixedAnomalies(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
+    const fixedAnomaliesResponse: string = yield requests.getFixedAnomalies(`${project.siteId}-${project.finalChannelId}`,
+     `${project.siteId}-${project.rawChannelId}`, startDate, endDate);
     const editedChannelResponse: string = yield requests.getChannelData(`${project.siteId}-${project.finalChannelId}`, startDate, endDate);
 
     const rawChannelParseResult = Papa.parse(rawChannelResponse, { header: true });
