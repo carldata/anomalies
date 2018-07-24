@@ -12,6 +12,7 @@ import {
 import { IDomain, IHpSliderHandleValues } from 'time-series-scroller/lib/out/hp-slider/interfaces';
 import * as hpTimeSeriesChartScss from 'time-series-scroller/lib/out/sass/hp-time-series-chart.scss';
 import * as hpSliderScss from '../../styles/hp-slider/hp-slider.scss';
+import { hpTimeSeriesChartCalculations } from 'time-series-scroller';
 import { IState } from '../state';
 import { DataGrid } from './controls/data-grid';
 import { IDataGridState } from './controls/data-grid/state';
@@ -240,15 +241,14 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
               <div>
                 <div style={{ height: 250 }} >
                   <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>
-                    {
-                      `${this.props.screenState.project.siteName}-${this.props.screenState.project.rawChannelName}`
-                    }
+                    {`${this.props.screenState.project.siteName}-${this.props.screenState.project.rawChannelName}`}
                   </p>
                   <HpTimeSeriesChart
                     scss={this.scss.timeSeries}
                     state={this.state.rawChartState}
                     fitToParent={{ toHeight: true, toWidth: true }}
-                  ></HpTimeSeriesChart>
+                    scaleLinearDomain={() => hpTimeSeriesChartCalculations.findMinMaxValuesBasedOnWindow(this.state.rawChartState)}>
+                  </HpTimeSeriesChart>
                 </div>
               </div>
             </Col>
@@ -262,7 +262,8 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                   <HpTimeSeriesChart
                     scss={this.scss.timeSeries}
                     state={this.state.mainChartState}
-                    fitToParent={{ toHeight: true, toWidth: true }}>
+                    fitToParent={{ toHeight: true, toWidth: true }}
+                    scaleLinearDomain={() => hpTimeSeriesChartCalculations.findMinMaxValuesBasedOnWindow(this.state.mainChartState)}>
                   </HpTimeSeriesChart>
                 </div>
               </div>
@@ -281,7 +282,8 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                   scss={this.scss.timeSeries}
                   state={this.state.finalChartState}
                   fitToParent={{ toHeight: true, toWidth: true }}
-                ></HpTimeSeriesChart>
+                  scaleLinearDomain={() => hpTimeSeriesChartCalculations.findMinMaxValuesBasedOnWindow(this.state.finalChartState)}>
+                </HpTimeSeriesChart>
               </div>
             </Col>
           </Row>
@@ -298,7 +300,8 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                       scss={this.scss.timeSeries}
                       state={el}
                       fitToParent={{ toHeight: true, toWidth: true }}
-                    ></HpTimeSeriesChart>
+                      scaleLinearDomain={() =>  hpTimeSeriesChartCalculations.findMinMaxValuesBasedOnWindow(el)}>
+                    </HpTimeSeriesChart>
                   </div>
                 </Col>
               </Row>
