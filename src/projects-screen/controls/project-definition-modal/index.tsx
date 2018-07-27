@@ -120,14 +120,18 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
 
   public render() {
     let okButton;
+    let modalTitle;
     if (this.props.mode === EnumProjectModalMode.AddNew) {
-      okButton = <Button id='btnApproveAddProjectModal' bsStyle='primary' onClick={this.approveAddProject}>Add Project</Button>;
+      okButton = <Button id='btnApproveAddProjectModal' bsStyle='primary' onClick={this.approveAddProject}>Create Project</Button>;
+      modalTitle = 'Create New Anomaly Detection Project';
     } else if (this.props.mode === EnumProjectModalMode.Edit) {
-      okButton = <Button id='btnApproveAddProjectModal' bsStyle='primary' onClick={this.approveAddProject}>Approve Edit</Button>;
+      okButton = <Button id='btnApproveAddProjectModal' bsStyle='primary' onClick={this.approveAddProject}>Save Settings</Button>;
+      modalTitle = 'Edit Project Settings';
     }
 
     return <Modal show={this.props.mode !== EnumProjectModalMode.Hidden} onHide={() => this.props.hide(null, false)}>
       <Modal.Body>
+        <h4>{modalTitle}</h4>
         <Form horizontal>
           <FormGroup>
             <Col sm={4} componentClass={ControlLabel}>

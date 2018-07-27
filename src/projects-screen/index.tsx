@@ -21,6 +21,8 @@ import { ProjectDefinitionModal } from './controls/project-definition-modal';
 import { GeneralMessageModalContainer } from '../components/modal';
 import { IProject } from '../models';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 interface IProjectComponentProps {
   projects: IProject[];
 }
@@ -46,7 +48,8 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
     return <>
       <GeneralMessageModalContainer />
       <div className='container'>
-        <Form horizontal>
+        <h3>Anomaly Detection</h3>
+        <Form>
           <FormGroup>
             <ListGroup>
               {_.map(this.props.projects, (project: IProject, index) => {
@@ -66,7 +69,9 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
             </ListGroup>
           </FormGroup>
           <FormGroup>
-            <Button id='btnAddProject' bsStyle='primary' onClick={() => this.props.showProjectDefinitionModalToAdd()}>Add Project</Button>
+            <Button id='btnAddProject' bsStyle='primary' onClick={() => this.props.showProjectDefinitionModalToAdd()}>
+              <FontAwesomeIcon icon={['fal', 'plus-circle']}/> Create New Project
+            </Button>
           </FormGroup>
         </Form>
         <ProjectDefinitionModal></ProjectDefinitionModal>

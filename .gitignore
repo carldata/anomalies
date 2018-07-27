@@ -16,3 +16,4 @@ dist/*.svg
 dist/*.ttf
 dist/*.eot
 package-lock.json
+.idea

@@ -12,6 +12,10 @@ import Anomalies from './anomalies-screen';
 import Projects from './projects-screen';
 import { store, history } from './store-creator';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCog, faTrashAlt, faEdit, faPlusCircle } from '@fortawesome/pro-light-svg-icons';
+library.add(faCog, faTrashAlt, faEdit, faPlusCircle);
+
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
