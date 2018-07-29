@@ -35,8 +35,6 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
   try {
     yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
 
-    yield select((state: IState) => state.anomaliesScreen.project);
-
     const rawChannelResponse: string = yield requests.getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
     const fixedAnomaliesResponse: string = yield requests.getFixedAnomalies(`${project.siteId}-${project.finalChannelId}`,
      `${project.siteId}-${project.rawChannelId}`, startDate, endDate);
@@ -61,9 +59,9 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
     const rawSeries: ITimeSeries = csvLoadingCalculations.extractUnixTimePoints(rawChannelParseResult.data, toUnixTimePointsExtractConfig);
     const anomaliesSeries: ITimeSeries = csvLoadingCalculations.extractUnixTimePoints(fixedAnomaliesParseResult.data, toUnixTimePointsExtractConfig);
     const mergedAnomaliesSeries = _.map(rawSeries, (raw) => {
-      const res = _.find(anomaliesSeries, (anomaly) => raw.unix == anomaly.unix);
+      const res = _.find(anomaliesSeries, (anomaly) => raw.unix === anomaly.unix);
       return _.isUndefined(res) ? raw : res;
-    })
+    });
 
     yield put(_.toPlainObject(new GetTimeSeriesFulfilledAction({
       rawSeries,
