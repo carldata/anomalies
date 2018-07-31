@@ -15,7 +15,7 @@ import * as hpSliderScss from '../../styles/hp-slider/hp-slider.scss';
 import { hpTimeSeriesChartCalculations } from 'time-series-scroller';
 import { IState } from '../state';
 import { DataGrid } from './controls/data-grid';
-import { IDataGridState } from './controls/data-grid/state';
+import { IDataGridState, IDataGridRow } from './controls/data-grid/state';
 import { AddChannelModal } from './controls/add-channel-control';
 import { GeneralMessageModalContainer } from '../components/modal';
 import { IProject } from '../models';
@@ -124,7 +124,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       supportingChannelsState: _.cloneDeep(nextProps.supportingChannels),
       windowUnixFrom: nextProps.mainChartState.dateRangeUnixFrom,
       windowUnixTo: nextProps.mainChartState.dateRangeUnixTo,
-      gridState: nextProps.gridState,
+      gridState: _.cloneDeep(nextProps.gridState),
     });
   }
 
@@ -216,6 +216,9 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                       windowUnixFrom,
                       windowUnixTo,
                     } as IHpTimeSeriesChartState)),
+                    gridState: {
+                      rows: this.props.gridState.rows.filter((el: IDataGridRow) => el.epoch >= windowUnixFrom && el.epoch <= windowUnixTo),
+                    } as IDataGridState,
                   });
                 }}
                 fitToParent={{ toWidth: true }}>
@@ -300,7 +303,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                       scss={this.scss.timeSeries}
                       state={el}
                       fitToParent={{ toHeight: true, toWidth: true }}
-                      scaleLinearDomain={() =>  hpTimeSeriesChartCalculations.findMinMaxValuesBasedOnWindow(el)}>
+                      scaleLinearDomain={() => hpTimeSeriesChartCalculations.findMinMaxValuesBasedOnWindow(el)}>
                     </HpTimeSeriesChart>
                   </div>
                 </Col>

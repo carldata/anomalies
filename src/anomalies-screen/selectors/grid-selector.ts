@@ -30,6 +30,7 @@ export const gridSelector = createSelector<IState, IAnomaliesTimeSeries, IDataGr
       const timeKey = timeSeries.rawSeries[i].unix;
       result.rows.push({
         date: dateFns.format(timeKey, 'YYYY-MM-DD HH:mm:ss'),
+        epoch: timeKey,
         rawValue: timeSeries.rawSeries[i].value,
         fixedValue: fixedAnomaliesValuesMap.has(timeKey) ? fixedAnomaliesValuesMap.get(timeKey) : null,
         editedValue: editedChannelValuesMap.has(timeKey) ? editedChannelValuesMap.get(timeKey) : null,
