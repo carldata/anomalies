@@ -26,10 +26,6 @@ export class DataGrid extends React.Component<IDataGridComponentProps, IDataGrid
     this.state = { selectedIndexes: [] };
   }
 
-  public shouldComponentUpdate(nextProps: IDataGridComponentProps) {
-    return ((_.size(this.props.rows) !== _.size(nextProps.rows)) || (JSON.stringify(this.props.columns) !== JSON.stringify(nextProps.columns)));
-  }
-
   public render() {
     return (
       <div>
@@ -39,7 +35,7 @@ export class DataGrid extends React.Component<IDataGridComponentProps, IDataGrid
             rowGetter={(i: number) => this.props.rows[i]}
             rowsCount={this.props.rows.length}
             minHeight={500}
-            rowRenderer={RowRenderer} />
+            rowRenderer={RowRenderer}/>
           <Row>
             <Col lg={12}>
               <div className='pull-left'>

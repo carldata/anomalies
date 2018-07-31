@@ -193,8 +193,6 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                     windowUnixTo: this.state.windowUnixTo,
                   } as IUnixFromTo);
 
-                  const newRows = _.filter(this.props.gridState.rows, (el: IDataGridRow) => { return el.epoch >= windowUnixFrom && el.epoch <= windowUnixTo })
-                  console.log('newRows ', newRows);
                   this.setState({
                     windowUnixFrom,
                     windowUnixTo,
@@ -219,7 +217,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
                       windowUnixTo,
                     } as IHpTimeSeriesChartState)),
                     gridState: {
-                      rows: newRows,
+                      rows: this.props.gridState.rows.filter((el: IDataGridRow) => el.epoch >= windowUnixFrom && el.epoch <= windowUnixTo),
                     } as IDataGridState,
                   });
                 }}
