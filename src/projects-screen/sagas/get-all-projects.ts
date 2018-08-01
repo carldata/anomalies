@@ -10,7 +10,7 @@ import { handleErrorInSaga } from '@common/handle-error-in-saga';
 function* getAllProjectsAsyncCall() {
   try {
     yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
-    const response: IConfigurationEntry[] = yield requests.getConfiguration();
+    const response: IConfigurationEntry[] = yield requests().getConfiguration();
     yield put(_.toPlainObject(new GetAllProjectsFulfilledAction(_.map(response, (el) => ({ ...el.data, id: el.id } as IProject)))));
     yield put(_.toPlainObject(new HideGeneralMessageModalAction()));
   } catch (error) {

@@ -10,7 +10,7 @@ import { handleErrorInSaga } from '@common/handle-error-in-saga';
 function* getChannelsForSite(action) {
   try {
     yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
-    const channels: IChannel[] = yield requests.getChannels(action.payload);
+    const channels: IChannel[] = yield requests().getChannels(action.payload);
     yield put(_.toPlainObject(new GetChannelsForSiteFulfilledAction(channels)));
     yield put(_.toPlainObject(new HideGeneralMessageModalAction()));
   } catch (error) {

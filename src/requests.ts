@@ -5,7 +5,7 @@ import { IProject, IChannel, ISite } from './models';
 
 const appName = 'anomaly-tool-development';
 const apiAddress = 'http://13.77.168.238';
-const token = 'oasdob123a23hnaovnfaewd123akjwpod';
+let token = '';
 
 enum EnumHTTPVerb { GET, POST, PUT, DELETE }
 
@@ -36,17 +36,13 @@ const httpOp = <TReturnedDataType>(verb: EnumHTTPVerb, url: string, payload?: an
 const getConfiguration = (): AxiosPromise<IConfigurationEntry[]> => {
   const configuration = select((state) => state);
   return httpOp<IConfigurationEntry[]>(EnumHTTPVerb.GET, `${apiAddress}/config/${appName}`);
-}
+};
 
 const getChannelData = (channel: string, startDate: string, endDate: string): AxiosPromise<string> =>
   httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
 
 const getFixedAnomalies = (finalChannel: string, rawChannel: string, startDate: string, endDate: string): AxiosPromise<string> =>
   httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/anomalies/find?editedFlowChannelId=${finalChannel}&rawFlowChannelId=${rawChannel}&startDate=${startDate}&endDate=${endDate}`);
-
-// TODO - remove  getEditedChannelData and use only getChannelData
-const getEditedChannelData = (channel: string, startDate: string, endDate: string): AxiosPromise<string> =>
-  httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
 
 const getSupportingChannels = (supportingChannels: { siteId: string, channelId: string }[], startDate: string, endDate: string): Promise<AxiosResponse<string>[]> =>
   Promise.all(_.map(supportingChannels, (el) => {
@@ -68,15 +64,17 @@ const getSites = (db: string): AxiosPromise<ISite[]> =>
 const getChannels = (siteId: string): AxiosPromise<IChannel[]> =>
   httpOp<IChannel[]>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${siteId}?token=${token}`);
 
-export const requests = {
-  getConfiguration,
-  getChannelData,
-  getFixedAnomalies,
-  getEditedChannelData,
-  getSupportingChannels,
-  addProject,
-  deleteProject,
-  saveProject,
-  getSites,
-  getChannels,
+export const requests = (t: string = 'oasdob123a23hnaovnfaewd123akjwpod') => {
+  token = t;
+  return {
+    getConfiguration,
+    getChannelData,
+    getFixedAnomalies,
+    getSupportingChannels,
+    addProject,
+    deleteProject,
+    saveProject,
+    getSites,
+    getChannels,
+  };
 };

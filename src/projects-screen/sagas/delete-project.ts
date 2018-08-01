@@ -8,7 +8,7 @@ import _ = require('lodash');
 function* getChannelsForSite(action) {
     try {
         yield put(_.toPlainObject(new DeleteProjectDeletingAction(action.payload)));
-        const isRemoved = yield requests.deleteProject(action.payload); // 'ok' is returned if request is finished, export it as request enums?
+        const isRemoved = yield requests().deleteProject(action.payload); // 'ok' is returned if request is finished, export it as request enums?
         yield put(_.toPlainObject(new DeleteProjectFulfilledAction(action.payload)));
     } catch (error) {
         yield handleErrorInSaga(error);
