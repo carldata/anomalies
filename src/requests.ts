@@ -4,7 +4,8 @@ import { all, call, select } from 'redux-saga/effects';
 import { IProject, IChannel, ISite } from './models';
 
 const appName = 'anomaly-tool-development';
-const apiAddress = 'http://13.77.168.238';
+// const apiAddress = 'http://13.77.168.238';
+const apiAddress = 'http://localhost:8080';
 let token = '';
 
 enum EnumHTTPVerb { GET, POST, PUT, DELETE }
@@ -42,7 +43,8 @@ const getChannelData = (channel: string, startDate: string, endDate: string): Ax
   httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
 
 const getFixedAnomalies = (finalChannel: string, rawChannel: string, startDate: string, endDate: string): AxiosPromise<string> =>
-  httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/anomalies/find?editedFlowChannelId=${finalChannel}&rawFlowChannelId=${rawChannel}&startDate=${startDate}&endDate=${endDate}`);
+  httpOp<string>(EnumHTTPVerb.GET,
+    `${apiAddress}/anomalies/find?editedFlowChannelId=${finalChannel}&rawFlowChannelId=${rawChannel}&startDate=${startDate}&endDate=${endDate}&token=${token}`);
 
 const getSupportingChannels = (supportingChannels: { siteId: string, channelId: string }[], startDate: string, endDate: string): Promise<AxiosResponse<string>[]> =>
   Promise.all(_.map(supportingChannels, (el) => {

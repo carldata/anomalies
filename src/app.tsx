@@ -15,6 +15,13 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div >
+        <Route exact path='/whatever' component={() => {
+          window.location.href = `http://beta.flowworks.com/login.aspx?externalUrl=http://${window.location.host}`;
+          return null;
+        }} />
+        <Route exact path='/access_token/:token' render={(props) => {
+          return <div>Your token: {props.match.params.token} </div>;
+        }} />
         <Route
           exact
           path='/'

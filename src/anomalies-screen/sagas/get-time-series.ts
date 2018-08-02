@@ -36,7 +36,7 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
     yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
 
     const rawChannelResponse: string = yield requests().getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
-    const fixedAnomaliesResponse: string = yield requests().getFixedAnomalies(`${project.siteId}-${project.finalChannelId}`,
+    const fixedAnomaliesResponse: string = yield requests('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InRwaWNobGFrIiwibmJmIjoxNTMzMTg2MzU2LCJleHAiOjE1MzMxOTM1NTYsImlhdCI6MTUzMzE4NjM1NiwiaXNzIjoiRlcifQ.GBN_bX0b3tGKhWifewQhaeDIfdcwnXrMVGhO_FALuUU').getFixedAnomalies(`${project.siteId}-${project.finalChannelId}`,
      `${project.siteId}-${project.rawChannelId}`, startDate, endDate);
     const editedChannelResponse: string = yield requests().getChannelData(`${project.siteId}-${project.finalChannelId}`, startDate, endDate);
 
