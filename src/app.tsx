@@ -13,19 +13,20 @@ import Projects from './projects-screen';
 import { store, history } from './store-creator';
 import { ConfigurationLoadStartedAction, SetTokenStartedAction } from '@business-logic/configuration/actions';
 import { IState } from './state';
-
+import { ifUserLoggedInRedirectToProjects, isUserLoggedIn } from './redux-auth-wrappers';
 
 store.dispatch(_.toPlainObject(new ConfigurationLoadStartedAction()));
+
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div >
-        <Route exact path='/login' component={() => {
+        <Route exact path='/login' component={ifUserLoggedInRedirectToProjects(() => {
           console.log('apiAddress: ', (store.getState() as IState).configuration.apiAddress);
           window.location.href = `http://beta.flowworks.com/login.aspx?externalUrl=http://${window.location.host}`;
           return <div>Loading</div>;
-        }} />
+        })} />
         <Route exact path='/access_token/:token' render={(props) => {
           store.dispatch(_.toPlainObject(new SetTokenStartedAction(props.match.params.token)));
           return <div>Loading</div>;
@@ -36,10 +37,10 @@ ReactDOM.render(
           render={() => (<Redirect to='/projects' />)} />
         <Route
           path='/projects'
-          component={Projects} />
+          component={isUserLoggedIn(Projects as React.ComponentClass<any>)} />
         <Route
           path='/anomalies'
-          component={Anomalies} />
+          component={isUserLoggedIn(Anomalies as React.ComponentClass<any>)} />
       </div>
     </ConnectedRouter>
   </Provider>, document.getElementById('app'));

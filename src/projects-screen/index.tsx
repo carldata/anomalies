@@ -34,7 +34,7 @@ interface IProjectComponentActionCreators {
 }
 
 class ProjectsComponent extends React.Component<IProjectComponentProps & IProjectComponentActionCreators> {
-  constructor(props: IProjectComponentProps & IProjectComponentActionCreators) {
+  constructor(props: IProjectComponentProps & IProjectComponentActionCreators ) {
     super(props);
   }
 
