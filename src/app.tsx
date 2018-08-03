@@ -20,7 +20,7 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div >
-        <Route exact path='/whatever' component={() => {
+        <Route exact path='/login' component={() => {
           window.location.href = `http://beta.flowworks.com/login.aspx?externalUrl=http://${window.location.host}`;
           return null;
         }} />

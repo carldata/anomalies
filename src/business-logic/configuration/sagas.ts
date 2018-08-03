@@ -22,7 +22,7 @@ export function* getConfigurationSaga() {
       yield put(_.toPlainObject(new ConfigurationLoadSucceededAction(localResponse.data)));
     }
   } catch (error) {
-    //
+    console.log(error);
   }
 }
 
