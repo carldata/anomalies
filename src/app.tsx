@@ -12,6 +12,7 @@ import Anomalies from './anomalies-screen';
 import Projects from './projects-screen';
 import { store, history } from './store-creator';
 import { ConfigurationLoadStartedAction, SetTokenStartedAction } from '@business-logic/configuration/actions';
+import { IState } from './state';
 
 
 store.dispatch(_.toPlainObject(new ConfigurationLoadStartedAction()));
@@ -21,12 +22,13 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <div >
         <Route exact path='/login' component={() => {
+          console.log('apiAddress: ', (store.getState() as IState).configuration.apiAddress);
           window.location.href = `http://beta.flowworks.com/login.aspx?externalUrl=http://${window.location.host}`;
-          return null;
+          return <div>Loading</div>;
         }} />
         <Route exact path='/access_token/:token' render={(props) => {
           store.dispatch(_.toPlainObject(new SetTokenStartedAction(props.match.params.token)));
-          return null;
+          return <div>Loading</div>;
         }} />
         <Route
           exact
