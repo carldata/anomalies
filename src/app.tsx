@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -10,6 +11,10 @@ import '../styles/index.css';
 import Anomalies from './anomalies-screen';
 import Projects from './projects-screen';
 import { store, history } from './store-creator';
+import { ConfigurationLoadStartedAction, SetTokenStartedAction } from '@business-logic/configuration/actions';
+
+
+store.dispatch(_.toPlainObject(new ConfigurationLoadStartedAction()));
 
 ReactDOM.render(
   <Provider store={store}>
@@ -20,7 +25,8 @@ ReactDOM.render(
           return null;
         }} />
         <Route exact path='/access_token/:token' render={(props) => {
-          return <div>Your token: {props.match.params.token} </div>;
+          store.dispatch(_.toPlainObject(new SetTokenStartedAction(props.match.params.token)));
+          return null;
         }} />
         <Route
           exact

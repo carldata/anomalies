@@ -35,8 +35,10 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
   try {
     yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
 
+    const token: string = yield select((state: IState) => state.configuration.token);
+    console.log('get-time-series saga, token: ', token);
     const rawChannelResponse: string = yield requests().getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
-    const fixedAnomaliesResponse: string = yield requests('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InRwaWNobGFrIiwibmJmIjoxNTMzMTg2MzU2LCJleHAiOjE1MzMxOTM1NTYsImlhdCI6MTUzMzE4NjM1NiwiaXNzIjoiRlcifQ.GBN_bX0b3tGKhWifewQhaeDIfdcwnXrMVGhO_FALuUU').getFixedAnomalies(`${project.siteId}-${project.finalChannelId}`,
+    const fixedAnomaliesResponse: string = yield requests(token).getFixedAnomalies(`${project.siteId}-${project.finalChannelId}`,
      `${project.siteId}-${project.rawChannelId}`, startDate, endDate);
     const editedChannelResponse: string = yield requests().getChannelData(`${project.siteId}-${project.finalChannelId}`, startDate, endDate);
 

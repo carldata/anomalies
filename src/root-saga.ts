@@ -19,12 +19,14 @@ import {
   watchDeleteProject,
 } from './projects-screen/sagas';
 import { initializationSaga } from '@business-logic/configuration/initialization';
+import { watchSetTokenSaga } from '@business-logic/configuration/sagas';
 import { watchRouterForGoogleAnalitycs } from './google-analytics/saga';
 // import { watchEditProject } from './projects-screen/sagas/edit-project';
 
 export function* rootSaga() {
   return yield all([
     fork(initializationSaga),
+    fork(watchSetTokenSaga),
     fork(watchGoToAnomalies),
     // fork(watchEditProject),
     fork(watchDeleteProject),

@@ -3,4 +3,5 @@ export interface IConfigurationState {
   apiAddress: string;
   appName: string;
   gaTrackingNumber: string;
+  loaded: boolean;
 }

@@ -2,6 +2,7 @@ import axios, { AxiosResponse, AxiosPromise } from 'axios';
 import * as _ from 'lodash';
 import { all, call, select } from 'redux-saga/effects';
 import { IProject, IChannel, ISite } from './models';
+import { IState } from './state';
 
 const appName = 'anomaly-tool-development';
 // const apiAddress = 'http://13.77.168.238';
@@ -35,8 +36,7 @@ const httpOp = <TReturnedDataType>(verb: EnumHTTPVerb, url: string, payload?: an
 };
 
 const getConfiguration = (): AxiosPromise<IConfigurationEntry[]> => {
-  const configuration = select((state) => state);
-  return httpOp<IConfigurationEntry[]>(EnumHTTPVerb.GET, `${apiAddress}/config/${appName}`);
+  return httpOp<IConfigurationEntry[]>(EnumHTTPVerb.GET, `${apiAddress}/config/${appName}?token=${token}`);
 };
 
 const getChannelData = (channel: string, startDate: string, endDate: string): AxiosPromise<string> =>
@@ -66,7 +66,7 @@ const getSites = (db: string): AxiosPromise<ISite[]> =>
 const getChannels = (siteId: string): AxiosPromise<IChannel[]> =>
   httpOp<IChannel[]>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${siteId}?token=${token}`);
 
-export const requests = (t: string = 'oasdob123a23hnaovnfaewd123akjwpod') => {
+export const requests = (t: string = 'whatever') => {
   token = t;
   return {
     getConfiguration,
