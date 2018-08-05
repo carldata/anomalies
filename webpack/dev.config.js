@@ -4,6 +4,7 @@ const merge = require('webpack-merge')
 const base = require('./base.config')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const constants = require('./constants');
+const config = require('../src/json/config/config.dev.json')
 
 const files = [
   { from: './src/json/config/config.dev.json', to: 'configuration.json', dot: true },
@@ -21,5 +22,8 @@ module.exports = merge(base, {
     contentBase: path.join(__dirname, "../dist"),
     hot: true,
     port: 9000
+  }, 
+  externals: {
+    myconfig: JSON.stringify(config)
   }
 })
