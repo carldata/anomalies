@@ -14,6 +14,7 @@ import { store, history } from './store-creator';
 import { ConfigurationLoadStartedAction, SetTokenStartedAction } from '@business-logic/configuration/actions';
 import { IState } from './state';
 import { ifTokenNotEmptyGoToProjects, ifTokenIsEmptyGoToLogin } from './redux-auth-wrappers';
+import { setCookie } from '@common/cookie-auxiliary';
 
 store.dispatch(_.toPlainObject(new ConfigurationLoadStartedAction()));
 
@@ -27,7 +28,9 @@ ReactDOM.render(
           return <div>Loading</div>;
         })} />
         <Route exact path='/access_token/:token' render={(props) => {
-          store.dispatch(_.toPlainObject(new SetTokenStartedAction(props.match.params.token)));
+          setCookie('fw_jwt', props.match.params.token, 120);
+          history.push('/projects');
+          // store.dispatch(_.toPlainObject(new SetTokenStartedAction(props.match.params.token)));
           return <div>Loading</div>;
         }} />
         <Route

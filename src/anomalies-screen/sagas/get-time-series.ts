@@ -26,6 +26,7 @@ import { IState } from '../../state';
 import { GetTimeSeriesFulfilledAction, GetTimeSeriesStartAction } from '../actions';
 import { GET_TIME_SERIES_START } from '../action-types';
 import { handleErrorInSaga } from '@common/handle-error-in-saga';
+import { getCookie} from '@common/cookie-auxiliary';
 
 function* getTimeSeries(action: GetTimeSeriesStartAction) {
   const project: IProject = yield select((state: IState) => state.anomaliesScreen.project);
@@ -35,7 +36,8 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
   try {
     yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
 
-    const token: string = yield select((state: IState) => state.configuration.token);
+    // const token: string = yield select((state: IState) => state.configuration.token);
+    const token: string =  getCookie('fw_jwt');
     console.log('get-time-series saga, token: ', token);
     const rawChannelResponse: string = yield requests().getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
     const fixedAnomaliesResponse: string = yield requests(token).getFixedAnomalies(`${project.siteId}-${project.finalChannelId}`,

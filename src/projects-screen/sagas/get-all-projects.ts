@@ -7,11 +7,13 @@ import { GET_ALL_PROJECTS_STARTED } from '../action-types';
 import { GetAllProjectsFulfilledAction } from '../actions';
 import { handleErrorInSaga } from '@common/handle-error-in-saga';
 import { IState } from '../../state';
+import { getCookie } from '@common/cookie-auxiliary';
 
 function* getAllProjectsAsyncCall() {
   try {
     yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
-    const token = yield select((state: IState) => state.configuration.token)
+    // const token = yield select((state: IState) => state.configuration.token)
+    const token = getCookie('fw_jwt');
     const response: IConfigurationEntry[] = yield requests(token).getConfiguration();
     yield put(_.toPlainObject(new GetAllProjectsFulfilledAction(_.map(response, (el) => ({ ...el.data, id: el.id } as IProject)))));
     yield put(_.toPlainObject(new HideGeneralMessageModalAction()));
