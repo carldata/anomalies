@@ -131,7 +131,7 @@ class ProjectDefinitionModalComponent extends React.Component<IAddProjectModalCo
 
     return <Modal show={this.props.mode !== EnumProjectModalMode.Hidden} onHide={() => this.props.hide(null, false)}>
       <Modal.Body>
-        <h4>{modalTitle}</h4>
+        <h4 style={{marginBottom: 20}}>{modalTitle}</h4>
         <Form horizontal>
           <FormGroup>
             <Col sm={4} componentClass={ControlLabel}>

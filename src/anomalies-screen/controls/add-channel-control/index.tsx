@@ -51,15 +51,39 @@ export class AddChannelModal extends React.Component<IAddChannelModalProps & IAd
     this.channelName = _.isUndefined(firstChannel) ? '' : firstChannel.name;
   }
 
+  // todo: how do you access functions in typescript :S
+  // public sortAlphabetically() {
+  //
+  //   let sortedSites = sites.map( site => site);
+  //
+  //   sortedSites.sort((first, second) => {
+  //     if ( first.name === second.name ) {
+  //       return 0;
+  //     }
+  //     if ( first.name < second.name ) {
+  //       return -1;
+  //     } else {
+  //       return 1;
+  //     }
+  //   });
+  //
+  //   return (
+  //     sortedSites.map( (el, idx) =>
+  //       <option value={el.id} key={idx}>{el.name}</option>
+  //     )
+  //   )
+  // }
+
   public render() {
     return <Modal show={this.props.showModal} onHide={() => this.props.cancelClicked()}>
       <Modal.Body>
+        <h4 style={{marginBottom: 20}}>Add Supporting Channel to Project</h4>
         <Form horizontal>
           <FormGroup>
-            <Col sm={2} componentClass={ControlLabel}>
+            <Col sm={4} componentClass={ControlLabel}>
               Site:
             </Col>
-            <Col sm={10}>
+            <Col sm={6}>
               <select id='selectSite' className='form-control' onChange={(e) => {
                 const selectElement = (e.target as HTMLSelectElement);
                 this.siteId = selectElement.value;
@@ -67,16 +91,17 @@ export class AddChannelModal extends React.Component<IAddChannelModalProps & IAd
                 this.props.getChannelsForSite(selectElement.value);
               }} >
                 {
+                  // todo: sort sites alphabetically.
                   this.props.sites.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
                 }
               </select>
             </Col>
           </FormGroup>
           <FormGroup>
-            <Col sm={2} componentClass={ControlLabel}>
+            <Col sm={4} componentClass={ControlLabel}>
               Channel:
             </Col>
-            <Col sm={10}>
+            <Col sm={6}>
               <select id='selectChannel' className='form-control' onChange={(e) => {
                 const selectElement = (e.target as HTMLSelectElement);
                 this.channelId = selectElement.value;
@@ -88,22 +113,22 @@ export class AddChannelModal extends React.Component<IAddChannelModalProps & IAd
               </select>
             </Col>
           </FormGroup>
-          <FormGroup>
-            <Col sm={2} componentClass={ControlLabel}>
-              Type:
-            </Col>
-            <Col sm={10}>
-              <FormControl type='text' onChange={(e) => this.setState({ channelType: (e.target as HTMLInputElement).value })} value={this.state.channelType}></FormControl>
-            </Col>
-          </FormGroup>
+          {/*<FormGroup>*/}
+            {/*<Col sm={4} componentClass={ControlLabel}>*/}
+              {/*Type:*/}
+            {/*</Col>*/}
+            {/*<Col sm={6}>*/}
+              {/*<FormControl type='text' onChange={(e) => this.setState({ channelType: (e.target as HTMLInputElement).value })} value={this.state.channelType}></FormControl>*/}
+            {/*</Col>*/}
+          {/*</FormGroup>*/}
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button id='btnCancelAddChannelModal' onClick={() => this.props.cancelClicked()}>
-          Cancel
-        </Button>
         <Button id='btnApproveAddChannelModal' bsStyle='primary' onClick={() => this.addChannelClicked()} >
           Add
+        </Button>
+        <Button id='btnCancelAddChannelModal' onClick={() => this.props.cancelClicked()}>
+          Cancel
         </Button>
       </Modal.Footer>
     </Modal>;
