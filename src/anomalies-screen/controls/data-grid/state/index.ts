@@ -4,6 +4,7 @@ export interface IDataGridState {
 
 export interface IDataGridRow {
   date: any;
+  epoch: any;
   rawValue: any;
   editedValue: any;
   fixedValue: any;

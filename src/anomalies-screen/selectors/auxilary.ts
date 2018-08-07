@@ -14,9 +14,11 @@ export const createAnomaliesTimeSeriesForScrollbar = (rawSeries: ITimeSeries, fi
     new Map<number, number>());
 
   const rawSeriesMax = _.max(_.map(rawSeries, (el) => el.value));
+  const rawSeriesMin = _.min(_.map(rawSeries, (el) => el.value));
+  const minBarChartValue = rawSeriesMin >= 0 ? 0 : rawSeriesMin;
 
   return _.map(rawSeries, (el) => ({
     unix: el.unix,
-    value: fixedAnomaliesSeriesMap.get(el.unix) !== el.value ? ANOMALIES_BARCHART_HEIGHT_RATIO * rawSeriesMax : 0,
+    value: fixedAnomaliesSeriesMap.get(el.unix) !== el.value ? ANOMALIES_BARCHART_HEIGHT_RATIO * rawSeriesMax : minBarChartValue,
   }));
 };

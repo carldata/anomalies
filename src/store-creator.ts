@@ -1,11 +1,6 @@
 
 import { createHashHistory } from 'history';
-import * as _ from 'lodash';
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { Redirect, Route } from 'react-router';
-import { ConnectedRouter, routerMiddleware, routerReducer } from 'react-router-redux';
+import { routerMiddleware, routerReducer } from 'react-router-redux';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
@@ -14,7 +9,7 @@ import { projectsScreenReducer } from './projects-screen/reducer';
 import { IState } from './state';
 
 import { rootSaga } from './root-saga';
-import { GeneralMessageModalContainer, generalMessageModalContainerReducer } from './components/modal';
+import { generalMessageModalContainerReducer } from './components/modal';
 import { configurationReducer } from '@business-logic/configuration/reducers';
 
 const reducers = combineReducers<IState>({

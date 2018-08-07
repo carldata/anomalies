@@ -1,6 +1,5 @@
 import { Action } from 'redux';
 import * as actionTypes from './action-types';
-import { GET_TIME_SERIES_START } from './action-types';
 import { ITimeSeriesLoadContext } from './models/time-series-load-context';
 import { ISiteChannelInfo } from '@models/site-channel-info';
 import { IProject } from '@models/project';

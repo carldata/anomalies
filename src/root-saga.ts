@@ -19,6 +19,7 @@ import {
   watchDeleteProject,
 } from './projects-screen/sagas';
 import { initializationSaga } from '@business-logic/configuration/initialization';
+import { watchRouterForGoogleAnalitycs } from './google-analytics/saga';
 // import { watchEditProject } from './projects-screen/sagas/edit-project';
 
 export function* rootSaga() {
@@ -40,5 +41,6 @@ export function* rootSaga() {
     fork(watchHideProjectDefinitionModal),
     fork(watchShowDefineChannelModal),
     fork(watchGetChannelsForSiteAnomalies),
+    fork(watchRouterForGoogleAnalitycs),
   ]);
 }
