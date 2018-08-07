@@ -15,4 +15,5 @@ dist/*.woff
 dist/*.svg
 dist/*.ttf
 dist/*.eot
+dist/configuration.json
 package-lock.json
