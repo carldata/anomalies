@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import * as React from 'react';
-import { Button, Form, FormGroup, ListGroup } from 'react-bootstrap';
+import { Button, Form, FormGroup, ListGroup, Navbar } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { IState } from '../state';
@@ -47,8 +47,18 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
   public render() {
     return <>
       <GeneralMessageModalContainer />
+
+      <Navbar>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <div>
+              Anomaly Detection
+            </div>
+          </Navbar.Brand>
+        </Navbar.Header>
+      </Navbar>
+
       <div className='container'>
-        <h3>Anomaly Detection</h3>
         <Form>
           <FormGroup>
             <ListGroup>

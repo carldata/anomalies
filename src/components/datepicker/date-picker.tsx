@@ -46,12 +46,13 @@ export default class DatePickerWrapper extends React.Component< IDatePickerWrapp
     }
 
     public render() {
-        return <Form inline>
-            <FormGroup>
+        return <div>
+            <FormGroup style={{marginRight: '4px'}}>
                 <ControlLabel>Start Date:</ControlLabel>
             </ FormGroup>
-            <FormGroup>
-                <DatePicker 
+            <FormGroup style={{marginRight: '16px'}}>
+                <DatePicker
+                    className='form-control'
                     disabledKeyboardNavigation
                     selected={this.state.startDate}
                     dateFormat={'YYYY-MM-DD HH:mm'}
@@ -72,11 +73,12 @@ export default class DatePickerWrapper extends React.Component< IDatePickerWrapp
                     startDate={this.state.startDate}
                     endDate={this.state.endDate} />
             </ FormGroup>
-            <FormGroup>
+            <FormGroup style={{marginRight: '4px'}}>
                 <ControlLabel>End Date:</ControlLabel>
             </ FormGroup>
             <FormGroup>
                 <DatePicker
+                    className='form-control'
                     disabledKeyboardNavigation
                     selected={this.state.endDate}
                     dateFormat={'YYYY-MM-DD HH:mm'}
@@ -97,7 +99,7 @@ export default class DatePickerWrapper extends React.Component< IDatePickerWrapp
                     startDate={this.state.startDate}
                     endDate={this.state.endDate} />
             </ FormGroup>
-        </Form>;
+        </div>;
     }
 }
 

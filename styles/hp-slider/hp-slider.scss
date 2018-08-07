@@ -18,6 +18,11 @@ $hpSliderBorderRadiusPx: 5px;
   background-color: navy;
   opacity: 0.25;
   height: $hpSliderHeightPx;
+  transition: opacity 200ms;
+
+  &:hover {
+    opacity: 0.35;
+  }
 }
 
 .hp-slider-handle-right {
@@ -28,6 +33,30 @@ $hpSliderBorderRadiusPx: 5px;
 .hp-slider-handle-left {
   border-top-left-radius: $hpSliderBorderRadiusPx;
   border-bottom-left-radius: $hpSliderBorderRadiusPx;
+}
+
+.hp-slider-handle-right:after,
+.hp-slider-handle-left:after {
+  content: "";
+  top: 35px;
+  color: #ffffff;
+  opacity: .5;
+  position: absolute;
+  font-size: 20px;
+  width: 0px;
+  height: 0px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+.hp-slider-handle-left:after {
+  left: 4px;
+  border-right: 8px solid transparent;
+  border-left: 8px solid white;
+}
+.hp-slider-handle-right:after {
+  right: 4px;
+  border-right: 8px solid white;
+  border-left: 8px solid transparent;
 }
 
 .hp-slider-handle-dragBar {

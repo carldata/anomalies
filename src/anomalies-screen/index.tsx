@@ -1,7 +1,7 @@
 import * as dateFns from 'date-fns';
 import * as _ from 'lodash';
 import * as React from 'react';
-import { Button, ControlLabel, Form, FormControl, FormGroup, Row, Col, Navbar } from 'react-bootstrap';
+import { Button, ControlLabel, Form, FormControl, FormGroup, Row, Col, Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Column } from 'react-data-grid';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
@@ -46,6 +46,7 @@ import {
 import { ITimeSeriesLoadContext } from './models/time-series-load-context';
 import DatePickerWrapper from '../components/datepicker/date-picker';
 import { EnumHpTimeSeriesChartMode } from '../../node_modules/time-series-scroller/lib/out/hp-time-series-chart';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface IAnomaliesComponentProps {
   scrollbarChartState: IHpTimeSeriesChartState;
@@ -134,225 +135,205 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
       <div>
         <Navbar fluid>
           <Navbar.Header>
+            <Navbar.Text style={{marginLeft: 0}}>
+              <a href='#' onClick={() => this.props.goToProjectsScreen()}>
+                <FontAwesomeIcon icon={['fal', 'angle-left']}/> Back
+              </a>
+            </Navbar.Text>
             <Navbar.Brand>
-              <div style={{ cursor: 'pointer' }} onClick={() => this.props.goToProjectsScreen()}>Anomaly</div>
+              Anomaly Detection: {_.isEmpty(this.props.screenState.project) ? ' ' : this.props.screenState.project.projectName}
             </Navbar.Brand>
           </Navbar.Header>
         </Navbar>
-        <div style={{ marginLeft: 20, marginRight: 20, marginTop: 10, marginBottom: 10 }}>
-          <Form>
-            <FormGroup>
-              <ControlLabel style={{ fontWeight: 'bold' }}>{_.isEmpty(this.props.screenState.project) ? ' ' : this.props.screenState.project.projectName}</ControlLabel>{' '}
-              <Button
-                disabled={_.isEmpty(this.props.screenState.project)}
-                onClick={() => this.props.saveProject(this.props.screenState.project)}>
-                Save Project
-              </Button>
-              {' '}
-              <Button
-                bsStyle='primary'
-                disabled={_.isEmpty(this.props.screenState.project)}
-                onClick={() => this.props.getTimeSeries({ dateFrom: this.state.startDate, dateTo: this.state.endDate } as ITimeSeriesLoadContext)}>
-                Load Timeseries</Button>
-            </FormGroup>
+        <div className='container-fluid'>
+
+          {/*<a onClick={() => this.props.goToProjectsScreen()}><FontAwesomeIcon icon={['fal', 'angle-left']}/> Back</a>*/}
+
+          <Form inline style={{marginBottom: 40}}>
+            <div className='row'>
+              <div className='col-sm-6'>
+                <FormGroup style={{marginRight: '16px'}}>
+                  <ControlLabel style={{marginRight: '4px'}}>Site:</ControlLabel>
+                  <FormControl.Static>{_.isEmpty(this.props.screenState.project) ? 'No site' : this.props.screenState.project.siteName}</FormControl.Static>
+                </FormGroup>
+                <FormGroup style={{marginRight: '16px'}}>
+                  <ControlLabel style={{marginRight: '4px'}}>Source:</ControlLabel>
+                  <FormControl.Static>{_.isEmpty(this.props.screenState.project) ? 'No source ' : this.props.screenState.project.rawChannelName}</FormControl.Static>
+                </FormGroup>
+                <FormGroup>
+                  <ControlLabel style={{marginRight: '4px'}}>Final:</ControlLabel>
+                  <FormControl.Static>{_.isEmpty(this.props.screenState.project) ? 'No final' : this.props.screenState.project.finalChannelName}</FormControl.Static>
+                </FormGroup>
+              </div>
+              <div className='col-sm-6 text-right'>
+                <FormGroup style={{marginRight: '4px'}} >
+                  <DatePickerWrapper dateSelected={(startDate, endDate) => {
+                    this.setState({ startDate, endDate });
+                  }} />
+                </FormGroup>
+                <Button
+                  bsStyle='link'
+                  disabled={_.isEmpty(this.props.screenState.project)}
+                  onClick={() => this.props.getTimeSeries({ dateFrom: this.state.startDate, dateTo: this.state.endDate } as ITimeSeriesLoadContext)}>
+                  <FontAwesomeIcon icon={['fal', 'sync']}/> Update</Button>
+              </div>
+            </div>
           </Form>
 
-          <Form inline>
-            <FormGroup>
-              <ControlLabel>Site: </ControlLabel>
-              <FormControl.Static>{_.isEmpty(this.props.screenState.project) ? 'No site' : this.props.screenState.project.siteName}</FormControl.Static>
-            </FormGroup>
-            {' '}
-            <FormGroup>
-              <ControlLabel>Source: </ControlLabel>
-              <FormControl.Static>{_.isEmpty(this.props.screenState.project) ? 'No source ' : this.props.screenState.project.rawChannelName}</FormControl.Static>
-            </FormGroup>
-            {' '}
-            <FormGroup>
-              <ControlLabel>Final: </ControlLabel>
-              <FormControl.Static>{_.isEmpty(this.props.screenState.project) ? 'No final' : this.props.screenState.project.finalChannelName}</FormControl.Static>
-            </FormGroup>
-            {' '}
-            <FormGroup >
-              <DatePickerWrapper dateSelected={(startDate, endDate) => {
-                this.setState({ startDate, endDate });
-              }} />
-            </FormGroup>
-          </Form>
+          <div style={{ minHeight: this.scss.slider.heightPx, marginLeft: this.scss.timeSeries.paddingLeftPx, marginBottom: 40 }}>
+            <HpSlider
+              scss={convertHpSliderScss(hpSliderScss)}
+              domain={{ domainMin: this.props.mainChartState.dateRangeUnixFrom, domainMax: this.props.mainChartState.dateRangeUnixTo } as IDomain<number>}
+              displayDragBar={true}
+              handleValues={{ left: this.state.windowUnixFrom, right: this.state.windowUnixTo } as IHpSliderHandleValues<number>}
+              handleMoved={(value: number | number[], type: EnumHandleType) => {
+                const { windowUnixFrom, windowUnixTo } = handleMovedCallback(value, type, {
+                  windowUnixFrom: this.state.windowUnixFrom,
+                  windowUnixTo: this.state.windowUnixTo,
+                } as IUnixFromTo);
 
-          <Row style={{ minHeight: this.scss.slider.heightPx, marginLeft: this.scss.timeSeries.paddingLeftPx, marginTop: 20, marginBottom: 20 }}>
-            <Col>
-              <HpSlider
-                scss={convertHpSliderScss(hpSliderScss)}
-                domain={{ domainMin: this.props.mainChartState.dateRangeUnixFrom, domainMax: this.props.mainChartState.dateRangeUnixTo } as IDomain<number>}
-                displayDragBar={true}
-                handleValues={{ left: this.state.windowUnixFrom, right: this.state.windowUnixTo } as IHpSliderHandleValues<number>}
-                handleMoved={(value: number | number[], type: EnumHandleType) => {
-                  const { windowUnixFrom, windowUnixTo } = handleMovedCallback(value, type, {
-                    windowUnixFrom: this.state.windowUnixFrom,
-                    windowUnixTo: this.state.windowUnixTo,
-                  } as IUnixFromTo);
-
-                  this.setState({
+                this.setState({
+                  windowUnixFrom,
+                  windowUnixTo,
+                  rawChartState: {
+                    ...this.state.rawChartState,
                     windowUnixFrom,
                     windowUnixTo,
-                    rawChartState: {
-                      ...this.state.rawChartState,
-                      windowUnixFrom,
-                      windowUnixTo,
-                    },
-                    mainChartState: {
-                      ...this.state.mainChartState,
-                      windowUnixFrom,
-                      windowUnixTo,
-                    } as IHpTimeSeriesChartState,
-                    finalChartState: {
-                      ...this.state.finalChartState,
-                      windowUnixFrom,
-                      windowUnixTo,
-                    } as IHpTimeSeriesChartState,
-                    supportingChannelsState: _.map(this.state.supportingChannelsState, (el) => ({
-                      ...el,
-                      windowUnixFrom,
-                      windowUnixTo,
-                    } as IHpTimeSeriesChartState)),
-                    gridState: {
-                      rows: this.props.gridState.rows.filter((el: IDataGridRow) => el.epoch >= windowUnixFrom && el.epoch <= windowUnixTo),
-                    } as IDataGridState,
-                  });
-                }}
-                fitToParent={{ toWidth: true }}>
-                <HpTimeSeriesChart
-                  scss={((scss) => ({
-                    heightPx: scss.heightPx,
-                    widthPx: scss.widthPx,
-                    paddingBottomPx: 5,
-                    paddingLeftPx: 0,
-                    paddingRightPx: 0,
-                    paddingTopPx: 5,
-                  }))(convertHpSliderScss(hpSliderScss))}
-                  state={this.state.scrollbarChartState}
-                  mode={EnumHpTimeSeriesChartMode.SliderEmbedded}
-                  fitToParent={{ toWidth: true, offsetWidth: 0 }}
-                />
-              </HpSlider>
-            </Col>
-          </Row>
+                  },
+                  mainChartState: {
+                    ...this.state.mainChartState,
+                    windowUnixFrom,
+                    windowUnixTo,
+                  } as IHpTimeSeriesChartState,
+                  finalChartState: {
+                    ...this.state.finalChartState,
+                    windowUnixFrom,
+                    windowUnixTo,
+                  } as IHpTimeSeriesChartState,
+                  supportingChannelsState: _.map(this.state.supportingChannelsState, (el) => ({
+                    ...el,
+                    windowUnixFrom,
+                    windowUnixTo,
+                  } as IHpTimeSeriesChartState)),
+                  gridState: {
+                    rows: this.props.gridState.rows.filter((el: IDataGridRow) => el.epoch >= windowUnixFrom && el.epoch <= windowUnixTo),
+                  } as IDataGridState,
+                });
+              }}
+              fitToParent={{ toWidth: true }}>
+              <HpTimeSeriesChart
+                scss={((scss) => ({
+                  heightPx: scss.heightPx,
+                  widthPx: scss.widthPx,
+                  paddingBottomPx: 5,
+                  paddingLeftPx: 0,
+                  paddingRightPx: 0,
+                  paddingTopPx: 5,
+                }))(convertHpSliderScss(hpSliderScss))}
+                state={this.state.scrollbarChartState}
+                mode={EnumHpTimeSeriesChartMode.SliderEmbedded}
+                fitToParent={{ toWidth: true, offsetWidth: 0 }}
+              />
+            </HpSlider>
+          </div>
 
-          <Row>
-            <Col lg={12}>
-              <div>
-                <div style={{ height: 250 }} >
-                  <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>
-                    {`${this.props.screenState.project.siteName}-${this.props.screenState.project.rawChannelName}`}
-                  </p>
-                  <HpTimeSeriesChart
-                    scss={this.scss.timeSeries}
-                    state={this.state.rawChartState}
-                    fitToParent={{ toHeight: true, toWidth: true }}
-                    scaleLinearDomain={() => hpTimeSeriesChartCalculations.findMinMaxValuesBasedOnWindow(this.state.rawChartState)}>
-                  </HpTimeSeriesChart>
-                </div>
-              </div>
-            </Col>
-          </Row>
+          <div style={{ height: 250, marginBottom: 40 }} >
+            <h4 style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>
+              {`${this.props.screenState.project.siteName}-${this.props.screenState.project.rawChannelName}`}
+            </h4>
+            <HpTimeSeriesChart
+              scss={this.scss.timeSeries}
+              state={this.state.rawChartState}
+              fitToParent={{ toHeight: true, toWidth: true }}
+              scaleLinearDomain={() => hpTimeSeriesChartCalculations.findMinMaxValuesBasedOnWindow(this.state.rawChartState)}>
+            </HpTimeSeriesChart>
+          </div>
 
-          <Row>
-            <Col lg={12}>
-              <div>
-                <div style={{ height: 250 }} >
-                  <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>ML Corrections</p>
-                  <HpTimeSeriesChart
-                    scss={this.scss.timeSeries}
-                    state={this.state.mainChartState}
-                    fitToParent={{ toHeight: true, toWidth: true }}
-                    scaleLinearDomain={() => hpTimeSeriesChartCalculations.findMinMaxValuesBasedOnWindow(this.state.mainChartState)}>
-                  </HpTimeSeriesChart>
-                </div>
-              </div>
-            </Col>
-          </Row>
+          <div style={{ height: 250, marginBottom: 40 }} >
+            <h4 style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>ML Corrections</h4>
+            <HpTimeSeriesChart
+              scss={this.scss.timeSeries}
+              state={this.state.mainChartState}
+              fitToParent={{ toHeight: true, toWidth: true }}
+              scaleLinearDomain={() => hpTimeSeriesChartCalculations.findMinMaxValuesBasedOnWindow(this.state.mainChartState)}>
+            </HpTimeSeriesChart>
+          </div>
 
-          <Row>
-            <Col md={12} >
-              <div style={{ height: 250 }} >
-                <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>
-                  {
-                    `${this.props.screenState.project.siteName}-${this.props.screenState.project.finalChannelName}`
-                  }
-                </p>
-                <HpTimeSeriesChart
-                  scss={this.scss.timeSeries}
-                  state={this.state.finalChartState}
-                  fitToParent={{ toHeight: true, toWidth: true }}
-                  scaleLinearDomain={() => hpTimeSeriesChartCalculations.findMinMaxValuesBasedOnWindow(this.state.finalChartState)}>
-                </HpTimeSeriesChart>
-              </div>
-            </Col>
-          </Row>
+          <div style={{ height: 250, marginBottom: 40 }}>
+            <h4 style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>
+              {
+                `${this.props.screenState.project.siteName}-${this.props.screenState.project.finalChannelName}`
+              }
+            </h4>
+            <HpTimeSeriesChart
+              scss={this.scss.timeSeries}
+              state={this.state.finalChartState}
+              fitToParent={{ toHeight: true, toWidth: true }}
+              scaleLinearDomain={() => hpTimeSeriesChartCalculations.findMinMaxValuesBasedOnWindow(this.state.finalChartState)}>
+            </HpTimeSeriesChart>
+          </div>
 
           {_.map(this.state.supportingChannelsState, (el, idx) => {
-            return <div style={{ background: '#F8F8F8' }}>
-              <Row>
-                <Col md={12} >
-                  <div style={{ height: 250 }} >
-                    <p style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>
-                      {`${this.props.screenState.project.supportingChannels[idx].siteName}-${this.props.screenState.project.supportingChannels[idx].channelName}`}
-                    </p>
-                    <HpTimeSeriesChart
-                      scss={this.scss.timeSeries}
-                      state={el}
-                      fitToParent={{ toHeight: true, toWidth: true }}
-                      scaleLinearDomain={() => hpTimeSeriesChartCalculations.findMinMaxValuesBasedOnWindow(el)}>
-                    </HpTimeSeriesChart>
-                  </div>
-                </Col>
-              </Row>
-              <Row>
-                <Col md={12}>
-                  <Button className='pull-right' bsStyle='primary' onClick={() => this.props.deleteSupportingChannel(idx)}>Delete</Button>
-                </Col>
-              </Row>
+            return <div key={idx} style={{ background: '#f5f5f5', marginBottom: 40, padding: 15 }}>
+              <div style={{ height: 250, marginBottom: 15 }} >
+                <h4 style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>
+                  {`${this.props.screenState.project.supportingChannels[idx].siteName}-${this.props.screenState.project.supportingChannels[idx].channelName}`}
+                </h4>
+                <HpTimeSeriesChart
+                  scss={this.scss.timeSeries}
+                  state={el}
+                  fitToParent={{ toHeight: true, toWidth: true }}
+                  scaleLinearDomain={() => hpTimeSeriesChartCalculations.findMinMaxValuesBasedOnWindow(el)}>
+                </HpTimeSeriesChart>
+              </div>
+              <div className='clearfix'>
+                <Button className='pull-right' bsStyle='default' onClick={() => this.props.deleteSupportingChannel(idx)}>
+                  <FontAwesomeIcon icon={['fal', 'trash-alt']}/> Delete
+                </Button>
+              </div>
             </div>;
           })}
 
-          <Row style={{ marginTop: 4 }}>
-            <Col sm={12}>
-              <Button className='pull-right' bsStyle='primary' onClick={() => this.props.showSupportingChannelModal()}>
-                Add Channel
-              </Button>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={12}>
-              <DataGrid
-                columns={
-                  _.concat(
-                    [
-                      { key: 'date', name: 'Timestamp' },
-                      { key: 'rawValue', name: `${this.props.screenState.project.siteName}-${this.props.screenState.project.rawChannelName}` },
-                      { key: 'editedValue', name: `${this.props.screenState.project.siteName}-${this.props.screenState.project.finalChannelName}` },
-                      { key: 'fixedValue', name: 'ML Corrections' },
-                    ] as Column[],
-                    _.map(this.state.supportingChannelsState, (c, idx) => ({
-                      key: `extendedValue${_.indexOf(this.state.supportingChannelsState, c) + 1}`,
-                      name: `${this.props.screenState.project.supportingChannels[idx].siteName}-${this.props.screenState.project.supportingChannels[idx].channelName}`,
-                    }) as Column))}
-                rows={this.state.gridState.rows}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <AddChannelModal
-              approveClicked={(siteChannelInfo: ISiteChannelInfo) => {
-                this.props.addAndPopulateChannel(siteChannelInfo, this.state.startDate, this.state.endDate);
-              }}
-              cancelClicked={() => this.props.hideSupportingChannelModal()}
-              channels={this.props.screenState.channels}
-              sites={this.props.screenState.sites}
-              showModal={this.props.screenState.supportingChannelModalShown}
-              getChannelsForSite={this.props.getChannelsForSite} />
-          </Row>
+          <div className='clearfix' style={{marginBottom: 40}}>
+            <Button className='pull-right' bsStyle='primary' onClick={() => this.props.showSupportingChannelModal()}>
+              <FontAwesomeIcon icon={['fal', 'plus-circle']}/> Add Supporting Channel
+            </Button>
+          </div>
+
+          <DataGrid
+            columns={
+              _.concat(
+                [
+                  { key: 'date', name: 'Timestamp' },
+                  { key: 'rawValue', name: `${this.props.screenState.project.siteName}-${this.props.screenState.project.rawChannelName}` },
+                  { key: 'fixedValue', name: 'ML Corrections' },
+                  { key: 'editedValue', name: `${this.props.screenState.project.siteName}-${this.props.screenState.project.finalChannelName}` },
+                ] as Column[],
+                _.map(this.state.supportingChannelsState, (c, idx) => ({
+                  key: `extendedValue${_.indexOf(this.state.supportingChannelsState, c) + 1}`,
+                  name: `${this.props.screenState.project.supportingChannels[idx].siteName}-${this.props.screenState.project.supportingChannels[idx].channelName}`,
+                }) as Column))}
+            rows={this.state.gridState.rows}
+          />
+
+          <AddChannelModal
+            approveClicked={(siteChannelInfo: ISiteChannelInfo) => {
+              this.props.addAndPopulateChannel(siteChannelInfo, this.state.startDate, this.state.endDate);
+            }}
+            cancelClicked={() => this.props.hideSupportingChannelModal()}
+            channels={this.props.screenState.channels}
+            sites={this.props.screenState.sites}
+            showModal={this.props.screenState.supportingChannelModalShown}
+            getChannelsForSite={this.props.getChannelsForSite} />
+
+          <Button
+            style={{marginRight: 4}}
+            bsStyle='primary'
+            disabled={_.isEmpty(this.props.screenState.project)}
+            onClick={() => this.props.saveProject(this.props.screenState.project)}>
+            Save Project
+          </Button>
+          <Button bsStyle='default' onClick={() => this.props.goToProjectsScreen()}>Cancel</Button>
         </div>
       </div>;
     </>;

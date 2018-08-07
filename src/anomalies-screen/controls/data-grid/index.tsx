@@ -5,6 +5,7 @@ import { CSVLink } from 'react-csv';
 import * as ReactDataGrid from 'react-data-grid';
 import { IDataGridRow } from './state';
 import { RowRenderer } from './grid-renderer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export interface IDataGridComponentProps {
   columns: ReactDataGrid.Column[];
@@ -30,27 +31,24 @@ export class DataGrid extends React.Component<IDataGridComponentProps, IDataGrid
     return (
       <div>
         <FormGroup>
-          <ReactDataGrid
-            columns={this.props.columns}
-            rowGetter={(i: number) => this.props.rows[i]}
-            rowsCount={this.props.rows.length}
-            minHeight={500}
-            rowRenderer={RowRenderer}/>
-          <Row>
-            <Col lg={12}>
-              <div className='pull-left'>
-                <CSVLink data={this.props.rows}
-                  filename={'series.csv'}
-                  headers={
-                    _.map(this.props.columns, (x, y) => ({key: x.key, label: x.name} as IDataGridHeader))
-                  }
-                  className='btn btn-primary'
-                  target='_blank'>
-                  Export To CSV
-              </CSVLink>
-              </div>
-            </Col>
-          </Row>
+          <div style={{marginBottom: 15}}>
+            <ReactDataGrid
+              columns={this.props.columns}
+              rowGetter={(i: number) => this.props.rows[i]}
+              rowsCount={this.props.rows.length}
+              minHeight={500}
+              rowRenderer={RowRenderer}/>
+          </div>
+
+          <CSVLink data={this.props.rows}
+            filename={'series.csv'}
+            headers={
+              _.map(this.props.columns, (x, y) => ({key: x.key, label: x.name} as IDataGridHeader))
+            }
+            className='btn btn-primary'
+            target='_blank'>
+            <FontAwesomeIcon icon={['fal', 'file-export']}/>  Export To CSV
+          </CSVLink>
         </FormGroup>
       </div>
     );
