@@ -32,7 +32,7 @@ function* locationChangedCallback(action: Action) {
   }
 }
 export function* watchRouterForGoogleAnalitycs() {
-  if (process.env.NODE_ENV === environments.DEVELOPMENT) {
+  if (process.env.NODE_ENV === environments.PRODUCTION) {
     yield takeEvery(CONFIGURATION_LOAD_SUCCEEDED, initializationCallback);
     yield takeEvery(LOCATION_CHANGE, locationChangedCallback);
   }
