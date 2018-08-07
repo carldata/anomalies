@@ -27,6 +27,7 @@ import { GetTimeSeriesFulfilledAction, GetTimeSeriesStartAction } from '../actio
 import { GET_TIME_SERIES_START } from '../action-types';
 import { handleErrorInSaga } from '@common/handle-error-in-saga';
 import { getCookie} from '@common/cookie-auxiliary';
+import { checkResponseForError } from '@common/response-error-checking';
 
 function* getTimeSeries(action: GetTimeSeriesStartAction) {
   const project: IProject = yield select((state: IState) => state.anomaliesScreen.project);
@@ -40,8 +41,9 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
     const token: string =  getCookie('fw_jwt');
     console.log('get-time-series saga, token: ', token);
     const rawChannelResponse: string = yield requests().getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
-    const fixedAnomaliesResponse: string = yield requests(token).getFixedAnomalies(`${project.siteId}-${project.finalChannelId}`,
+    let fixedAnomaliesResponse: string = yield requests(token).getFixedAnomalies(`${project.siteId}-${project.finalChannelId}`,
      `${project.siteId}-${project.rawChannelId}`, startDate, endDate);
+    fixedAnomaliesResponse =  checkResponseForError(fixedAnomaliesResponse);
     const editedChannelResponse: string = yield requests().getChannelData(`${project.siteId}-${project.finalChannelId}`, startDate, endDate);
 
     const rawChannelParseResult = Papa.parse(rawChannelResponse, { header: true });

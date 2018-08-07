@@ -35,8 +35,8 @@ const httpOp = <TReturnedDataType>(verb: EnumHTTPVerb, url: string, payload?: an
       .catch((error) => reject(error)));
 };
 
-const getConfiguration = (): AxiosPromise<IConfigurationEntry[]> => {
-  return httpOp<IConfigurationEntry[]>(EnumHTTPVerb.GET, `${apiAddress}/config/${appName}?token=${token}`);
+const getConfiguration = (): AxiosPromise<any> => {
+  return httpOp<any>(EnumHTTPVerb.GET, `${apiAddress}/config/${appName}?token=${token}`);
 };
 
 const getChannelData = (channel: string, startDate: string, endDate: string): AxiosPromise<string> =>
@@ -60,11 +60,11 @@ const deleteProject = (projectId: string): AxiosPromise<string> =>
 const saveProject = (project: IProject): AxiosPromise<string> =>
   httpOp<string>(EnumHTTPVerb.PUT, `${apiAddress}/config/${appName}/${project.id}`, JSON.stringify(project));
 
-const getSites = (db: string): AxiosPromise<ISite[]> =>
-  httpOp<ISite[]>(EnumHTTPVerb.GET, `${apiAddress}/data/site/${db}?token=${token}`);
+const getSites = (db: string): AxiosPromise<any> =>
+  httpOp<any>(EnumHTTPVerb.GET, `${apiAddress}/data/site/${db}?token=${token}`);
 
 const getChannels = (siteId: string): AxiosPromise<IChannel[]> =>
-  httpOp<IChannel[]>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${siteId}?token=${token}`);
+  httpOp<any>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${siteId}?token=${token}`);
 
 export const requests = (t: string = 'whatever') => {
   token = t;
