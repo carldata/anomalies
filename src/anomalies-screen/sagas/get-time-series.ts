@@ -37,14 +37,12 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
   try {
     yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
 
-    // const token: string = yield select((state: IState) => state.configuration.token);
     const token: string =  getCookie('fw_jwt');
-    console.log('get-time-series saga, token: ', token);
-    const rawChannelResponse: string = yield requests().getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
-    let fixedAnomaliesResponse: string = yield requests(token).getFixedAnomalies(`${project.siteId}-${project.finalChannelId}`,
+    const rawChannelResponse: string = yield requests.getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
+    let fixedAnomaliesResponse: string = yield requests.getFixedAnomalies(`${project.siteId}-${project.finalChannelId}`,
      `${project.siteId}-${project.rawChannelId}`, startDate, endDate);
     fixedAnomaliesResponse =  checkResponseForError(fixedAnomaliesResponse);
-    const editedChannelResponse: string = yield requests().getChannelData(`${project.siteId}-${project.finalChannelId}`, startDate, endDate);
+    const editedChannelResponse: string = yield requests.getChannelData(`${project.siteId}-${project.finalChannelId}`, startDate, endDate);
 
     const rawChannelParseResult = Papa.parse(rawChannelResponse, { header: true });
     const fixedAnomaliesParseResult = Papa.parse(fixedAnomaliesResponse, { header: true });
@@ -52,7 +50,7 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
 
     let supportingChannelsParseResults: Papa.ParseResult[] = [];
     if (project.supportingChannels.length > 0) {
-      const supportingChannelsResults: string[] = yield requests().getSupportingChannels(project.supportingChannels, startDate, endDate);
+      const supportingChannelsResults: string[] = yield requests.getSupportingChannels(project.supportingChannels, startDate, endDate);
       supportingChannelsParseResults = _.map(supportingChannelsResults, (result) => Papa.parse(result, { header: true }));
     }
 

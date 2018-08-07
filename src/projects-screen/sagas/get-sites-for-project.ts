@@ -11,7 +11,7 @@ function* getSitesForProject(action) {
   try {
     yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
     yield put(_.toPlainObject(new GetSitesForProjectFetchingAction()));
-    const sites: ISite[] = yield requests().getSites(action.payload);
+    const sites: ISite[] = yield requests.getSites(action.payload);
     yield put(_.toPlainObject(new
       GetSitesForProjectFulfilledAction(_.sortBy(
         sites,

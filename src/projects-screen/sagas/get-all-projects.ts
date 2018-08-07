@@ -13,9 +13,8 @@ import { checkResponseForError } from '@common/response-error-checking';
 function* getAllProjectsAsyncCall() {
   try {
     yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
-    // const token = yield select((state: IState) => state.configuration.token)
     const token = getCookie('fw_jwt');
-    let response = yield requests(token).getConfiguration();
+    let response = yield requests.getConfiguration();
     response = checkResponseForError(response);
     yield put(_.toPlainObject(new GetAllProjectsFulfilledAction(_.map(response, (el) => ({ ...el.data, id: el.id } as IProject)))));
     yield put(_.toPlainObject(new HideGeneralMessageModalAction()));

@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import { all, call, select } from 'redux-saga/effects';
 import { IProject, IChannel, ISite } from './models';
 import { IState } from './state';
+import { getCookie } from '@common/cookie-auxiliary';
 
 const appName = 'anomaly-tool-development';
 // const apiAddress = 'http://13.77.168.238';
@@ -18,6 +19,7 @@ export interface IConfigurationEntry {
 
 const httpOp = <TReturnedDataType>(verb: EnumHTTPVerb, url: string, payload?: any): AxiosPromise<TReturnedDataType> => {
   const enpointCall = () => {
+    token = getCookie('fw_jwt');
     switch (verb) {
       case EnumHTTPVerb.GET:
         return axios.get<AxiosResponse<TReturnedDataType>>(url);
@@ -66,9 +68,7 @@ const getSites = (db: string): AxiosPromise<any> =>
 const getChannels = (siteId: string): AxiosPromise<IChannel[]> =>
   httpOp<any>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${siteId}?token=${token}`);
 
-export const requests = (t: string = 'whatever') => {
-  token = t;
-  return {
+export const requests =  {
     getConfiguration,
     getChannelData,
     getFixedAnomalies,
@@ -79,4 +79,3 @@ export const requests = (t: string = 'whatever') => {
     getSites,
     getChannels,
   };
-};

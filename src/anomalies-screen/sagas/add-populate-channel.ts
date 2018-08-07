@@ -31,7 +31,7 @@ function* addAndPopulateChannel(action: AddAndPopulateChannelStartAction) {
 
     yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
 
-    const channelData = yield requests().getChannelData(siteId + '-' + channelId, dateFrom, dateTo);
+    const channelData = yield requests.getChannelData(siteId + '-' + channelId, dateFrom, dateTo);
     const channelParseResult = Papa.parse(channelData, { header: true });
     const timeSeries = csvLoadingCalculations.extractUnixTimePoints(channelParseResult.data, {
       rawFormat: EnumRawCsvFormat.DateTimeThenValue,

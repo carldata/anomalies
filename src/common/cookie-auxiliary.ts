@@ -1,8 +1,7 @@
 export function setCookie(cname, cvalue, exminutes) {
     let d = new Date();
     d.setTime(d.getTime() + (exminutes * 60 * 1000));
-    const expires = 'expires='+d.toUTCString();
-    // document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';
+    const expires = 'expires=' + d.toUTCString();
     document.cookie = cname + '=' + cvalue + ';' + expires + ';';
 }
 

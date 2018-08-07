@@ -13,19 +13,7 @@ class ConfigurationLoadSucceededAction implements Action {
   constructor(public configuration: IConfigurationState) { }
 }
 
-class SetTokenStartedAction implements Action {
-  public readonly type = actionTypes.SET_TOKEN_STARTED;
-  constructor(public token: string) {}
-}
-
-class SetTokenSucceededAction implements Action {
-  public readonly type = actionTypes.SET_TOKEN_SUCCEEDED;
-  constructor(public token: string) {}
-}
-
 export {
   ConfigurationLoadStartedAction,
   ConfigurationLoadSucceededAction,
-  SetTokenStartedAction,
-  SetTokenSucceededAction,
 };

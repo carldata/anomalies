@@ -19,8 +19,8 @@ function* showDefineChannelModal(action) {
                                                     'additional channels added, which is the maximum', true)));
       return;
     }
-    const sites: ISite[] = yield requests().getSites('Emerald_AECOM');
-    const channels: IChannel[] = yield requests().getChannels(_.head(sites).id);
+    const sites: ISite[] = yield requests.getSites('Emerald_AECOM');
+    const channels: IChannel[] = yield requests.getChannels(_.head(sites).id);
     yield put(_.toPlainObject(new ShowDefineChannelModalFulfilledAction({
       sites,
       channels,

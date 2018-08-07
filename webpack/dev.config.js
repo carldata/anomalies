@@ -22,8 +22,5 @@ module.exports = merge(base, {
     contentBase: path.join(__dirname, "../dist"),
     hot: true,
     port: 9000
-  }, 
-  externals: {
-    myconfig: JSON.stringify(config)
   }
 })

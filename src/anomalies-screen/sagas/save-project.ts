@@ -9,7 +9,7 @@ import { handleErrorInSaga } from '@common/handle-error-in-saga';
 function* saveProject(action: SaveProjectStartAction) {
   try {
     yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
-    yield requests().saveProject(action.payload);
+    yield requests.saveProject(action.payload);
     yield put(_.toPlainObject(new SaveProjectFulfilledAction(action.payload)));
     yield put(_.toPlainObject(new HideGeneralMessageModalAction()));
   } catch (error) {
