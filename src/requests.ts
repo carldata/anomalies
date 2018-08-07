@@ -6,8 +6,7 @@ import { IState } from './state';
 import { getCookie } from '@common/cookie-auxiliary';
 
 const appName = 'anomaly-tool-development';
-// const apiAddress = 'http://13.77.168.238';
-const apiAddress = 'http://localhost:8080';
+const apiAddress = 'http://13.77.168.238';
 let token = '';
 
 enum EnumHTTPVerb { GET, POST, PUT, DELETE }
