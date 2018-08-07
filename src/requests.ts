@@ -2,10 +2,12 @@ import axios, { AxiosResponse, AxiosPromise } from 'axios';
 import * as _ from 'lodash';
 import { all, call, select } from 'redux-saga/effects';
 import { IProject, IChannel, ISite } from './models';
+import { IState } from './state';
+import { getCookie } from '@common/cookie-auxiliary';
 
 const appName = 'anomaly-tool-development';
 const apiAddress = 'http://13.77.168.238';
-const token = 'oasdob123a23hnaovnfaewd123akjwpod';
+let token = '';
 
 enum EnumHTTPVerb { GET, POST, PUT, DELETE }
 
@@ -16,6 +18,7 @@ export interface IConfigurationEntry {
 
 const httpOp = <TReturnedDataType>(verb: EnumHTTPVerb, url: string, payload?: any): AxiosPromise<TReturnedDataType> => {
   const enpointCall = () => {
+    token = getCookie('fw_jwt');
     switch (verb) {
       case EnumHTTPVerb.GET:
         return axios.get<AxiosResponse<TReturnedDataType>>(url);
@@ -33,20 +36,16 @@ const httpOp = <TReturnedDataType>(verb: EnumHTTPVerb, url: string, payload?: an
       .catch((error) => reject(error)));
 };
 
-const getConfiguration = (): AxiosPromise<IConfigurationEntry[]> => {
-  const configuration = select((state) => state);
-  return httpOp<IConfigurationEntry[]>(EnumHTTPVerb.GET, `${apiAddress}/config/${appName}`);
-}
+const getConfiguration = (): AxiosPromise<any> => {
+  return httpOp<any>(EnumHTTPVerb.GET, `${apiAddress}/config/${appName}?token=${token}`);
+};
 
 const getChannelData = (channel: string, startDate: string, endDate: string): AxiosPromise<string> =>
   httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
 
 const getFixedAnomalies = (finalChannel: string, rawChannel: string, startDate: string, endDate: string): AxiosPromise<string> =>
-  httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/anomalies/find?editedFlowChannelId=${finalChannel}&rawFlowChannelId=${rawChannel}&startDate=${startDate}&endDate=${endDate}`);
-
-// TODO - remove  getEditedChannelData and use only getChannelData
-const getEditedChannelData = (channel: string, startDate: string, endDate: string): AxiosPromise<string> =>
-  httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
+  httpOp<string>(EnumHTTPVerb.GET,
+    `${apiAddress}/anomalies/find?editedFlowChannelId=${finalChannel}&rawFlowChannelId=${rawChannel}&startDate=${startDate}&endDate=${endDate}&token=${token}`);
 
 const getSupportingChannels = (supportingChannels: { siteId: string, channelId: string }[], startDate: string, endDate: string): Promise<AxiosResponse<string>[]> =>
   Promise.all(_.map(supportingChannels, (el) => {
@@ -62,21 +61,20 @@ const deleteProject = (projectId: string): AxiosPromise<string> =>
 const saveProject = (project: IProject): AxiosPromise<string> =>
   httpOp<string>(EnumHTTPVerb.PUT, `${apiAddress}/config/${appName}/${project.id}`, JSON.stringify(project));
 
-const getSites = (db: string): AxiosPromise<ISite[]> =>
-  httpOp<ISite[]>(EnumHTTPVerb.GET, `${apiAddress}/data/site/${db}?token=${token}`);
+const getSites = (db: string): AxiosPromise<any> =>
+  httpOp<any>(EnumHTTPVerb.GET, `${apiAddress}/data/site/${db}?token=${token}`);
 
 const getChannels = (siteId: string): AxiosPromise<IChannel[]> =>
-  httpOp<IChannel[]>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${siteId}?token=${token}`);
+  httpOp<any>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${siteId}?token=${token}`);
 
-export const requests = {
-  getConfiguration,
-  getChannelData,
-  getFixedAnomalies,
-  getEditedChannelData,
-  getSupportingChannels,
-  addProject,
-  deleteProject,
-  saveProject,
-  getSites,
-  getChannels,
-};
+export const requests =  {
+    getConfiguration,
+    getChannelData,
+    getFixedAnomalies,
+    getSupportingChannels,
+    addProject,
+    deleteProject,
+    saveProject,
+    getSites,
+    getChannels,
+  };

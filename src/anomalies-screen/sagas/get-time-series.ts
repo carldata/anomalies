@@ -26,6 +26,8 @@ import { IState } from '../../state';
 import { GetTimeSeriesFulfilledAction, GetTimeSeriesStartAction } from '../actions';
 import { GET_TIME_SERIES_START } from '../action-types';
 import { handleErrorInSaga } from '@common/handle-error-in-saga';
+import { getCookie} from '@common/cookie-auxiliary';
+import { checkResponseForError } from '@common/response-error-checking';
 
 function* getTimeSeries(action: GetTimeSeriesStartAction) {
   const project: IProject = yield select((state: IState) => state.anomaliesScreen.project);
@@ -35,9 +37,11 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
   try {
     yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
 
+    const token: string =  getCookie('fw_jwt');
     const rawChannelResponse: string = yield requests.getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
-    const fixedAnomaliesResponse: string = yield requests.getFixedAnomalies(`${project.siteId}-${project.finalChannelId}`,
+    let fixedAnomaliesResponse: string = yield requests.getFixedAnomalies(`${project.siteId}-${project.finalChannelId}`,
      `${project.siteId}-${project.rawChannelId}`, startDate, endDate);
+    fixedAnomaliesResponse =  checkResponseForError(fixedAnomaliesResponse);
     const editedChannelResponse: string = yield requests.getChannelData(`${project.siteId}-${project.finalChannelId}`, startDate, endDate);
 
     const rawChannelParseResult = Papa.parse(rawChannelResponse, { header: true });

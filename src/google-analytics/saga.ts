@@ -21,6 +21,7 @@ function* initializationCallback(action: Action) {
 }
 
 function* locationChangedCallback(action: Action) {
+  console.log('action', action);
   try {
     const gaTrackingNumber = yield select((state: IState) => state.configuration.gaTrackingNumber);
     if (_.isString(gaTrackingNumber)) {
@@ -31,7 +32,7 @@ function* locationChangedCallback(action: Action) {
   }
 }
 export function* watchRouterForGoogleAnalitycs() {
-  if (process.env.NODE_ENV === environments.PRODUCTION) {
+  if (process.env.NODE_ENV === environments.DEVELOPMENT) {
     yield takeEvery(CONFIGURATION_LOAD_SUCCEEDED, initializationCallback);
     yield takeEvery(LOCATION_CHANGE, locationChangedCallback);
   }

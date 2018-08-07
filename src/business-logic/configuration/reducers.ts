@@ -1,12 +1,15 @@
 import * as actionTypes from './action-types';
 import { IConfigurationState } from '@business-logic/configuration/models/state';
-import { ConfigurationLoadStartedAction, ConfigurationLoadSucceededAction } from '@business-logic/configuration/actions';
+import { ConfigurationLoadStartedAction,
+  ConfigurationLoadSucceededAction,
+ } from '@business-logic/configuration/actions';
 
 const initialState: IConfigurationState = {
   apiAddress: '',
   appName: '',
   token: '',
   gaTrackingNumber: '',
+  loaded: false,
 } as IConfigurationState;
 
 export type ConfigurationActionTypes = ConfigurationLoadStartedAction |
