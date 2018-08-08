@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import * as React from 'react';
-import { Button, Form, FormGroup, ListGroup } from 'react-bootstrap';
+import { Button, Form, FormGroup, ListGroup, Navbar } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { IState } from '../state';
@@ -20,6 +20,8 @@ import { ProjectComponent } from './project';
 import { ProjectDefinitionModal } from './controls/project-definition-modal';
 import { GeneralMessageModalContainer } from '../components/modal';
 import { IProject } from '../models';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface IProjectComponentProps {
   projects: IProject[];
@@ -45,8 +47,19 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
   public render() {
     return <>
       <GeneralMessageModalContainer />
+
+      <Navbar>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <div>
+              Anomaly Detection
+            </div>
+          </Navbar.Brand>
+        </Navbar.Header>
+      </Navbar>
+
       <div className='container'>
-        <Form horizontal>
+        <Form>
           <FormGroup>
             <ListGroup>
               {_.map(this.props.projects, (project: IProject, index) => {
@@ -66,7 +79,9 @@ class ProjectsComponent extends React.Component<IProjectComponentProps & IProjec
             </ListGroup>
           </FormGroup>
           <FormGroup>
-            <Button id='btnAddProject' bsStyle='primary' onClick={() => this.props.showProjectDefinitionModalToAdd()}>Add Project</Button>
+            <Button id='btnAddProject' bsStyle='primary' onClick={() => this.props.showProjectDefinitionModalToAdd()}>
+              <FontAwesomeIcon icon={['fal', 'plus-circle']}/> Create New Project
+            </Button>
           </FormGroup>
         </Form>
         <ProjectDefinitionModal></ProjectDefinitionModal>
