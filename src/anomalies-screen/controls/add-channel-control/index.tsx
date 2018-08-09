@@ -22,6 +22,62 @@ interface IAddChannelModalState {
   channelType: string;
 }
 
+interface ISiteOptionsSorted {
+  sites: any;
+}
+
+interface IChannelOptionsSorted {
+  channels: any;
+}
+
+class SiteOptionsSorted extends React.Component<ISiteOptionsSorted, {}> {
+  public render() {
+
+    let sortedSites = this.props.sites.map( site => site);
+
+    sortedSites.sort((first, second) => {
+      if ( first.name.toLowerCase() === second.name.toLowerCase() ) {
+        return 0;
+      }
+      if ( first.name.toLowerCase() < second.name.toLowerCase() ) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+
+    return (
+      sortedSites.map( (el, idx) =>
+        <option value={el.id} key={idx}>{el.name}</option>
+      )
+    );
+  }
+}
+
+class ChannelOptionsSorted extends React.Component<IChannelOptionsSorted, {}> {
+  public render() {
+
+    let sortedChannels = this.props.channels.map( channel => channel);
+
+    sortedChannels.sort((first, second) => {
+      if ( first.name.toLowerCase() === second.name.toLowerCase() ) {
+        return 0;
+      }
+      if ( first.name.toLowerCase() < second.name.toLowerCase() ) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+
+    return (
+      sortedChannels.map( (el, idx) =>
+        <option value={el.id} key={idx}>{el.name}</option>
+      )
+    );
+  }
+}
+
 export class AddChannelModal extends React.Component<IAddChannelModalProps & IAddChannelModalActionCreators, IAddChannelModalState> {
   private siteId: string;
   private channelId: string;
@@ -51,29 +107,6 @@ export class AddChannelModal extends React.Component<IAddChannelModalProps & IAd
     this.channelName = _.isUndefined(firstChannel) ? '' : firstChannel.name;
   }
 
-  // todo: how do you access functions in typescript :S
-  // public sortAlphabetically() {
-  //
-  //   let sortedSites = sites.map( site => site);
-  //
-  //   sortedSites.sort((first, second) => {
-  //     if ( first.name === second.name ) {
-  //       return 0;
-  //     }
-  //     if ( first.name < second.name ) {
-  //       return -1;
-  //     } else {
-  //       return 1;
-  //     }
-  //   });
-  //
-  //   return (
-  //     sortedSites.map( (el, idx) =>
-  //       <option value={el.id} key={idx}>{el.name}</option>
-  //     )
-  //   )
-  // }
-
   public render() {
     return <Modal show={this.props.showModal} onHide={() => this.props.cancelClicked()}>
       <Modal.Body>
@@ -90,10 +123,7 @@ export class AddChannelModal extends React.Component<IAddChannelModalProps & IAd
                 this.siteName = _.head(selectElement.selectedOptions).label;
                 this.props.getChannelsForSite(selectElement.value);
               }} >
-                {
-                  // todo: sort sites alphabetically.
-                  this.props.sites.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
-                }
+                <SiteOptionsSorted sites={this.props.sites}/>
               </select>
             </Col>
           </FormGroup>
@@ -107,9 +137,7 @@ export class AddChannelModal extends React.Component<IAddChannelModalProps & IAd
                 this.channelId = selectElement.value;
                 this.channelName = _.head(selectElement.selectedOptions).label;
               }} >
-                {
-                  this.props.channels.map((el, idx) => (<option value={el.id} key={idx}>{el.name}</option>))
-                }
+                <ChannelOptionsSorted channels={this.props.channels} />
               </select>
             </Col>
           </FormGroup>
