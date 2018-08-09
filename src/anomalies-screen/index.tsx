@@ -275,10 +275,10 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
 
           {_.map(this.state.supportingChannelsState, (el, idx) => {
             return <div key={idx} style={{ background: '#f5f5f5', marginBottom: 40, padding: 15 }}>
+              <h4 style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>
+                {`${this.props.screenState.project.supportingChannels[idx].siteName}-${this.props.screenState.project.supportingChannels[idx].channelName}`}
+              </h4>
               <div style={{ height: 250, marginBottom: 15 }} >
-                <h4 style={{ fontWeight: 'bold', marginLeft: this.scss.timeSeries.paddingLeftPx }}>
-                  {`${this.props.screenState.project.supportingChannels[idx].siteName}-${this.props.screenState.project.supportingChannels[idx].channelName}`}
-                </h4>
                 <HpTimeSeriesChart
                   scss={this.scss.timeSeries}
                   state={el}
@@ -288,7 +288,7 @@ class AnomaliesComponent extends React.Component<IAnomaliesComponentProps & IAno
               </div>
               <div className='clearfix'>
                 <Button className='pull-right' bsStyle='default' onClick={() => this.props.deleteSupportingChannel(idx)}>
-                  <FontAwesomeIcon icon={['fal', 'trash-alt']}/> Delete
+                  <FontAwesomeIcon icon={['fal', 'times']}/> Remove
                 </Button>
               </div>
             </div>;

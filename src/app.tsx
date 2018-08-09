@@ -18,8 +18,8 @@ import { ConfigurationLoadStartedAction } from '@business-logic/configuration/ac
 store.dispatch(_.toPlainObject(new ConfigurationLoadStartedAction()))
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCog, faTrashAlt, faEdit, faPlusCircle, faSync, faAngleLeft, faFileExport } from '@fortawesome/pro-light-svg-icons';
-library.add(faCog, faTrashAlt, faEdit, faPlusCircle, faSync, faAngleLeft, faFileExport);
+import { faCog, faTrashAlt, faEdit, faPlusCircle, faSync, faAngleLeft, faFileExport, faTimes } from '@fortawesome/pro-light-svg-icons';
+library.add(faCog, faTrashAlt, faEdit, faPlusCircle, faSync, faAngleLeft, faFileExport, faTimes);
 
 ReactDOM.render(
   <Provider store={store}>
