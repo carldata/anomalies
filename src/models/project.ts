@@ -9,5 +9,9 @@ export interface IProject {
   rawChannelId: string;
   finalChannelName: string;
   finalChannelId: string;
+  rainfallSiteName?: string;
+  rainfallSiteId?: string;
+  rainfallChannelName?: string;
+  rainfallChannelId?: string;
   supportingChannels?: ISupportingChannel[];
 }
