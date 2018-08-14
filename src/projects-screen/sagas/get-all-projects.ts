@@ -6,16 +6,11 @@ import { ShowGeneralMessageModalAction, HideGeneralMessageModalAction } from '..
 import { GET_ALL_PROJECTS_STARTED } from '../action-types';
 import { GetAllProjectsFulfilledAction } from '../actions';
 import { handleErrorInSaga } from '@common/handle-error-in-saga';
-import { IState } from '../../state';
-import { getCookie } from '@common/cookie-auxiliary';
-import { checkResponseForError } from '@common/response-error-checking';
 
 function* getAllProjectsAsyncCall() {
   try {
     yield put(_.toPlainObject(new ShowGeneralMessageModalAction()));
-    const token = getCookie('fw_jwt');
-    let response = yield requests.getConfiguration();
-    response = checkResponseForError(response);
+    const response = yield requests.getConfiguration();
     yield put(_.toPlainObject(new GetAllProjectsFulfilledAction(_.map(response, (el) => ({ ...el.data, id: el.id } as IProject)))));
     yield put(_.toPlainObject(new HideGeneralMessageModalAction()));
   } catch (error) {
