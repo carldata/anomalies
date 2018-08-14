@@ -4,6 +4,7 @@ import { all, call, select } from 'redux-saga/effects';
 import { IProject, IChannel, ISite } from './models';
 import { IState } from './state';
 import { getCookie } from '@common/cookie-auxiliary';
+import { checkResponseForError } from '@common/response-error-checking'
 
 const appName = 'anomaly-tool-development';
 const apiAddress = 'http://13.77.168.238';
@@ -32,7 +33,7 @@ const httpOp = <TReturnedDataType>(verb: EnumHTTPVerb, url: string, payload?: an
   };
   return new Promise((resolve, reject) =>
     enpointCall()
-      .then((response) => resolve(response.data))
+      .then((response) =>  resolve(checkResponseForError(response.data)))
       .catch((error) => reject(error)));
 };
 
@@ -41,25 +42,29 @@ const getConfiguration = (): AxiosPromise<any> => {
 };
 
 const getChannelData = (channel: string, startDate: string, endDate: string): AxiosPromise<string> =>
-  httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
+  httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}&token=${token}`);
 
-const getFixedAnomalies = (finalChannel: string, rawChannel: string, startDate: string, endDate: string): AxiosPromise<string> =>
-  httpOp<string>(EnumHTTPVerb.GET,
-    `${apiAddress}/anomalies/find?editedFlowChannelId=${finalChannel}&rawFlowChannelId=${rawChannel}&startDate=${startDate}&endDate=${endDate}&token=${token}`);
+const getFixedAnomalies = (finalChannel: string, rawChannel: string, startDate: string, endDate: string, rainfallChannel?: string): AxiosPromise<string> => {
+  const anomaliesRequest = rainfallChannel === null ?
+  `${apiAddress}/anomalies/find?editedFlowChannelId=${finalChannel}&rawFlowChannelId=${rawChannel}&startDate=${startDate}&endDate=${endDate}&token=${token}` :
+  `${apiAddress}/anomalies/find?editedFlowChannelId=${finalChannel}&rawFlowChannelId=${rawChannel}&startDate=${startDate}&endDate=${endDate}&token=${token}
+  &rainfallChannelId=${rainfallChannel}`;
+  return httpOp<string>(EnumHTTPVerb.GET, anomaliesRequest);
+};
 
 const getSupportingChannels = (supportingChannels: { siteId: string, channelId: string }[], startDate: string, endDate: string): Promise<AxiosResponse<string>[]> =>
   Promise.all(_.map(supportingChannels, (el) => {
-    return httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${el.siteId}-${el.channelId}/data?startDate=${startDate}&endDate=${endDate}`);
+    return httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${el.siteId}-${el.channelId}/data?startDate=${startDate}&endDate=${endDate}&token=${token}`);
   }));
 
 const addProject = (project: IProject): AxiosPromise<string> =>
-  httpOp<string>(EnumHTTPVerb.POST, `${apiAddress}/config/${appName}`, JSON.stringify(project));
+  httpOp<string>(EnumHTTPVerb.POST, `${apiAddress}/config/${appName}?token=${token}`, JSON.stringify(project));
 
 const deleteProject = (projectId: string): AxiosPromise<string> =>
-  httpOp<string>(EnumHTTPVerb.DELETE, `${apiAddress}/config/${appName}/${projectId}`);
+  httpOp<string>(EnumHTTPVerb.DELETE, `${apiAddress}/config/${appName}/${projectId}?token=${token}`);
 
 const saveProject = (project: IProject): AxiosPromise<string> =>
-  httpOp<string>(EnumHTTPVerb.PUT, `${apiAddress}/config/${appName}/${project.id}`, JSON.stringify(project));
+  httpOp<string>(EnumHTTPVerb.PUT, `${apiAddress}/config/${appName}/${project.id}?token=${token}`, JSON.stringify(project));
 
 const getSites = (db: string): AxiosPromise<any> =>
   httpOp<any>(EnumHTTPVerb.GET, `${apiAddress}/data/site/${db}?token=${token}`);
@@ -67,14 +72,14 @@ const getSites = (db: string): AxiosPromise<any> =>
 const getChannels = (siteId: string): AxiosPromise<IChannel[]> =>
   httpOp<any>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${siteId}?token=${token}`);
 
-export const requests =  {
-    getConfiguration,
-    getChannelData,
-    getFixedAnomalies,
-    getSupportingChannels,
-    addProject,
-    deleteProject,
-    saveProject,
-    getSites,
-    getChannels,
-  };
+export const requests = {
+  getConfiguration,
+  getChannelData,
+  getFixedAnomalies,
+  getSupportingChannels,
+  addProject,
+  deleteProject,
+  saveProject,
+  getSites,
+  getChannels,
+};
