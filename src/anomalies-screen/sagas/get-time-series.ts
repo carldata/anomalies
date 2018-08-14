@@ -39,8 +39,9 @@ function* getTimeSeries(action: GetTimeSeriesStartAction) {
 
     const token: string =  getCookie('fw_jwt');
     const rawChannelResponse: string = yield requests.getChannelData(`${project.siteId}-${project.rawChannelId}`, startDate, endDate);
+    const rainfallChannel: string = (project.rainfallSiteId === null || project.rainfallChannelId == null) ? null : `${project.rainfallSiteId}-${project.rainfallChannelId}`;
     let fixedAnomaliesResponse: string = yield requests.getFixedAnomalies(`${project.siteId}-${project.finalChannelId}`,
-     `${project.siteId}-${project.rawChannelId}`, startDate, endDate);
+     `${project.siteId}-${project.rawChannelId}`, startDate, endDate, rainfallChannel);
     fixedAnomaliesResponse =  checkResponseForError(fixedAnomaliesResponse);
     const editedChannelResponse: string = yield requests.getChannelData(`${project.siteId}-${project.finalChannelId}`, startDate, endDate);
 

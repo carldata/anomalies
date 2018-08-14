@@ -43,9 +43,12 @@ const getConfiguration = (): AxiosPromise<any> => {
 const getChannelData = (channel: string, startDate: string, endDate: string): AxiosPromise<string> =>
   httpOp<string>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${channel}/data?startDate=${startDate}&endDate=${endDate}`);
 
-const getFixedAnomalies = (finalChannel: string, rawChannel: string, startDate: string, endDate: string): AxiosPromise<string> =>
-  httpOp<string>(EnumHTTPVerb.GET,
-    `${apiAddress}/anomalies/find?editedFlowChannelId=${finalChannel}&rawFlowChannelId=${rawChannel}&startDate=${startDate}&endDate=${endDate}&token=${token}`);
+const getFixedAnomalies = (finalChannel: string, rawChannel: string, startDate: string, endDate: string, rainfallChannel?: string): AxiosPromise<string> => {
+  const anomaliesRequest = rainfallChannel === null ?
+  `${apiAddress}/anomalies/find?editedFlowChannelId=${finalChannel}&rawFlowChannelId=${rawChannel}&startDate=${startDate}&endDate=${endDate}&token=${token}` :
+  `${apiAddress}/anomalies/find?editedFlowChannelId=${finalChannel}&rawFlowChannelId=${rawChannel}&startDate=${startDate}&endDate=${endDate}&token=${token}&rainfallChannelId=${rainfallChannel}`;
+  return httpOp<string>(EnumHTTPVerb.GET, anomaliesRequest);
+};
 
 const getSupportingChannels = (supportingChannels: { siteId: string, channelId: string }[], startDate: string, endDate: string): Promise<AxiosResponse<string>[]> =>
   Promise.all(_.map(supportingChannels, (el) => {
@@ -67,14 +70,14 @@ const getSites = (db: string): AxiosPromise<any> =>
 const getChannels = (siteId: string): AxiosPromise<IChannel[]> =>
   httpOp<any>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${siteId}?token=${token}`);
 
-export const requests =  {
-    getConfiguration,
-    getChannelData,
-    getFixedAnomalies,
-    getSupportingChannels,
-    addProject,
-    deleteProject,
-    saveProject,
-    getSites,
-    getChannels,
-  };
+export const requests = {
+  getConfiguration,
+  getChannelData,
+  getFixedAnomalies,
+  getSupportingChannels,
+  addProject,
+  deleteProject,
+  saveProject,
+  getSites,
+  getChannels,
+};
