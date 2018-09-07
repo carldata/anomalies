@@ -38,6 +38,7 @@ const httpOp = <TReturnedDataType>(verb: EnumHTTPVerb, url: string, payload?: an
 };
 
 const getConfiguration = (): AxiosPromise<any> => {
+  token = getCookie('fw_jwt');
   return httpOp<any>(EnumHTTPVerb.GET, `${apiAddress}/config/${appName}?token=${token}`);
 };
 
