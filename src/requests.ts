@@ -7,7 +7,7 @@ import { getCookie } from '@common/cookie-auxiliary';
 import { checkResponseForError } from '@common/response-error-checking'
 
 const appName = 'anomaly-tool-development';
-const apiAddress = 'http://13.77.168.238';
+const apiAddress = 'http://52.183.15.185';
 let token = '';
 
 enum EnumHTTPVerb { GET, POST, PUT, DELETE }
