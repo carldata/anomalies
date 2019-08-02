@@ -1,6 +1,6 @@
 {
-  "token": "",
-  "apiAddress": "http://13.77.168.238",
+  "apiAddress": "http://52.183.15.185",
   "appName": "anomaly-tool-development",
-  "gaTrackingNumber": "UA-9351367"
+  "gaTrackingNumber": "UA-9351367",
+  "flowworksAddress": "beta.flowworks.com"
 }
