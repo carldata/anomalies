@@ -7,8 +7,8 @@ import { ConfigurationLoadStartedAction,
 const initialState: IConfigurationState = {
   apiAddress: '',
   appName: '',
-  token: '',
   gaTrackingNumber: '',
+  flowworksAddress: '',
   loaded: false,
 } as IConfigurationState;
 

@@ -10,6 +10,7 @@ import {
 } from '@business-logic/configuration/action-types';
 import { IState } from '../../state';
 import { getCookie, setCookie } from '@common/cookie-auxiliary';
+import { requests } from '../../requests'
 
 export function* getConfigurationSaga() {
   yield take(CONFIGURATION_LOAD_STARTED);
@@ -18,7 +19,7 @@ export function* getConfigurationSaga() {
     const token = getCookie('fw_jwt');
     if (_.isObject(localResponse)) {
       localResponse.data.token = token;
-      console.log('localResponse.data', localResponse.data);
+      requests.init(localResponse.data.appName, localResponse.data.apiAddress)
       yield put(_.toPlainObject(new ConfigurationLoadSucceededAction(localResponse.data)));
     }
   } catch (error) {

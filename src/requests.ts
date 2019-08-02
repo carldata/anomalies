@@ -6,8 +6,8 @@ import { IState } from './state';
 import { getCookie } from '@common/cookie-auxiliary';
 import { checkResponseForError } from '@common/response-error-checking'
 
-const appName = 'anomaly-tool-development';
-const apiAddress = 'http://52.183.15.185';
+let appName = '';
+let apiAddress = '';
 let token = '';
 
 enum EnumHTTPVerb { GET, POST, PUT, DELETE }
@@ -20,6 +20,7 @@ export interface IConfigurationEntry {
 const httpOp = <TReturnedDataType>(verb: EnumHTTPVerb, url: string, payload?: any): AxiosPromise<TReturnedDataType> => {
   const enpointCall = () => {
     token = getCookie('fw_jwt');
+
     switch (verb) {
       case EnumHTTPVerb.GET:
         return axios.get<AxiosResponse<TReturnedDataType>>(url);
@@ -33,9 +34,14 @@ const httpOp = <TReturnedDataType>(verb: EnumHTTPVerb, url: string, payload?: an
   };
   return new Promise((resolve, reject) =>
     enpointCall()
-      .then((response) =>  resolve(checkResponseForError(response.data)))
+      .then((response) => resolve(checkResponseForError(response.data)))
       .catch((error) => reject(error)));
 };
+
+function init(app, api) {
+  appName = app;
+  apiAddress = api;
+}
 
 const getConfiguration = (): AxiosPromise<any> => {
   token = getCookie('fw_jwt');
@@ -47,8 +53,8 @@ const getChannelData = (channel: string, startDate: string, endDate: string): Ax
 
 const getFixedAnomalies = (finalChannel: string, rawChannel: string, startDate: string, endDate: string, rainfallChannel?: string): AxiosPromise<string> => {
   const anomaliesRequest = rainfallChannel === null ?
-  `${apiAddress}/anomalies/find?editedFlowChannelId=${finalChannel}&rawFlowChannelId=${rawChannel}&startDate=${startDate}&endDate=${endDate}&token=${token}` :
-  `${apiAddress}/anomalies/find?editedFlowChannelId=${finalChannel}&rawFlowChannelId=${rawChannel}&startDate=${startDate}&endDate=${endDate}&token=${token}
+    `${apiAddress}/anomalies/find?editedFlowChannelId=${finalChannel}&rawFlowChannelId=${rawChannel}&startDate=${startDate}&endDate=${endDate}&token=${token}` :
+    `${apiAddress}/anomalies/find?editedFlowChannelId=${finalChannel}&rawFlowChannelId=${rawChannel}&startDate=${startDate}&endDate=${endDate}&token=${token}
   &rainfallChannelId=${rainfallChannel}`;
   return httpOp<string>(EnumHTTPVerb.GET, anomaliesRequest);
 };
@@ -74,6 +80,7 @@ const getChannels = (siteId: string): AxiosPromise<IChannel[]> =>
   httpOp<any>(EnumHTTPVerb.GET, `${apiAddress}/data/channel/${siteId}?token=${token}`);
 
 export const requests = {
+  init,
   getConfiguration,
   getChannelData,
   getFixedAnomalies,
